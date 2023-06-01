@@ -1,0 +1,31 @@
+# next.js
+/.next/
+/out/
+build
+dist
+out
+public
+
+# dependencies
+/node_modules
+.vscode
+.eslintrc.json
+
+# testing
+/coverage
+/.swc
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# config files
+.prettierrc
+package.json
+
+# readme
+README.md
+
+# vercel
+.vercel
+
