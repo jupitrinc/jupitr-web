@@ -38,3 +38,15 @@ Locally preview production build:
 pnpm  start
 ```
 
+## Storybook
+Run storybook locally:
+
+```bash
+pnpm  storybook
+```
+
+Build storybook:
+```bash
+pnpm  build-storybook
+```
+
