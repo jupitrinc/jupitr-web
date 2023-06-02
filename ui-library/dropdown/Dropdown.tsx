@@ -1,6 +1,9 @@
 import { Fragment } from "react"
 import { Menu, Transition } from "@headlessui/react"
 import { DropdownProps } from "./Dropdown.types"
+import { OptimisedImage } from "ui-library/image/Image"
+import { AvatarPlaceholder } from "ui-library/avatar/avatar-placeholder/AvatarPlaceholder"
+import { EllipsisHorizontalIcon } from "ui-library/icons/Icons"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -9,14 +12,42 @@ function classNames(...classes: string[]) {
 export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
   return (
     <Menu as="div" className="relative">
-      <Menu.Button
-        className={
-          "justify-center rounded-lg px-3 py-1 text-sm ring-1 ring-gray-200 hover:ring-gray-300 text-gray-500 active:ring-gray-300 focus:outline-none"
-        }
-        data-testid="dropdown"
-      >
-        {dropdown.label}
-      </Menu.Button>
+      {dropdown.type === "tab" && (
+        <Menu.Button
+          disabled={dropdown.disabled}
+          className={`justify-center ${
+            dropdown.label ? "rounded-xl" : "rounded-full"
+          } px-2 py-2 text-sm text-gray-500 hover:text-gray-600 hover:bg-gray-100 active:bg-gray-200 focus:outline-none`}
+        >
+          {dropdown.label ? (
+            dropdown.label
+          ) : (
+            <EllipsisHorizontalIcon className="h-6 w-6" />
+          )}
+        </Menu.Button>
+      )}
+
+      {dropdown.type === "avatar" && (
+        <Menu.Button className="flex rounded-full text-sm ring-2 ring-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          <span className="sr-only">{dropdown.label}</span>
+          <OptimisedImage
+            className={
+              dropdown.imgClassName
+                ? dropdown.imgClassName
+                : "h-10 w-10 rounded-full"
+            }
+            src={dropdown.imgSrc ? dropdown.imgSrc : ""}
+            alt={dropdown.imgAlt ? dropdown.imgAlt : "image"}
+            size={dropdown.imgSize ? dropdown.imgSize : 40}
+          />
+        </Menu.Button>
+      )}
+
+      {dropdown.type === "placeholder" && (
+        <Menu.Button className="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          <AvatarPlaceholder label={dropdown.label ? dropdown.label : ""} />
+        </Menu.Button>
+      )}
 
       <Transition
         as={Fragment}
@@ -35,7 +66,7 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
                   onClick={option.onClick}
                   className={classNames(
                     active ? "bg-gray-100" : "",
-                    "w-full flex px-3 py-1 text-sm text-gray-500"
+                    "w-full flex px-4 py-2 text-sm text-gray-700"
                   )}
                 >
                   {option.label}

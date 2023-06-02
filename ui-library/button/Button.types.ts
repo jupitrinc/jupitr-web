@@ -1,7 +1,12 @@
 export interface ButtonProps {
-  label: string | JSX.Element
+  label: string
   onClick: (event: React.MouseEvent) => void
+  variant?: "text" | "contained" | "outlined"
+  size?: "small" | "medium" | "large"
+  type?: "default" | "important" | "dangerous"
   disabled?: boolean
   loading?: boolean
-  testId?: string
+  icon?: JSX.Element
+  arrow?: boolean
+  fullWidth?: boolean
 }

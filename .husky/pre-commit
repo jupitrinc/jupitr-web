@@ -2,21 +2,21 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Check Prettier standards
-npm run check-format ||
+pnpm check-format ||
 (
     echo 'Prettier format check failed';
     false;
 )
 
 # Check ESLint Standards
-npm run lint ||
+pnpm lint ||
 (
         echo 'Linting failed'
         false; 
 )
 
 # Run Tests 
-npm run test ||
+pnpm run test ||
 (
         echo 'Tests failed'
         false; 
