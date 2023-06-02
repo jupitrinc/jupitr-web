@@ -1,4 +1,4 @@
-# Jupitr
+# jupitr
 
 ## Setup
 
