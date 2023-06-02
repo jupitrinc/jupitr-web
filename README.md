@@ -5,8 +5,8 @@
 create `.env` file with the following
 
 ```bash
-VITE_SUPABASE_URL=https://nhnpdrhrvgbdnqvizexq.supabase.co
-VITE_SUPABASE_KEY=
+SUPABASE_URL=https://nhnpdrhrvgbdnqvizexq.supabase.co
+SUPABASE_KEY=
 ```
 
 Make sure to install the dependencies:
