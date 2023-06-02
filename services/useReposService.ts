@@ -1,9 +1,9 @@
-export function useReposAPI() {
+export function useReposService() {
   const getRequestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   }
-  const fetchReposAPI = async (language: string) => {
+  const fetchRepos = async (language: string) => {
     if (!language) return
     const API = `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc`
 
@@ -12,6 +12,6 @@ export function useReposAPI() {
   }
 
   return {
-    fetchReposAPI,
+    fetchRepos,
   }
 }

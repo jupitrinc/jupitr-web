@@ -2,11 +2,11 @@
 
 ## Setup
 
-create `.env` file with the following
+create `.env.local` file with the following
 
 ```bash
-SUPABASE_URL=https://nhnpdrhrvgbdnqvizexq.supabase.co
-SUPABASE_KEY=
+NEXT_PUBLIC_SUPABASE_URL=https://nhnpdrhrvgbdnqvizexq.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 ```
 
 Make sure to install the dependencies:

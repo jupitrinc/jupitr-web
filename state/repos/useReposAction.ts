@@ -1,16 +1,16 @@
 import { useContext } from "react"
 import { ReposContext } from "./ReposContext"
 import { ReposActionEnum } from "./repos.types"
-import { useReposAPI } from "apis/useReposAPI"
+import { useReposService } from "services/useReposService"
 
 export function useReposAction() {
   const { dispatch } = useContext(ReposContext)
-  const { fetchReposAPI } = useReposAPI()
+  const { fetchRepos } = useReposService()
 
-  const fetchRepos = async (language: string) => {
+  const getRepos = async (language: string) => {
     if (!language) return
 
-    const fetchReposFailed = (errorMessage: string) => {
+    const getReposFailed = (errorMessage: string) => {
       dispatch({
         type: ReposActionEnum.FETCH_REPOS_FAILURE,
       })
@@ -23,10 +23,10 @@ export function useReposAction() {
         type: ReposActionEnum.FETCH_REPOS_BEGIN,
       })
 
-      const response = await fetchReposAPI(language)
+      const response = await fetchRepos(language)
 
       if (!response.ok) {
-        fetchReposFailed(`No repositories found for the keyword ${language} :(`)
+        getReposFailed(`No repositories found for the keyword ${language} :(`)
       } else {
         const data = await response.json()
         if (data.items) {
@@ -37,7 +37,7 @@ export function useReposAction() {
         }
       }
     } catch (error) {
-      fetchReposFailed(error as string)
+      getReposFailed(error as string)
     }
   }
 
@@ -55,7 +55,7 @@ export function useReposAction() {
   }
 
   return {
-    fetchRepos,
+    getRepos,
     resetRepos,
     sortRepos,
   }
