@@ -1,4 +1,4 @@
-import { UserIcon } from "../../icon/icons/Icons"
+import { UserIcon } from "ui-library/icons/Icons"
 import { AvatarPlaceholderProps } from "./AvatarPlaceholder.types"
 
 export const AvatarPlaceholder: React.FC<AvatarPlaceholderProps> = (

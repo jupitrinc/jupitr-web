@@ -133,6 +133,7 @@ const Days: React.FC<Props> = ({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const bgColor = "bg-blue-500"
+        // @ts-ignore
         className = ` transition-all duration-500 text-white font-medium ${bgColor} ${
           period.start ? "rounded-r-full" : "rounded-l-full"
         }`
