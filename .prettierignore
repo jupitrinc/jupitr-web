@@ -22,6 +22,7 @@ next-env.d.ts
 # config files
 .prettierrc
 package.json
+pnpm-lock.yaml
 
 # readme
 README.md
