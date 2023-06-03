@@ -1,4 +1,4 @@
-import { Button } from "./Button"
+import { Button } from "../button/Button"
 import { render, screen, fireEvent } from "@testing-library/react"
 
 // test type: unit

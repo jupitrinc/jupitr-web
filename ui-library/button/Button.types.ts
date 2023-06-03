@@ -8,5 +8,5 @@ export interface ButtonProps {
   loading?: boolean
   icon?: JSX.Element
   arrow?: boolean
-  fullWidth?: boolean
+  full_width?: boolean
 }

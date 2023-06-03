@@ -33,7 +33,7 @@ const data = [
   },
 ]
 
-export const Photo: Story = {
+export const group: Story = {
   args: {
     avatars: data,
     max_number: 3,
