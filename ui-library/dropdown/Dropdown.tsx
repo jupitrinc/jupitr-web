@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import { Menu, Transition } from "@headlessui/react"
 import { DropdownProps } from "./Dropdown.types"
 import { OptimisedImage } from "ui-library/image/Image"
-import { AvatarPlaceholder } from "ui-library/avatar/avatar-placeholder/AvatarPlaceholder"
+import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { EllipsisHorizontalIcon } from "ui-library/icons/Icons"
 
 function classNames(...classes: string[]) {
@@ -38,14 +38,16 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
             }
             src={dropdown.imgSrc ? dropdown.imgSrc : ""}
             alt={dropdown.imgAlt ? dropdown.imgAlt : "image"}
-            size={dropdown.imgSize ? dropdown.imgSize : 40}
           />
         </Menu.Button>
       )}
 
       {dropdown.type === "placeholder" && (
         <Menu.Button className="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-          <AvatarPlaceholder label={dropdown.label ? dropdown.label : ""} />
+          <Avatar
+            name_initials={dropdown.label ? dropdown.label : ""}
+            size={10}
+          />
         </Menu.Button>
       )}
 

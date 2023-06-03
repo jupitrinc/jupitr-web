@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 
 export function generateArrayNumber(start = 0, end = 0) {
-  const array = []
+  const array: any = []
   for (let i = start; i <= end; i++) {
     array.push(i)
   }

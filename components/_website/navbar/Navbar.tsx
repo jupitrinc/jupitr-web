@@ -19,12 +19,7 @@ export const NavBar: React.FC<NavBarProps> = (nav) => {
       <div className="relative flex h-16 items-center justify-between">
         <div className="flex flex-1 sm:items-stretch sm:justify-start">
           <Link href="/" className="flex flex-shrink-0 items-center">
-            <OptimisedImage
-              src={brand}
-              alt="logo"
-              className="h-8 w-auto"
-              size={32}
-            />
+            <OptimisedImage src={brand} alt="logo" className="h-8 w-auto" />
             <span className="pl-1 tracking-wider font-['Roboto'] font-bold">
               Spikes
             </span>

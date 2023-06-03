@@ -25,15 +25,17 @@ export function useReposAction() {
 
       const response = await fetchRepos(language)
 
-      if (!response.ok) {
-        getReposFailed(`No repositories found for the keyword ${language} :(`)
-      } else {
-        const data = await response.json()
-        if (data.items) {
-          dispatch({
-            type: ReposActionEnum.FETCH_REPOS_SUCCESS,
-            payload: data.items,
-          })
+      if (response) {
+        if (!response.ok) {
+          getReposFailed(`No repositories found for the keyword ${language} :(`)
+        } else {
+          const data = await response.json()
+          if (data.items) {
+            dispatch({
+              type: ReposActionEnum.FETCH_REPOS_SUCCESS,
+              payload: data.items,
+            })
+          }
         }
       }
     } catch (error) {

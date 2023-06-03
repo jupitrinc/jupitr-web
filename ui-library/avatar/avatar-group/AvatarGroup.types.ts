@@ -1,4 +1,6 @@
+import { AvatarProps } from "../avatar/Avatar.types"
+
 export interface AvatarGroupProps {
-  avatars: [{ name: string; photo: string; id: number }]
-  limit?: number
+  avatars: AvatarProps[]
+  max_number: number
 }

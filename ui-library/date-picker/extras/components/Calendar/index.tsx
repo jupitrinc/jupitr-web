@@ -119,7 +119,7 @@ const Calendar: React.FC<Props> = ({
     (day: number, month = date.month() + 1, year = date.year()) => {
       const fullDay = `${year}-${month}-${day}`
       let newStart
-      let newEnd = null
+      let newEnd
 
       function chosePeriod(start: string, end: string) {
         changeDatepickerValue({
