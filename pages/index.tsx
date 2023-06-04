@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <DefaultLayout>
       <ReposContextProvider>
-        <span>Loading...</span>
+        <h1 className="text-center">Home...</h1>
       </ReposContextProvider>
     </DefaultLayout>
   )

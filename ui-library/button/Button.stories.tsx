@@ -16,21 +16,21 @@ export const small: Story = {
   args: {
     label: "Get started",
     size: "small",
-    type: "default",
+    type: "standard",
   },
 }
 export const medium: Story = {
   args: {
     label: "Get started",
     size: "medium",
-    type: "default",
+    type: "standard",
   },
 }
 export const large: Story = {
   args: {
     label: "Get started",
     size: "large",
-    type: "default",
+    type: "standard",
   },
 }
 
@@ -48,6 +48,31 @@ export const dangerous: Story = {
     type: "dangerous",
   },
 }
+export const standard: Story = {
+  args: {
+    label: "Get started",
+    size: "large",
+    type: "standard",
+  },
+}
+
+export const text: Story = {
+  args: {
+    label: "Get started",
+    size: "large",
+    type: "important",
+    variant: "text",
+  },
+}
+
+export const outlined: Story = {
+  args: {
+    label: "Get started",
+    size: "large",
+    type: "important",
+    variant: "outlined",
+  },
+}
 
 export const contained: Story = {
   args: {
@@ -57,20 +82,13 @@ export const contained: Story = {
     variant: "contained",
   },
 }
-export const outlined: Story = {
+
+export const icon: Story = {
   args: {
-    label: "Get started",
     size: "large",
     type: "important",
-    variant: "outlined",
-  },
-}
-export const text: Story = {
-  args: {
-    label: "Get started",
-    size: "large",
-    type: "important",
-    variant: "text",
+    variant: "contained",
+    icon: <ChatIcon className="h-10 w-10" />,
   },
 }
 
@@ -81,14 +99,6 @@ export const disabled: Story = {
     type: "important",
     variant: "contained",
     disabled: true,
-  },
-}
-export const icon: Story = {
-  args: {
-    size: "large",
-    type: "important",
-    variant: "contained",
-    icon: <ChatIcon className="h-10 w-10" />,
   },
 }
 

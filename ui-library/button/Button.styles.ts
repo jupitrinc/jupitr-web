@@ -9,7 +9,7 @@ export const buttonStyles = {
     contained: "",
   },
   type: {
-    default:
+    standard:
       "text-gray-500 hover:text-gray-600 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-50 disabled:active:bg-gray-50",
     important:
       "text-blue-500 hover:text-blue-600 ring-blue-900/10 hover:ring-blue-900/20 bg-blue-50 hover:bg-blue-100 active:bg-blue-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-blue-500 disabled:hover:bg-blue-50 disabled:active:bg-blue-50",

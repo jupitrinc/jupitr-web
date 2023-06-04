@@ -3,7 +3,7 @@ export interface ButtonProps {
   onClick: (event: React.MouseEvent) => void
   variant?: "text" | "contained" | "outlined"
   size?: "small" | "medium" | "large"
-  type?: "default" | "important" | "dangerous"
+  type?: "standard" | "important" | "dangerous"
   disabled?: boolean
   loading?: boolean
   icon?: JSX.Element
