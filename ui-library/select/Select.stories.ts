@@ -11,7 +11,7 @@ const meta: Meta<typeof Select> = {
 export default meta
 type Story = StoryObj<typeof Select>
 
-export const size: Story = {
+export const options: Story = {
   args: {
     options: ["1st option", "2nd option", "3rd option"],
   },
