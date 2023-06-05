@@ -14,10 +14,11 @@ export const Select: React.FC<SelectProps> = (select) => {
       >
         {select.label ? select.label : ""}
       </label>
-      <select value={select.value} id={randomHash} className={styles.select}>
-        <option selected disabled>
-          Choose a value
-        </option>
+      <select
+        id={randomHash}
+        className={styles.select}
+        disabled={select.disabled}
+      >
         {select.options.map((item) => (
           <option key={item}>{item}</option>
         ))}

@@ -7,11 +7,15 @@ export const Toggle: React.FC<ToggleProps> = (toggle) => {
 
   return (
     <label className={styles.container}>
-      <input type="checkbox" value={toggle.value} className={styles.input} />
+      <input
+        type="checkbox"
+        className={styles.input}
+        disabled={toggle.disabled}
+      />
       <div
         className={styles.size[toggle.size ? toggle.size : styles.size.small]}
       />
-      {toggle.label && <span className={styles.span}>{toggle.label}</span>}
+      {toggle.label && <span className={styles.label}>{toggle.label}</span>}
     </label>
   )
 }

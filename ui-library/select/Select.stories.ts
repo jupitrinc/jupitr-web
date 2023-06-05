@@ -16,3 +16,18 @@ export const options: Story = {
     options: ["1st option", "2nd option", "3rd option"],
   },
 }
+
+export const label: Story = {
+  args: {
+    options: ["1st option", "2nd option", "3rd option"],
+    label: "Select an option",
+  },
+}
+
+export const disabled: Story = {
+  args: {
+    options: ["1st option", "2nd option", "3rd option"],
+    label: "Select an option",
+    disabled: true,
+  },
+}

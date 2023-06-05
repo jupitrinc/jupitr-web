@@ -1,4 +1,4 @@
-import { themeStyles } from "ui-library/__theme/Theme.styles"
+import { themeStyles } from "ui-library/_theme/Theme.styles"
 
 export const avatarGroupStyles = {
   container: "flex -space-x-2 overflow-hidden",

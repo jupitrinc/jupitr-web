@@ -42,6 +42,9 @@ dependencies:
     version: 5.1.3
 
 devDependencies:
+  '@storybook/addon-a11y':
+    specifier: ^7.0.18
+    version: 7.0.18(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-essentials':
     specifier: ^7.0.18
     version: 7.0.18(react-dom@18.2.0)(react@18.2.0)
@@ -3323,6 +3326,34 @@ packages:
     resolution: {integrity: sha512-OPwQlEdg40HAj5KNF8WW6q2KG4Z+cBCZb3m4ninfTZKaBmbIJodviQsDBoYMPHkOyJJMHnOJo5j2+LKDOhOACg==}
     dependencies:
       '@sinonjs/commons': 3.0.0
+    dev: true
+
+  /@storybook/addon-a11y@7.0.18(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-kftOzFBpg3goWbLBXDLLsJslfrKYbHs1xtFEH5/4J9NFNE8vZKbIBDQa/R3ezWheL+l2y+5qOlWoLl5z96zlWA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addon-highlight': 7.0.18
+      '@storybook/channels': 7.0.18
+      '@storybook/client-logger': 7.0.18
+      '@storybook/components': 7.0.18(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/core-events': 7.0.18
+      '@storybook/global': 5.0.0
+      '@storybook/manager-api': 7.0.18(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/preview-api': 7.0.18
+      '@storybook/theming': 7.0.18(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/types': 7.0.18
+      axe-core: 4.7.2
+      lodash: 4.17.21
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-resize-detector: 7.1.2(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /@storybook/addon-actions@7.0.18(react-dom@18.2.0)(react@18.2.0):
@@ -10804,6 +10835,17 @@ packages:
   /react-refresh@0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /react-resize-detector@7.1.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-zXnPJ2m8+6oq9Nn8zsep/orts9vQv3elrpA+R8XTcW7DVVUJ9vwDwMXaBtykAYjMnkCIaOoK9vObyR7ZgFNlOw==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      lodash: 4.17.21
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: true
 
   /react@18.2.0:

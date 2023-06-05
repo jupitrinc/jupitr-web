@@ -1,4 +1,4 @@
-import { ColorType, SizeType } from "ui-library/__theme/Theme.types"
+import { ColorType, SizeType } from "ui-library/_theme/Theme.types"
 
 export interface ButtonProps {
   label: string

@@ -3,10 +3,12 @@ import { ThemeColorEnum } from "./Theme.types"
 export const themeStyles = {
   border: {
     [`${ThemeColorEnum.STANDARD}`]:
-      "border-0 ring-1 ring-gray-900/10 hover:ring-gray-900/20 focus:outline-none",
+      "border-0 ring-1 rounded-lg ring-gray-900/10 hover:ring-gray-900/20 focus:outline-none disabled:hover:ring-gray-900/10",
   },
   textColor: {
     [`${ThemeColorEnum.STANDARD}`]: {
+      400: "text-gray-400",
+      500: "text-gray-500",
       600: "text-gray-600",
     },
   },

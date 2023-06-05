@@ -1,5 +1,8 @@
+import { ChangeEventHandler } from "react"
+
 export interface SelectProps {
-  value: string
+  onChange: ChangeEventHandler<HTMLInputElement>
   options: string[]
   label?: string
+  disabled?: boolean
 }

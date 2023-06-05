@@ -1,4 +1,4 @@
-import { ThemeColorEnum } from "ui-library/__theme/Theme.types"
+import { ThemeColorEnum } from "ui-library/_theme/Theme.types"
 
 export const buttonStyles = {
   button: "font-medium flex-1 space-x-2 focus:outline-none ease-in-out",
