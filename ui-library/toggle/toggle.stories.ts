@@ -11,8 +11,24 @@ const meta: Meta<typeof Toggle> = {
 export default meta
 type Story = StoryObj<typeof Toggle>
 
-export const size: Story = {
+export const small: Story = {
   args: {
-    size: "default",
+    size: "small",
+  },
+}
+export const medium: Story = {
+  args: {
+    size: "medium",
+  },
+}
+export const large: Story = {
+  args: {
+    size: "large",
+  },
+}
+export const label: Story = {
+  args: {
+    size: "large",
+    label: "Active",
   },
 }

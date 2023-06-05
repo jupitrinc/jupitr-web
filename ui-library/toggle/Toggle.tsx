@@ -7,11 +7,11 @@ export const Toggle: React.FC<ToggleProps> = (toggle) => {
 
   return (
     <label className={styles.container}>
-      <input type="checkbox" value={toggle.value} className="sr-only peer" />
+      <input type="checkbox" value={toggle.value} className={styles.input} />
       <div
-        className={styles.size[toggle.size ? toggle.size : styles.size.default]}
+        className={styles.size[toggle.size ? toggle.size : styles.size.small]}
       />
-      <span className={styles.span}>{toggle.label}</span>
+      {toggle.label && <span className={styles.span}>{toggle.label}</span>}
     </label>
   )
 }

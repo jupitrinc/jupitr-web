@@ -1,4 +1,6 @@
+import { themeStyles } from "ui-library/__theme/Theme.styles"
+
 export const progressBarStyles = {
-  container: "w-full h-4 mb-4 bg-gray-200 rounded-full dark:bg-gray-700",
-  progress: "h-4 bg-blue-600 rounded-full dark:bg-blue-500",
+  container: `w-full h-4 mb-4 ${themeStyles.backgroundColor.standard[200]} rounded-full`,
+  progress: `h-4 ${themeStyles.backgroundColor.important[500]} rounded-full`,
 }
