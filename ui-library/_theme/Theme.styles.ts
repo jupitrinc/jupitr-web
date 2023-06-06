@@ -1,13 +1,11 @@
 import { ThemeColorEnum } from "./Theme.types"
 
 export const themeStyles = {
-  disabled: {
-    [`${ThemeColorEnum.STANDARD}`]:
-      "disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 disabled:border-slate-200 disabled:shadow-none",
-  },
+  disabled:
+    "disabled:cursor-not-allowed disabled:text-opacity-70 disabled:hover:text-opacity-70",
   border: {
     [`${ThemeColorEnum.STANDARD}`]:
-      "border-0 ring-1 rounded-lg ring-gray-900/10 hover:ring-gray-900/20 focus:outline-none disabled:hover:ring-gray-900/10",
+      "border-0 ring-1 rounded-lg ring-gray-900/10 hover:ring-gray-900/20 focus:outline-none disabled:hover:ring-gray-900/10 focus:ring-gray-900/20",
   },
   textColor: {
     [`${ThemeColorEnum.STANDARD}`]: {
