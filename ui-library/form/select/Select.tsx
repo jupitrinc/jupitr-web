@@ -1,21 +1,18 @@
 import React from "react"
 import { SelectProps } from "./Select.types"
 import { selectStyles } from "./Select.styles"
+import { Label } from "../label/Label"
+import { stringHelper } from "helper/stringHelper"
 
 export const Select: React.FC<SelectProps> = (select) => {
   const styles = selectStyles
-  const randomHash = (Math.random() + 1).toString(36).substring(7)
+  const { randomHash } = stringHelper
 
   return (
     <>
-      <label
-        htmlFor={select.label ? select.label : randomHash}
-        className={styles.label}
-      >
-        {select.label ? select.label : ""}
-      </label>
+      <Label htmlFor={randomHash()} value={select.label} />
       <select
-        id={randomHash}
+        id={randomHash()}
         className={styles.select}
         disabled={select.disabled}
       >
