@@ -10,7 +10,9 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
 
   return (
     <>
-      <Label htmlFor={randomHash()} value={textarea.label} />
+      {textarea.label && (
+        <Label htmlFor={randomHash()} value={textarea.label} />
+      )}
       <textarea
         id={randomHash()}
         value={textarea.value}

@@ -1,9 +1,19 @@
-export const Loader: React.FC = () => {
+import clsx from "clsx"
+import { loaderStyles } from "./Loader.styles"
+import { LoaderProps } from "./Loader.types"
+
+export const Loader: React.FC<LoaderProps> = (loader) => {
   return (
     <svg
       aria-hidden="true"
       role="status"
-      className={"inline w-4 h-4 animate-spin text-gray-500"}
+      className={clsx(
+        loader.className,
+        loaderStyles.type[
+          loader.type ? loader.type : loaderStyles.type.default
+        ],
+        "animate-spin"
+      )}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

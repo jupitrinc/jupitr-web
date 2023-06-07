@@ -1,4 +1,4 @@
-import { ColorType, SizeType } from "ui-library/_theme/Theme.types"
+import { ColorType, SizeType, VariantType } from "ui-library/_theme/Theme.types"
 
 export interface ButtonProps {
   label: string
@@ -12,5 +12,3 @@ export interface ButtonProps {
   arrow?: boolean
   full_width?: boolean
 }
-
-type VariantType = "text" | "contained" | "outlined"

@@ -1,9 +1,9 @@
 import clsx from "clsx"
-import { UserIcon } from "../../icons/Icons"
 import { AvatarProps } from "./Avatar.types"
 import { avatarStyles } from "./Avatar.styles"
 import { stringHelper } from "helper/stringHelper"
 import { OptimisedImage } from "ui-library/image/Image"
+import { User } from "lucide-react"
 
 export const Avatar: React.FC<AvatarProps> = (avatar) => {
   const styles = avatarStyles
@@ -39,6 +39,6 @@ const NameInitials = ({ avatar, styles }) => {
 
 const Placeholder = ({ avatar, styles }) => (
   <div className={clsx(styles.container, styles.size(avatar.size))}>
-    <UserIcon className={clsx(styles.icon, styles.size(avatar.size))} />
+    <User className={clsx(styles.icon)} />
   </div>
 )
