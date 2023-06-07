@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { Button } from "./Button"
-import { ChatIcon } from "../icons/Icons"
+import { RocketIcon } from "lucide-react"
 
 const meta: Meta<typeof Button> = {
   title: "Button",
@@ -88,7 +88,7 @@ export const icon: Story = {
     size: "large",
     type: "important",
     variant: "contained",
-    icon: <ChatIcon className="h-10 w-10" />,
+    icon: <RocketIcon className="h-10 w-10" />,
   },
 }
 

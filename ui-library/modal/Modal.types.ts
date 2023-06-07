@@ -1,5 +1,5 @@
 export interface ModalProps {
   children: React.ReactNode
-  show: boolean
+  open: boolean
   onClose: (value: boolean) => void
 }

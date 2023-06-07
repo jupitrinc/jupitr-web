@@ -30,4 +30,5 @@ export const buttonStyles = {
   width: {
     full: "w-full",
   },
+  loader: "inline w-4 h-4",
 }

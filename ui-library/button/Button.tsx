@@ -23,7 +23,9 @@ export const Button: React.FC<ButtonProps> = (button) => {
       disabled={button.disabled || button.loading}
     >
       {button.icon && !button.loading && button.icon}
-      {button.loading && <Loader />}
+      {button.loading && (
+        <Loader type={button.type} className={styles.loader} />
+      )}
       <span>{button.label}</span>
 
       {button.arrow && <span aria-hidden="true">&rarr;</span>}

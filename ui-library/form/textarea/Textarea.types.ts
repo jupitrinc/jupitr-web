@@ -1,7 +1,7 @@
 export interface TextAreaProps {
   value: string
-  label: string
   name: string
+  label?: string
   placeholder?: string
   disabled?: boolean
   autoFocus?: boolean

@@ -3,7 +3,7 @@ import { Menu, Transition } from "@headlessui/react"
 import { DropdownProps } from "./Dropdown.types"
 import { OptimisedImage } from "ui-library/image/Image"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { EllipsisHorizontalIcon } from "ui-library/icons/Icons"
+import { MoreHorizontal } from "lucide-react"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -22,7 +22,7 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
           {dropdown.label ? (
             dropdown.label
           ) : (
-            <EllipsisHorizontalIcon className="h-6 w-6" />
+            <MoreHorizontal className="h-6 w-6" />
           )}
         </Menu.Button>
       )}
