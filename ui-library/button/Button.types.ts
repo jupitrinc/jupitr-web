@@ -5,7 +5,7 @@ export interface ButtonProps {
   onClick: (event: React.MouseEvent) => void
   variant?: VariantType
   size?: SizeType
-  type?: ColorType
+  color?: ColorType
   disabled?: boolean
   loading?: boolean
   icon?: JSX.Element

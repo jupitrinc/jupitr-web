@@ -12,55 +12,63 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
+export const extraSmall: Story = {
+  args: {
+    label: "Get started",
+    size: "xs",
+    color: "standard",
+  },
+}
+
 export const small: Story = {
   args: {
     label: "Get started",
-    size: "small",
-    type: "standard",
+    size: "sm",
+    color: "standard",
   },
 }
-export const medium: Story = {
+export const base: Story = {
   args: {
     label: "Get started",
-    size: "medium",
-    type: "standard",
+    size: "base",
+    color: "standard",
   },
 }
 export const large: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "standard",
+    size: "lg",
+    color: "standard",
   },
 }
 
 export const important: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "xl",
+    color: "important",
   },
 }
 export const dangerous: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "dangerous",
+    size: "lg",
+    color: "dangerous",
   },
 }
 export const standard: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "standard",
+    size: "lg",
+    color: "standard",
   },
 }
 
 export const text: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "text",
   },
 }
@@ -68,8 +76,8 @@ export const text: Story = {
 export const outlined: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "outlined",
   },
 }
@@ -77,26 +85,26 @@ export const outlined: Story = {
 export const contained: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
   },
 }
 
 export const icon: Story = {
   args: {
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
-    icon: <RocketIcon className="h-10 w-10" />,
+    icon: <RocketIcon />,
   },
 }
 
 export const disabled: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
     disabled: true,
   },
@@ -105,8 +113,8 @@ export const disabled: Story = {
 export const arrow: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
     arrow: true,
   },
@@ -115,8 +123,8 @@ export const arrow: Story = {
 export const loading: Story = {
   args: {
     label: "Get started",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
     loading: true,
   },

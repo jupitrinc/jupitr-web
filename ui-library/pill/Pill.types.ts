@@ -4,5 +4,5 @@ export interface PillProps {
   label: string
   variant?: VariantType
   size?: SizeType
-  type?: ColorType
+  color?: ColorType
 }
