@@ -11,55 +11,70 @@ const meta: Meta<typeof Pill> = {
 export default meta
 type Story = StoryObj<typeof Pill>
 
+export const extraSmall: Story = {
+  args: {
+    label: "storybook",
+    size: "xs",
+    color: "standard",
+  },
+}
+
 export const small: Story = {
   args: {
     label: "storybook",
-    size: "small",
-    type: "standard",
+    size: "sm",
+    color: "standard",
   },
 }
 export const medium: Story = {
   args: {
     label: "storybook",
-    size: "medium",
-    type: "standard",
+    size: "base",
+    color: "standard",
   },
 }
 export const large: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "standard",
+    size: "lg",
+    color: "standard",
+  },
+}
+export const extraLarge: Story = {
+  args: {
+    label: "storybook",
+    size: "xl",
+    color: "standard",
   },
 }
 
 export const important: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
   },
 }
 export const dangerous: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "dangerous",
+    size: "lg",
+    color: "dangerous",
   },
 }
 export const standard: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "standard",
+    size: "lg",
+    color: "standard",
   },
 }
 
 export const text: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "text",
   },
 }
@@ -67,8 +82,8 @@ export const text: Story = {
 export const outlined: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "outlined",
   },
 }
@@ -76,8 +91,8 @@ export const outlined: Story = {
 export const contained: Story = {
   args: {
     label: "storybook",
-    size: "large",
-    type: "important",
+    size: "lg",
+    color: "important",
     variant: "contained",
   },
 }

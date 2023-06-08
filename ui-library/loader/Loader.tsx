@@ -9,8 +9,8 @@ export const Loader: React.FC<LoaderProps> = (loader) => {
       role="status"
       className={clsx(
         loader.className,
-        loaderStyles.type[
-          loader.type ? loader.type : loaderStyles.type.default
+        loaderStyles.color[
+          loader.color ? loader.color : loaderStyles.color.default
         ],
         "animate-spin"
       )}

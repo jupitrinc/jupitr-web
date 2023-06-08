@@ -12,19 +12,19 @@ type Story = StoryObj<typeof Loader>
 
 export const standard: Story = {
   args: {
-    type: "standard",
+    color: "standard",
     className: "w-10 h-10",
   },
 }
 export const dangerous: Story = {
   args: {
-    type: "dangerous",
+    color: "dangerous",
     className: "w-10 h-10",
   },
 }
 export const important: Story = {
   args: {
-    type: "important",
+    color: "important",
     className: "w-10 h-10",
   },
 }

@@ -1,9 +1,9 @@
 import { ThemeColorEnum } from "ui-library/_theme/Theme.types"
 
 export const loaderStyles = {
-  type: {
-    [`${ThemeColorEnum.STANDARD}`]: "text-gray-500",
-    [`${ThemeColorEnum.IMPORTANT}`]: "text-blue-500",
-    [`${ThemeColorEnum.DANGEROUS}`]: "text-red-500",
+  color: {
+    [`${ThemeColorEnum.standard}`]: "text-gray-500",
+    [`${ThemeColorEnum.important}`]: "text-blue-500",
+    [`${ThemeColorEnum.dangerous}`]: "text-red-500",
   },
 }
