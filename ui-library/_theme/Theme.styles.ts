@@ -13,6 +13,11 @@ export const themeStyles = {
       500: "text-gray-500",
       600: "text-gray-600",
     },
+    [`${ThemeColorEnum.important}`]: {
+      400: "text-blue-400",
+      500: "text-blue-500",
+      600: "text-blue-600",
+    },
   },
   backgroundColor: {
     [`${ThemeColorEnum.standard}`]: {
