@@ -1,6 +1,6 @@
 import { ImageProps } from "./Image.types"
 
-export const OptimisedImage: React.FC<ImageProps> = (image) => {
+export const Image: React.FC<ImageProps> = (image) => {
   return (
     <img
       src={image.src as string}
