@@ -4,7 +4,7 @@ import brand from "public/logo.png"
 import { NavBarProps } from "./Navbar.types"
 import { OptimisedImage } from "ui-library/image/Image"
 import { Button } from "ui-library/button/Button"
-import { Dropdown } from "ui-library/dropdown/Dropdown"
+import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 
 export const NavBar: React.FC<NavBarProps> = (nav) => {
   const router = useRouter()

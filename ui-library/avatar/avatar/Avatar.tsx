@@ -23,7 +23,7 @@ const Photo = ({ avatar, styles }) => (
     <OptimisedImage
       className={clsx(styles.image, styles.size(avatar.size))}
       src={avatar.image_url}
-      alt={avatar.name_initials || "user photo"}
+      alt={avatar.name_initials || "avatar"}
     />
   </div>
 )

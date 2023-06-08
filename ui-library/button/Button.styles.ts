@@ -3,7 +3,7 @@ import { ThemeColorEnum } from "ui-library/_theme/Theme.types"
 export const buttonStyles = {
   button: "font-medium flex-1 space-x-2 focus:outline-none ease-in-out",
   icon_button:
-    "font-medium p-3 text-center inline-flex items-center focus:outline-none ease-in-out",
+    "font-medium p-2 text-center inline-flex items-center focus:outline-none ease-in-out",
 
   variant: {
     text: "bg-opacity-0",

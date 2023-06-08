@@ -1,7 +1,7 @@
 import { createElement } from "react"
 import { TextProps } from "./Text.types"
 import clsx from "clsx"
-import { textStyles } from "./Text.styles"
+import { textStyles as styles } from "./Text.styles"
 import { ThemeColorEnum, ThemeSizeEnum } from "ui-library/_theme/Theme.types"
 
 export const Text: React.FC<TextProps> = ({
@@ -13,9 +13,9 @@ export const Text: React.FC<TextProps> = ({
   <Typography
     tag={as}
     className={clsx(
-      textStyles.color[color ? color : ThemeColorEnum.standard],
-      textStyles.size[size ? size : ThemeSizeEnum.base],
-      heading.includes(as) && textStyles.heading.fontFamily
+      styles.color[color ? color : ThemeColorEnum.standard],
+      styles.size[size ? size : ThemeSizeEnum.base],
+      heading.includes(as) && styles.heading.fontFamily
     )}
   >
     {children}

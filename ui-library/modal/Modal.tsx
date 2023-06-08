@@ -6,36 +6,37 @@ import { modalStyles } from "./Modal.styles"
 import { XCircle } from "lucide-react"
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+  const styles = modalStyles
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className={modalStyles.dialog} onClose={onClose}>
+      <Dialog as="div" className={styles.dialog} onClose={onClose}>
         <Transition.Child
           as={Fragment}
-          enter={modalStyles.dialog_child1.enter}
-          enterFrom={modalStyles.dialog_child1.enterFrom}
-          enterTo={modalStyles.dialog_child1.enterTo}
-          leave={modalStyles.dialog_child1.leave}
-          leaveFrom={modalStyles.dialog_child1.leaveFrom}
-          leaveTo={modalStyles.dialog_child1.leaveTo}
+          enter={styles.dialog_child1.enter}
+          enterFrom={styles.dialog_child1.enterFrom}
+          enterTo={styles.dialog_child1.enterTo}
+          leave={styles.dialog_child1.leave}
+          leaveFrom={styles.dialog_child1.leaveFrom}
+          leaveTo={styles.dialog_child1.leaveTo}
         >
-          <div className={modalStyles.dialog_child1.fixed_container} />
+          <div className={styles.dialog_child1.fixed_container} />
         </Transition.Child>
 
-        <div className={modalStyles.dialog_child2.container1}>
-          <div className={modalStyles.dialog_child2.container2}>
+        <div className={styles.dialog_child2.container1}>
+          <div className={styles.dialog_child2.container2}>
             <Transition.Child
               as={Fragment}
-              enter={modalStyles.dialog_child2.enter}
-              enterFrom={modalStyles.dialog_child2.enterFrom}
-              enterTo={modalStyles.dialog_child2.enterTo}
-              leave={modalStyles.dialog_child2.leave}
-              leaveFrom={modalStyles.dialog_child2.leaveFrom}
-              leaveTo={modalStyles.dialog_child2.leaveTo}
+              enter={styles.dialog_child2.enter}
+              enterFrom={styles.dialog_child2.enterFrom}
+              enterTo={styles.dialog_child2.enterTo}
+              leave={styles.dialog_child2.leave}
+              leaveFrom={styles.dialog_child2.leaveFrom}
+              leaveTo={styles.dialog_child2.leaveTo}
             >
-              <Dialog.Panel className={modalStyles.dialog_panel}>
-                <div className={modalStyles.dialog_panel_div}>
+              <Dialog.Panel className={styles.dialog_panel}>
+                <div className={styles.dialog_panel_div}>
                   <Button
-                    icon={<XCircle className={modalStyles.close_icon} />}
+                    icon={<XCircle className={styles.close_icon} />}
                     label=""
                     onClick={() => onClose(false)}
                   />

@@ -8,16 +8,17 @@ import {
 } from "ui-library/_theme/Theme.types"
 
 export const Pill: React.FC<PillProps> = (pill) => {
+  const styles = pillStyles
   return (
     <span
       className={clsx(
-        pillStyles.pill,
-        pillStyles.variant[
+        styles.pill,
+        styles.variant[
           pill.variant ? pill.variant : ThemeVariantEnum.contained
         ],
-        pillStyles.color[pill.color ? pill.color : ThemeColorEnum.standard],
-        pillStyles.size[pill.size ? pill.size : ThemeSizeEnum.sm],
-        pillStyles.rounded.full
+        styles.color[pill.color ? pill.color : ThemeColorEnum.standard],
+        styles.size[pill.size ? pill.size : ThemeSizeEnum.sm],
+        styles.rounded.full
       )}
     >
       {pill.label}
