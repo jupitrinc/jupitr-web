@@ -5,6 +5,7 @@ import { TextInputProps } from "./TextInput.types"
 
 export const TextInput: React.FC<TextInputProps> = (textInput) => {
   const { randomHash } = stringHelper
+  const styles = textInputStyles
   return (
     <>
       {textInput.label && (
@@ -21,7 +22,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         autoFocus={textInput.autoFocus}
         onBlur={textInput.onBlur}
         maxLength={textInput.maxLength}
-        className={textInputStyles.input}
+        className={styles.input}
       />
     </>
   )

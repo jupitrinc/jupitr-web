@@ -13,29 +13,29 @@ type Story = StoryObj<typeof Toggle>
 
 export const small: Story = {
   args: {
-    size: "small",
+    size: "sm",
   },
 }
-export const medium: Story = {
+export const base: Story = {
   args: {
-    size: "medium",
+    size: "base",
   },
 }
 export const large: Story = {
   args: {
-    size: "large",
+    size: "lg",
   },
 }
 export const label: Story = {
   args: {
-    size: "large",
+    size: "lg",
     label: "Label",
   },
 }
 
 export const disabled: Story = {
   args: {
-    size: "large",
+    size: "lg",
     disabled: true,
   },
 }

@@ -3,15 +3,14 @@ import { loaderStyles } from "./Loader.styles"
 import { LoaderProps } from "./Loader.types"
 
 export const Loader: React.FC<LoaderProps> = (loader) => {
+  const styles = loaderStyles
   return (
     <svg
       aria-hidden="true"
       role="status"
       className={clsx(
         loader.className,
-        loaderStyles.color[
-          loader.color ? loader.color : loaderStyles.color.default
-        ],
+        styles.color[loader.color ? loader.color : styles.color.default],
         "animate-spin"
       )}
       viewBox="0 0 100 101"
