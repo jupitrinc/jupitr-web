@@ -11,7 +11,7 @@ const meta: Meta<typeof Dropdown> = {
 export default meta
 type Story = StoryObj<typeof Dropdown>
 
-const options = [
+const items = [
   { name: "Profile", onClick: () => console.log("clicked") },
   { name: "Account settings", onClick: () => console.log("clicked") },
   { name: "Sign out", onClick: () => console.log("clicked") },
@@ -20,7 +20,7 @@ const options = [
 export const label: Story = {
   args: {
     label: "Profile",
-    options: options,
+    items: items,
     type: "label",
   },
 }
@@ -28,7 +28,7 @@ export const label: Story = {
 export const avatar: Story = {
   args: {
     label: "Members",
-    options: options,
+    items: items,
     type: "avatar",
     image_url: sampleData.image[3],
   },
@@ -37,6 +37,6 @@ export const avatar: Story = {
 export const more: Story = {
   args: {
     type: "more",
-    options: options,
+    items: items,
   },
 }

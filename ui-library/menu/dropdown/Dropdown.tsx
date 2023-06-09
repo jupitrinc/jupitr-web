@@ -44,17 +44,17 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
         leaveTo={styles.transition.leaveTo}
       >
         <Menu.Items className={styles.menu_item}>
-          {dropdown.options.map((option) => (
-            <Menu.Item key={option.name}>
+          {dropdown.items.map((item) => (
+            <Menu.Item key={item.name}>
               {({ active }) => (
                 <button
-                  onClick={option.onClick}
+                  onClick={item.onClick}
                   className={clsx(
                     styles.menu_item_link,
                     active && styles.menu_item_active
                   )}
                 >
-                  {option.name}
+                  {item.name}
                 </button>
               )}
             </Menu.Item>
