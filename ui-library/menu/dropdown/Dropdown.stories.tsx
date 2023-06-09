@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { Dropdown } from "./Dropdown"
+import { sampleData } from "ui-library/_sample/sample.data"
 const meta: Meta<typeof Dropdown> = {
   title: "Menu/Dropdown",
   component: Dropdown,
@@ -29,8 +30,7 @@ export const avatar: Story = {
     label: "Members",
     options: options,
     type: "avatar",
-    image_url:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80",
+    image_url: sampleData.image[3],
   },
 }
 
