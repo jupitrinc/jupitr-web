@@ -3,8 +3,6 @@ export interface DatePickerProps {
   onChange: (value: DatePickerValueType) => void
   placeholder?: string
   disabled?: boolean
-  inputClassName?: string
-  containerClassName?: string
 }
 
 export type DatePickerValueType = {

@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { AvatarProps } from "./Avatar.types"
 import { avatarStyles } from "./Avatar.styles"
 import { stringHelper } from "helper/stringHelper"
-import { OptimisedImage } from "ui-library/image/Image"
+import { Image } from "ui-library/image/Image"
 import { User } from "lucide-react"
 
 export const Avatar: React.FC<AvatarProps> = (avatar) => {
@@ -20,7 +20,7 @@ export const Avatar: React.FC<AvatarProps> = (avatar) => {
 
 const Photo = ({ avatar, styles }) => (
   <div className={clsx(styles.container, styles.size(avatar.size))}>
-    <OptimisedImage
+    <Image
       className={clsx(styles.image, styles.size(avatar.size))}
       src={avatar.image_url}
       alt={avatar.name_initials || "avatar"}
