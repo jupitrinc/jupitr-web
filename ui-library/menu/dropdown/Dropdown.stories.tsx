@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { Dropdown } from "./Dropdown"
+import { sampleData } from "ui-library/_sample/sample.data"
 const meta: Meta<typeof Dropdown> = {
   title: "Menu/Dropdown",
   component: Dropdown,
@@ -10,7 +11,7 @@ const meta: Meta<typeof Dropdown> = {
 export default meta
 type Story = StoryObj<typeof Dropdown>
 
-const options = [
+const items = [
   { name: "Profile", onClick: () => console.log("clicked") },
   { name: "Account settings", onClick: () => console.log("clicked") },
   { name: "Sign out", onClick: () => console.log("clicked") },
@@ -19,7 +20,7 @@ const options = [
 export const label: Story = {
   args: {
     label: "Profile",
-    options: options,
+    items: items,
     type: "label",
   },
 }
@@ -27,16 +28,15 @@ export const label: Story = {
 export const avatar: Story = {
   args: {
     label: "Members",
-    options: options,
+    items: items,
     type: "avatar",
-    image_url:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80",
+    image_url: sampleData.image[3],
   },
 }
 
 export const more: Story = {
   args: {
     type: "more",
-    options: options,
+    items: items,
   },
 }
