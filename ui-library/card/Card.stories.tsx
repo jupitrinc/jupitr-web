@@ -8,7 +8,7 @@ import { sampleData } from "ui-library/_sample/sample.data"
 
 const SampleComponent = () => (
   <div className="space-y-1 flex-col">
-    <Image src={sampleData.image[1]} alt="" className="w-auto" />
+    <Image src={sampleData.image[1]} alt="" className="w-full" />
     <div className="flex space-y-3 flex-col p-5">
       <Text as="h1" size="lg">
         Card title
