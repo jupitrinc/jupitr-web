@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 
 import { Button } from "./Button"
 import { RocketIcon } from "lucide-react"
+import { GoogleIcon } from "ui-library/icon/Icon"
 
 const meta: Meta<typeof Button> = {
   title: "Button",
@@ -97,6 +98,16 @@ export const icon: Story = {
     color: "important",
     variant: "contained",
     icon: <RocketIcon />,
+  },
+}
+
+export const labelIcon: Story = {
+  args: {
+    size: "lg",
+    color: "important",
+    variant: "contained",
+    icon: <GoogleIcon className="inline w-6 h-6" />,
+    label: "with Google",
   },
 }
 

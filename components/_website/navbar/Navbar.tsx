@@ -2,9 +2,9 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import brand from "public/logo.png"
 import { NavBarProps } from "./Navbar.types"
-import { OptimisedImage } from "ui-library/image/Image"
+import { Image } from "ui-library/image/Image"
 import { Button } from "ui-library/button/Button"
-import { Dropdown } from "ui-library/dropdown/Dropdown"
+import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 
 export const NavBar: React.FC<NavBarProps> = (nav) => {
   const router = useRouter()
@@ -19,7 +19,7 @@ export const NavBar: React.FC<NavBarProps> = (nav) => {
       <div className="relative flex h-16 items-center justify-between">
         <div className="flex flex-1 sm:items-stretch sm:justify-start">
           <Link href="/" className="flex flex-shrink-0 items-center">
-            <OptimisedImage src={brand} alt="logo" className="h-8 w-auto" />
+            <Image src={brand} alt="logo" className="h-8 w-auto" />
             <span className="pl-1 tracking-wider font-['Roboto'] font-bold">
               Spikes
             </span>
