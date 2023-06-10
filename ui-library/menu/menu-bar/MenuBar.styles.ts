@@ -1,3 +1,3 @@
 export const menuBarStyles = {
-  container: "grid grid-cols-4 gap-2",
+  container: "inline-flex gap-2",
 }

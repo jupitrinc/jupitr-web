@@ -1,8 +1,8 @@
 import { ChangeEventHandler } from "react"
 
-export interface RangerProps {
-  value: number
-  min: number
-  max: number
+export interface CheckboxProps {
+  label: string
+  checked: boolean
+  name: string
   onChange: ChangeEventHandler<HTMLInputElement>
 }

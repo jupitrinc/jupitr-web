@@ -10,6 +10,7 @@ export const Ranger: React.FC<RangerProps> = (ranger) => {
       value={ranger.value}
       min={ranger.min}
       max={ranger.max}
+      onChange={ranger.onChange}
       className={styles.ranger}
     />
   )
