@@ -8,8 +8,11 @@ export const Stepper: React.FC<StepperProps> = (props) => {
   const styles = stepperStyles
   return (
     <ol className={styles.container}>
-      {props.steps.map((step, idx) => (
-        <li key={step.name} className={styles.item}>
+      {props.steps.map((step, idx, arr) => (
+        <li
+          key={step.name}
+          className={idx !== arr.length - 1 ? styles.item : styles.last_item}
+        >
           <div className={styles.item_container}>
             {props.clickable ? (
               <Button
