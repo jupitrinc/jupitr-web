@@ -1,4 +1,4 @@
-import { ReposContextProvider } from "state/repos/ReposContext"
+import { ReposContextProvider } from "state/user/UserContext"
 import { DefaultLayout } from "layouts/DefaultLayout"
 
 export default function Home() {
