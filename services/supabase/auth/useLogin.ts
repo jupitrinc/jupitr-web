@@ -1,3 +1,4 @@
+import { AccountTypeEnum } from "../_types/account.types"
 import { supabase } from "../supabase"
 
 const useLogin = async (email: string) => {
@@ -6,7 +7,7 @@ const useLogin = async (email: string) => {
     options: {
       emailRedirectTo: `${window.location.origin}`,
       "data": {
-        "accountType": "talent",
+        "accountType": AccountTypeEnum.talent,
       },
     },
   })

@@ -1,3 +1,5 @@
+import { AccountType, PermissionType, ServiceLevelType } from "./account.types"
+
 export type Json =
   | string
   | number
@@ -250,9 +252,9 @@ export interface Database {
       }
     }
     Enums: {
-      account_types: "company" | "talent"
-      permission_type: "read" | "write"
-      service_level_type: "company" | "job" | "team"
+      account_types: AccountType
+      permission_type: PermissionType
+      service_level_type: ServiceLevelType
     }
     CompositeTypes: {
       [_ in never]: never

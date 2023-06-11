@@ -1,5 +1,5 @@
+import { Database } from "../_types/db.types"
 import { supabase } from "../supabase"
-import { Database } from "../../_types/supabase"
 
 type TalentProfilePayload =
   Database["public"]["Tables"]["talent_profile"]["Insert"]
