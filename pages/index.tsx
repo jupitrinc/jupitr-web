@@ -1,4 +1,4 @@
-import { ReposContextProvider } from "state/repos/ReposContext"
+import { ReposContextProvider } from "state/user/UserContext"
 import { DefaultLayout } from "layouts/DefaultLayout"
 import { ProfileOnboarding } from "components/talent/profile/profileOnboarding"
 
