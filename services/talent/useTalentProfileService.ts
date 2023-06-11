@@ -4,7 +4,7 @@ import { Database } from "services/_supabase/database"
 type TalentProfilePayload =
   Database["public"]["Tables"]["talent_profile"]["Insert"]
 
-export const useTalentProfile = () => {
+export const useTalentProfileService = () => {
   const getProfile = async (userId: string) => {
     const { data, error } = await supabase
       .from("talent_profile")
