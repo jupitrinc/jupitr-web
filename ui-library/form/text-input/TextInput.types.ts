@@ -11,4 +11,5 @@ export interface TextInputProps {
   autoFocus?: boolean
   onBlur?: ChangeEventHandler<HTMLInputElement>
   maxLength?: number
+  type?: string
 }

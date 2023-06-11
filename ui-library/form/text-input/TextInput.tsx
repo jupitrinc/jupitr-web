@@ -7,12 +7,12 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
   const { randomHash } = stringHelper
   const styles = textInputStyles
   return (
-    <>
+    <div>
       {textInput.label && (
         <Label htmlFor={randomHash()} value={textInput.label} />
       )}
       <input
-        type={"text"}
+        type={textInput.type ? textInput.type : "text"}
         value={textInput.value}
         name={textInput.name}
         placeholder={textInput.placeholder}
@@ -24,6 +24,6 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         maxLength={textInput.maxLength}
         className={styles.input}
       />
-    </>
+    </div>
   )
 }
