@@ -2,9 +2,18 @@ import React, { useState } from "react"
 import { Stepper } from "ui-library/stepper/Stepper"
 import { Details } from "./details"
 import { Skills } from "./skills"
+import { Filters } from "./filters"
 
 export const ProfileOnboarding = () => {
   const [step, setStep] = useState(1)
+
+  const goNext = () => {
+    setStep((prevStep) => (prevStep < 3 ? prevStep + 1 : 3))
+  }
+
+  const goBack = () => {
+    setStep((prevStep) => (prevStep > 1 ? prevStep - 1 : 1))
+  }
   return (
     <div className="grid grid-cols-3">
       <div>
@@ -33,8 +42,9 @@ export const ProfileOnboarding = () => {
         />
       </div>
       <div className="col-span-2">
-        {step == 1 && <Details />}
-        {step == 2 && <Skills />}
+        {step == 1 && <Details goNext={goNext} />}
+        {step == 2 && <Skills goNext={goNext} goBack={goBack} />}
+        {step == 3 && <Filters goBack={goBack} />}
       </div>
     </div>
   )

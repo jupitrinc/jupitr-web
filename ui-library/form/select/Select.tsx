@@ -13,6 +13,7 @@ export const Select: React.FC<SelectProps> = (select) => {
       <Label htmlFor={randomHash()} value={select.label} />
       <select
         id={randomHash()}
+        name={select.name}
         className={styles.select}
         disabled={select.disabled}
       >

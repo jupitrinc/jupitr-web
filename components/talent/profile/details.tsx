@@ -1,22 +1,33 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
 import { Heading } from "../Heading/Heading"
+import { Button } from "ui-library/button/Button"
 
-export const Details = () => {
+export const Details = ({ goNext }) => {
+  const formRef = useRef(null)
+
+  const onSubmit = () => {
+    if (!formRef.current) return
+
+    const formData = new FormData(formRef.current)
+    const formValues = Object.fromEntries(formData.entries())
+
+    goNext()
+  }
   return (
-    <div>
+    <form ref={formRef}>
       <Heading heading="Details" subHeading="Tell us a bit about yourself" />
       <div>
         <TextInput
-          value=""
+          name="fullname"
           label="Full name"
           onChange={() => {
             return
           }}
         />
         <TextInput
-          value=""
+          name="avatar"
           type="file"
           label="Profile picture"
           onChange={() => {
@@ -25,23 +36,13 @@ export const Details = () => {
         />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 mb-4">
         <Text as="h2">Social media links</Text>
-        <TextInput
-          value=""
-          label="Linkedin profile"
-          onChange={() => {
-            return
-          }}
-        />
-        <TextInput
-          value=""
-          label="Github profile"
-          onChange={() => {
-            return
-          }}
-        />
+        <TextInput name="linkedin" label="Linkedin profile" />
+        <TextInput name="github" label="Github profile" />
       </div>
-    </div>
+
+      <Button color="important" label="Next" onClick={onSubmit} size="base" />
+    </form>
   )
 }

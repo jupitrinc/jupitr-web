@@ -1,9 +1,9 @@
 import { ChangeEventHandler } from "react"
 
 export interface TextInputProps {
-  value: string
+  value?: string
   label?: string
-  onChange: ChangeEventHandler<HTMLInputElement>
+  onChange?: ChangeEventHandler<HTMLInputElement>
   name?: string
   placeholder?: string
   autoComplete?: string
