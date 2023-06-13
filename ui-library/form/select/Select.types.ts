@@ -5,4 +5,5 @@ export interface SelectProps {
   options: string[]
   label: string
   disabled?: boolean
+  name?: string
 }
