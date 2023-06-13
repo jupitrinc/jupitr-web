@@ -1,11 +1,11 @@
 import React, { useRef } from "react"
-import { Heading } from "../Heading/Heading"
+import { Heading } from "../../Heading/Heading"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { Select } from "ui-library/form/select/Select"
 import { Ranger } from "ui-library/ranger/Ranger"
 
-export const Filters = ({ goBack }) => {
+const Filters = ({ goBack }) => {
   const formRef = useRef(null)
 
   const onSubmit = () => {
@@ -60,3 +60,5 @@ export const Filters = ({ goBack }) => {
     </form>
   )
 }
+
+export default Filters

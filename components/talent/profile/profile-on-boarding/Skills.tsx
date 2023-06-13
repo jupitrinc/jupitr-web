@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Heading } from "../Heading/Heading"
+import { Heading } from "../../Heading/Heading"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Plus, Trash2 } from "lucide-react"
 import { Button } from "ui-library/button/Button"
@@ -10,7 +10,7 @@ interface ISkill {
   experience: number
 }
 
-export const Skills = ({ goNext, goBack }) => {
+const Skills = ({ goNext, goBack }) => {
   const [skill, setSkill] = useState("")
   const [skillList, setSkillList] = useState<ISkill[]>([])
 
@@ -90,3 +90,5 @@ export const Skills = ({ goNext, goBack }) => {
     </div>
   )
 }
+
+export default Skills

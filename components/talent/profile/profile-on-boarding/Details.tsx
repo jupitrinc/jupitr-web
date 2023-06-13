@@ -1,10 +1,10 @@
 import React, { useRef } from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
-import { Heading } from "../Heading/Heading"
+import { Heading } from "../../Heading/Heading"
 import { Button } from "ui-library/button/Button"
 
-export const Details = ({ goNext }) => {
+const Details = ({ goNext }) => {
   const formRef = useRef(null)
 
   const onSubmit = () => {
@@ -19,21 +19,8 @@ export const Details = ({ goNext }) => {
     <form ref={formRef}>
       <Heading heading="Details" subHeading="Tell us a bit about yourself" />
       <div>
-        <TextInput
-          name="fullname"
-          label="Full name"
-          onChange={() => {
-            return
-          }}
-        />
-        <TextInput
-          name="avatar"
-          type="file"
-          label="Profile picture"
-          onChange={() => {
-            return
-          }}
-        />
+        <TextInput name="fullname" label="Full name" />
+        <TextInput name="avatar" type="file" label="Profile picture" />
       </div>
 
       <div className="mt-8 mb-4">
@@ -46,3 +33,5 @@ export const Details = ({ goNext }) => {
     </form>
   )
 }
+
+export default Details

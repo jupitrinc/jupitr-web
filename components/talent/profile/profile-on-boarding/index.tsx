@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import { Stepper } from "ui-library/stepper/Stepper"
-import { Details } from "./details"
-import { Skills } from "./skills"
-import { Filters } from "./filters"
+import Details from "./Details"
+import Skills from "./Skills"
+import Filters from "./Filters"
 
-export const ProfileOnboarding = () => {
+const ProfileOnboarding = () => {
   const [step, setStep] = useState(1)
 
   const goNext = () => {
@@ -49,3 +49,5 @@ export const ProfileOnboarding = () => {
     </div>
   )
 }
+
+export default ProfileOnboarding
