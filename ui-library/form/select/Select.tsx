@@ -7,7 +7,7 @@ export const Select: React.FC<SelectProps> = (select) => {
   const styles = selectStyles
 
   return (
-    <>
+    <div>
       <Label htmlFor={select.label ? select.label : ""} value={select.label} />
       <select
         name={select.name}
@@ -18,6 +18,6 @@ export const Select: React.FC<SelectProps> = (select) => {
           <option key={item}>{item}</option>
         ))}
       </select>
-    </>
+    </div>
   )
 }

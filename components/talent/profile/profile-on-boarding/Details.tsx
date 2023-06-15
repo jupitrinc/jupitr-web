@@ -15,6 +15,7 @@ const Details = ({ goNext }) => {
 
     goNext()
   }
+
   return (
     <form ref={formRef}>
       <Heading heading="Details" subHeading="Tell us a bit about yourself" />

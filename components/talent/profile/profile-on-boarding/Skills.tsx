@@ -83,10 +83,12 @@ const Skills = ({ goNext, goBack }) => {
         placeHolder="Skill name"
       />
 
-      <div className="mt-4">
-        <Button color="standard" label="Back" onClick={goBack} size="base" />
-        <Button color="important" label="Next" onClick={goNext} size="base" />
-      </div>
+      {goBack && goNext && (
+        <div className="mt-4 flex gap-4">
+          <Button color="standard" label="Back" onClick={goBack} size="base" />
+          <Button color="important" label="Next" onClick={goNext} size="base" />
+        </div>
+      )}
     </div>
   )
 }
