@@ -1,9 +1,9 @@
 import { DefaultLayout } from "layouts/DefaultLayout"
 
-export default function Home() {
+export default function Jobs() {
   return (
     <DefaultLayout>
-      <h1 className="text-center">List of jobs for talent</h1>
+      <h1 className="text-center">Talent job list</h1>
     </DefaultLayout>
   )
 }

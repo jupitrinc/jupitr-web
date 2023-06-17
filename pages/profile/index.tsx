@@ -1,9 +1,20 @@
-import { DefaultLayout } from "layouts/DefaultLayout"
+import { ProfileLayout } from "layouts/ProfileLayout"
+import { Filters } from "components/talent/profile/Filters"
+import { Intro } from "components/talent/profile/Intro"
+import { Links } from "components/talent/profile/Links"
+import { Skills } from "components/talent/profile/Skills"
 
-export default function Home() {
+export default function Profile() {
+  // network calls
+  // pass data to each component
+  // memoize components
+
   return (
-    <DefaultLayout>
-      <h1 className="text-center">Talent profile + onboarding</h1>
-    </DefaultLayout>
+    <ProfileLayout>
+      <Intro />
+      <Skills />
+      <Links />
+      <Filters />
+    </ProfileLayout>
   )
 }

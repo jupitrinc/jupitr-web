@@ -1,29 +1,24 @@
 import { Check, Copy } from "lucide-react"
 import { useState } from "react"
-import { copyClipboardStyles } from "./CopyClipboard.styles"
+import { Button } from "ui-library/button/Button"
+import { CopyClipboardProps } from "./CopyClipboard.types"
 
-const CopyClipboard = ({ email }) => {
+export const CopyClipboard: React.FC<CopyClipboardProps> = (clipboard) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(email)
+    navigator.clipboard.writeText(clipboard.value)
     setIsCopied(true)
     setTimeout(() => setIsCopied(false), 1000)
   }
 
-  const styles = copyClipboardStyles
-
   return (
-    <div className={styles.container}>
-      <div className={styles.text}>{email}</div>
-      <button
-        className="px-2 py-2 rounded text-gray-500 hover:text-gray-600 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-50 disabled:active:bg-gray-50"
-        onClick={copyToClipboard}
-      >
-        {isCopied ? <Check /> : <Copy />}
-      </button>
-    </div>
+    <Button
+      onClick={copyToClipboard}
+      variant="contained"
+      size="base"
+      icon={isCopied ? <Check /> : <Copy />}
+      disabled={!clipboard.value}
+    />
   )
 }
-
-export default CopyClipboard

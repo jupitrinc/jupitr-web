@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "ui-library/button/Button"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 
-export const AccountSettings = () => {
+export const Settings = () => {
   return (
     <>
       <div className="grid grid-cols-3 grid-rows-1 gap-2">
