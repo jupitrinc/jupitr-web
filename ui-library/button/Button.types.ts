@@ -2,7 +2,7 @@ import { ColorType, SizeType, VariantType } from "ui-library/_theme/Theme.types"
 
 export interface ButtonProps {
   label?: string
-  onClick: (event: React.MouseEvent) => void
+  onClick?: (event: React.MouseEvent) => void
   variant?: VariantType
   size?: SizeType
   color?: ColorType
