@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserContext } from "./UserContext"
+import { UserContext } from "./UserContextProvider"
 
 export const userState = () => {
   const { state } = useContext(UserContext)
@@ -8,5 +8,6 @@ export const userState = () => {
     user: state.data,
     loading: state.loading,
     error: state.error,
+    isLoggedIn: state.data.id ? true : false,
   }
 }

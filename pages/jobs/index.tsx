@@ -1,9 +1,9 @@
-import { DefaultLayout } from "layouts/DefaultLayout"
+import { TalentLayout } from "layouts/TalentLayout"
 
-export default function Jobs() {
+export default function TalentJobs() {
   return (
-    <DefaultLayout>
+    <TalentLayout>
       <h1 className="text-center">Talent job list</h1>
-    </DefaultLayout>
+    </TalentLayout>
   )
 }

@@ -1,16 +1,16 @@
 import { useContext } from "react"
-import { UserActionEnum } from "./user.types"
-import { UserContext } from "./UserContextProvider"
+import { TalentProfileActionEnum } from "./talentProfile.types"
+import { TalentProfileContext } from "./TalentProfileContext"
 
-export function userAction() {
-  const { dispatch } = useContext(UserContext)
+export function talentProfileAction() {
+  const { dispatch } = useContext(TalentProfileContext)
 
   const get = async (language: string) => {
     if (!language) return
 
     const catchError = (errorMessage: string) => {
       dispatch({
-        type: UserActionEnum.GET_USER_FAILURE,
+        type: TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE,
       })
 
       console.log(errorMessage)
@@ -18,7 +18,7 @@ export function userAction() {
 
     try {
       dispatch({
-        type: UserActionEnum.GET_USER_BEGIN,
+        type: TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN,
       })
 
       /* const response = await fetchRepos(language)
@@ -29,7 +29,7 @@ export function userAction() {
           const data = await response.json()
           if (data.items) {
             dispatch({
-              type: UserActionEnum.GET_USER_SUCCESS,
+              type: TalentProfileActionEnum.GET_USER_SUCCESS,
               payload: data.items,
             })
           }
@@ -40,14 +40,7 @@ export function userAction() {
     }
   }
 
-  const signOut = () => {
-    dispatch({
-      type: UserActionEnum.SIGN_OUT_USER,
-    })
-  }
-
   return {
     get,
-    signOut,
   }
 }

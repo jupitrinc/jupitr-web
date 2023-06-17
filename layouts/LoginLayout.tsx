@@ -1,14 +1,11 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
-import { dateHelper } from "helper/dateHelper"
 
-export const ProfileLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { currentYear } = dateHelper
-
+export const LoginLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>jupitr</title>
+        <title>Login</title>
         <meta name="description" content="" />
         <link
           rel="apple-touch-icon"
@@ -34,14 +31,7 @@ export const ProfileLayout: React.FC<LayoutProps> = ({ children }) => {
       </Head>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
         <header className="space-y-2"></header>
-        <main>
-          <div className="mx-auto max-w-2xl my-5 space-y-10">{children}</div>
-        </main>
-        <footer className="mt-20">
-          <p className="text-gray-500 sm:text-center text-xs mb-10">
-            © {currentYear()} jupitr
-          </p>
-        </footer>
+        <main className="mx-auto max-w-sm space-y-10">{children}</main>
       </div>
     </>
   )

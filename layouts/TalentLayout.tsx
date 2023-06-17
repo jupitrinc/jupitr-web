@@ -1,14 +1,14 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
-import { dateHelper } from "helper/dateHelper"
+import Link from "next/link"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import Link from "next/link"
+import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { userState } from "state/user/userState"
+import { useRouter } from "next/router"
+import { userAction } from "state/user/userAction"
 
-export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { currentYear } = dateHelper
-
+export const TalentLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Head>
@@ -37,46 +37,52 @@ export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
-        <header>
+        <header className="space-y-2">
           <Navbar />
         </header>
         <main>
           <div className="mx-auto max-w-2xl my-5 space-y-10">{children}</div>
         </main>
-        <footer className="mt-20">
-          <p className="text-gray-500 sm:text-center text-xs mb-10">
-            © {currentYear()} jupitr
-          </p>
-        </footer>
       </div>
     </>
   )
 }
 
 const Navbar = () => {
-  const { isLoggedIn } = userState()
-
-  console.log("default navbar ...")
+  const router = useRouter()
+  const { user } = userState()
+  const { signOut } = userAction()
   return (
     <div className="flex flex-row space-x-5 justify-between items-baseline">
       <div>
-        <Link href="/">
+        <Link href="/jobs">
           <Text as="h1" size="xl">
             jupitr
           </Text>
         </Link>
       </div>
 
-      {isLoggedIn && (
-        <div className="space-x-5 flex">
-          <Link href="/c/signup">
-            <Button label="Post a job" size="base" variant="text" />
-          </Link>
-          <Link href="/login">
-            <Button label="Login" size="base" color="important" />
-          </Link>
-        </div>
-      )}
+      <div className="space-x-5 flex">
+        <Link href="/jobs">
+          <Button label="Jobs" size="base" variant="text" />
+        </Link>
+
+        <Dropdown
+          type="avatar"
+          image_url={user.avatar}
+          items={[
+            {
+              name: "Profile",
+              onClick: () => router.push("/profile"),
+            },
+            {
+              name: "Account settings",
+              onClick: () => router.push("/account/settings"),
+            },
+            { name: "Sign out", onClick: () => signOut() },
+          ]}
+        />
+      </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-export interface UserContextInterface {
+export interface IUserContext {
   state: UserStateType
   dispatch: ({ type }: UserActionType) => void
 }
@@ -19,14 +19,17 @@ export type UserStateType = {
 
 export type UserActionType = {
   type:
-    | UserActionEnum.FETCH_USER_BEGIN
-    | UserActionEnum.FETCH_USER_FAILURE
-    | UserActionEnum.FETCH_USER_SUCCESS
+    | UserActionEnum.GET_USER_BEGIN
+    | UserActionEnum.GET_USER_FAILURE
+    | UserActionEnum.GET_USER_SUCCESS
+    | UserActionEnum.SIGN_OUT_USER
   payload?: UserType
 }
 
 export enum UserActionEnum {
-  FETCH_USER_BEGIN = "FETCH_USER_BEGIN",
-  FETCH_USER_FAILURE = "FETCH_USER_FAILURE",
-  FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS",
+  GET_USER_BEGIN = "GET_USER_BEGIN",
+  GET_USER_FAILURE = "GET_USER_FAILURE",
+  GET_USER_SUCCESS = "GET_USER_SUCCESS",
+
+  SIGN_OUT_USER = "SIGN_OUT_USER",
 }

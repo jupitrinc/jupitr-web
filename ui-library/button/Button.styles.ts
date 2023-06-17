@@ -1,7 +1,8 @@
 import { ThemeColorEnum } from "ui-library/_theme/Theme.types"
 
 export const buttonStyles = {
-  button: "font-medium flex-1 space-x-2 focus:outline-none ease-in-out",
+  button:
+    "font-medium flex space-x-2 focus:outline-none ease-in-out justify-center place-items-center",
   icon_button:
     "font-medium p-2 text-center inline-flex items-center focus:outline-none ease-in-out",
 
@@ -12,11 +13,11 @@ export const buttonStyles = {
   },
   color: {
     [`${ThemeColorEnum.standard}`]:
-      "text-gray-500 hover:text-gray-600 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-50 disabled:active:bg-gray-50",
+      "text-gray-500 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-100 hover:bg-gray-100 active:bg-gray-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-50 disabled:active:bg-gray-50",
     [`${ThemeColorEnum.important}`]:
-      "text-blue-500 hover:text-blue-600 ring-blue-900/10 hover:ring-blue-900/20 bg-blue-50 hover:bg-blue-100 active:bg-blue-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-blue-500 disabled:hover:bg-blue-50 disabled:active:bg-blue-50",
+      "text-blue-500 ring-blue-900/10 hover:ring-blue-900/20 bg-blue-50 hover:bg-blue-100 active:bg-blue-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-blue-500 disabled:hover:bg-blue-50 disabled:active:bg-blue-50",
     [`${ThemeColorEnum.dangerous}`]:
-      "text-red-500 hover:text-red-600 ring-red-900/10 hover:ring-red-900/20 bg-red-50 hover:bg-red-100 active:bg-red-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-red-500 disabled:hover:bg-red-50 disabled:active:bg-red-50",
+      "text-red-500 ring-red-900/10 hover:ring-red-900/20 bg-red-50 hover:bg-red-100 active:bg-red-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-red-500 disabled:hover:bg-red-50 disabled:active:bg-red-50",
   },
   rounded: {
     xl: "rounded-xl",
