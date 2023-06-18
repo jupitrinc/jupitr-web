@@ -1,16 +1,19 @@
 import { useContext } from "react"
-import { TalentProfileActionEnum } from "./talentProfile.types"
+import {
+  TalentProfileActionEnum,
+  TalentProfileSkill,
+} from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
 
 export function talentProfileAction() {
   const { dispatch } = useContext(TalentProfileContext)
 
-  const get = async (language: string) => {
+  const getProfile = async (language: string) => {
     if (!language) return
 
     const catchError = (errorMessage: string) => {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE,
+        type: TalentProfileActionEnum.GET_PROFILE_FAILURE,
       })
 
       console.log(errorMessage)
@@ -18,7 +21,7 @@ export function talentProfileAction() {
 
     try {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN,
+        type: TalentProfileActionEnum.GET_PROFILE_BEGIN,
       })
 
       /* const response = await fetchRepos(language)
@@ -40,7 +43,23 @@ export function talentProfileAction() {
     }
   }
 
+  const addSkill = (skill: TalentProfileSkill) => {
+    dispatch({
+      type: TalentProfileActionEnum.ADD_SKILL,
+      payload: skill,
+    })
+  }
+
+  const removeSkill = (skill: TalentProfileSkill) => {
+    dispatch({
+      type: TalentProfileActionEnum.REMOVE_SKILL,
+      payload: skill,
+    })
+  }
+
   return {
-    get,
+    getProfile,
+    addSkill,
+    removeSkill,
   }
 }
