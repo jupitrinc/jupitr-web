@@ -8,7 +8,7 @@ import { userState } from "state/user/userState"
 import { useRouter } from "next/router"
 import { userAction } from "state/user/userAction"
 
-export const TalentLayout: React.FC<LayoutProps> = ({ children }) => {
+export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Head>
@@ -41,7 +41,9 @@ export const TalentLayout: React.FC<LayoutProps> = ({ children }) => {
           <Navbar />
         </header>
         <main>
-          <div className="mx-auto max-w-2xl my-5 space-y-10">{children}</div>
+          <div className="mx-auto flex flex-col max-w-2xl my-5 space-y-10">
+            {children}
+          </div>
         </main>
       </div>
     </>
@@ -52,37 +54,44 @@ const Navbar = () => {
   const router = useRouter()
   const { user } = userState()
   const { signOut } = userAction()
-  return (
-    <div className="flex flex-row space-x-5 justify-between items-baseline">
-      <div>
-        <Link href="/jobs">
-          <Text as="h1" size="xl">
-            jupitr
-          </Text>
-        </Link>
-      </div>
 
-      <div className="space-x-5 flex">
-        <Link href="/jobs">
-          <Button label="Jobs" size="base" variant="text" />
-        </Link>
+  if (router.pathname.includes("/login")) {
+    return null
+  } else if (router.pathname.includes("/c/")) {
+    return null
+  } else {
+    return (
+      <div className="flex flex-row space-x-5 justify-between items-baseline">
+        <div>
+          <Link href="/jobs">
+            <Text as="h1" size="xl">
+              jupitr
+            </Text>
+          </Link>
+        </div>
 
-        <Dropdown
-          type="avatar"
-          image_url={user.avatar}
-          items={[
-            {
-              name: "Profile",
-              onClick: () => router.push("/profile"),
-            },
-            {
-              name: "Account settings",
-              onClick: () => router.push("/account/settings"),
-            },
-            { name: "Sign out", onClick: () => signOut() },
-          ]}
-        />
+        <div className="space-x-5 flex">
+          <Link href="/jobs">
+            <Button label="Jobs" size="base" variant="text" />
+          </Link>
+
+          <Dropdown
+            type="avatar"
+            image_url={user.avatar}
+            items={[
+              {
+                name: "Profile",
+                onClick: () => router.push("/profile"),
+              },
+              {
+                name: "Account settings",
+                onClick: () => router.push("/account/settings"),
+              },
+              { name: "Sign out", onClick: () => signOut() },
+            ]}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }

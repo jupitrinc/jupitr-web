@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react"
 
-import { userReducer } from "./talentProfileReducer"
+import { talentProfileReducer } from "./talentProfileReducer"
 import {
   ITalentProfileContext,
   TalentProfileStateType,
@@ -15,7 +15,7 @@ const TalentProfile = () => {
     loading: false,
     error: false,
   }
-  const [state, dispatch] = useReducer(userReducer, initialState)
+  const [state, dispatch] = useReducer(talentProfileReducer, initialState)
 
   return {
     state,
@@ -39,7 +39,11 @@ const test_data = {
     { id: "2", name: "Pytorch", level: 2 },
     { id: "3", name: "Python", level: 2 },
   ],
-  social_links: ["https://link.com", "https://link.com", "https://link.com"],
+  social_links: [
+    "https://linkedin.com",
+    "https://github.com",
+    "https://link.com",
+  ],
   preferences: {
     location: ["UK"],
     work_model: ["remote"],

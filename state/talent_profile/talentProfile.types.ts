@@ -6,11 +6,7 @@ export interface ITalentProfileContext {
 export type TalentProfileType = {
   user_id: string
   active: boolean
-  skills: {
-    id: string
-    name: string
-    level: number
-  }[]
+  skills: TalentProfileSkill[]
   social_links: string[]
   preferences: {
     location: string[]
@@ -23,6 +19,12 @@ export type TalentProfileType = {
   }
 }
 
+export type TalentProfileSkill = {
+  id: string
+  name: string
+  level: number
+}
+
 export type TalentProfileStateType = {
   data: TalentProfileType
   loading: boolean
@@ -31,14 +33,19 @@ export type TalentProfileStateType = {
 
 export type TalentProfileActionType = {
   type:
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_SUCCESS
-  payload?: TalentProfileType
+    | TalentProfileActionEnum.GET_PROFILE_BEGIN
+    | TalentProfileActionEnum.GET_PROFILE_FAILURE
+    | TalentProfileActionEnum.GET_PROFILE_SUCCESS
+    | TalentProfileActionEnum.ADD_SKILL
+    | TalentProfileActionEnum.REMOVE_SKILL
+  payload?: TalentProfileType | TalentProfileSkill
 }
 
 export enum TalentProfileActionEnum {
-  GET_TALENT_PROFILE_BEGIN = "GET_TALENT_PROFILE_BEGIN",
-  GET_TALENT_PROFILE_FAILURE = "GET_TALENT_PROFILE_FAILURE",
-  GET_TALENT_PROFILE_SUCCESS = "GET_TALENT_PROFILE_SUCCESS",
+  GET_PROFILE_BEGIN = "GET_PROFILE_BEGIN",
+  GET_PROFILE_FAILURE = "GET_PROFILE_FAILURE",
+  GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS",
+
+  ADD_SKILL = "ADD_SKILL",
+  REMOVE_SKILL = "REMOVE_SKILL",
 }

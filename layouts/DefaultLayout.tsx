@@ -56,7 +56,6 @@ export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
 const Navbar = () => {
   const { isLoggedIn } = userState()
 
-  console.log("default navbar ...")
   return (
     <div className="flex flex-row space-x-5 justify-between items-baseline">
       <div>
