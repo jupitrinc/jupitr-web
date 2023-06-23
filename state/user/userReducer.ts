@@ -10,21 +10,21 @@ export const userReducer = (
   action: UserActionType
 ): UserStateType => {
   switch (action.type) {
-    case UserActionEnum.GET_USER_BEGIN:
+    case UserActionEnum.SIGN_IN_BEGIN:
       return {
         ...state,
         loading: true,
         error: false,
       }
 
-    case UserActionEnum.GET_USER_FAILURE:
+    case UserActionEnum.SIGN_IN_FAILURE:
       return {
         ...state,
         loading: false,
         error: true,
       }
 
-    case UserActionEnum.GET_USER_SUCCESS:
+    case UserActionEnum.SIGN_IN_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -32,7 +32,21 @@ export const userReducer = (
         data: action.payload as UserType,
       }
 
-    case UserActionEnum.SIGN_OUT_USER:
+    case UserActionEnum.SIGN_OUT_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      }
+
+    case UserActionEnum.SIGN_OUT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      }
+
+    case UserActionEnum.SIGN_OUT_SUCCESS:
       return {
         ...state,
         loading: false,

@@ -1,4 +1,4 @@
-import { supabase } from "services/_supabase/client"
+import { supabase, supabaseClientComponent } from "services/_supabase/client"
 
 const useAuthService = () => {
   const getUserId = async () => {
@@ -11,14 +11,11 @@ const useAuthService = () => {
     }
   }
 
-  const login = async (email: string) => {
-    return await supabase.auth.signInWithOtp({
+  const signInWithOtp = async (email: string) => {
+    return await supabaseClientComponent.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}`,
-        "data": {
-          "accountType": "talent",
-        },
+        emailRedirectTo: `${location.origin}/auth/callback`,
       },
     })
   }
@@ -27,6 +24,6 @@ const useAuthService = () => {
     return await supabase.auth.signOut()
   }
 
-  return { logout, login, getUserId }
+  return { logout, signInWithOtp, getUserId }
 }
 export default useAuthService

@@ -5,10 +5,19 @@ import { SocialLinks } from "components/talent/profile/SocialLinks"
 import { Skills } from "components/talent/profile/Skills"
 import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
 import { talentProfileState } from "state/talent_profile/talentProfileState"
-import { userState } from "state/user/userState"
+import { useUserState } from "state/user/userState"
+import { useEffect } from "react"
+import { useUserAction } from "state/user/userAction"
 
 export default function TalentProfile() {
-  // network call: get talent profile
+  const { signInWithOtp } = useUserAction()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await signInWithOtp()
+    }
+    fetchData()
+  }, [])
 
   return (
     <AppLayout>
@@ -20,7 +29,7 @@ export default function TalentProfile() {
 }
 
 const Components = () => {
-  const { user } = userState()
+  const { user } = useUserState()
   const { talent_profile } = talentProfileState()
 
   return (

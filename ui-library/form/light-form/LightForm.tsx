@@ -11,6 +11,7 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
     <form onSubmit={form.onSubmit} className={styles.form}>
       <TextInput
         value={form.value}
+        type={form.type}
         onChange={form.onChange}
         placeholder={form.placeHolder}
         disabled={form.disabled}
