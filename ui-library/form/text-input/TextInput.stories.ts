@@ -41,3 +41,11 @@ export const maxLength: Story = {
     maxLength: 10,
   },
 }
+
+export const ghost: Story = {
+  args: {
+    maxLength: 10,
+    placeholder: "Ava Sky",
+    ghost: true,
+  },
+}

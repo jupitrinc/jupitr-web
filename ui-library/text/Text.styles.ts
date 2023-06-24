@@ -16,4 +16,9 @@ export const textStyles = {
   heading: {
     fontFamily: "font-mw",
   },
+  align: {
+    left: "text-left",
+    right: "text-right",
+    center: "text-center",
+  },
 }

@@ -2,7 +2,8 @@ import { ChangeEventHandler } from "react"
 
 export interface CheckboxProps {
   label: string
-  checked: boolean
+  value: string
   name: string
+  checked: boolean
   onChange: ChangeEventHandler<HTMLInputElement>
 }
