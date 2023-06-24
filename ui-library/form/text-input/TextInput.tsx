@@ -5,7 +5,7 @@ import { TextInputProps } from "./TextInput.types"
 export const TextInput: React.FC<TextInputProps> = (textInput) => {
   const styles = textInputStyles
   return (
-    <div>
+    <div className={styles.container}>
       {textInput.label && (
         <Label
           htmlFor={textInput.label ? textInput.label : ""}
@@ -23,7 +23,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         autoFocus={textInput.autoFocus}
         onBlur={textInput.onBlur}
         maxLength={textInput.maxLength}
-        className={styles.input}
+        className={textInput.ghost ? styles.ghostInput : styles.input}
       />
     </div>
   )

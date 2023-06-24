@@ -9,7 +9,7 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
   const { randomHash } = stringHelper
 
   return (
-    <>
+    <div className={styles.container}>
       {textarea.label && (
         <Label htmlFor={randomHash()} value={textarea.label} />
       )}
@@ -25,6 +25,6 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
         rows={10}
         className={styles.textarea}
       />
-    </>
+    </div>
   )
 }

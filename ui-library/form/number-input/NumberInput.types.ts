@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react"
 
-export interface TextInputProps {
+export interface NumberInputProps {
   value?: string
   label?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
@@ -10,7 +10,4 @@ export interface TextInputProps {
   disabled?: boolean
   autoFocus?: boolean
   onBlur?: ChangeEventHandler<HTMLInputElement>
-  maxLength?: number
-  type?: string
-  ghost?: boolean
 }

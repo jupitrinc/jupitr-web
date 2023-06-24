@@ -1,8 +1,8 @@
 import {
+  IUser,
   UserActionEnum,
   UserActionType,
   UserStateType,
-  UserType,
 } from "./user.types"
 
 export const userReducer = (
@@ -29,7 +29,7 @@ export const userReducer = (
         ...state,
         loading: false,
         error: false,
-        data: action.payload as UserType,
+        data: action.payload as IUser,
       }
 
     case UserActionEnum.SIGN_OUT_BEGIN:
@@ -51,7 +51,7 @@ export const userReducer = (
         ...state,
         loading: false,
         error: false,
-        data: {} as UserType,
+        data: {} as IUser,
       }
 
     default:

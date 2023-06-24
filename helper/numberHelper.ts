@@ -19,4 +19,8 @@ export const numberHelper = {
       return number
     }
   },
+
+  formatNumber: (num: number) => {
+    return num.toLocaleString("en-GB")
+  },
 }

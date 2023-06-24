@@ -5,6 +5,7 @@ export interface LightFormProps {
   type?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   onSubmit?: FormEventHandler<HTMLFormElement>
+  onClick?: (event: React.MouseEvent) => void
   icon: JSX.Element
   label?: string
   placeHolder?: string
