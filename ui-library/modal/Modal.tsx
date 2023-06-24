@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { ModalProps } from "./Modal.types"
 import { Button } from "ui-library/button/Button"
 import { modalStyles } from "./Modal.styles"
-import { XCircle } from "lucide-react"
+import { X } from "lucide-react"
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
   const styles = modalStyles
@@ -36,7 +36,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
               <Dialog.Panel className={styles.dialog_panel}>
                 <div className={styles.dialog_panel_div}>
                   <Button
-                    icon={<XCircle className={styles.close_icon} />}
+                    icon={<X className={styles.close_icon} />}
                     label=""
                     onClick={() => onClose(false)}
                   />
