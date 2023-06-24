@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { CheckboxGroup } from "ui-library/form/checkbox/checkbox-group/CheckboxGroup"
 import { SectionHeader } from "./Sections"
 import { CheckboxProps } from "ui-library/form/checkbox/checkbox/Checkbox.types"
@@ -8,10 +8,10 @@ import { CheckboxProps } from "ui-library/form/checkbox/checkbox/Checkbox.types"
 const models = ["Remote", "Office", "Hybrid"]
 
 export const WorkModel = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const work_models = talent_profile.preferences.work_model
 
-  const { addWorkModel, removeWorkModel } = talentProfileAction()
+  const { addWorkModel, removeWorkModel } = useTalentProfileAction()
 
   const handleOnChange = (e) => {
     const { value, checked } = e.target

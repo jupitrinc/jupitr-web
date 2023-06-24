@@ -1,7 +1,7 @@
 import { Plus, X } from "lucide-react"
 import { useState } from "react"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { Button } from "ui-library/button/Button"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
@@ -9,11 +9,11 @@ import { Text } from "ui-library/text/Text"
 import { SectionHeader } from "./Sections"
 
 export const Skills = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const skills = talent_profile.skills
 
   const [newSkill, setNewSkill] = useState<string>("")
-  const { addSkill } = talentProfileAction()
+  const { addSkill } = useTalentProfileAction()
 
   const handleAddSkill = (e) => {
     e.preventDefault()
@@ -46,7 +46,7 @@ export const Skills = () => {
 
 const SkillCard = ({ skill }) => {
   const [level, setLevel] = useState(skill.level)
-  const { removeSkill } = talentProfileAction()
+  const { removeSkill } = useTalentProfileAction()
   return (
     <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl">
       <div className="flex justify-between">

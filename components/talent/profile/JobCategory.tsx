@@ -1,17 +1,17 @@
 import { Plus } from "lucide-react"
 import React, { useState } from "react"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Pill } from "ui-library/pill/Pill"
 import { SectionHeader } from "./Sections"
 
 export const JobCategory = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const job_categories = talent_profile.preferences.job_category
 
   const [newCategory, setNewCategory] = useState<string>("")
-  const { addJobCategory, removeJobCategory } = talentProfileAction()
+  const { addJobCategory, removeJobCategory } = useTalentProfileAction()
 
   const handleAddCategory = (e) => {
     e.preventDefault()

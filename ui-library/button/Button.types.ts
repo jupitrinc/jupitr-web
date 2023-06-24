@@ -11,4 +11,5 @@ export interface ButtonProps {
   icon?: JSX.Element
   arrow?: boolean
   full_width?: boolean
+  type?: "submit" | "reset"
 }

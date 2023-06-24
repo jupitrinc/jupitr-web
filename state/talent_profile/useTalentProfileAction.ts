@@ -7,7 +7,7 @@ import {
 } from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
 
-export function talentProfileAction() {
+export function useTalentProfileAction() {
   const { dispatch } = useContext(TalentProfileContext)
 
   const getProfile = async (language: string) => {

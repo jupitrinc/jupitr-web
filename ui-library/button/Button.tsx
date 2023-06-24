@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = (button) => {
   const styles = buttonStyles
   return (
     <button
-      type="button"
+      type={button.type ? button.type : "button"}
       className={clsx(
         button.label ? styles.button : styles.icon_button,
         styles.variant[

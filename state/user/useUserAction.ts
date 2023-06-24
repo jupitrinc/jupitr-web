@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabaseClientComponent } from "services/_supabase/client"
-import { useUserState } from "./userState"
+import { useUserState } from "./useUserState"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
