@@ -3,6 +3,7 @@ import { ChangeEventHandler, FormEventHandler } from "react"
 export interface LightFormProps {
   value?: string
   type?: string
+  name?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   onSubmit?: FormEventHandler<HTMLFormElement>
   onClick?: (event: React.MouseEvent) => void
@@ -11,4 +12,5 @@ export interface LightFormProps {
   placeHolder?: string
   maxLength?: number
   disabled?: boolean
+  autocomplete?: boolean
 }

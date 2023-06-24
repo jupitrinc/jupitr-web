@@ -1,16 +1,16 @@
 import React from "react"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { SectionHeader } from "./Sections"
 import { NumberInput } from "ui-library/form/number-input/NumberInput"
 import { Text } from "ui-library/text/Text"
 import { numberHelper } from "helper/numberHelper"
 
 export const Salary = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const salary = talent_profile.preferences.min_salary
 
-  const { updateSalary } = talentProfileAction()
+  const { updateSalary } = useTalentProfileAction()
   const { formatNumber } = numberHelper
 
   const handleOnChange = (e) => {

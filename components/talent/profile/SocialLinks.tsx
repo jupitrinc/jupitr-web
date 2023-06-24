@@ -2,10 +2,10 @@ import React from "react"
 import { Github, Globe, Linkedin } from "lucide-react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 
 export const SocialLinks = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const links = talent_profile.social_links
   return (
     <>

@@ -1,10 +1,10 @@
 import React, { useRef } from "react"
-import { userState } from "state/user/userState"
+import { useUserState } from "state/user/useUserState"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 
 export const Intro = () => {
-  const { user } = userState()
+  const { user } = useUserState()
   const inputRef = useRef(null)
 
   return (

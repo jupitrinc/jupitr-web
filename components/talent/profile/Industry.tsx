@@ -1,16 +1,16 @@
 import { Plus } from "lucide-react"
 import React, { useState } from "react"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
-import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Pill } from "ui-library/pill/Pill"
 import { SectionHeader } from "./Sections"
 
 export const Industry = () => {
-  const { talent_profile } = talentProfileState()
+  const { talent_profile } = useTalentProfileState()
   const industries = talent_profile.preferences.industry
   const [newIndustry, setNewIndustry] = useState<string>("")
-  const { addIndustry, removeIndustry } = talentProfileAction()
+  const { addIndustry, removeIndustry } = useTalentProfileAction()
 
   const handleAddIndustry = (e) => {
     e.preventDefault()

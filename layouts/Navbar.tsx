@@ -1,11 +1,11 @@
 import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useUserState } from "state/user/userState"
+import { useUserState } from "state/user/useUserState"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
-import { useUserAction } from "state/user/userAction"
+import { useUserAction } from "state/user/useUserAction"
 
 export const Navbar = () => {
   const { isLoggedIn, user } = useUserState()
