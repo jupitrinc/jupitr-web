@@ -1,10 +1,7 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
 import { dateHelper } from "helper/dateHelper"
-import { Text } from "ui-library/text/Text"
-import { Button } from "ui-library/button/Button"
-import Link from "next/link"
-import { userState } from "state/user/userState"
+import { Navbar } from "./Navbar"
 
 export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
   const { currentYear } = dateHelper
@@ -50,32 +47,5 @@ export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
         </footer>
       </div>
     </>
-  )
-}
-
-const Navbar = () => {
-  const { isLoggedIn } = userState()
-
-  return (
-    <div className="flex flex-row space-x-5 justify-between items-baseline">
-      <div>
-        <Link href="/">
-          <Text as="h1" size="xl">
-            jupitr
-          </Text>
-        </Link>
-      </div>
-
-      {isLoggedIn && (
-        <div className="space-x-5 flex">
-          <Link href="/c/signup">
-            <Button label="Post a job" size="base" variant="text" />
-          </Link>
-          <Link href="/login">
-            <Button label="Login" size="base" color="important" />
-          </Link>
-        </div>
-      )}
-    </div>
   )
 }

@@ -1,12 +1,7 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
-import Link from "next/link"
-import { Text } from "ui-library/text/Text"
-import { Button } from "ui-library/button/Button"
-import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
-import { userState } from "state/user/userState"
 import { useRouter } from "next/router"
-import { userAction } from "state/user/userAction"
+import { Navbar } from "./Navbar"
 
 export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -38,7 +33,7 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
       </Head>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
         <header className="space-y-2">
-          <Navbar />
+          <LocalNavbar />
         </header>
         <main className="my-10">{children}</main>
       </div>
@@ -46,48 +41,14 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   )
 }
 
-const Navbar = () => {
+const LocalNavbar = () => {
   const router = useRouter()
-  const { user } = userState()
-  const { signOut } = userAction()
 
   if (router.pathname.includes("/login")) {
     return null
   } else if (router.pathname.includes("/c/")) {
     return null
   } else {
-    return (
-      <div className="flex flex-row space-x-5 justify-between items-baseline">
-        <div>
-          <Link href="/jobs">
-            <Text as="h1" size="xl">
-              jupitr
-            </Text>
-          </Link>
-        </div>
-
-        <div className="space-x-5 flex">
-          <Link href="/jobs">
-            <Button label="Jobs" size="base" variant="text" />
-          </Link>
-
-          <Dropdown
-            type="avatar"
-            image_url={user.avatar}
-            items={[
-              {
-                name: "Profile",
-                onClick: () => router.push("/profile"),
-              },
-              {
-                name: "Account settings",
-                onClick: () => router.push("/account/settings"),
-              },
-              { name: "Sign out", onClick: () => signOut() },
-            ]}
-          />
-        </div>
-      </div>
-    )
+    return <Navbar />
   }
 }

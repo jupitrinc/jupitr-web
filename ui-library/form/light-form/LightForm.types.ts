@@ -2,6 +2,7 @@ import { ChangeEventHandler, FormEventHandler } from "react"
 
 export interface LightFormProps {
   value?: string
+  type?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   onSubmit?: FormEventHandler<HTMLFormElement>
   onClick?: (event: React.MouseEvent) => void

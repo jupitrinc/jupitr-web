@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { UserContext } from "./UserContextProvider"
 
-export const userState = () => {
+export const useUserState = () => {
   const { state } = useContext(UserContext)
 
   return {

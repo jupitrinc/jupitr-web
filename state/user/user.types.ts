@@ -19,17 +19,20 @@ export type UserStateType = {
 
 export type UserActionType = {
   type:
-    | UserActionEnum.GET_USER_BEGIN
-    | UserActionEnum.GET_USER_FAILURE
-    | UserActionEnum.GET_USER_SUCCESS
-    | UserActionEnum.SIGN_OUT_USER
+    | UserActionEnum.SIGN_IN_BEGIN
+    | UserActionEnum.SIGN_IN_FAILURE
+    | UserActionEnum.SIGN_IN_SUCCESS
+    | UserActionEnum.SIGN_OUT_BEGIN
+    | UserActionEnum.SIGN_OUT_FAILURE
+    | UserActionEnum.SIGN_OUT_SUCCESS
   payload?: IUser
 }
 
 export enum UserActionEnum {
-  GET_USER_BEGIN = "GET_USER_BEGIN",
-  GET_USER_FAILURE = "GET_USER_FAILURE",
-  GET_USER_SUCCESS = "GET_USER_SUCCESS",
-
-  SIGN_OUT_USER = "SIGN_OUT_USER",
+  SIGN_IN_BEGIN = "SIGN_IN_BEGIN",
+  SIGN_IN_FAILURE = "SIGN_IN_FAILURE",
+  SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS",
+  SIGN_OUT_BEGIN = "SIGN_OUT_BEGIN",
+  SIGN_OUT_FAILURE = "SIGN_OUT_FAILURE",
+  SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS",
 }

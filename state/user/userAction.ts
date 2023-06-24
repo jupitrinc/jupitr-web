@@ -1,53 +1,46 @@
 import { useContext } from "react"
+import { useRouter } from "next/router"
 import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
+import { supabaseClientComponent } from "services/_supabase/client"
+import { useUserState } from "./userState"
 
-export function userAction() {
+export function useUserAction() {
   const { dispatch } = useContext(UserContext)
+  const { user } = useUserState()
+  const router = useRouter()
 
-  const get = async (language: string) => {
-    if (!language) return
-
-    const catchError = (errorMessage: string) => {
-      dispatch({
-        type: UserActionEnum.GET_USER_FAILURE,
-      })
-
-      console.log(errorMessage)
+  const signInWithOtp = async () => {
+    dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
+    const { data, error } = await supabaseClientComponent.auth.getUser()
+    if (error) {
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
     }
-
-    try {
-      dispatch({
-        type: UserActionEnum.GET_USER_BEGIN,
-      })
-
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: UserActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
-          }
-        }
-      } */
-    } catch (error) {
-      catchError(error as string)
-    }
-  }
-
-  const signOut = () => {
     dispatch({
-      type: UserActionEnum.SIGN_OUT_USER,
+      type: UserActionEnum.SIGN_IN_SUCCESS,
+      payload: {
+        ...user,
+        id: data.user?.id || "",
+        email: data.user?.email || "",
+        account_type: data.user?.user_metadata.accountType,
+      },
     })
   }
 
+  const signOut = async () => {
+    dispatch({ type: UserActionEnum.SIGN_OUT_BEGIN })
+    const { error } = await supabaseClientComponent.auth.signOut()
+    if (error) {
+      dispatch({ type: UserActionEnum.SIGN_OUT_FAILURE })
+    }
+    dispatch({
+      type: UserActionEnum.SIGN_OUT_SUCCESS,
+    })
+    router.push("/")
+  }
+
   return {
-    get,
+    signInWithOtp,
     signOut,
   }
 }

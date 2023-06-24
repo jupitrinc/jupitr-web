@@ -1,9 +1,20 @@
+import { useEffect } from "react"
 import { AppLayout } from "layouts/AppLayout"
-import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
 import { Sections } from "components/talent/profile/Sections"
+import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
+import { talentProfileState } from "state/talent_profile/talentProfileState"
+import { useUserState } from "state/user/userState"
+import { useUserAction } from "state/user/userAction"
 
 export default function TalentProfile() {
-  // network call: get talent profile
+  const { signInWithOtp } = useUserAction()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await signInWithOtp()
+    }
+    fetchData()
+  }, [])
 
   return (
     <AppLayout>
