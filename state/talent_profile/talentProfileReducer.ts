@@ -1,17 +1,15 @@
 import {
   ITalentProfile,
   TalentProfileActionEnum,
-  TalentProfileActionType,
-  TalentProfileIndustry,
-  TalentProfileJobCategory,
+  TalentProfileAction,
   TalentProfileSkill,
-  TalentProfileStateType,
+  TalentProfileState,
 } from "./talentProfile.types"
 
 export const talentProfileReducer = (
-  state: TalentProfileStateType,
-  action: TalentProfileActionType
-): TalentProfileStateType => {
+  state: TalentProfileState,
+  action: TalentProfileAction
+): TalentProfileState => {
   console.log(action)
   switch (action.type) {
     case TalentProfileActionEnum.GET_PROFILE_BEGIN:
@@ -61,44 +59,8 @@ export const talentProfileReducer = (
         },
       }
 
-    case TalentProfileActionEnum.ADD_JOB_CATEGORY:
-      const add_job_category_payload =
-        action.payload as TalentProfileJobCategory
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          preferences: {
-            ...state.data.preferences,
-            job_category: [
-              ...state.data.preferences.job_category,
-              add_job_category_payload,
-            ],
-          },
-        },
-      }
-
-    case TalentProfileActionEnum.REMOVE_JOB_CATEGORY:
-      const remove_job_category_payload =
-        action.payload as TalentProfileJobCategory
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          preferences: {
-            ...state.data.preferences,
-            job_category: [
-              ...state.data.preferences.job_category.filter(
-                (category) => category.id !== remove_job_category_payload.id
-              ),
-            ],
-          },
-        },
-      }
-
     case TalentProfileActionEnum.ADD_INDUSTRY:
-      const add_industry_payload = action.payload as TalentProfileIndustry
+      const add_industry_payload = action.payload as string
 
       return {
         ...state,
@@ -115,7 +77,7 @@ export const talentProfileReducer = (
       }
 
     case TalentProfileActionEnum.REMOVE_INDUSTRY:
-      const remove_industry_payload = action.payload as TalentProfileIndustry
+      const remove_industry_payload = action.payload as string
 
       return {
         ...state,
@@ -125,7 +87,7 @@ export const talentProfileReducer = (
             ...state.data.preferences,
             industry: [
               ...state.data.preferences.industry.filter(
-                (i) => i.id !== remove_industry_payload.id
+                (i) => i !== remove_industry_payload
               ),
             ],
           },
@@ -233,34 +195,6 @@ export const talentProfileReducer = (
                 (test) => test !== remove_tech_test_payload
               ),
             ],
-          },
-        },
-      }
-
-    case TalentProfileActionEnum.TOGGLE_VISA_SPONSORSHIP:
-      const toggle_visa_sponsorship_payload = action.payload as boolean
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          preferences: {
-            ...state.data.preferences,
-            visa_sponsorship: toggle_visa_sponsorship_payload,
-          },
-        },
-      }
-
-    case TalentProfileActionEnum.UPDATE_SALARY:
-      const update_salary_payload = action.payload as number
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          preferences: {
-            ...state.data.preferences,
-            min_salary: update_salary_payload,
           },
         },
       }

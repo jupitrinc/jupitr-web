@@ -1,9 +1,9 @@
 export interface ITalentProfileContext {
-  state: TalentProfileStateType
-  dispatch: ({ type }: TalentProfileActionType) => void
+  state: TalentProfileState
+  dispatch: ({ type }: TalentProfileAction) => void
 }
 
-export type TalentProfileStateType = {
+export type TalentProfileState = {
   data: ITalentProfile
   loading: boolean
   error: boolean
@@ -18,10 +18,8 @@ export interface ITalentProfile {
     location: string[]
     work_model: string[]
     min_salary: number
-    industry: TalentProfileIndustry[]
+    industry: string[]
     technical_test: string[]
-    visa_sponsorship: boolean
-    job_category: TalentProfileJobCategory[]
   }
 }
 
@@ -31,24 +29,13 @@ export type TalentProfileSkill = {
   level: number
 }
 
-export type TalentProfileJobCategory = {
-  id: string
-  name: string
-}
-export type TalentProfileIndustry = {
-  id: string
-  name: string
-}
-
-export type TalentProfileActionType = {
+export type TalentProfileAction = {
   type:
     | TalentProfileActionEnum.GET_PROFILE_BEGIN
     | TalentProfileActionEnum.GET_PROFILE_FAILURE
     | TalentProfileActionEnum.GET_PROFILE_SUCCESS
     | TalentProfileActionEnum.ADD_SKILL
     | TalentProfileActionEnum.REMOVE_SKILL
-    | TalentProfileActionEnum.ADD_JOB_CATEGORY
-    | TalentProfileActionEnum.REMOVE_JOB_CATEGORY
     | TalentProfileActionEnum.ADD_INDUSTRY
     | TalentProfileActionEnum.REMOVE_INDUSTRY
     | TalentProfileActionEnum.ADD_WORK_MODEL
@@ -57,16 +44,8 @@ export type TalentProfileActionType = {
     | TalentProfileActionEnum.REMOVE_LOCATION
     | TalentProfileActionEnum.ADD_TECH_TEST
     | TalentProfileActionEnum.REMOVE_TECH_TEST
-    | TalentProfileActionEnum.TOGGLE_VISA_SPONSORSHIP
     | TalentProfileActionEnum.UPDATE_SALARY
-  payload?:
-    | ITalentProfile
-    | TalentProfileSkill
-    | TalentProfileJobCategory
-    | TalentProfileIndustry
-    | string
-    | boolean
-    | number
+  payload?: ITalentProfile | TalentProfileSkill | string | boolean | number
 }
 
 export enum TalentProfileActionEnum {
@@ -76,9 +55,6 @@ export enum TalentProfileActionEnum {
 
   ADD_SKILL = "ADD_SKILL",
   REMOVE_SKILL = "REMOVE_SKILL",
-
-  ADD_JOB_CATEGORY = "ADD_JOB_CATEGORY",
-  REMOVE_JOB_CATEGORY = "REMOVE_JOB_CATEGORY",
 
   ADD_INDUSTRY = "ADD_INDUSTRY",
   REMOVE_INDUSTRY = "REMOVE_INDUSTRY",
@@ -91,8 +67,6 @@ export enum TalentProfileActionEnum {
 
   ADD_TECH_TEST = "ADD_TECH_TEST",
   REMOVE_TECH_TEST = "REMOVE_TECH_TEST",
-
-  TOGGLE_VISA_SPONSORSHIP = "TOGGLE_VISA_SPONSORSHIP",
 
   UPDATE_SALARY = "UPDATE_SALARY",
 }

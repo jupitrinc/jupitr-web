@@ -1,11 +1,11 @@
 import { createContext, useReducer } from "react"
 import { userReducer } from "./userReducer"
-import { IUser, IUserContext, UserStateType } from "./user.types"
+import { IUser, IUserContext, UserState } from "./user.types"
 
 export const UserContext = createContext({} as IUserContext)
 
 const User = () => {
-  const initialState: UserStateType = {
+  const initialState: UserState = {
     data: {} as IUser,
     loading: false,
     error: false,

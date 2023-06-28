@@ -22,14 +22,16 @@ export const Pill: React.FC<PillProps> = (pill) => {
         styles.size[pill.size ? pill.size : ThemeSizeEnum.sm]
       )}
     >
-      <span>{pill.label}</span>{" "}
-      <Button
-        size="xs"
-        color={pill.color ? pill.color : ThemeColorEnum.standard}
-        variant="text"
-        icon={<X className="h-4 w-4" />}
-        onClick={pill.onClick}
-      />
+      <span>{pill.label}</span>
+      {pill.type === "clickable" && (
+        <Button
+          size="xs"
+          color={pill.color ? pill.color : ThemeColorEnum.standard}
+          variant="text"
+          icon={<X className="h-4 w-4" />}
+          onClick={pill.onClick}
+        />
+      )}
     </span>
   )
 }

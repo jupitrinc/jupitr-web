@@ -1,14 +1,9 @@
-import {
-  IUser,
-  UserActionEnum,
-  UserActionType,
-  UserStateType,
-} from "./user.types"
+import { IUser, UserActionEnum, UserAction, UserState } from "./user.types"
 
 export const userReducer = (
-  state: UserStateType,
-  action: UserActionType
-): UserStateType => {
+  state: UserState,
+  action: UserAction
+): UserState => {
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
       return {
