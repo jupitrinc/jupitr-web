@@ -29,5 +29,8 @@ export const themeStyles = {
       50: "bg-blue-50",
       500: "bg-blue-500",
     },
+    [`${ThemeColorEnum.special}`]: {
+      default: "bg-gradient-to-r from-orange-400 to-rose-400",
+    },
   },
 }

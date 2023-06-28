@@ -38,9 +38,9 @@ export const Industry = () => {
           {industries.map((industry) => (
             <Pill
               key={industry}
-              color="important"
-              size="base"
-              variant="outlined"
+              color="special"
+              size="lg"
+              variant="contained"
               label={industry}
               type="clickable"
               onClick={() => removeIndustry(industry)}

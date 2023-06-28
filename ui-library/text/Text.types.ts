@@ -7,6 +7,7 @@ export interface TextProps {
   color?: ColorType
   size?: SizeType
   align?: "left" | "center" | "right"
+  bold?: boolean
 }
 
 type TextType = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span"

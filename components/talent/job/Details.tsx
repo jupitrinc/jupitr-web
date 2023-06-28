@@ -44,7 +44,7 @@ export const Details = () => {
           <div>
             <Button
               size="lg"
-              color="important"
+              color="special"
               variant="contained"
               label="Apply"
             />
@@ -133,6 +133,20 @@ export const Details = () => {
         </div>
 
         <Divider />
+
+        <div className="flex flex-col gap-5">
+          <Text as="h2" size="lg">
+            Interview steps
+          </Text>
+
+          <div className="flex flex-col flex-wrap gap-5">
+            {talent_job.interview_steps.map((step, index) => (
+              <Text key={index} as="p" size="base">
+                {index + 1}. {step}
+              </Text>
+            ))}
+          </div>
+        </div>
       </div>
     )
   } else {

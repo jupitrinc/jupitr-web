@@ -10,6 +10,7 @@ export const Text: React.FC<TextProps> = ({
   color,
   size,
   align,
+  bold,
 }) => (
   <Typography
     tag={as}
@@ -17,6 +18,7 @@ export const Text: React.FC<TextProps> = ({
       styles.color[color ? color : ThemeColorEnum.standard],
       styles.size[size ? size : ThemeSizeEnum.base],
       styles.align[align ? align : styles.align.left],
+      bold && styles.weight.bold,
       heading.includes(as) && styles.heading.fontFamily
     )}
   >

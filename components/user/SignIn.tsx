@@ -54,7 +54,7 @@ export const SignIn = () => {
       </div>
 
       <Button
-        color="important"
+        color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
         onClick={() => {

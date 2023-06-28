@@ -50,14 +50,14 @@ export const SkillCard = ({ skill }) => {
   return (
     <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl">
       <div className="flex justify-between">
-        <Text as="span" size="base" color="important">
+        <Text as="span" size="lg" color="important">
           {skill.name}
         </Text>
         <Button
           onClick={() => removeSkill(skill)}
           icon={<X className="h-4 w-4" />}
           size="xs"
-          color="important"
+          color="standard"
           variant="text"
         />
       </div>
@@ -66,7 +66,6 @@ export const SkillCard = ({ skill }) => {
         items={["Beginner", "Competent", "Expert"]}
         active_tab={level}
         onChange={setLevel}
-        size="sm"
       />
     </div>
   )
