@@ -1,8 +1,6 @@
 import { useContext } from "react"
 import {
   TalentProfileActionEnum,
-  TalentProfileIndustry,
-  TalentProfileJobCategory,
   TalentProfileSkill,
 } from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
@@ -65,29 +63,8 @@ export function useTalentProfileAction() {
     })
   }
 
-  const addJobCategory = (job_category: TalentProfileJobCategory) => {
-    const { id, name } = job_category
-    if (!id || !name.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_JOB_CATEGORY,
-      payload: job_category,
-    })
-  }
-
-  const removeJobCategory = (job_category: TalentProfileJobCategory) => {
-    const { id, name } = job_category
-    if (!id || !name.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_JOB_CATEGORY,
-      payload: job_category,
-    })
-  }
-
-  const addIndustry = (industry: TalentProfileJobCategory) => {
-    const { id, name } = industry
-    if (!id || !name.trim()) return
+  const addIndustry = (industry: string) => {
+    if (!industry.trim()) return
 
     dispatch({
       type: TalentProfileActionEnum.ADD_INDUSTRY,
@@ -95,9 +72,8 @@ export function useTalentProfileAction() {
     })
   }
 
-  const removeIndustry = (industry: TalentProfileIndustry) => {
-    const { id, name } = industry
-    if (!id || !name.trim()) return
+  const removeIndustry = (industry: string) => {
+    if (!industry.trim()) return
 
     dispatch({
       type: TalentProfileActionEnum.REMOVE_INDUSTRY,
@@ -161,13 +137,6 @@ export function useTalentProfileAction() {
     })
   }
 
-  const toggleVisaSponsorship = (toggle: boolean) => {
-    dispatch({
-      type: TalentProfileActionEnum.TOGGLE_VISA_SPONSORSHIP,
-      payload: toggle,
-    })
-  }
-
   const updateSalary = (salary: number) => {
     dispatch({
       type: TalentProfileActionEnum.UPDATE_SALARY,
@@ -179,8 +148,6 @@ export function useTalentProfileAction() {
     getProfile,
     addSkill,
     removeSkill,
-    addJobCategory,
-    removeJobCategory,
     addIndustry,
     removeIndustry,
     addWorkModel,
@@ -189,7 +156,6 @@ export function useTalentProfileAction() {
     removeLocation,
     addTechTest,
     removeTechTest,
-    toggleVisaSponsorship,
     updateSalary,
   }
 }

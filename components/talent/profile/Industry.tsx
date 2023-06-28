@@ -14,7 +14,7 @@ export const Industry = () => {
 
   const handleAddIndustry = (e) => {
     e.preventDefault()
-    addIndustry({ id: "444", name: newIndustry })
+    addIndustry(newIndustry)
     setNewIndustry("")
   }
 
@@ -37,11 +37,12 @@ export const Industry = () => {
         <div className="flex flex-row gap-5 flex-wrap">
           {industries.map((industry) => (
             <Pill
-              key={industry.id}
+              key={industry}
               color="important"
               size="base"
               variant="outlined"
-              label={industry.name}
+              label={industry}
+              type="clickable"
               onClick={() => removeIndustry(industry)}
             />
           ))}

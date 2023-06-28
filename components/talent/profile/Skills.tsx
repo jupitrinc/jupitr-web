@@ -44,7 +44,7 @@ export const Skills = () => {
   )
 }
 
-const SkillCard = ({ skill }) => {
+export const SkillCard = ({ skill }) => {
   const [level, setLevel] = useState(skill.level)
   const { removeSkill } = useTalentProfileAction()
   return (
