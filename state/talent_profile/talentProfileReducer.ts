@@ -199,6 +199,20 @@ export const talentProfileReducer = (
         },
       }
 
+    case TalentProfileActionEnum.UPDATE_SALARY:
+      const update_salary_payload = action.payload as number
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          preferences: {
+            ...state.data.preferences,
+            min_salary: update_salary_payload,
+          },
+        },
+      }
+
     default:
       return state
   }

@@ -8,6 +8,7 @@ import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { SectionHeader } from "./Sections"
 import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
+import { Card } from "ui-library/card/Card"
 
 export const Skills = () => {
   const { talent_profile } = useTalentProfileState()
@@ -53,8 +54,8 @@ export const SkillCard: React.FC<SkillCardProps> = (card) => {
   const [level, setLevel] = useState(card.skill.level)
   const { removeSkill } = useTalentProfileAction()
   return (
-    <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl w-full">
-      <div className="flex justify-between">
+    <Card type="static">
+      <div className="flex justify-between mb-3">
         <Text as="span" size="lg">
           {card.skill.name}
         </Text>
@@ -73,6 +74,6 @@ export const SkillCard: React.FC<SkillCardProps> = (card) => {
         active_tab={level}
         onChange={setLevel}
       />
-    </div>
+    </Card>
   )
 }

@@ -41,7 +41,7 @@ const JobCard = ({ job }: { job: ITalentJob }) => {
   const { setJob } = useTalentJobAction()
   return (
     <Card onClick={() => setJob(job)} active={job.id === talent_job.id}>
-      <div className="p-3 flex flex-row gap-5 items-center">
+      <div className="flex flex-row gap-5 items-center">
         <Avatar
           image_url={job.company.logo}
           size={10}

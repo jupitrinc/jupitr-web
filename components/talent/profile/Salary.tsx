@@ -22,7 +22,7 @@ export const Salary = () => {
 
   return (
     <>
-      <SectionHeader title="Salary" />
+      <SectionHeader title="Minimum Salary" />
 
       <div className="flex flex-col space-y-10">
         <Text as="span" align="center" size="xl">

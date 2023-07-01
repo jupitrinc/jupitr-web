@@ -17,7 +17,7 @@ enum SectionEnum {
   skills = "Skills",
   technical_test = "Tech test",
   work_model = "Work model",
-  salary = "Salary",
+  salary = "Minimum salary",
   industry = "Industry",
   location = "Location",
 }

@@ -41,30 +41,24 @@ const meta: Meta<typeof Card> = {
 export default meta
 type Story = StoryObj<typeof Card>
 
-export const standard: Story = {
+export const linked: Story = {
   args: {
-    color: "standard",
     onClick: () => console.log("card clicked"),
     children: <SampleComponent />,
-  },
-}
-export const important: Story = {
-  args: {
-    color: "important",
-    children: <SampleComponent />,
-  },
-}
-export const dangerous: Story = {
-  args: {
-    color: "dangerous",
-    children: <SampleComponent />,
+    type: "linked",
   },
 }
 
 export const active: Story = {
   args: {
-    color: "standard",
     children: <SampleComponent />,
     active: true,
+  },
+}
+
+export const Static: Story = {
+  args: {
+    children: <SampleComponent />,
+    type: "static",
   },
 }
