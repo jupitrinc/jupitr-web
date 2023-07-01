@@ -25,7 +25,7 @@ export const Salary = () => {
       <SectionHeader title="Salary" />
 
       <div className="flex flex-col space-y-10">
-        <Text as="span" align="center" size="xl" color="important">
+        <Text as="span" align="center" size="xl">
           &pound;{formatNumber(salary)}
         </Text>
 

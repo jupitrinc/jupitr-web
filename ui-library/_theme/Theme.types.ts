@@ -2,6 +2,7 @@ export enum ThemeColorEnum {
   standard = "standard",
   important = "important",
   dangerous = "dangerous",
+  special = "special",
 }
 export enum ThemeSizeEnum {
   xs = "xs",
@@ -16,6 +17,6 @@ export enum ThemeVariantEnum {
   outlined = "outlined",
 }
 
-export type ColorType = "standard" | "important" | "dangerous"
+export type ColorType = "standard" | "important" | "dangerous" | "special"
 export type SizeType = "xs" | "sm" | "base" | "lg" | "xl"
 export type VariantType = "text" | "contained" | "outlined"

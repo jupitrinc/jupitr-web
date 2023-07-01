@@ -43,6 +43,14 @@ export const large: Story = {
   },
 }
 
+export const special: Story = {
+  args: {
+    label: "Get started",
+    size: "xl",
+    color: "special",
+  },
+}
+
 export const important: Story = {
   args: {
     label: "Get started",

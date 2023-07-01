@@ -63,7 +63,7 @@ export const Navbar = () => {
               <Button label="Post a job" size="base" variant="text" />
             </Link>
             <Link href="/login">
-              <Button label="Login" size="base" color="important" />
+              <Button label="Login" size="base" color="special" />
             </Link>
           </div>
         }

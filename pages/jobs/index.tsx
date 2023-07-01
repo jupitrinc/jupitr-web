@@ -9,7 +9,7 @@ export default function TalentJobs() {
     <AppLayout>
       <TalentJobsContextProvider>
         <TalentJobContextProvider>
-          <div className="flex flex-row gap-5 justify-between">
+          <div className="flex flex-row gap-10 justify-between">
             <div className="basis-2/5">
               <List />
             </div>

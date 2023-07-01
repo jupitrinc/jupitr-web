@@ -21,4 +21,7 @@ export const textStyles = {
     right: "text-right",
     center: "text-center",
   },
+  weight: {
+    bold: "font-medium",
+  },
 }

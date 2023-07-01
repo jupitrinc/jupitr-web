@@ -7,6 +7,7 @@ import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { SectionHeader } from "./Sections"
+import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
 
 export const Skills = () => {
   const { talent_profile } = useTalentProfileState()
@@ -44,20 +45,25 @@ export const Skills = () => {
   )
 }
 
-export const SkillCard = ({ skill }) => {
-  const [level, setLevel] = useState(skill.level)
+export interface SkillCardProps {
+  skill: TalentProfileSkill
+}
+
+export const SkillCard: React.FC<SkillCardProps> = (card) => {
+  const [level, setLevel] = useState(card.skill.level)
   const { removeSkill } = useTalentProfileAction()
   return (
-    <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl">
+    <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl w-full">
       <div className="flex justify-between">
-        <Text as="span" size="base" color="important">
-          {skill.name}
+        <Text as="span" size="lg">
+          {card.skill.name}
         </Text>
+
         <Button
-          onClick={() => removeSkill(skill)}
+          onClick={() => removeSkill(card.skill)}
           icon={<X className="h-4 w-4" />}
-          size="xs"
-          color="important"
+          size="base"
+          color="standard"
           variant="text"
         />
       </div>
@@ -66,7 +72,6 @@ export const SkillCard = ({ skill }) => {
         items={["Beginner", "Competent", "Expert"]}
         active_tab={level}
         onChange={setLevel}
-        size="sm"
       />
     </div>
   )

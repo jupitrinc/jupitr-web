@@ -1,6 +1,6 @@
 import { numberHelper } from "helper/numberHelper"
-import { Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
-import React from "react"
+import { Code, Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
+import React, { useState } from "react"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
@@ -8,14 +8,22 @@ import { Divider } from "ui-library/divider/Divider"
 import { Pill } from "ui-library/pill/Pill"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
+import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
+import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
+import { Application } from "./Application"
 
 export const Details = () => {
   const { talent_job } = useTalentJobState()
   const { formatNumber } = numberHelper
 
+  const [apply, setApply] = useState<boolean>(false)
+  const handleApply = () => {
+    setApply(!apply)
+  }
+
   if (talent_job.id) {
     return (
-      <div className="flex flex-col gap-5 flex-wrap">
+      <div className="flex flex-col gap-10 flex-wrap">
         <div className="flex flex-row">
           {talent_job.videos.map((video, index) => (
             <div key={video.id} className={`${index === 0 ? "" : "basis-1/3"}`}>
@@ -24,11 +32,11 @@ export const Details = () => {
           ))}
         </div>
 
-        <div className="flex flex-row justify-between gap-5 items-center">
+        <div className="flex flex-col sm:flex-row justify-between gap-5 items-center">
           <div className="flex flex-row gap-5 items-center">
             <Avatar
               image_url={talent_job.company.logo}
-              size={10}
+              size={14}
               alt={`${talent_job.company.name} logo`}
             />
             <div className="flex flex-col gap-1">
@@ -41,101 +49,137 @@ export const Details = () => {
               </Text>
             </div>
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <Button
               size="lg"
-              color="important"
+              color="special"
               variant="contained"
               label="Apply"
+              full_width
+              onClick={handleApply}
             />
           </div>
         </div>
 
-        <Divider />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="flex flex-row justify-between gap-5 mt-5 mb-5">
+            <div className="flex flex-col flex-wrap gap-5">
+              <Text as="span" size="base">
+                <span className="flex flex-row flex-wrap gap-1 items-center">
+                  <PoundSterling className="h-5 w-5" />
+                  <Pill label={formatNumber(talent_job.salary)} size="base" />
+                </span>
+              </Text>
 
-        <div className="flex flex-row justify-between gap-5">
-          <div className="flex flex-col flex-wrap gap-5">
-            <div className="flex flex-row gap-2">
-              {talent_job.company.industry.map((name) => (
-                <Pill key={name} label={name} size="sm" />
+              <div className="flex flex-row flex-wrap gap-2 items-center">
+                <Laptop className="h-5 w-5" />
+
+                <div className="flex flex-row flex-wrap gap-2">
+                  {talent_job.work_model.map((model) => (
+                    <Text key={model} as="span" size="lg">
+                      <span className="flex flex-row flex-wrap">
+                        <Pill label={model} size="base" />
+                      </span>
+                    </Text>
+                  ))}
+                </div>
+              </div>
+
+              <Text as="span" size="base">
+                <span className="flex flex-row flex-wrap gap-1 items-center">
+                  <MapPin className="h-5 w-5" />
+                  <Pill label={talent_job.location} size="base" />
+                </span>
+              </Text>
+
+              <Text as="span" size="base">
+                <span className="flex flex-row flex-wrap gap-1 items-center">
+                  <Globe className="h-5 w-5" />
+                  <a
+                    href={talent_job.company.website.trim()}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <Pill label={talent_job.company.website} size="base" />
+                  </a>
+                </span>
+              </Text>
+
+              <Text as="span" size="base">
+                <span className="flex flex-row gap-1 flex-wrap items-center">
+                  <Code className="h-5 w-5" />
+
+                  {talent_job.technical_test.map((test) => (
+                    <Text key={test} as="span" size="lg">
+                      <span className="flex flex-row flex-wrap p-1">
+                        <Pill key={test} label={test} size="base" />
+                      </span>
+                    </Text>
+                  ))}
+                </span>
+              </Text>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <div className="grid grid-cols-3 gap-5 items-center">
+              <Divider />
+              <Text as="h2" size="lg" align="center">
+                Skills
+              </Text>
+              <Divider />
+            </div>
+
+            <div className="flex flex-row flex-wrap gap-5">
+              {talent_job.skills.map((skill) => (
+                <SkillCard key={skill.id} skill={skill} />
               ))}
             </div>
-            <Text as="span" size="base">
-              <span className="flex flex-row flex-wrap gap-1 items-center">
-                <PoundSterling className="h-4 w-4" />
-                <Pill label={formatNumber(talent_job.salary)} size="sm" />
-              </span>
-            </Text>
-
-            <div className="flex flex-row flex-wrap gap-2 items-center">
-              <Laptop className="h-5 w-5" />
-
-              <div className="flex flex-row flex-wrap gap-2">
-                {talent_job.work_model.map((model) => (
-                  <Text key={model} as="span" size="base">
-                    <span className="flex flex-row flex-wrap">
-                      <Pill label={model} size="sm" />
-                    </span>
-                  </Text>
-                ))}
-              </div>
-            </div>
-
-            <Text as="span" size="base">
-              <span className="flex flex-row flex-wrap gap-1 items-center">
-                <MapPin className="h-5 w-5" />
-
-                <Pill label={talent_job.location} size="sm" />
-              </span>
-            </Text>
-
-            <Text as="span" size="base">
-              <span className="flex flex-row flex-wrap gap-1 items-center">
-                <Globe className="h-5 w-5" />
-                <a
-                  href={talent_job.company.website.trim()}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Pill label={talent_job.company.website} size="sm" />
-                </a>
-              </span>
-            </Text>
           </div>
         </div>
 
-        <Divider />
-
-        <div className="flex flex-col gap-5">
-          <Text as="h2" size="lg">
-            Skills
-          </Text>
-
-          <div className="flex flex-row flex-wrap gap-5">
-            {talent_job.skills.map((skill) => (
-              <Pill key={skill.id} label={skill.name} size="sm" />
-            ))}
-          </div>
-        </div>
-
-        <Divider />
-
-        <div className="flex flex-col gap-5">
-          <Text as="h2" size="lg">
-            Tech challenge
-          </Text>
-
-          <div className="flex flex-row flex-wrap gap-5">
-            {talent_job.technical_test.map((test) => (
-              <Pill key={test} label={test} size="sm" />
-            ))}
-          </div>
-        </div>
-
-        <Divider />
+        <Application job={talent_job} open={apply} onClose={handleApply} />
       </div>
     )
   } else {
     return null
   }
+}
+
+const SkillCard = ({ skill }: { skill: TalentProfileSkill }) => {
+  const skillLevel = (level: number) => {
+    switch (level) {
+      case 1:
+        return 10
+
+      case 2:
+        return 50
+
+      case 3:
+        return 90
+
+      default:
+        return 10
+    }
+  }
+
+  return (
+    <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl w-full">
+      <div className="flex justify-between mb-3">
+        <Text as="span" size="lg">
+          {skill.name}
+        </Text>
+      </div>
+
+      <ProgressBar value={skillLevel(skill.level)} />
+      <div className="flex justify-between">
+        <Text as="span" size="sm">
+          Beginner
+        </Text>
+        <Text as="span" size="sm">
+          Expert
+        </Text>
+      </div>
+    </div>
+  )
 }

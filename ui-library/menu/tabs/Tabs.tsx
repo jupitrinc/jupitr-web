@@ -16,7 +16,7 @@ export const Tabs: React.FC<TabsProps> = (tabs) => {
               clsx(
                 styles.tab,
                 selected && styles.tab_active,
-                styles.size[tabs.size ? tabs.size : ThemeSizeEnum.xs]
+                styles.size[tabs.size ? tabs.size : ThemeSizeEnum.sm]
               )
             }
           >

@@ -53,8 +53,8 @@ export const Sections: React.FC = () => {
                 key={section}
                 label={section}
                 variant={activeFilter === section ? "outlined" : "text"}
-                color={activeFilter === section ? "important" : "standard"}
-                size="sm"
+                color={activeFilter === section ? "special" : "standard"}
+                size="base"
                 onClick={() => setActiveFilter(section)}
                 full_width
               />

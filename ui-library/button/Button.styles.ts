@@ -1,3 +1,4 @@
+import { themeStyles } from "ui-library/_theme/Theme.styles"
 import { ThemeColorEnum } from "ui-library/_theme/Theme.types"
 
 export const buttonStyles = {
@@ -18,8 +19,10 @@ export const buttonStyles = {
       "text-blue-500 ring-blue-900/10 hover:ring-blue-900/20 bg-blue-100 hover:bg-blue-100 active:bg-blue-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-blue-500 disabled:hover:bg-blue-50 disabled:active:bg-blue-50",
     [`${ThemeColorEnum.dangerous}`]:
       "text-red-500 ring-red-900/10 hover:ring-red-900/20 bg-red-100 hover:bg-red-100 active:bg-red-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-red-500 disabled:hover:bg-red-50 disabled:active:bg-red-50",
+    [`${ThemeColorEnum.special}`]: `text-white ring-0 ${themeStyles.backgroundColor.special.default} active:${themeStyles.backgroundColor.special.default} disabled:cursor-not-allowed disabled:text-opacity-80 disabled:hover:text-opacity-80`,
   },
   rounded: {
+    lg: "rounded-lg",
     xl: "rounded-xl",
     full: "rounded-full",
   },
