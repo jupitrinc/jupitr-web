@@ -4,4 +4,5 @@ export interface CardProps {
   children: React.ReactNode
   onClick: (event: React.MouseEvent) => void
   color?: ColorType
+  active?: boolean
 }

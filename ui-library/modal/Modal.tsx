@@ -38,6 +38,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
                   <Button
                     icon={<X className={styles.close_icon} />}
                     label=""
+                    variant="text"
                     onClick={() => onClose(false)}
                   />
                 </div>

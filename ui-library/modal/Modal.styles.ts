@@ -21,7 +21,7 @@ export const modalStyles = {
     leaveTo: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
   },
   dialog_panel:
-    "relative transform overflow-y-auto rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg p-5",
-  dialog_panel_div: "absolute top-2 right-2",
-  close_icon: "w-7 h-7 text-gray-600",
+    "relative transform overflow-y-auto rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-2xl p-5",
+  dialog_panel_div: "absolute top-3 right-3",
+  close_icon: "w-6 h-6 text-gray-600",
 }

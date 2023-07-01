@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Card } from "ui-library/card/Card"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Text } from "ui-library/text/Text"
@@ -6,6 +6,7 @@ import { useTalentJobsState } from "state/talent_jobs/useTalentJobsState"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import { Divider } from "ui-library/divider/Divider"
+import { useTalentJobState } from "state/talent_job/useTalentJobState"
 
 export const List = () => {
   const { talent_jobs } = useTalentJobsState()
@@ -18,7 +19,7 @@ export const List = () => {
   })
 
   return (
-    <div className="flex flex-col gap-5 overflow-x-scroll p-2">
+    <div className="flex flex-col gap-5">
       <div className="grid grid-cols-3 gap-5 items-center">
         <Divider />
         <Text as="p" align="center">{`${talent_jobs.length} ${
@@ -26,18 +27,20 @@ export const List = () => {
         }`}</Text>
         <Divider />
       </div>
-
-      {talent_jobs.map((job: ITalentJob) => (
-        <JobCard key={job.id} job={job} />
-      ))}
+      <div className="overflow-y-scroll h-screen space-y-5 p-1">
+        {talent_jobs.map((job: ITalentJob) => (
+          <JobCard key={job.id} job={job} />
+        ))}
+      </div>
     </div>
   )
 }
 
 const JobCard = ({ job }: { job: ITalentJob }) => {
+  const { talent_job } = useTalentJobState()
   const { setJob } = useTalentJobAction()
   return (
-    <Card onClick={() => setJob(job)}>
+    <Card onClick={() => setJob(job)} active={job.id === talent_job.id}>
       <div className="p-3 flex flex-row gap-5 items-center">
         <Avatar
           image_url={job.company.logo}

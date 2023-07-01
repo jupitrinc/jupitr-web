@@ -60,3 +60,11 @@ export const dangerous: Story = {
     children: <SampleComponent />,
   },
 }
+
+export const active: Story = {
+  args: {
+    color: "standard",
+    children: <SampleComponent />,
+    active: true,
+  },
+}

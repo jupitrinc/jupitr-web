@@ -10,7 +10,8 @@ export const Card: React.FC<CardProps> = (card) => {
       onClick={card.onClick}
       className={clsx(
         styles.container,
-        styles.color[card.color ? card.color : ThemeColorEnum.standard]
+        styles.color[card.color ? card.color : ThemeColorEnum.standard],
+        card.active && styles.active
       )}
     >
       {card.children}

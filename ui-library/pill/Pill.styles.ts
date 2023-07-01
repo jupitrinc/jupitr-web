@@ -12,7 +12,7 @@ export const pillStyles = {
   },
   color: {
     [`${ThemeColorEnum.standard}`]:
-      "text-gray-500  ring-gray-900/10 bg-gray-50",
+      "text-gray-600  ring-gray-900/10 bg-gray-100",
     [`${ThemeColorEnum.important}`]:
       "text-blue-500 ring-blue-900/10 bg-blue-50",
     [`${ThemeColorEnum.dangerous}`]: "text-red-500 ring-red-900/10 bg-red-50",
