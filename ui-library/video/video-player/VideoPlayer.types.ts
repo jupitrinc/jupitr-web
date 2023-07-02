@@ -3,5 +3,4 @@ export interface VideoPlayerProps {
   autoPlay?: boolean
   muted?: boolean
   loop?: boolean
-  controls?: boolean
 }

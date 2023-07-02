@@ -14,7 +14,6 @@ type Story = StoryObj<typeof VideoPlayer>
 export const player: Story = {
   args: {
     src: sampleData.video[1],
-    controls: true,
   },
 }
 
