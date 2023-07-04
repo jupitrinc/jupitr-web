@@ -7,6 +7,7 @@ import { Text } from "ui-library/text/Text"
 import { SkillCard } from "../profile/Skills"
 import { Button } from "ui-library/button/Button"
 import { Check } from "lucide-react"
+import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 
 interface application {
   job: ITalentJob
@@ -80,9 +81,7 @@ export const Application: React.FC<application> = (application) => {
                   {application.job.talent_response_video.description}
                 </Text>
 
-                <div className="flex flex-col flex-wrap gap-5">
-                  <span>video recorder</span>
-                </div>
+                <div className="flex flex-col flex-wrap gap-5"></div>
               </div>
             )}
 

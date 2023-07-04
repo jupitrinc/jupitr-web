@@ -52,7 +52,7 @@ export const Sections: React.FC = () => {
               <Button
                 key={section}
                 label={section}
-                variant={activeFilter === section ? "outlined" : "text"}
+                variant={activeFilter === section ? "contained" : "text"}
                 color={activeFilter === section ? "special" : "standard"}
                 size="base"
                 onClick={() => setActiveFilter(section)}
