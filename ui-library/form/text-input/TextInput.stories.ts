@@ -42,10 +42,10 @@ export const maxLength: Story = {
   },
 }
 
-export const ghost: Story = {
+export const light: Story = {
   args: {
     maxLength: 10,
     placeholder: "Ava Sky",
-    ghost: true,
+    light: true,
   },
 }

@@ -13,6 +13,7 @@ module.exports = {
     "./ui-library/**/*.{js,ts,jsx,tsx}",
     "./ui-library/**/**/*.{js,ts,jsx,tsx}",
     "./ui-library/**/**/**/*.{js,ts,jsx,tsx}",
+    "./ui-library/**/**/**/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {

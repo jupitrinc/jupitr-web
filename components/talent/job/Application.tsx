@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Divider } from "ui-library/divider/Divider"
 import { Modal } from "ui-library/modal/Modal"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Text } from "ui-library/text/Text"
 import { SkillCard } from "../profile/Skills"
 import { Button } from "ui-library/button/Button"
-import { Pill } from "ui-library/pill/Pill"
-import { Rocket } from "lucide-react"
+import { Check } from "lucide-react"
+import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
+import { VideoRecorderProps } from "ui-library/video/video-recorder/VideoRecorder.types"
 
 interface application {
   job: ITalentJob
@@ -83,7 +83,12 @@ export const Application: React.FC<application> = (application) => {
                 </Text>
 
                 <div className="flex flex-col flex-wrap gap-5">
-                  <span>video recorder</span>
+                  {/* <VideoRecorder
+                    duration={
+                      application.job.talent_response_video
+                        .length as VideoRecorderProps["duration"]
+                    }
+                  /> */}
                 </div>
               </div>
             )}
@@ -93,7 +98,7 @@ export const Application: React.FC<application> = (application) => {
                 <div className="flex justify-center align-middle">
                   <Text as="span" size="base" align="center">
                     <span className="flex flex-col justify-center items-center gap-2">
-                      <Rocket className="h-6 w-6" />
+                      <Check className="h-6 w-6" />
                       <span>Application submitted</span>
                     </span>
                   </Text>

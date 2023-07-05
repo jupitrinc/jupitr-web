@@ -11,6 +11,7 @@ import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
 import { Application } from "./Application"
+import { Card } from "ui-library/card/Card"
 
 export const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -164,7 +165,7 @@ const SkillCard = ({ skill }: { skill: TalentProfileSkill }) => {
   }
 
   return (
-    <div className="flex flex-col space-y-2 text-center p-3 ring-1 ring-gray-900/10 rounded-xl w-full">
+    <Card type="static">
       <div className="flex justify-between mb-3">
         <Text as="span" size="lg">
           {skill.name}
@@ -172,7 +173,7 @@ const SkillCard = ({ skill }: { skill: TalentProfileSkill }) => {
       </div>
 
       <ProgressBar value={skillLevel(skill.level)} />
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-2">
         <Text as="span" size="sm">
           Beginner
         </Text>
@@ -180,6 +181,6 @@ const SkillCard = ({ skill }: { skill: TalentProfileSkill }) => {
           Expert
         </Text>
       </div>
-    </div>
+    </Card>
   )
 }

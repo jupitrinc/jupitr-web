@@ -17,7 +17,7 @@ enum SectionEnum {
   skills = "Skills",
   technical_test = "Tech test",
   work_model = "Work model",
-  salary = "Salary",
+  salary = "Minimum salary",
   industry = "Industry",
   location = "Location",
 }
@@ -52,7 +52,7 @@ export const Sections: React.FC = () => {
               <Button
                 key={section}
                 label={section}
-                variant={activeFilter === section ? "outlined" : "text"}
+                variant={activeFilter === section ? "contained" : "text"}
                 color={activeFilter === section ? "special" : "standard"}
                 size="base"
                 onClick={() => setActiveFilter(section)}

@@ -25,7 +25,7 @@ export const Intro = () => {
       <TextInput
         placeholder="My name is ..."
         //value={user.name}
-        ghost={true}
+        light={true}
         maxLength={50}
       />
     </div>

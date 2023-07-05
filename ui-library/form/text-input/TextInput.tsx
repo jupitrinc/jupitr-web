@@ -23,7 +23,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         autoFocus={textInput.autoFocus}
         onBlur={textInput.onBlur}
         maxLength={textInput.maxLength}
-        className={textInput.ghost ? styles.ghostInput : styles.input}
+        className={textInput.light ? styles.lightInput : styles.input}
       />
     </div>
   )
