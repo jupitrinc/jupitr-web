@@ -15,25 +15,16 @@ const data = [
     active: true,
     step_label: "1",
     name: "Details",
-    onclick: () => {
-      return
-    },
   },
   {
     active: false,
     step_label: "2",
     name: "Skills",
-    onclick: () => {
-      return
-    },
   },
   {
     active: false,
     step_label: "3",
     name: "Filters",
-    onclick: () => {
-      return
-    },
   },
 ]
 

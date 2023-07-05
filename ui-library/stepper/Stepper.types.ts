@@ -7,5 +7,5 @@ type step = {
   step_label?: string | JSX.Element
   name: string
   active: boolean
-  onClick: (event: React.MouseEvent) => void
+  onClick?: (event: React.MouseEvent) => void
 }
