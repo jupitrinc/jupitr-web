@@ -1,9 +1,10 @@
-import { DefaultLayout } from "layouts/DefaultLayout"
+import { SignUp } from "components/user/SignUp"
+import { AppLayout } from "layouts/AppLayout"
 
-export default function Home() {
+export default function CompanySignUp() {
   return (
-    <DefaultLayout>
-      <h1 className="text-center">Company sign up</h1>
-    </DefaultLayout>
+    <AppLayout>
+      <SignUp />
+    </AppLayout>
   )
 }

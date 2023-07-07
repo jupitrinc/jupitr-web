@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
 import { dateHelper } from "helper/dateHelper"
-import { Navbar } from "./Navbar"
+import { Navbar } from "./navbar/Navbar"
 
 export const DefaultLayout: React.FC<LayoutProps> = ({ children }) => {
   const { currentYear } = dateHelper
