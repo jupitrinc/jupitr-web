@@ -18,5 +18,5 @@ export enum ThemeVariantEnum {
 }
 
 export type ColorType = "standard" | "important" | "dangerous" | "special"
-export type SizeType = "xs" | "sm" | "base" | "lg" | "xl"
+export type SizeType = "xs" | "sm" | "base" | "lg" | "xl" | "xl2"
 export type VariantType = "text" | "contained" | "outlined"

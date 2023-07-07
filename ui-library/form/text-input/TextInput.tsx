@@ -7,10 +7,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
   return (
     <div className={styles.container}>
       {textInput.label && (
-        <Label
-          htmlFor={textInput.label ? textInput.label : ""}
-          value={textInput.label}
-        />
+        <Label htmlFor={textInput.label} value={textInput.label} />
       )}
       <input
         type={textInput.type ? textInput.type : "text"}

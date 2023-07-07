@@ -21,29 +21,27 @@ export const SignIn = () => {
   }
 
   return (
-    <div className="max-w-sm mx-auto flex flex-col space-y-5 text-center w-full">
+    <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
       <div className="mb-20">
         <Link href="/">
           <Button variant="text" icon={<ChevronLeft />} label="Back" />
         </Link>
       </div>
 
-      <Text as="h1" size="xl">
+      <Text as="h1" size="xl2">
         Sign in
       </Text>
 
-      {
-        <LightForm
-          type="email"
-          name="otp_sign_in"
-          onChange={(e) => {
-            setEmail(e.target.value)
-          }}
-          onSubmit={(e) => loginWithEmail(e)}
-          icon={<ChevronRight />}
-          placeHolder="Email address"
-        />
-      }
+      <LightForm
+        type="email"
+        name="otp_sign_in"
+        onChange={(e) => {
+          setEmail(e.target.value)
+        }}
+        onSubmit={(e) => loginWithEmail(e)}
+        icon={<ChevronRight />}
+        placeHolder="Email address"
+      />
 
       <div className="grid grid-cols-3 gap-1 items-baseline">
         <Divider />

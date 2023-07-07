@@ -1,7 +1,6 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
-import { useRouter } from "next/router"
-import { Navbar } from "./Navbar"
+import { Navbar } from "./navbar/Navbar"
 
 export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -33,22 +32,10 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
       </Head>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
         <header className="space-y-2">
-          <LocalNavbar />
+          <Navbar />
         </header>
         <main className="my-10">{children}</main>
       </div>
     </>
   )
-}
-
-const LocalNavbar = () => {
-  const router = useRouter()
-
-  if (router.pathname.includes("/login")) {
-    return null
-  } else if (router.pathname.includes("/c/")) {
-    return null
-  } else {
-    return <Navbar />
-  }
 }
