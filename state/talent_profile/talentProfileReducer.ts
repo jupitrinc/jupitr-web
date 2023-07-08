@@ -1,8 +1,8 @@
+import { ISkill } from "state/company_job/companyJob.types"
 import {
   ITalentProfile,
   TalentProfileActionEnum,
   TalentProfileAction,
-  TalentProfileSkill,
   TalentProfileState,
 } from "./talentProfile.types"
 
@@ -12,21 +12,21 @@ export const talentProfileReducer = (
 ): TalentProfileState => {
   console.log(action)
   switch (action.type) {
-    case TalentProfileActionEnum.GET_PROFILE_BEGIN:
+    case TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN:
       return {
         ...state,
         loading: true,
         error: false,
       }
 
-    case TalentProfileActionEnum.GET_PROFILE_FAILURE:
+    case TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE:
       return {
         ...state,
         loading: false,
         error: true,
       }
 
-    case TalentProfileActionEnum.GET_PROFILE_SUCCESS:
+    case TalentProfileActionEnum.GET_TALENT_PROFILE_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -35,7 +35,7 @@ export const talentProfileReducer = (
       }
 
     case TalentProfileActionEnum.ADD_SKILL:
-      const add_skill_payload = action.payload as TalentProfileSkill
+      const add_skill_payload = action.payload as ISkill
       return {
         ...state,
         data: {
@@ -45,7 +45,7 @@ export const talentProfileReducer = (
       }
 
     case TalentProfileActionEnum.REMOVE_SKILL:
-      const remove_skill_payload = action.payload as TalentProfileSkill
+      const remove_skill_payload = action.payload as ISkill
 
       return {
         ...state,

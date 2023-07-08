@@ -42,6 +42,7 @@ export const SignUp = () => {
           magic_word="people"
           name="company-people"
         />
+        <TextInput placeholder="Industry" />
         <Textarea
           name="company-mission"
           maxLength={250}

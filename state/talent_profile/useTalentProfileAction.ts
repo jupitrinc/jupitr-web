@@ -1,9 +1,7 @@
 import { useContext } from "react"
-import {
-  TalentProfileActionEnum,
-  TalentProfileSkill,
-} from "./talentProfile.types"
+import { TalentProfileActionEnum } from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
+import { ISkill } from "state/company_job/companyJob.types"
 
 export function useTalentProfileAction() {
   const { dispatch } = useContext(TalentProfileContext)
@@ -13,7 +11,7 @@ export function useTalentProfileAction() {
 
     const catchError = (errorMessage: string) => {
       dispatch({
-        type: TalentProfileActionEnum.GET_PROFILE_FAILURE,
+        type: TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE,
       })
 
       console.log(errorMessage)
@@ -21,7 +19,7 @@ export function useTalentProfileAction() {
 
     try {
       dispatch({
-        type: TalentProfileActionEnum.GET_PROFILE_BEGIN,
+        type: TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN,
       })
 
       /* const response = await fetchRepos(language)
@@ -43,7 +41,7 @@ export function useTalentProfileAction() {
     }
   }
 
-  const addSkill = (skill: TalentProfileSkill) => {
+  const addSkill = (skill: ISkill) => {
     const { id, name, level } = skill
     if (!id || !name.trim() || !level) return
 
@@ -53,7 +51,7 @@ export function useTalentProfileAction() {
     })
   }
 
-  const removeSkill = (skill: TalentProfileSkill) => {
+  const removeSkill = (skill: ISkill) => {
     const { id, name, level } = skill
     if (!id || !name.trim() || !level) return
 
