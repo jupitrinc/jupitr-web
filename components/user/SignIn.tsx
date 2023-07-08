@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Loader } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { Button } from "ui-library/button/Button"
@@ -37,12 +37,15 @@ export const SignIn = () => {
 
 export const SignInForm = () => {
   const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false)
   const { signInWithOtp } = useAuthService()
   const router = useRouter()
 
   const loginWithEmail = async (e) => {
     e.preventDefault()
+    setLoading(true)
     await signInWithOtp(email)
+    setLoading(false)
     router.refresh()
   }
 
@@ -66,6 +69,7 @@ export const SignInForm = () => {
         onSubmit={(e) => loginWithEmail(e)}
         icon={<ChevronRight />}
         placeHolder="Email address"
+        loading={loading}
       />
 
       <div className="grid grid-cols-3 gap-1 items-baseline">
@@ -91,5 +95,13 @@ export const SignInForm = () => {
 }
 
 export const EmailSentMessage = () => {
-  return <div>The link has been sent</div>
+  return (
+    <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
+      <div className="mt-20">
+        <Text as="h1" size="xl">
+          Please, check out your email for the sign in link.
+        </Text>
+      </div>
+    </div>
+  )
 }
