@@ -6,7 +6,7 @@ export const UserContext = createContext({} as IUserContext)
 
 const User = () => {
   const initialState: UserStateType = {
-    data: test_data as UserType, // {}
+    data: {} as UserType, // {}
     loading: false,
     error: false,
   }

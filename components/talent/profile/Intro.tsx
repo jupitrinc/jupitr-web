@@ -34,7 +34,7 @@ export const Intro: React.FC<props> = memo(({ user }) => {
       ) : (
         <div className="flex space-x-2 justify-center">
           <Text as="p" size="xl">
-            {user.name}
+            {user.email}
           </Text>
           <Button
             icon={<Edit className="w-4 h-4" />}

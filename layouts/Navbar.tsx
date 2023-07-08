@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useUserState } from "state/user/userState"
@@ -12,7 +12,30 @@ export const Navbar = () => {
   const { signOut } = useUserAction()
   const router = useRouter()
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
+    return (
+      <div className="flex flex-row space-x-5 justify-between items-baseline">
+        <div>
+          <Link href="/">
+            <Text as="h1" size="xl">
+              jupitr
+            </Text>
+          </Link>
+        </div>
+
+        {
+          <div className="space-x-5 flex">
+            <Link href="/c/signup">
+              <Button label="Post a job" size="base" variant="text" />
+            </Link>
+            <Link href="/login">
+              <Button label="Login" size="base" color="important" />
+            </Link>
+          </div>
+        }
+      </div>
+    )
+  } else {
     return (
       <div className="flex flex-row space-x-5 justify-between items-baseline">
         <div>
@@ -44,29 +67,6 @@ export const Navbar = () => {
             ]}
           />
         </div>
-      </div>
-    )
-  } else {
-    return (
-      <div className="flex flex-row space-x-5 justify-between items-baseline">
-        <div>
-          <Link href="/">
-            <Text as="h1" size="xl">
-              jupitr
-            </Text>
-          </Link>
-        </div>
-
-        {
-          <div className="space-x-5 flex">
-            <Link href="/c/signup">
-              <Button label="Post a job" size="base" variant="text" />
-            </Link>
-            <Link href="/login">
-              <Button label="Login" size="base" color="important" />
-            </Link>
-          </div>
-        }
       </div>
     )
   }

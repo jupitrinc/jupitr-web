@@ -4,6 +4,7 @@ import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./userState"
+import { deleteAllCookies } from "helper/clearCookies"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
@@ -36,6 +37,7 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT_SUCCESS,
     })
+    deleteAllCookies()
     router.push("/")
   }
 

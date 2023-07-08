@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
@@ -8,8 +8,34 @@ import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
 import useAuthService from "../../services/auth/useAuthService"
 import { useRouter } from "next/navigation"
+import { supabaseClientComponent } from "services/_supabase/client"
 
 export const SignIn = () => {
+  const [isEmailSent, setIsEmailSent] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (document.cookie == "") {
+      setIsEmailSent(false)
+    } else {
+      setIsEmailSent(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabaseClientComponent.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_IN") router.replace("/profile")
+    })
+
+    return () => subscription.unsubscribe()
+  }, [supabaseClientComponent])
+
+  return !isEmailSent ? <SignInForm /> : <EmailSentMessage />
+}
+
+export const SignInForm = () => {
   const [email, setEmail] = useState("")
   const { signInWithOtp } = useAuthService()
   const router = useRouter()
@@ -64,4 +90,8 @@ export const SignIn = () => {
       />
     </div>
   )
+}
+
+export const EmailSentMessage = () => {
+  return <div>The link has been sent</div>
 }

@@ -5,7 +5,7 @@ import { Text } from "ui-library/text/Text"
 import { useUserState } from "state/user/userState"
 
 export default function Home() {
-  const { user, loading, error } = useUserState()
+  // const { user, loading, error } = useUserState()
 
   return (
     <DefaultLayout>

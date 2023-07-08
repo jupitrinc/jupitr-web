@@ -1,8 +1,12 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-import { NextResponse } from "next/server"
-import { Database } from "services/_supabase/database"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function middleware(req) {
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl
+  const allowedRoutes = ["/", "/login", "/auth/callback"]
+
+  const isRouteAllowed = allowedRoutes.includes(`${pathname}`)
+
   const res = NextResponse.next()
 
   // Create a Supabase client configured to use cookies
@@ -10,7 +14,17 @@ export async function middleware(req) {
 
   // Refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-  await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session && !isRouteAllowed) {
+    return NextResponse.redirect(`${new URL(req.url).origin}/login`)
+  }
 
   return res
+}
+
+export const config = {
+  matcher: "/((?!api|static|.*\\..*|_next).*)",
 }
