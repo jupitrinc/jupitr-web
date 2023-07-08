@@ -8,8 +8,7 @@ import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { useUserAction } from "state/user/useUserAction"
 
 export const Navbar = () => {
-  const { isLoggedIn, user } = useUserState()
-  const { signOut } = useUserAction()
+  const { isLoggedIn, accountType } = useUserState()
   const router = useRouter()
 
   if (
@@ -21,57 +20,100 @@ export const Navbar = () => {
     if (isLoggedIn) {
       return (
         <div className="flex flex-row space-x-5 justify-between items-baseline">
-          <div>
-            <Link href="/jobs">
-              <Text as="h1" size="xl">
-                jupitr
-              </Text>
-            </Link>
-          </div>
-
-          <div className="flex gap-5">
-            <Link href="/jobs">
-              <Button label="Jobs" size="base" variant="text" />
-            </Link>
-
-            <Dropdown
-              type="avatar"
-              image_url={user.avatar}
-              items={[
-                {
-                  name: "Profile",
-                  onClick: () => router.push("/profile"),
-                },
-                {
-                  name: "Account settings",
-                  onClick: () => router.push("/account/settings"),
-                },
-                { name: "Sign out", onClick: signOut },
-              ]}
-            />
-          </div>
+          <Brand link={accountType === "talent" ? "/jobs" : "/c/jobs"} />
+          {accountType === "talent" ? <TalentMenu /> : <CompanyMenu />}
         </div>
       )
     } else {
       return (
         <div className="flex flex-row space-x-5 justify-between items-baseline">
-          <div>
-            <Link href="/">
-              <Text as="h1" size="xl">
-                jupitr
-              </Text>
-            </Link>
-          </div>
-          <div className="flex gap-5">
-            <Link href="/c/signup">
-              <Button label="Post a job" size="base" variant="text" />
-            </Link>
-            <Link href="/login">
-              <Button label="Sign in" size="base" color="special" />
-            </Link>
-          </div>
+          <Brand link="/" />
+          <PublicMenu />
         </div>
       )
     }
   }
+}
+
+const Brand = ({ link }: { link: string }) => {
+  return (
+    <Link href={link}>
+      <Text as="h1" size="xl">
+        jupitr
+      </Text>
+    </Link>
+  )
+}
+
+const TalentMenu = () => {
+  const router = useRouter()
+  const { user } = useUserState()
+  const { signOut } = useUserAction()
+
+  return (
+    <div className="flex gap-5">
+      <Link href="/jobs">
+        <Button label="Jobs" size="base" variant="text" />
+      </Link>
+
+      <Dropdown
+        type="avatar"
+        image_url={user.avatar}
+        items={[
+          {
+            name: "Profile",
+            onClick: () => router.push("/profile"),
+          },
+          {
+            name: "Account settings",
+            onClick: () => router.push("/account/settings"),
+          },
+          { name: "Sign out", onClick: signOut },
+        ]}
+      />
+    </div>
+  )
+}
+
+const CompanyMenu = () => {
+  const router = useRouter()
+  const { user } = useUserState()
+  const { signOut } = useUserAction()
+
+  return (
+    <div className="flex gap-5">
+      <Link href="/c/jobs">
+        <Button label="Jobs" size="base" variant="text" />
+      </Link>
+
+      <Dropdown
+        type="avatar"
+        image_url={user.avatar}
+        items={[
+          {
+            name: "Profile",
+            onClick: () => router.push("/c/profile"),
+          },
+          {
+            name: "Account settings",
+            onClick: () => router.push("/account/settings"),
+          },
+          { name: "Sign out", onClick: signOut },
+        ]}
+      />
+    </div>
+  )
+}
+
+const PublicMenu = () => {
+  return (
+    <div className="flex gap-5">
+      <Link href="/c/signup">
+        <Button label="Post a job" size="base" variant="text" />
+      </Link>
+      <Link href="/login">
+        <Button label="Sign in" size="base" color="special" />
+      </Link>
+    </div>
+  )
 }

@@ -1,3 +1,6 @@
+import { ISkill } from "state/company_job/companyJob.types"
+import { ICompanyProfile } from "state/company_profile/companyProfile.types"
+
 export interface ITalentJobContext {
   state: TalentJobState
   dispatch: ({ type }: TalentJobAction) => void
@@ -29,24 +32,13 @@ export interface ITalentJob {
     video_url: string
   }[]
   technical_test: string[]
-  skills: { id: string; name: string; level: number }[]
+  skills: ISkill[]
   talent_response_video: { length: number; description: string }
   active: boolean
-  company: ICompany
+  company: ICompanyProfile
 
   // FIXME
   date_posted: any
-}
-
-interface ICompany {
-  id: string
-  name: string
-  logo: string
-  year_founded: string
-  website: string
-  size: string
-  mission: string
-  industry: string[]
 }
 
 export type TalentJobAction = {

@@ -1,21 +1,21 @@
 import { createContext, useReducer } from "react"
 
-import { talentJobsReducer } from "./talentJobsReducer"
+import { companyJobsReducer } from "./companyJobsReducer"
 import {
-  TalentJobs,
-  ITalentJobsContext,
-  TalentJobsState,
-} from "./talentJobs.types"
+  CompanyJobs,
+  ICompanyJobsContext,
+  CompanyJobsState,
+} from "./companyJobs.types"
 
-export const TalentJobsContext = createContext({} as ITalentJobsContext)
+export const CompanyJobsContext = createContext({} as ICompanyJobsContext)
 
-const TalentJobs = () => {
-  const initialState: TalentJobsState = {
-    data: test_data as TalentJobs,
+const CompanyJobs = () => {
+  const initialState: CompanyJobsState = {
+    data: test_data as CompanyJobs,
     loading: false,
     error: false,
   }
-  const [state, dispatch] = useReducer(talentJobsReducer, initialState)
+  const [state, dispatch] = useReducer(companyJobsReducer, initialState)
 
   return {
     state,
@@ -23,11 +23,11 @@ const TalentJobs = () => {
   }
 }
 
-export const TalentJobsContextProvider: React.FC<any> = ({ children }) => {
+export const CompanyJobsContextProvider: React.FC<any> = ({ children }) => {
   return (
-    <TalentJobsContext.Provider value={TalentJobs()}>
+    <CompanyJobsContext.Provider value={CompanyJobs()}>
       {children}
-    </TalentJobsContext.Provider>
+    </CompanyJobsContext.Provider>
   )
 }
 
@@ -64,7 +64,7 @@ const sample_job_1 = {
     { id: "5", name: "React", level: 2 },
     { id: "6", name: "Frontend tooling", level: 1 },
   ],
-  talent_response_video: {
+  company_response_video: {
     length: 20,
     description: "Why are you a good match for this role?",
   },
@@ -82,85 +82,6 @@ const sample_job_1 = {
   date_posted: "2023-06-11 18:13:59.232382+00",
 }
 
-const sample_job_2 = {
-  id: "2",
-  title: "Machine learning engineer",
-  salary: 110000,
-  currency: "",
-  location: "london",
-  work_model: ["Remote", "Hybrid"],
-  videos: [
-    {
-      id: "123",
-      job_id: "123",
-      company_member_profile: {
-        user_id: "123",
-        name: "Rafa",
-        job_title: "AI engineer",
-      },
+const sample_job_2 = {}
 
-      video_url: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
-    },
-  ],
-  technical_test: [
-    "Pair programming",
-    "Technical conversation",
-    "Take-home challenge",
-  ],
-  skills: [
-    { id: "1", name: "NLP", level: 3 },
-    { id: "2", name: "Python", level: 3 },
-    { id: "1", name: "Computer Vision", level: 3 },
-  ],
-  talent_response_video: {
-    length: 20,
-    description: "Why are you a good match for this role?",
-  },
-  active: true,
-  company: {
-    id: "123",
-    name: "Tesla",
-    logo: "data:image/png;base64,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",
-    year_founded: "2023",
-    website: "https://jupitr.tech",
-    size: "1-5",
-    mission: "",
-    industry: ["Automobile", "AI"],
-  },
-  date_posted: "2023-06-11 18:13:59.232382+00",
-}
-
-const test_data = [
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-  sample_job_1,
-  sample_job_2,
-]
+const test_data = [sample_job_1, sample_job_2]
