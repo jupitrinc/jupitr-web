@@ -25,7 +25,7 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
           onClick={form.onClick}
           icon={form.icon}
           disabled={form.disabled}
-          loading={form.disabled}
+          loading={form.loading}
         />
       </div>
     </form>

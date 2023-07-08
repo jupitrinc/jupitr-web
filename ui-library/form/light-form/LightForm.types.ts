@@ -13,4 +13,5 @@ export interface LightFormProps {
   maxLength?: number
   disabled?: boolean
   autocomplete?: boolean
+  loading?: boolean
 }
