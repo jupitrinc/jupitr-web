@@ -1,9 +1,10 @@
 import { ChangeEventHandler } from "react"
 
 export interface SelectProps {
-  onChange: ChangeEventHandler<HTMLInputElement>
   options: string[]
-  label: string
+  label?: string
+  onChange?: ChangeEventHandler<HTMLInputElement>
   disabled?: boolean
   name?: string
+  magic_word?: string
 }

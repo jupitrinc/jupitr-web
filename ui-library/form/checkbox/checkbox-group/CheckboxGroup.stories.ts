@@ -12,17 +12,20 @@ const items = [
   {
     label: "option 1",
     name: "option 1",
+    value: "option 1",
     checked: false,
     onChange: (e) => console.log(!e.target.checked),
   },
   {
     label: "option 2",
     name: "option 2",
+    value: "option 2",
     checked: true,
     onChange: (e) => console.log(!e.target.checked),
   },
   {
     label: "option 3",
+    value: "option 3",
     name: "option 3",
     checked: true,
     onChange: (e) => console.log(!e.target.checked),

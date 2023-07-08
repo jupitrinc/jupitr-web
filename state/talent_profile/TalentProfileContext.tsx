@@ -2,16 +2,16 @@ import { createContext, useReducer } from "react"
 
 import { talentProfileReducer } from "./talentProfileReducer"
 import {
+  ITalentProfile,
   ITalentProfileContext,
-  TalentProfileStateType,
-  TalentProfileType,
+  TalentProfileState,
 } from "./talentProfile.types"
 
 export const TalentProfileContext = createContext({} as ITalentProfileContext)
 
 const TalentProfile = () => {
-  const initialState: TalentProfileStateType = {
-    data: test_data as TalentProfileType,
+  const initialState: TalentProfileState = {
+    data: test_data as ITalentProfile,
     loading: false,
     error: false,
   }
@@ -46,7 +46,7 @@ const test_data = {
   ],
   preferences: {
     location: ["UK"],
-    work_model: ["remote"],
+    work_model: ["Remote"],
     min_salary: 80000,
     industry: ["Finance", "Biotech", "Media", "AI"],
     technical_test: [
@@ -54,12 +54,6 @@ const test_data = {
       "Take-home challenge",
       "Pair programming",
       "None",
-    ],
-    visa_sponsorship: false,
-    job_category: [
-      "AI engineer",
-      "Python developer",
-      "Machine learning engineer",
     ],
   },
 }

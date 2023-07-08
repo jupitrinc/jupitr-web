@@ -12,8 +12,17 @@ export const textStyles = {
     base: "text-base",
     lg: "text-lg",
     xl: "text-xl",
+    xl2: "text-2xl",
   },
   heading: {
     fontFamily: "font-mw",
+  },
+  align: {
+    left: "text-left",
+    right: "text-right",
+    center: "text-center",
+  },
+  weight: {
+    bold: "font-medium",
   },
 }

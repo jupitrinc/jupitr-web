@@ -2,19 +2,17 @@ import React from "react"
 import { TextAreaProps } from "./Textarea.types"
 import { textareaStyles } from "./Textarea.styles"
 import { Label } from "../label/Label"
-import { stringHelper } from "helper/stringHelper"
 
 export const Textarea: React.FC<TextAreaProps> = (textarea) => {
   const styles = textareaStyles
-  const { randomHash } = stringHelper
 
   return (
-    <>
+    <div className={styles.container}>
       {textarea.label && (
-        <Label htmlFor={randomHash()} value={textarea.label} />
+        <Label htmlFor={textarea.label} value={textarea.label} />
       )}
       <textarea
-        id={randomHash()}
+        id={textarea.label}
         value={textarea.value}
         name={textarea.name}
         placeholder={textarea.placeholder}
@@ -22,9 +20,9 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
         autoFocus={textarea.autoFocus}
         maxLength={textarea.maxLength}
         cols={30}
-        rows={10}
+        rows={5}
         className={styles.textarea}
       />
-    </>
+    </div>
   )
 }

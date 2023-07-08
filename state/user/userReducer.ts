@@ -1,14 +1,9 @@
-import {
-  UserActionEnum,
-  UserActionType,
-  UserStateType,
-  UserType,
-} from "./user.types"
+import { IUser, UserActionEnum, UserAction, UserState } from "./user.types"
 
 export const userReducer = (
-  state: UserStateType,
-  action: UserActionType
-): UserStateType => {
+  state: UserState,
+  action: UserAction
+): UserState => {
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
       return {
@@ -29,7 +24,7 @@ export const userReducer = (
         ...state,
         loading: false,
         error: false,
-        data: action.payload as UserType,
+        data: action.payload as IUser,
       }
 
     case UserActionEnum.SIGN_OUT_BEGIN:
@@ -51,7 +46,7 @@ export const userReducer = (
         ...state,
         loading: false,
         error: false,
-        data: {} as UserType,
+        data: {} as IUser,
       }
 
     default:

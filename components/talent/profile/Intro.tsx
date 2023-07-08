@@ -1,24 +1,17 @@
-import React, { memo, useRef, useState } from "react"
-import { Edit } from "lucide-react"
-import { UserType } from "state/user/user.types"
+import React, { useRef } from "react"
+import { useUserState } from "state/user/useUserState"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Button } from "ui-library/button/Button"
 import { TextInput } from "ui-library/form/text-input/TextInput"
-import { Text } from "ui-library/text/Text"
 
-interface props {
-  user: UserType
-}
-
-export const Intro: React.FC<props> = memo(({ user }) => {
-  const [editName, setEditName] = useState<boolean>(false)
+export const Intro = () => {
+  const { user } = useUserState()
   const inputRef = useRef(null)
 
   return (
     <div className="space-y-5 mb-10 text-center">
       <div>
         <button>
-          <Avatar size={20} image_url={user.avatar} />
+          <Avatar size={36} image_url={user.avatar} />
         </button>
 
         <input
@@ -29,22 +22,12 @@ export const Intro: React.FC<props> = memo(({ user }) => {
         />
       </div>
 
-      {editName ? (
-        <TextInput placeholder="Name" value={user.name} />
-      ) : (
-        <div className="flex space-x-2 justify-center">
-          <Text as="p" size="xl">
-            {user.email}
-          </Text>
-          <Button
-            icon={<Edit className="w-4 h-4" />}
-            size="xs"
-            onClick={() => setEditName(!editName)}
-          />
-        </div>
-      )}
+      <TextInput
+        placeholder="My name is ..."
+        //value={user.name}
+        light={true}
+        maxLength={50}
+      />
     </div>
   )
-})
-
-Intro.displayName = "Intro"
+}

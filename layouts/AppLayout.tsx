@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { LayoutProps } from "./Layout.types"
 import { useRouter } from "next/router"
-import { Navbar } from "./Navbar"
+import { Navbar } from "./navbar/Navbar"
 
 export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -35,11 +35,7 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
         <header className="space-y-2">
           <LocalNavbar />
         </header>
-        <main>
-          <div className="mx-auto flex flex-col max-w-2xl my-5 space-y-10">
-            {children}
-          </div>
-        </main>
+        <main className="my-10">{children}</main>
       </div>
     </>
   )

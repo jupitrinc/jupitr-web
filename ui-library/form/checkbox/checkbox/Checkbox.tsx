@@ -6,11 +6,12 @@ export const Checkbox: React.FC<CheckboxProps> = (checkbox) => {
   const styles = checkboxStyles
 
   return (
-    <label className={styles.container}>
+    <label>
       <input
         type="checkbox"
-        checked={checkbox.checked}
-        name={checkbox.name}
+        defaultChecked={checkbox.checked}
+        name={checkbox.label}
+        value={checkbox.value}
         onChange={checkbox.onChange}
         className={styles.checkbox}
       />

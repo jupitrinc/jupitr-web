@@ -6,6 +6,8 @@ import {
   ThemeSizeEnum,
   ThemeVariantEnum,
 } from "ui-library/_theme/Theme.types"
+import { X } from "lucide-react"
+import { Button } from "ui-library/button/Button"
 
 export const Pill: React.FC<PillProps> = (pill) => {
   const styles = pillStyles
@@ -17,11 +19,19 @@ export const Pill: React.FC<PillProps> = (pill) => {
           pill.variant ? pill.variant : ThemeVariantEnum.contained
         ],
         styles.color[pill.color ? pill.color : ThemeColorEnum.standard],
-        styles.size[pill.size ? pill.size : ThemeSizeEnum.sm],
-        styles.rounded.full
+        styles.size[pill.size ? pill.size : ThemeSizeEnum.sm]
       )}
     >
-      {pill.label}
+      <span>{pill.label}</span>
+      {pill.type === "clickable" && (
+        <Button
+          size="xs"
+          color={pill.color ? pill.color : ThemeColorEnum.standard}
+          variant="text"
+          icon={<X className="h-4 w-4" />}
+          onClick={pill.onClick}
+        />
+      )}
     </span>
   )
 }

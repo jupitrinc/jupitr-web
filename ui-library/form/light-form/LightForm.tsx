@@ -11,6 +11,7 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
     <form onSubmit={form.onSubmit} className={styles.form}>
       <TextInput
         value={form.value}
+        name={form.name}
         type={form.type}
         onChange={form.onChange}
         placeholder={form.placeHolder}
@@ -20,7 +21,8 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
       />
       <div className={styles.buttonContainer}>
         <Button
-          onClick={() => form.onSubmit}
+          type="submit"
+          onClick={form.onClick}
           icon={form.icon}
           disabled={form.disabled}
           loading={form.disabled}

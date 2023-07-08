@@ -9,12 +9,16 @@ export const Text: React.FC<TextProps> = ({
   children,
   color,
   size,
+  align,
+  bold,
 }) => (
   <Typography
     tag={as}
     className={clsx(
       styles.color[color ? color : ThemeColorEnum.standard],
       styles.size[size ? size : ThemeSizeEnum.base],
+      styles.align[align ? align : styles.align.left],
+      bold && styles.weight.bold,
       heading.includes(as) && styles.heading.fontFamily
     )}
   >

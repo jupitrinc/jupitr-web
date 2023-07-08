@@ -1,14 +1,12 @@
-import React, { memo } from "react"
+import React from "react"
 import { Github, Globe, Linkedin } from "lucide-react"
-import { TalentProfileType } from "state/talent_profile/talentProfile.types"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 
-interface props {
-  links: TalentProfileType["social_links"]
-}
-
-export const SocialLinks: React.FC<props> = memo(({ links }) => {
+export const SocialLinks = () => {
+  const { talent_profile } = useTalentProfileState()
+  const links = talent_profile.social_links
   return (
     <>
       {links.map((link, index) => (
@@ -24,7 +22,7 @@ export const SocialLinks: React.FC<props> = memo(({ links }) => {
       ))}
     </>
   )
-})
+}
 
 SocialLinks.displayName = "SocialLinks"
 

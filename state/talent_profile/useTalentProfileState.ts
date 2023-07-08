@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { TalentProfileContext } from "./TalentProfileContext"
 
-export const talentProfileState = () => {
+export const useTalentProfileState = () => {
   const { state } = useContext(TalentProfileContext)
 
   return {

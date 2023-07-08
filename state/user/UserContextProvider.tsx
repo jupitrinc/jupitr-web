@@ -1,12 +1,12 @@
 import { createContext, useReducer } from "react"
 import { userReducer } from "./userReducer"
-import { IUserContext, UserStateType, UserType } from "./user.types"
+import { IUser, IUserContext, UserState } from "./user.types"
 
 export const UserContext = createContext({} as IUserContext)
 
 const User = () => {
-  const initialState: UserStateType = {
-    data: {} as UserType, // {}
+  const initialState: UserState = {
+    data: {} as IUser,
     loading: false,
     error: false,
   }
@@ -27,6 +27,6 @@ const test_data = {
   name: "Ava Sky",
   avatar:
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80",
-  account_type: "talent",
+  account_type: "company",
   email: "ava@jupitr.tech",
 }

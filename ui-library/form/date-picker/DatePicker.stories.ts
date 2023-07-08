@@ -13,6 +13,6 @@ type Story = StoryObj<typeof DatePicker>
 
 export const datePicker: Story = {
   args: {
-    value: { startDate: Date.now(), endDate: Date.now() },
+    value: { startDate: new Date(), endDate: new Date() },
   },
 }

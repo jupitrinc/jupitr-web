@@ -5,4 +5,6 @@ export interface PillProps {
   variant?: VariantType
   size?: SizeType
   color?: ColorType
+  onClick?: (event: React.MouseEvent) => void
+  type?: "default" | "clickable"
 }

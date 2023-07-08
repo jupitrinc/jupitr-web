@@ -32,7 +32,7 @@
     "**/*.tsx",
     "next.config.js",
     ".next/types/**/*.ts"
-  ],
+, "service-worker.js"  ],
   "exclude": [
     "node_modules"
   ]

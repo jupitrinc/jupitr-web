@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = (button) => {
   const styles = buttonStyles
   return (
     <button
-      type="button"
+      type={button.type ? button.type : "button"}
       className={clsx(
         button.label ? styles.button : styles.icon_button,
         styles.variant[
@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = (button) => {
         button.label &&
           styles.size[button.size ? button.size : ThemeSizeEnum.sm],
         button.full_width && styles.width.full,
-        !button.label ? styles.rounded.full : styles.rounded.xl
+        !button.label ? styles.rounded.full : styles.rounded.lg
       )}
       onClick={button.onClick}
       disabled={button.disabled || button.loading}

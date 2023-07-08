@@ -1,20 +1,21 @@
 import { Plus, X } from "lucide-react"
-import { memo, useState } from "react"
-import { TalentProfileType } from "state/talent_profile/talentProfile.types"
-import { talentProfileAction } from "state/talent_profile/talentProfileAction"
+import { useState } from "react"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { Button } from "ui-library/button/Button"
-import { Divider } from "ui-library/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
+import { SectionHeader } from "./Sections"
+import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
+import { Card } from "ui-library/card/Card"
 
-interface props {
-  skills: TalentProfileType["skills"]
-}
+export const Skills = () => {
+  const { talent_profile } = useTalentProfileState()
+  const skills = talent_profile.skills
 
-export const Skills: React.FC<props> = memo(({ skills }) => {
   const [newSkill, setNewSkill] = useState<string>("")
-  const { addSkill } = talentProfileAction()
+  const { addSkill } = useTalentProfileAction()
 
   const handleAddSkill = (e) => {
     e.preventDefault()
@@ -23,47 +24,48 @@ export const Skills: React.FC<props> = memo(({ skills }) => {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="grid grid-cols-3 gap-4 items-center text-center">
-        <Divider />
-        <Text as="p" size="xl">
-          Skills
-        </Text>
-        <Divider />
-      </div>
+    <>
+      <SectionHeader title="Skills" />
 
-      <div className="grid grid-rows-1 gap-4">
+      <div className="space-y-10">
         <LightForm
-          placeHolder="Add a skill ..."
+          placeHolder="Search ..."
           onChange={(e) => setNewSkill(e.target.value)}
           value={newSkill}
           onSubmit={handleAddSkill}
+          onClick={handleAddSkill}
           icon={<Plus />}
         />
-
-        {skills.map((skill) => (
-          <SkillCard skill={skill} key={skill.id} />
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {skills.map((skill) => (
+            <SkillCard skill={skill} key={skill.id} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
-})
+}
 
-Skills.displayName = "Skill"
+export interface SkillCardProps {
+  skill: TalentProfileSkill
+}
 
-const SkillCard = ({ skill }) => {
-  const [level, setLevel] = useState(skill.level)
-  const { removeSkill } = talentProfileAction()
+export const SkillCard: React.FC<SkillCardProps> = (card) => {
+  const [level, setLevel] = useState(card.skill.level)
+  const { removeSkill } = useTalentProfileAction()
   return (
-    <div className="flex flex-col space-y-5 text-center bg-gray-100 p-5 rounded-lg shadow-lg">
-      <div className="flex justify-between">
+    <Card type="static">
+      <div className="flex justify-between mb-3">
         <Text as="span" size="lg">
-          {skill.name}
+          {card.skill.name}
         </Text>
+
         <Button
-          onClick={() => removeSkill(skill)}
+          onClick={() => removeSkill(card.skill)}
           icon={<X className="h-4 w-4" />}
-          size="xs"
+          size="base"
+          color="standard"
+          variant="text"
         />
       </div>
 
@@ -71,8 +73,7 @@ const SkillCard = ({ skill }) => {
         items={["Beginner", "Competent", "Expert"]}
         active_tab={level}
         onChange={setLevel}
-        size="sm"
       />
-    </div>
+    </Card>
   )
 }

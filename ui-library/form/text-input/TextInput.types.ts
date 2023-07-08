@@ -12,4 +12,5 @@ export interface TextInputProps {
   onBlur?: ChangeEventHandler<HTMLInputElement>
   maxLength?: number
   type?: string
+  light?: boolean
 }

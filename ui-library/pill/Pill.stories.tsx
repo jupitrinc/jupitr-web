@@ -48,6 +48,14 @@ export const extraLarge: Story = {
   },
 }
 
+export const special: Story = {
+  args: {
+    label: "storybook",
+    size: "xl",
+    color: "special",
+  },
+}
+
 export const important: Story = {
   args: {
     label: "storybook",

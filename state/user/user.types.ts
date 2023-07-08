@@ -1,9 +1,9 @@
 export interface IUserContext {
-  state: UserStateType
-  dispatch: ({ type }: UserActionType) => void
+  state: UserState
+  dispatch: ({ type }: UserAction) => void
 }
 
-export type UserType = {
+export interface IUser {
   id: string
   name: string
   account_type: "talent" | "company"
@@ -11,13 +11,13 @@ export type UserType = {
   avatar: string
 }
 
-export type UserStateType = {
-  data: UserType
+export type UserState = {
+  data: IUser
   loading: boolean
   error: boolean
 }
 
-export type UserActionType = {
+export type UserAction = {
   type:
     | UserActionEnum.SIGN_IN_BEGIN
     | UserActionEnum.SIGN_IN_FAILURE
@@ -25,7 +25,7 @@ export type UserActionType = {
     | UserActionEnum.SIGN_OUT_BEGIN
     | UserActionEnum.SIGN_OUT_FAILURE
     | UserActionEnum.SIGN_OUT_SUCCESS
-  payload?: UserType
+  payload?: IUser
 }
 
 export enum UserActionEnum {
