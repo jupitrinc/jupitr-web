@@ -1,4 +1,4 @@
-export const cookiesHelper = {
+export const cookieHelper = {
   deleteAll: () => {
     const cookies = document.cookie.split(";")
 
