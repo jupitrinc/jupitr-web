@@ -4,11 +4,13 @@ import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./useUserState"
+import { cookiesHelper } from "../../helper/cookiesHelper"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const { user } = useUserState()
   const router = useRouter()
+  const { deleteAll } = cookiesHelper
 
   const signInWithOtp = async () => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -36,6 +38,7 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT_SUCCESS,
     })
+    deleteAll()
     router.push("/")
   }
 
