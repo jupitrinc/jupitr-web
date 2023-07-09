@@ -62,6 +62,7 @@ export const SignInForm = () => {
       </Text>
 
       <LightForm
+        name="otp_sign_in"
         type="email"
         onChange={(e) => {
           setEmail(e.target.value)
