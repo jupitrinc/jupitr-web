@@ -1,9 +1,13 @@
-import { DefaultLayout } from "layouts/DefaultLayout"
+import { Details } from "components/company/job/Details"
+import { AppLayout } from "layouts/AppLayout"
+import { CompanyJobContextProvider } from "state/company_job/CompanyJobContext"
 
 export default function Home() {
   return (
-    <DefaultLayout>
-      <h1 className="text-center">Company job detail + edit</h1>
-    </DefaultLayout>
+    <AppLayout>
+      <CompanyJobContextProvider>
+        <Details />
+      </CompanyJobContextProvider>
+    </AppLayout>
   )
 }

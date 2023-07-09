@@ -7,8 +7,8 @@ import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { SectionHeader } from "./Sections"
-import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
 import { Card } from "ui-library/card/Card"
+import { ISkill } from "state/company_job/companyJob.types"
 
 export const Skills = () => {
   const { talent_profile } = useTalentProfileState()
@@ -47,7 +47,7 @@ export const Skills = () => {
 }
 
 export interface SkillCardProps {
-  skill: TalentProfileSkill
+  skill: ISkill
 }
 
 export const SkillCard: React.FC<SkillCardProps> = (card) => {
