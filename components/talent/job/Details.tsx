@@ -9,9 +9,9 @@ import { Pill } from "ui-library/pill/Pill"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
-import { TalentProfileSkill } from "state/talent_profile/talentProfile.types"
 import { Application } from "./Application"
 import { Card } from "ui-library/card/Card"
+import { ISkill } from "state/company_job/companyJob.types"
 
 export const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -147,7 +147,7 @@ export const Details = () => {
   }
 }
 
-const SkillCard = ({ skill }: { skill: TalentProfileSkill }) => {
+const SkillCard = ({ skill }: { skill: ISkill }) => {
   const skillLevel = (level: number) => {
     switch (level) {
       case 1:

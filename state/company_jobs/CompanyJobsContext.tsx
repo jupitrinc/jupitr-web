@@ -31,13 +31,14 @@ export const CompanyJobsContextProvider: React.FC<any> = ({ children }) => {
   )
 }
 
-const sample_job_1 = {
+const sample_job = {
   id: "1",
   title: "Senior frontend developer",
   salary: 110000,
   currency: "",
   location: "london",
   work_model: ["Remote", "Hybrid"],
+  visa_sponsorship: false,
   videos: [
     {
       id: "123",
@@ -68,7 +69,7 @@ const sample_job_1 = {
     length: 20,
     description: "Why are you a good match for this role?",
   },
-  active: true,
+  status: "open",
   company: {
     id: "123",
     name: "Meta",
@@ -82,6 +83,16 @@ const sample_job_1 = {
   date_posted: "2023-06-11 18:13:59.232382+00",
 }
 
-const sample_job_2 = {}
-
-const test_data = [sample_job_1, sample_job_2]
+const test_data = [
+  { ...sample_job, title: "Open jobs" },
+  { ...sample_job, id: "2" },
+  { ...sample_job, id: "3" },
+  { ...sample_job, id: "4" },
+  { ...sample_job, id: "5" },
+  { ...sample_job, id: "6", status: "closed", title: "Closed jobs" },
+  { ...sample_job, id: "7", status: "closed" },
+  { ...sample_job, id: "8", status: "closed" },
+  { ...sample_job, id: "9", status: "closed" },
+  { ...sample_job, id: "10", status: "draft", title: "Draft jobs" },
+  { ...sample_job, id: "11", status: "draft" },
+]

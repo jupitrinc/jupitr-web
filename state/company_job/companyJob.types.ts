@@ -30,8 +30,8 @@ export interface ICompanyJob {
   technical_test: string[]
   skills: { id: string; name: string; level: number }[]
   company_response_video: { length: number; description: string }
-  active: boolean
-  applications: IJobApplication[]
+  status: "open" | "closed" | "draft"
+  applications?: IJobApplication[]
 
   // FIXME
   date_posted: any
