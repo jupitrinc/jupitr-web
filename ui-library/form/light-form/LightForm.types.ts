@@ -14,4 +14,5 @@ export interface LightFormProps {
   disabled?: boolean
   autocomplete?: boolean
   loading?: boolean
+  required?: boolean
 }
