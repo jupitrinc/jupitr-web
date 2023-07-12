@@ -13,4 +13,5 @@ export interface TextInputProps {
   maxLength?: number
   type?: string
   light?: boolean
+  required?: boolean
 }

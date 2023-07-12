@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Loader } from "lucide-react"
+import { ChevronLeft, ChevronRight, MailCheck, X } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { Button } from "ui-library/button/Button"
@@ -12,6 +12,9 @@ import { supabaseClientComponent } from "services/_supabase/client"
 
 export const SignIn = () => {
   const [isEmailSent, setIsEmailSent] = useState(false)
+  const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false)
+  const { signInWithOtp } = useAuthService()
   const router = useRouter()
 
   useEffect(() => {
@@ -32,21 +35,17 @@ export const SignIn = () => {
     return () => subscription.unsubscribe()
   }, [supabaseClientComponent])
 
-  return !isEmailSent ? <SignInForm /> : <EmailSentMessage />
-}
-
-export const SignInForm = () => {
-  const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const { signInWithOtp } = useAuthService()
-  const router = useRouter()
-
   const loginWithEmail = async (e) => {
     e.preventDefault()
     setLoading(true)
     await signInWithOtp(email)
     setLoading(false)
     router.refresh()
+  }
+
+  const toggleNotification = () => {
+    const sent = isEmailSent
+    setIsEmailSent(!sent)
   }
 
   return (
@@ -71,6 +70,7 @@ export const SignInForm = () => {
         icon={<ChevronRight />}
         placeHolder="Email address"
         loading={loading}
+        required={true}
       />
 
       <div className="grid grid-cols-3 gap-1 items-baseline">
@@ -91,18 +91,34 @@ export const SignInForm = () => {
         size="lg"
         variant="contained"
       />
+
+      {isEmailSent && (
+        <EmailSentMessage toggleNotification={toggleNotification} />
+      )}
     </div>
   )
 }
 
-export const EmailSentMessage = () => {
+export const EmailSentMessage = ({ toggleNotification }) => {
   return (
-    <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
-      <div className="mt-20">
-        <Text as="h1" size="xl">
-          Please, check out your email for the sign in link.
-        </Text>
+    <div
+      id="alert-5"
+      className="flex items-center gap-2 p-4 rounded-lg bg-gray-50 fixed bottom-8"
+      role="alert"
+    >
+      <MailCheck />
+      <div className="inline-flex gap-2  text-sm text-gray-800">
+        <p>Check out your email for a link to sign in to the app.</p>
       </div>
+      <button
+        onClick={toggleNotification}
+        type="button"
+        className="bg-gray-50 text-gray-500 rounded-lg p-1.5 hover:bg-gray-200 inline-flex items-center justify-center h-8 w-8"
+        data-dismiss-target="#alert-5"
+        aria-label="Close"
+      >
+        <X />
+      </button>
     </div>
   )
 }
