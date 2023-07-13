@@ -22,6 +22,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         maxLength={textInput.maxLength}
         className={textInput.light ? styles.lightInput : styles.input}
         defaultValue={textInput.defaultValue}
+        required={textInput.required}
       />
     </div>
   )

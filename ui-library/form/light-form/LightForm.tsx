@@ -18,6 +18,7 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
         disabled={form.disabled}
         maxLength={form.maxLength}
         label={form.label}
+        required={form.required}
       />
       <div className={styles.buttonContainer}>
         <Button

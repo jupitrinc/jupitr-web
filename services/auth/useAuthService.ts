@@ -20,10 +20,23 @@ const useAuthService = () => {
     })
   }
 
+  const signInWithGoogle = async () => {
+    return await supabaseClientComponent.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${location.origin}/login`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+  }
+
   const logout = async () => {
     return await supabase.auth.signOut()
   }
 
-  return { logout, signInWithOtp, getUserId }
+  return { logout, signInWithOtp, getUserId, signInWithGoogle }
 }
 export default useAuthService
