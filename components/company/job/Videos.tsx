@@ -12,14 +12,14 @@ export const Videos = () => {
   const { company_job } = useCompanyJobState()
   const videos = company_job.videos
   return (
-    <div className="flex flex-col gap-5 bg-white rounded-lg p-5 md:p-10">
+    <Card type="section">
       <SectionHeader title="Videos" />
       <SectionActions />
 
       {videos.map((video) => (
         <VideoCard key={video.id} video={video} />
       ))}
-    </div>
+    </Card>
   )
 }
 
