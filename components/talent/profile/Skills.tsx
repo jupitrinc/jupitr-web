@@ -25,7 +25,7 @@ export const Skills = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5 bg-white rounded-lg p-5 sm:p-10">
+    <Card type="section">
       <SectionHeader title="Skills" />
       <LightForm
         placeHolder="Search ..."
@@ -35,12 +35,12 @@ export const Skills = () => {
         onClick={handleAddSkill}
         icon={<Plus />}
       />
-      <div className="grid grid-cols-1 gap-5 mt-5">
+      <div className="grid grid-cols-1 gap-5">
         {skills.map((skill) => (
           <SkillCard skill={skill} key={skill.id} />
         ))}
       </div>
-    </div>
+    </Card>
   )
 }
 

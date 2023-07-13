@@ -1,6 +1,5 @@
-import { ChevronLeft } from "lucide-react"
-import Link from "next/link"
 import React from "react"
+import Link from "next/link"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/divider/Divider"
@@ -10,8 +9,8 @@ import { Select } from "ui-library/form/select/Select"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Textarea } from "ui-library/form/textarea/Textarea"
 import { Text } from "ui-library/text/Text"
-
-const company_size_options = ["1-10", "11-50", "51-250", "251-1000", "1001+"]
+import { ChevronLeft } from "lucide-react"
+import { company } from "data/company"
 
 export const SignUp = () => {
   return (
@@ -38,7 +37,7 @@ export const SignUp = () => {
         <NumberInput placeholder="Year founded" name="company-year-founded" />
         <TextInput placeholder="Website URL" name="company-website" />
         <Select
-          options={company_size_options}
+          options={company.size_options}
           magic_word="people"
           name="company-people"
         />

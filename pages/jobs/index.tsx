@@ -1,8 +1,6 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { AppLayout } from "layouts/AppLayout"
 import { Details } from "components/talent/job/Details"
 import { List } from "components/talent/job/List"
-import { AppLayout } from "layouts/AppLayout"
-import { useEffect } from "react"
 import { TalentJobContextProvider } from "state/talent_job/TalentJobContext"
 import { TalentJobsContextProvider } from "state/talent_jobs/TalentJobsContext"
 

@@ -1,7 +1,6 @@
 import Head from "next/head"
-import { LayoutProps } from "./Layout.types"
-import { useRouter } from "next/router"
 import { Navbar } from "./navbar/Navbar"
+import { LayoutProps } from "./Layout.types"
 
 export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
