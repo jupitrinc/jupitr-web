@@ -20,7 +20,7 @@ export const MenuBar: React.FC<MenuBarProps> = (menu) => {
       ))}
 
       {remaining_items > 0 && (
-        <Dropdown items={menu.items.slice(menu.max_number)} type="more" />
+        <Dropdown options={menu.items.slice(menu.max_number)} type="more" />
       )}
     </div>
   )

@@ -6,12 +6,13 @@ import {
   ICompanyJobContext,
   CompanyJobState,
 } from "./companyJob.types"
+import { sample_job } from "state/company_jobs/CompanyJobsContext"
 
 export const CompanyJobContext = createContext({} as ICompanyJobContext)
 
 const CompanyJob = () => {
   const initialState: CompanyJobState = {
-    data: {} as ICompanyJob,
+    data: sample_job as ICompanyJob,
     loading: false,
     error: false,
   }

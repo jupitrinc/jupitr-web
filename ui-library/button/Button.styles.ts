@@ -14,7 +14,7 @@ export const buttonStyles = {
   },
   color: {
     [`${ThemeColorEnum.standard}`]:
-      "text-gray-600 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-100 hover:bg-gray-100 active:bg-gray-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-100 disabled:active:bg-gray-100",
+      "text-gray-600 ring-gray-900/10 hover:ring-gray-900/20 bg-gray-200 hover:bg-gray-200 active:bg-gray-300 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-gray-500 disabled:hover:bg-gray-100 disabled:active:bg-gray-100",
     [`${ThemeColorEnum.important}`]:
       "text-blue-500 ring-blue-900/10 hover:ring-blue-900/20 bg-blue-100 hover:bg-blue-100 active:bg-blue-200 disabled:cursor-not-allowed disabled:text-opacity-50 disabled:hover:text-opacity-50 disabled:hover:text-blue-500 disabled:hover:bg-blue-100 disabled:active:bg-blue-100",
     [`${ThemeColorEnum.dangerous}`]:

@@ -20,10 +20,11 @@ const useAuthService = () => {
     })
   }
 
-  const signInWithGoogle = async (email: string) => {
-    return await supabaseClientComponent.auth.signInWithOtp({
+  const signInWithGoogle = async () => {
+    return await supabaseClientComponent.auth.signInWithOAuth({
       provider: "google",
       options: {
+        redirectTo: `${location.origin}/login`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",

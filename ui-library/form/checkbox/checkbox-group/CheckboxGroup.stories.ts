@@ -36,6 +36,6 @@ type Story = StoryObj<typeof CheckboxGroup>
 
 export const group: Story = {
   args: {
-    items: items,
+    options: items,
   },
 }

@@ -28,7 +28,7 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
 
       {dropdown.type === "more" && (
         <Menu.Button
-          className={`${buttonStyles.icon_button} ${buttonStyles.color.standard} ${buttonStyles.rounded.full}`}
+          className={`${buttonStyles.icon_button} ${buttonStyles.color.standard} ${buttonStyles.variant.text} ${buttonStyles.rounded.full}`}
         >
           <MoreVertical className="h-5 w-5" />
         </Menu.Button>
@@ -43,18 +43,18 @@ export const Dropdown: React.FC<DropdownProps> = (dropdown) => {
         leaveFrom={styles.transition.leaveFrom}
         leaveTo={styles.transition.leaveTo}
       >
-        <Menu.Items className={styles.menu_item}>
-          {dropdown.items.map((item) => (
-            <Menu.Item key={item.name}>
+        <Menu.Items className={styles.menu_option}>
+          {dropdown.options.map((option) => (
+            <Menu.Item key={option.name}>
               {({ active }) => (
                 <button
-                  onClick={item.onClick}
+                  onClick={option.onClick}
                   className={clsx(
-                    styles.menu_item_link,
-                    active && styles.menu_item_active
+                    styles.menu_option_link,
+                    active && styles.menu_option_active
                   )}
                 >
-                  {item.name}
+                  {option.name}
                 </button>
               )}
             </Menu.Item>

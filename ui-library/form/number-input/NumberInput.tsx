@@ -20,6 +20,7 @@ export const NumberInput: React.FC<NumberInputProps> = (input) => {
         autoFocus={input.autoFocus}
         onBlur={input.onBlur}
         className={styles.input}
+        defaultValue={input.defaultValue}
       />
     </div>
   )

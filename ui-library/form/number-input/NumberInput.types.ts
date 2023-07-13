@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from "react"
 
 export interface NumberInputProps {
-  value?: string
+  value?: number
   label?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   name?: string
@@ -10,4 +10,5 @@ export interface NumberInputProps {
   disabled?: boolean
   autoFocus?: boolean
   onBlur?: ChangeEventHandler<HTMLInputElement>
+  defaultValue?: number
 }

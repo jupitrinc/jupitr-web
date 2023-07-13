@@ -14,7 +14,7 @@ export const SignIn = () => {
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
-  const { signInWithOtp } = useAuthService()
+  const { signInWithOtp, signInWithGoogle } = useAuthService()
   const router = useRouter()
 
   useEffect(() => {
@@ -25,6 +25,9 @@ export const SignIn = () => {
     }
   }, [])
 
+  // hook to check if there is a session created
+  // social auth sessions like google are created client side,
+  // thats why we need to subscribe to this types of events.
   useEffect(() => {
     const {
       data: { subscription },
@@ -41,6 +44,10 @@ export const SignIn = () => {
     await signInWithOtp(email)
     setLoading(false)
     router.refresh()
+  }
+
+  const loginWithGoogle = async () => {
+    await signInWithGoogle()
   }
 
   const toggleNotification = () => {
@@ -85,9 +92,7 @@ export const SignIn = () => {
         color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
-        onClick={() => {
-          return
-        }}
+        onClick={loginWithGoogle}
         size="lg"
         variant="contained"
       />

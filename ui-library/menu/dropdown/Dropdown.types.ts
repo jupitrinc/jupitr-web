@@ -1,11 +1,11 @@
 export interface DropdownProps {
   type: "avatar" | "label" | "more"
-  items: Array<item>
+  options: Array<option>
   image_url?: string
   label?: string
 }
 
-type item = {
+type option = {
   name: string
   onClick: (event: React.MouseEvent) => void
 }
