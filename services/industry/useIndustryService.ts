@@ -14,8 +14,20 @@ const useIndustryService = () => {
       console.error("failed to load industry service: ", error)
     }
   }
+  const searchIndustry = async (name: string) => {
+    const { data: industry, error } = await supabase
+      .from("industry")
+      .select("*")
+      .ilike("name", `%${name}%`)
 
-  return { getAllIndustries }
+    if (industry) {
+      return industry
+    }
+    if (error) {
+      console.error("failed to load search for industry: ", error)
+    }
+  }
+  return { getAllIndustries, searchIndustry }
 }
 
 export default useIndustryService
