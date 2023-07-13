@@ -13,16 +13,16 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { job } from "data/job"
 import { SectionHeader } from "./Sections"
 import { Textarea } from "ui-library/form/textarea/Textarea"
-import { Toggle } from "ui-library/form/toggle/Toggle"
+import { Card } from "ui-library/card/Card"
 
 export const Details = () => {
   const { company_job } = useCompanyJobState()
   return (
-    <div className="flex flex-col gap-10 bg-white rounded-lg p-5 md:p-10">
+    <Card type="section">
       <Salary salary={company_job.salary} />
       <WorkModel models={company_job.work_model} />
       <Location location={company_job.location} />
-    </div>
+    </Card>
   )
 }
 
@@ -120,7 +120,7 @@ const Location = ({ location }: { location: ICompanyJob["location"] }) => {
 
 export const TalentResponse = () => {
   return (
-    <div className="flex flex-col gap-5 bg-white rounded-lg p-5 md:p-10">
+    <Card type="section">
       <SectionHeader title="Application" />
       <Textarea
         placeholder="E.g Why are you the best person for this job?"
@@ -132,6 +132,6 @@ export const TalentResponse = () => {
         label="Video duration"
         magic_word="seconds"
       />
-    </div>
+    </Card>
   )
 }
