@@ -31,7 +31,7 @@ export const CompanyJobsContextProvider: React.FC<any> = ({ children }) => {
   )
 }
 
-const sample_job = {
+export const sample_job = {
   id: "1",
   title: "Senior frontend developer",
   salary: 110000,
@@ -50,6 +50,18 @@ const sample_job = {
       },
 
       video_url: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
+    },
+    {
+      id: "124",
+      job_id: "123",
+      company_member_profile: {
+        user_id: "123",
+        name: "Ismael",
+        job_title: "Software engineer",
+      },
+
+      video_url:
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     },
   ],
   technical_test: [

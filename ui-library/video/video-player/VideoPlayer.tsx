@@ -59,7 +59,7 @@ const PlayButton = ({ playing }: { playing: boolean }) => {
     >
       <Button
         icon={
-          playing ? <Pause className="h-9 w-9" /> : <Play className="h-9 w-9" />
+          playing ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7" />
         }
       />
     </div>

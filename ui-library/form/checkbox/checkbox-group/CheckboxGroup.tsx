@@ -7,9 +7,9 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = (checkboxGroup) => {
   const styles = checkboxGroupStyles
 
   return (
-    <ul className={styles.list}>
-      {checkboxGroup.items.map((item) => (
-        <li key={item.label}>
+    <fieldset className={styles.list}>
+      {checkboxGroup.options.map((item) => (
+        <div>
           <Checkbox
             value={item.value}
             label={item.label}
@@ -17,8 +17,8 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = (checkboxGroup) => {
             checked={item.checked}
             onChange={item.onChange}
           />
-        </li>
+        </div>
       ))}
-    </ul>
+    </fieldset>
   )
 }

@@ -1,12 +1,12 @@
-import { Details } from "components/company/job/Details"
 import { AppLayout } from "layouts/AppLayout"
 import { CompanyJobContextProvider } from "state/company_job/CompanyJobContext"
+import { Sections } from "components/company/job/Sections"
 
-export default function Home() {
+export default function CompanyJob() {
   return (
     <AppLayout>
       <CompanyJobContextProvider>
-        <Details />
+        <Sections />
       </CompanyJobContextProvider>
     </AppLayout>
   )

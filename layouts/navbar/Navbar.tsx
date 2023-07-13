@@ -59,7 +59,7 @@ const TalentMenu = () => {
       <Dropdown
         type="avatar"
         image_url={user.avatar}
-        items={[
+        options={[
           {
             name: "Profile",
             onClick: () => router.push("/profile"),
@@ -89,7 +89,7 @@ const CompanyMenu = () => {
       <Dropdown
         type="avatar"
         image_url={user.avatar}
-        items={[
+        options={[
           {
             name: "Profile",
             onClick: () => router.push("/c/profile"),

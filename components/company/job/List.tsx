@@ -41,7 +41,7 @@ const ListGroup = ({ title, jobs }: { title: string; jobs: ICompanyJob[] }) => {
   return (
     <div
       className={`flex flex-col gap-5 p-5 relative ${
-        highlight && "bg-gray-100 rounded-lg"
+        highlight && "bg-white rounded-lg"
       }`}
     >
       <Text as="h2" size="sm" align="left">
@@ -70,7 +70,7 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
     <Card type="linked" onClick={onClick}>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row justify-between">
-          <Text as="h2" size="xl">
+          <Text as="span" size="xl">
             {job.title}
           </Text>
         </div>
