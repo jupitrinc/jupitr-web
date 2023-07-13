@@ -19,15 +19,15 @@ export const List = () => {
   })
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-3 gap-5 items-center">
+    <div className="flex flex-col bg-white rounded-lg h-screen">
+      <div className="grid grid-cols-3 gap-5 items-center p-5">
         <Divider />
         <Text as="p" align="center">{`${talent_jobs.length} ${
           talent_jobs.length > 1 ? "jobs" : "job"
         }`}</Text>
         <Divider />
       </div>
-      <div className="overflow-y-scroll h-screen space-y-5 p-1">
+      <div className="overflow-y-scroll space-y-5 p-5">
         {talent_jobs.map((job: ITalentJob) => (
           <JobCard key={job.id} job={job} />
         ))}

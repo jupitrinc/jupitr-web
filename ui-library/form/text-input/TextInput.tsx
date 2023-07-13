@@ -21,6 +21,7 @@ export const TextInput: React.FC<TextInputProps> = (textInput) => {
         onBlur={textInput.onBlur}
         maxLength={textInput.maxLength}
         className={textInput.light ? styles.lightInput : styles.input}
+        defaultValue={textInput.defaultValue}
       />
     </div>
   )

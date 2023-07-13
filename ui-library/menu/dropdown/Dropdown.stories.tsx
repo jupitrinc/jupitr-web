@@ -20,7 +20,7 @@ const items = [
 export const label: Story = {
   args: {
     label: "Profile",
-    items: items,
+    options: items,
     type: "label",
   },
 }
@@ -28,7 +28,7 @@ export const label: Story = {
 export const avatar: Story = {
   args: {
     label: "Members",
-    items: items,
+    options: items,
     type: "avatar",
     image_url: sampleData.image[3],
   },
@@ -37,6 +37,6 @@ export const avatar: Story = {
 export const more: Story = {
   args: {
     type: "more",
-    items: items,
+    options: items,
   },
 }

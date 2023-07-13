@@ -1,37 +1,37 @@
 import { useState } from "react"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { Button } from "ui-library/button/Button"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/card/Card"
-import { SectionHeader } from "./Sections"
 import { Plus, X } from "lucide-react"
-import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
-import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
+import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { ISkill } from "state/company_job/companyJob.types"
+import { SectionHeader } from "./Sections"
 import { job } from "data/job"
 
 export const Skills = () => {
-  const { talent_profile } = useTalentProfileState()
-  const skills = talent_profile.skills
+  const { company_job } = useCompanyJobState()
+  const skills = company_job.skills
 
   const [newSkill, setNewSkill] = useState<string>("")
-  const { addSkill } = useTalentProfileAction()
+  //const { addSkill } = useTalentProfileAction()
 
   const handleAddSkill = (e) => {
     e.preventDefault()
-    addSkill({ id: "444", name: newSkill, level: 1 })
+    //addSkill({ id: "444", name: newSkill, level: 1 })
     setNewSkill("")
   }
 
   return (
-    <div className="flex flex-col gap-5 bg-white rounded-lg p-5 sm:p-10">
+    <div className="flex flex-col gap-5 bg-white rounded-lg p-5 md:p-10">
       <SectionHeader title="Skills" />
       <LightForm
         placeHolder="Search ..."
         onChange={(e) => setNewSkill(e.target.value)}
         value={newSkill}
-        onSubmit={handleAddSkill}
+        // onSubmit={handleAddSkill}
         onClick={handleAddSkill}
         icon={<Plus />}
       />
