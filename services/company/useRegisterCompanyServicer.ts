@@ -1,4 +1,4 @@
-import { supabase, supabaseClientComponent } from "services/_supabase/client"
+import { supabase } from "services/_supabase/client"
 
 const useRegisterCompanyServicer = () => {
   const registerCompany = async (payload) => {
