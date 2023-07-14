@@ -37,7 +37,7 @@ export const Skills = () => {
           icon={<Plus className="h-5 w-5" />}
         />
       </div>
-
+      
       <div className="grid grid-cols-1 gap-5">
         {skills.map((skill) => (
           <SkillCard skill={skill} key={skill.id} />
