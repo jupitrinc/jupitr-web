@@ -6,15 +6,17 @@ import { Text } from "ui-library/text/Text"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { Divider } from "ui-library/divider/Divider"
 import { Card } from "ui-library/card/Card"
-import { Plus, Send } from "lucide-react"
+import { Plus, Users2 } from "lucide-react"
 
 export const Videos = () => {
   const { company_job } = useCompanyJobState()
   const videos = company_job.videos
   return (
     <Card type="section">
-      <SectionHeader title="Videos" />
-      <SectionActions />
+      <div className="flex flex-col gap-5">
+        <SectionHeader title="Videos" />
+        <ActionBar />
+      </div>
 
       {videos.map((video) => (
         <VideoCard key={video.id} video={video} />
@@ -23,12 +25,12 @@ export const Videos = () => {
   )
 }
 
-const SectionActions = () => {
+const ActionBar = () => {
   return (
     <div className="grid grid-cols-2 gap-5">
       <Card type="linked">
         <div className="flex flex-col gap-1 justify-center items-center">
-          <Plus className="h-6 w-6 text-gray-600" />
+          <Plus className="h-5 w-5 text-gray-600" />
           <Text as="span" size="base">
             Add video
           </Text>
@@ -37,7 +39,7 @@ const SectionActions = () => {
 
       <Card type="linked">
         <div className="flex flex-col gap-1 justify-center items-center">
-          <Send className="h-5 w-5 text-gray-600" />
+          <Users2 className="h-5 w-5 text-gray-600" />
           <Text as="span" size="base">
             Invite team
           </Text>

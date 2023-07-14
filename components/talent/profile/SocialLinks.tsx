@@ -26,8 +26,8 @@ export const SocialLinks = () => {
 
 SocialLinks.displayName = "SocialLinks"
 
-const SocialIcon = ({ link }) => {
-  const styles = "w-5 h-5 align-middle"
+export const SocialIcon = ({ link }) => {
+  const styles = "w-5 h-5 align-middle text-gray-600"
   if (link.includes("github")) {
     return <Github className={styles} />
   } else if (link.includes("linkedin")) {

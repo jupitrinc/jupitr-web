@@ -15,9 +15,15 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = (clipboard) => {
   return (
     <Button
       onClick={copyToClipboard}
-      variant="contained"
-      size="base"
-      icon={isCopied ? <Check /> : <Copy />}
+      variant="text"
+      size="sm"
+      icon={
+        isCopied ? (
+          <Check className="h-5 w-5 text-gray-600" />
+        ) : (
+          <Copy className="h-5 w-5 text-gray-600" />
+        )
+      }
       disabled={!clipboard.value}
     />
   )

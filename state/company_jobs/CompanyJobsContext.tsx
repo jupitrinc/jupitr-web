@@ -31,6 +31,27 @@ export const CompanyJobsContextProvider: React.FC<any> = ({ children }) => {
   )
 }
 
+const sample_application = {
+  id: "1",
+  job_id: "1",
+  skills: [
+    { id: "1", name: "Javascript", level: 3 },
+    { id: "2", name: "React", level: 2 },
+    { id: "1", name: "Frontend tooling", level: 1 },
+    { id: "4", name: "Javascript", level: 3 },
+    { id: "5", name: "React", level: 2 },
+    { id: "6", name: "Frontend tooling", level: 1 },
+  ],
+  video_url: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
+  talent_profile: {
+    name: "Ava Adam",
+    email: "ava@adam.com",
+    social_links: ["github.com", "linkedin.com", "website.com"],
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80",
+  },
+}
+
 export const sample_job = {
   id: "1",
   title: "Senior frontend developer",
@@ -77,8 +98,8 @@ export const sample_job = {
     { id: "5", name: "React", level: 2 },
     { id: "6", name: "Frontend tooling", level: 1 },
   ],
-  company_response_video: {
-    length: 20,
+  application_video: {
+    duration: 20,
     description: "Why are you a good match for this role?",
   },
   status: "open",
@@ -93,6 +114,13 @@ export const sample_job = {
     industry: ["Social media", "AI", "Metaverse"],
   },
   date_posted: "2023-06-11 18:13:59.232382+00",
+  applications: [
+    sample_application,
+    { ...sample_application, id: "2" },
+    { ...sample_application, id: "3" },
+    { ...sample_application, id: "4" },
+    { ...sample_application, id: "5" },
+  ],
 }
 
 const test_data = [

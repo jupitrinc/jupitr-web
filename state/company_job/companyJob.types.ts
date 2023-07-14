@@ -29,7 +29,7 @@ export interface ICompanyJob {
   }[]
   technical_test: string[]
   skills: { id: string; name: string; level: number }[]
-  company_response_video: { length: number; description: string }
+  application_video: { duration: number; description: string }
   status: "open" | "closed" | "draft"
   applications?: IJobApplication[]
 
@@ -37,12 +37,17 @@ export interface ICompanyJob {
   date_posted: any
 }
 
-interface IJobApplication {
-  id?: string
+export interface IJobApplication {
+  id: string
   job_id: string
-  user_id: string
-  skills: ISkill
+  skills: ISkill[]
   video_url: string
+  talent_profile: {
+    name: string
+    email: string
+    social_links: string[]
+    avatar: string
+  }
 }
 
 export type ISkill = {

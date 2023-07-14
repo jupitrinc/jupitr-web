@@ -63,7 +63,7 @@ export const Salary = ({ salary }: { salary: ICompanyJob["salary"] }) => {
         <div className="flex flex-row gap-3 items-center -mt-3">
           <Text as="span" size="lg">{`£${formatNumber(salary)}/annum`}</Text>
           <Button
-            icon={<Edit className="h-5 w-5" />}
+            icon={<Edit className="h-4 w-4" />}
             onClick={() => setEditing(true)}
             variant="text"
           />

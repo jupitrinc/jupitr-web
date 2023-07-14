@@ -10,12 +10,17 @@ import { job } from "data/job"
 export const Sections: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <Card type="section">
-        <Intro />
-        <SocialLinks />
-        <Select options={job.locations} label="Location" />
-      </Card>
-      <Skills />
+      <div>
+        <Card type="section">
+          <Intro />
+          <SocialLinks />
+          <Select options={job.locations} label="Location" />
+        </Card>
+      </div>
+
+      <div>
+        <Skills />
+      </div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { Card } from "ui-library/card/Card"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { Button } from "ui-library/button/Button"
 import { useRouter } from "next/router"
+import { Edit } from "lucide-react"
 
 export const List = () => {
   const {
@@ -61,18 +62,32 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
   const router = useRouter()
   const { setJob } = useCompanyJobAction()
 
-  const onClick = () => {
+  const viewJob = (e) => {
+    e.stopPropagation()
     setJob(job)
     router.push(`/c/jobs/${job.id}`)
   }
 
+  const viewJobApplications = (e) => {
+    e.stopPropagation()
+    router.push(`/c/jobs/${job.id}/apps`)
+  }
+
   return (
-    <Card type="linked" onClick={onClick}>
-      <div className="flex flex-col gap-2">
+    <Card type="linked" onClick={viewJobApplications}>
+      <div className="flex flex-col gap-2 group">
         <div className="flex flex-row justify-between">
           <Text as="span" size="xl">
             {job.title}
           </Text>
+
+          <div className="opacity-0 group-hover:opacity-100 fade-in-out duration-100">
+            <Button
+              icon={<Edit className="h-5 w-5" />}
+              variant="text"
+              onClick={viewJob}
+            />
+          </div>
         </div>
 
         <Text as="span" size="base">
@@ -86,7 +101,7 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
 const NewJob = () => {
   return (
     <div className="flex justify-end">
-      <Button label="New job" size="base" color="special" />
+      <Button label="New job" size="sm" color="special" />
     </div>
   )
 }
