@@ -5,7 +5,7 @@ import { Pill } from "ui-library/pill/Pill"
 import { SuggesterProps } from "./Suggester.types"
 import { suggesterStyles } from "./Suggester.styles"
 
-export const Suggester: React.FC<SuggesterProps> = ({ data }) => {
+export const Suggester: React.FC<SuggesterProps> = ({ options }) => {
   const styles = suggesterStyles
   const [list, setList] = useState<{ id: string; name: string }[]>([])
   const [selected, setSelected] = useState<
@@ -30,8 +30,8 @@ export const Suggester: React.FC<SuggesterProps> = ({ data }) => {
 
   const filteredValues =
     query === ""
-      ? data
-      : data.filter((value) =>
+      ? options
+      : options.filter((value) =>
           value.name
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -43,7 +43,7 @@ export const Suggester: React.FC<SuggesterProps> = ({ data }) => {
       <Combobox
         value={selected?.name ?? ""}
         onChange={(value) => {
-          const selectedValue = data.find((item) => item.name === value)
+          const selectedValue = options.find((item) => item.name === value)
           setSelected(selectedValue)
         }}
       >

@@ -4,5 +4,5 @@ interface SuggesterDataItem {
 }
 
 export interface SuggesterProps {
-  data: SuggesterDataItem[]
+  options: SuggesterDataItem[]
 }

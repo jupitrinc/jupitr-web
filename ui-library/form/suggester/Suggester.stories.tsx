@@ -21,6 +21,6 @@ const data = [
 
 export const suggester: Story = {
   args: {
-    data: data,
+    options: data,
   },
 }
