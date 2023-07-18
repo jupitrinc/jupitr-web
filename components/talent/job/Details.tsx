@@ -134,7 +134,7 @@ export const Details = () => {
   }
 }
 
-const SkillCard = ({ skill }: { skill: ISkill }) => {
+export const SkillCard = ({ skill }: { skill: ISkill }) => {
   const skillLevel = (level: number) => {
     switch (level) {
       case 1:

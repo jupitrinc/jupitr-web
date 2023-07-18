@@ -62,3 +62,10 @@ export const Static: Story = {
     type: "static",
   },
 }
+
+export const Section: Story = {
+  args: {
+    children: <SampleComponent />,
+    type: "section",
+  },
+}

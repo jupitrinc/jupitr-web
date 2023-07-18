@@ -1,12 +1,12 @@
 import { VariantType } from "ui-library/_theme/Theme.types"
 
 export interface MenuBarProps {
-  items: Array<item>
+  options: Array<option>
   max_number: number
   variant?: VariantType
 }
 
-type item = {
+type option = {
   name: string
   onClick: (event: React.MouseEvent) => void
 }

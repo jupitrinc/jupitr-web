@@ -26,15 +26,18 @@ export const Skills = () => {
 
   return (
     <Card type="section">
-      <SectionHeader title="Skills" />
-      <LightForm
-        placeHolder="Search ..."
-        onChange={(e) => setNewSkill(e.target.value)}
-        value={newSkill}
-        onSubmit={handleAddSkill}
-        onClick={handleAddSkill}
-        icon={<Plus />}
-      />
+      <div className="flex flex-col gap-5">
+        <SectionHeader title="Skills" />
+        <LightForm
+          placeHolder="Search ..."
+          onChange={(e) => setNewSkill(e.target.value)}
+          value={newSkill}
+          onSubmit={handleAddSkill}
+          onClick={handleAddSkill}
+          icon={<Plus className="h-5 w-5" />}
+        />
+      </div>
+        
       <div className="grid grid-cols-1 gap-5">
         {skills.map((skill) => (
           <SkillCard skill={skill} key={skill.id} />

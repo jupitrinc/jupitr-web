@@ -79,14 +79,14 @@ export const Application: React.FC<application> = (application) => {
             {step === 2 && (
               <div className="flex flex-col gap-5 mt-10">
                 <Text as="span" size="base" align="left">
-                  {application.job.talent_response_video.description}
+                  {application.job.application_video.description}
                 </Text>
 
                 <div className="flex flex-col flex-wrap gap-5">
                   {/* <VideoRecorder
                     duration={
-                      application.job.talent_response_video
-                        .length as VideoRecorderProps["duration"]
+                      application.job.application_video
+                        .duration as VideoRecorderProps["duration"]
                     }
                   /> */}
                 </div>

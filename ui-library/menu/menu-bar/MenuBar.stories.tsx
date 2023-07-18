@@ -10,7 +10,7 @@ const meta: Meta<typeof MenuBar> = {
 export default meta
 type Story = StoryObj<typeof MenuBar>
 
-const items = [
+const options = [
   { name: "Preview", onClick: () => console.log("clicked") },
   { name: "Publish", onClick: () => console.log("clicked") },
   { name: "Collaborate", onClick: () => console.log("clicked") },
@@ -20,20 +20,20 @@ const items = [
 
 export const menu: Story = {
   args: {
-    items: items,
+    options: options,
   },
 }
 
 export const more: Story = {
   args: {
-    items: items,
+    options: options,
     max_number: 3,
   },
 }
 
 export const outlined: Story = {
   args: {
-    items: items,
+    options: options,
     max_number: 3,
     variant: "outlined",
   },

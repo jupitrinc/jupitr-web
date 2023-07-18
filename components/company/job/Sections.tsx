@@ -5,8 +5,9 @@ import { Details, TalentResponse } from "./Details"
 import { Skills } from "./Skills"
 import { Videos } from "./Videos"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
+import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 import { Button } from "ui-library/button/Button"
-import { Eye } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export const Sections = () => {
   const { company_job } = useCompanyJobState()
@@ -46,18 +47,16 @@ const JobTitle = ({ title }: { title: string }) => {
 }
 
 const Toolbar = () => {
+  const options = [
+    { name: "Preview", onClick: () => alert("") },
+    { name: "Share", onClick: () => alert("") },
+    { name: "Delete", onClick: () => alert("") },
+  ]
+
   return (
-    <div className="basis-2/3 flex justify-end items-center">
-      <div className="flex flex-row gap-3 items-center align-middle">
-        <Button
-          label="Preview"
-          variant="text"
-          icon={<Eye className="h-5 w-5" />}
-        />
-        <div className="w-24">
-          <Button label="Publish" color="special" full_width />
-        </div>
-      </div>
+    <div className="basis-2/3 flex flex-row gap-2 items-center justify-end">
+      <Button label="Publish" variant="contained" />
+      <MenuBar options={options} max_number={2} variant="text" />
     </div>
   )
 }

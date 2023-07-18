@@ -33,7 +33,7 @@ export interface ITalentJob {
   }[]
   technical_test: string[]
   skills: ISkill[]
-  talent_response_video: { length: number; description: string }
+  application_video: { duration: number; description: string }
   active: boolean
   company: ICompanyProfile
 
