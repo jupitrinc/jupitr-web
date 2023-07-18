@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
@@ -11,8 +11,20 @@ import { Textarea } from "ui-library/form/textarea/Textarea"
 import { Text } from "ui-library/text/Text"
 import { ChevronLeft } from "lucide-react"
 import { company } from "data/company"
+import { Multiselect } from "ui-library/form/multiselect/Multiselect"
+import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
+import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
 
 export const SignUp = () => {
+  const { industries } = useCompanyProfileState()
+  const { getIndustries } = useCompanyProfileAction()
+
+  useEffect(() => {
+    const getData = () => {
+      getIndustries()
+    }
+    getData()
+  }, [])
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
       <div className="mb-10 flex justify-between">
@@ -41,7 +53,7 @@ export const SignUp = () => {
           magic_word="people"
           name="company-people"
         />
-        <TextInput placeholder="Industry" />
+        <Multiselect options={industries} />
         <Textarea
           name="company-mission"
           maxLength={250}

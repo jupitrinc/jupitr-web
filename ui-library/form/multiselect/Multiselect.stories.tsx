@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Suggester } from "./Suggester"
+import { Multiselect } from "./Multiselect"
 
-const meta: Meta<typeof Suggester> = {
-  title: "Suggester",
-  component: Suggester,
+const meta: Meta<typeof Multiselect> = {
+  title: "Form/Multiselect",
+  component: Multiselect,
   tags: ["autodocs"],
 }
 
 export default meta
-type Story = StoryObj<typeof Suggester>
+type Story = StoryObj<typeof Multiselect>
 
 const data = [
   { id: "1", name: "Wade Cooper" },
@@ -19,7 +19,7 @@ const data = [
   { id: "6", name: "Hellen Schmidt" },
 ]
 
-export const suggester: Story = {
+export const multiselect: Story = {
   args: {
     options: data,
   },

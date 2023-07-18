@@ -12,6 +12,7 @@ export const CompanyProfileContext = createContext({} as ICompanyProfileContext)
 const CompanyProfile = () => {
   const initialState: CompanyProfileState = {
     data: test_data as ICompanyProfile,
+    industries: [] as { id: string; name: string }[],
     loading: false,
     error: false,
   }
@@ -31,4 +32,13 @@ export const CompanyProfileContextProvider: React.FC<any> = ({ children }) => {
   )
 }
 
-const test_data = {}
+const test_data = {
+  id: "",
+  name: "",
+  logo: "",
+  year_founded: "",
+  website: "",
+  size: "",
+  mission: "",
+  industry: [],
+}
