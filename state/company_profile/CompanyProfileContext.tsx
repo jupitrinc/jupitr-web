@@ -5,6 +5,7 @@ import {
   ICompanyProfile,
   ICompanyProfileContext,
   CompanyProfileState,
+  IIndustry,
 } from "./companyProfile.types"
 
 export const CompanyProfileContext = createContext({} as ICompanyProfileContext)
@@ -12,6 +13,7 @@ export const CompanyProfileContext = createContext({} as ICompanyProfileContext)
 const CompanyProfile = () => {
   const initialState: CompanyProfileState = {
     data: test_data as ICompanyProfile,
+    industries: [] as IIndustry[],
     loading: false,
     error: false,
   }
@@ -31,4 +33,13 @@ export const CompanyProfileContextProvider: React.FC<any> = ({ children }) => {
   )
 }
 
-const test_data = {}
+const test_data = {
+  id: "",
+  name: "",
+  logo: "",
+  year_founded: "",
+  website: "",
+  size: "",
+  mission: "",
+  industry: [],
+}

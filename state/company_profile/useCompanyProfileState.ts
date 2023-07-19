@@ -6,6 +6,7 @@ export const useCompanyProfileState = () => {
 
   return {
     company_profile: state.data,
+    industries: state.industries,
     loading: state.loading,
     error: state.error,
   }
