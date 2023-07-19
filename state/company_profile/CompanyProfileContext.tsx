@@ -5,6 +5,7 @@ import {
   ICompanyProfile,
   ICompanyProfileContext,
   CompanyProfileState,
+  IIndustry,
 } from "./companyProfile.types"
 
 export const CompanyProfileContext = createContext({} as ICompanyProfileContext)
@@ -12,7 +13,7 @@ export const CompanyProfileContext = createContext({} as ICompanyProfileContext)
 const CompanyProfile = () => {
   const initialState: CompanyProfileState = {
     data: test_data as ICompanyProfile,
-    industries: [] as { id: string; name: string }[],
+    industries: [] as IIndustry[],
     loading: false,
     error: false,
   }

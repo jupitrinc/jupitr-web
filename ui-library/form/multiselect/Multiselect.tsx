@@ -6,16 +6,15 @@ import { MultiselectProps } from "./Multiselect.types"
 import { multiselectStyles } from "./Multiselect.styles"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
+import { IIndustry } from "state/company_profile/companyProfile.types"
 
-export const Multiselect: React.FC<MultiselectProps> = ({ options }) => {
+export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const styles = multiselectStyles
   const { addIndustry, removeIndustry } = useCompanyProfileAction()
   const {
     company_profile: { industry },
   } = useCompanyProfileState()
-  const [selected, setSelected] = useState<
-    { id: string; name: string } | undefined
-  >(undefined)
+  const [selected, setSelected] = useState<IIndustry | undefined>(undefined)
   const [query, setQuery] = useState("")
 
   useEffect(() => {
@@ -36,8 +35,8 @@ export const Multiselect: React.FC<MultiselectProps> = ({ options }) => {
 
   const filteredValues =
     query === ""
-      ? options
-      : options.filter((value) =>
+      ? multiselect.options
+      : multiselect.options.filter((value) =>
           value.name
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -45,11 +44,13 @@ export const Multiselect: React.FC<MultiselectProps> = ({ options }) => {
         )
 
   return (
-    <div>
+    <>
       <Combobox
         value={selected?.name ?? ""}
         onChange={(value) => {
-          const selectedValue = options.find((item) => item.name === value)
+          const selectedValue = multiselect.options.find(
+            (item) => item.name === value
+          )
           setSelected(selectedValue)
         }}
       >
@@ -65,7 +66,7 @@ export const Multiselect: React.FC<MultiselectProps> = ({ options }) => {
               <ChevronDown className="text-gray-500 w-4 h-4" />
             </Combobox.Button>
           </div>
-          {options && options.length && (
+          {multiselect.options && multiselect.options.length && (
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"
@@ -105,6 +106,6 @@ export const Multiselect: React.FC<MultiselectProps> = ({ options }) => {
             />
           ))}
       </div>
-    </div>
+    </>
   )
 }

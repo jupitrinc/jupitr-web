@@ -1,8 +1,8 @@
-interface MultiselectDataItem {
+type option = {
   id: string
   name: string
 }
 
 export interface MultiselectProps {
-  options: MultiselectDataItem[]
+  options: option[]
 }

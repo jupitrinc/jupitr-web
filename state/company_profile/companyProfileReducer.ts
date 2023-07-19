@@ -3,6 +3,7 @@ import {
   CompanyProfileActionEnum,
   CompanyProfileAction,
   CompanyProfileState,
+  IIndustry,
 } from "./companyProfile.types"
 
 export const companyProfileReducer = (
@@ -52,17 +53,11 @@ export const companyProfileReducer = (
         ...state,
         loading: false,
         error: false,
-        industries: action.payload as {
-          id: string
-          name: string
-        }[],
+        industries: action.payload as IIndustry[],
       }
 
     case CompanyProfileActionEnum.ADD_INDUSTRY:
-      const add_industry_payload = action.payload as {
-        id: string
-        name: string
-      }
+      const add_industry_payload = action.payload as IIndustry
       return {
         ...state,
         data: {
@@ -72,10 +67,7 @@ export const companyProfileReducer = (
       }
 
     case CompanyProfileActionEnum.REMOVE_INDUSTRY:
-      const remove_industry_payload = action.payload as {
-        id: string
-        name: string
-      }
+      const remove_industry_payload = action.payload as IIndustry
       return {
         ...state,
         data: {

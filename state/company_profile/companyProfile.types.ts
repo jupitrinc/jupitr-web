@@ -5,10 +5,12 @@ export interface ICompanyProfileContext {
 
 export type CompanyProfileState = {
   data: ICompanyProfile
-  industries: { id: string; name: string }[]
+  industries: IIndustry[]
   loading: boolean
   error: boolean
 }
+
+export type IIndustry = { id: string; name: string }
 
 export interface ICompanyProfile {
   id: string
@@ -18,7 +20,7 @@ export interface ICompanyProfile {
   website: string
   size: string
   mission: string
-  industry: { id: string; name: string }[]
+  industry: IIndustry[]
 }
 
 export type CompanyProfileAction = {
@@ -32,10 +34,7 @@ export type CompanyProfileAction = {
     | CompanyProfileActionEnum.ADD_INDUSTRY
     | CompanyProfileActionEnum.REMOVE_INDUSTRY
 
-  payload?:
-    | ICompanyProfile
-    | { id: string; name: string }
-    | { id: string; name: string }[]
+  payload?: ICompanyProfile | IIndustry | IIndustry[]
 }
 
 export enum CompanyProfileActionEnum {

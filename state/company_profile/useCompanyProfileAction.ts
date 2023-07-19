@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { CompanyProfileActionEnum } from "./companyProfile.types"
+import { CompanyProfileActionEnum, IIndustry } from "./companyProfile.types"
 import { CompanyProfileContext } from "./CompanyProfileContext"
 import useIndustryService from "../../services/industry/useIndustryService"
 
@@ -61,7 +61,7 @@ export function useCompanyProfileAction() {
     })
   }
 
-  const addIndustry = (industry: { id: string; name: string }) => {
+  const addIndustry = (industry: IIndustry) => {
     if (!industry.name.trim()) return
 
     dispatch({
@@ -70,7 +70,7 @@ export function useCompanyProfileAction() {
     })
   }
 
-  const removeIndustry = (industry: { id: string; name: string }) => {
+  const removeIndustry = (industry: IIndustry) => {
     if (!industry.name.trim()) return
 
     dispatch({
