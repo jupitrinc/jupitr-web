@@ -38,7 +38,7 @@ export const Navbar = () => {
 const Brand = ({ link }: { link: string }) => {
   return (
     <Link href={link}>
-      <Text as="h1" size="xl">
+      <Text as="h1" size="base" bold>
         jupitr
       </Text>
     </Link>
@@ -63,10 +63,6 @@ const TalentMenu = () => {
           {
             name: "Profile",
             onClick: () => router.push("/profile"),
-          },
-          {
-            name: "Account settings",
-            onClick: () => router.push("/account/settings"),
           },
           { name: "Sign out", onClick: signOut },
         ]}
@@ -93,10 +89,6 @@ const CompanyMenu = () => {
           {
             name: "Profile",
             onClick: () => router.push("/c/profile"),
-          },
-          {
-            name: "Account settings",
-            onClick: () => router.push("/account/settings"),
           },
           { name: "Sign out", onClick: signOut },
         ]}

@@ -7,17 +7,19 @@ import { Videos } from "./Videos"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 import { Button } from "ui-library/button/Button"
-import { ArrowRight } from "lucide-react"
+import { useRouter } from "next/router"
 
 export const Sections = () => {
   const { company_job } = useCompanyJobState()
 
   return (
-    <div className="grid grid-cols-1 gap-10">
+    <div className="grid grid-cols-1 gap-5">
       <div className="flex flex-col md:flex-row gap-5">
         <JobTitle title={company_job.title} />
         <Toolbar />
       </div>
+
+      <PreviewApplications />
 
       <div className="flex flex-col md:flex-row gap-5">
         <div className="basis-1/3 flex flex-col gap-5">
@@ -50,13 +52,13 @@ const Toolbar = () => {
   const options = [
     { name: "Preview", onClick: () => alert("") },
     { name: "Share", onClick: () => alert("") },
-    { name: "Delete", onClick: () => alert("") },
+    { name: "Archive", onClick: () => alert("") },
   ]
 
   return (
     <div className="basis-2/3 flex flex-row gap-2 items-center justify-end">
       <Button label="Publish" variant="contained" />
-      <MenuBar options={options} max_number={2} variant="text" />
+      <MenuBar options={options} max_number={1} variant="text" />
     </div>
   )
 }
@@ -68,3 +70,28 @@ export const SectionHeader = ({ title }: { title: string }) => (
     </Text>
   </div>
 )
+
+export const PreviewApplications = () => {
+  const router = useRouter()
+  const { company_job } = useCompanyJobState()
+
+  const viewApplications = (e) => {
+    e.stopPropagation()
+    router.push(`/c/jobs/${company_job.id}/apps`)
+  }
+  return (
+    <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
+      {company_job.applications?.length && (
+        <Text as="span" size="sm" align="right">
+          {`${company_job.applications?.length} applications`}
+        </Text>
+      )}
+      <Button
+        label="View"
+        variant="outlined"
+        size="xs"
+        onClick={viewApplications}
+      />
+    </div>
+  )
+}

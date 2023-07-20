@@ -14,22 +14,27 @@ export const Applications = () => {
   const { company_job } = useCompanyJobState()
   const router = useRouter()
 
-  const titleLink = () => {
+  const viewJob = () => {
     router.push(`/c/jobs/${company_job.id}`)
   }
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      <div className="flex flex-col sm:flex-row gap-5 justify-between items-center">
-        <Button
-          label={company_job.title}
-          onClick={titleLink}
-          variant="contained"
-          size="base"
-        />
+      <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
+        <div className="flex flex-col md:flex-row gap-5 items-center">
+          <Text as="span" size="xl" align="left">
+            {company_job.title}
+          </Text>
+          <Button
+            label="View job"
+            variant="outlined"
+            size="xs"
+            onClick={viewJob}
+          />
+        </div>
 
         {company_job.applications?.length && (
-          <Text as="span" size="sm">
+          <Text as="span" size="sm" align="right">
             {`${company_job.applications?.length} applications`}
           </Text>
         )}

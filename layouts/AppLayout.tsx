@@ -1,8 +1,8 @@
 import Head from "next/head"
-import { Navbar } from "./navbar/Navbar"
-import { LayoutProps } from "./Layout.types"
+import { Navbar } from "./components/Navbar"
+import { Footer } from "./components/Footer"
 
-export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>
@@ -35,6 +35,7 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
           <Navbar />
         </header>
         <main className="my-10">{children}</main>
+        <Footer />
       </div>
     </>
   )

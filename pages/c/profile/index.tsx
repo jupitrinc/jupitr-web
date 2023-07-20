@@ -1,9 +1,9 @@
-import { DefaultLayout } from "layouts/DefaultLayout"
+import { AppLayout } from "layouts/AppLayout"
 
 export default function CompanyProfile() {
   return (
-    <DefaultLayout>
+    <AppLayout>
       <h1 className="text-center">Company profile</h1>
-    </DefaultLayout>
+    </AppLayout>
   )
 }
