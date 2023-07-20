@@ -64,8 +64,8 @@ const sample_job_1 = {
     { id: "5", name: "React", level: 2 },
     { id: "6", name: "Frontend tooling", level: 1 },
   ],
-  talent_response_video: {
-    length: 20,
+  application_video: {
+    duration: 20,
     description: "Why are you a good match for this role?",
   },
   active: true,
@@ -112,8 +112,8 @@ const sample_job_2 = {
     { id: "2", name: "Python", level: 3 },
     { id: "1", name: "Computer Vision", level: 3 },
   ],
-  talent_response_video: {
-    length: 20,
+  application_video: {
+    duration: 20,
     description: "Why are you a good match for this role?",
   },
   active: true,
