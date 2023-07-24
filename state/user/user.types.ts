@@ -5,10 +5,23 @@ export interface IUserContext {
 
 export interface IUser {
   id: string
+  updated_at?: string
+  avatar_url: string
   name: string
-  account_type: "talent" | "company"
-  email: string
-  avatar: string
+  active: boolean
+}
+export interface ICompanyMemberProfile {
+  //company member profile
+  job_title: string
+  company_id: number
+  roles: number
+}
+export interface ITalentProfile {
+  // talent profile
+  skills: object[]
+  socials: object[]
+  preferences: object[]
+  jobs: object[]
 }
 
 export type UserState = {

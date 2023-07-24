@@ -8,7 +8,6 @@ import { User } from "lucide-react"
 export const Avatar: React.FC<AvatarProps> = (avatar) => {
   const styles = avatarStyles
   const { getInitials } = stringHelper
-
   if (avatar.image_url) {
     return <Photo avatar={avatar} styles={styles} />
   } else if (!getInitials(avatar.name_initials as string)) {
