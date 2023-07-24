@@ -11,13 +11,6 @@ export type CompanyProfileState = {
   error: boolean
 }
 
-export interface ICompanyMemberProfile {
-  user_id: string
-  job_title: string
-  company_id: string
-  permission: string
-}
-
 export interface ICompanyProfile {
   id: string
   name: string

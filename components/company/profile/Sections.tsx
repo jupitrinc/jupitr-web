@@ -1,9 +1,10 @@
 import React from "react"
 import { Card } from "ui-library/card/Card"
-import { Details } from "./Details"
+import { CompanyDetails } from "./CompanyDetails"
 import { Intro } from "components/user/Intro"
 import { AccountSettings } from "components/user/account-settings/AccountSettings"
 import { TextInput } from "ui-library/form/text-input/TextInput"
+import { MemberDetails } from "./MemberDetails"
 
 export const Sections: React.FC = () => {
   return (
@@ -11,16 +12,12 @@ export const Sections: React.FC = () => {
       <div className="space-y-5">
         <Card type="section">
           <Intro />
-          <TextInput
-            placeholder="Job title"
-            name="job-title"
-            label="Job title"
-          />
+          <MemberDetails />
         </Card>
         <AccountSettings />
       </div>
 
-      <Details />
+      <CompanyDetails />
     </div>
   )
 }
