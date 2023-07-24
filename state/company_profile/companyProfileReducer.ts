@@ -1,9 +1,9 @@
+import { IIndustry } from "state/industry/industry.types"
 import {
   ICompanyProfile,
   CompanyProfileActionEnum,
   CompanyProfileAction,
   CompanyProfileState,
-  IIndustry,
 } from "./companyProfile.types"
 
 export const companyProfileReducer = (
@@ -32,28 +32,6 @@ export const companyProfileReducer = (
         loading: false,
         error: false,
         data: action.payload as ICompanyProfile,
-      }
-
-    case CompanyProfileActionEnum.GET_INDUSTRIES_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-      }
-
-    case CompanyProfileActionEnum.GET_INDUSTRIES_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-      }
-
-    case CompanyProfileActionEnum.GET_INDUSTRIES_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        industries: action.payload as IIndustry[],
       }
 
     case CompanyProfileActionEnum.ADD_INDUSTRY:

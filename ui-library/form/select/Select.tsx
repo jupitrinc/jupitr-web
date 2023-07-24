@@ -6,6 +6,22 @@ import { Label } from "../label/Label"
 export const Select: React.FC<SelectProps> = (select) => {
   const styles = selectStyles
 
+  const getName = (option) => {
+    if (typeof option === "object") {
+      return option.name
+    }
+
+    return option
+  }
+
+  const getId = (option) => {
+    if (typeof option === "object") {
+      return option.id
+    }
+
+    return option
+  }
+
   return (
     <div className={styles.container}>
       {select.label && <Label htmlFor={select.label} value={select.label} />}
@@ -14,8 +30,8 @@ export const Select: React.FC<SelectProps> = (select) => {
         className={styles.select}
         disabled={select.disabled}
       >
-        {select.options.map((item) => (
-          <option key={item}>{`${item}${
+        {select.options.map((option) => (
+          <option key={getId(option)}>{`${getName(option)}${
             select.magic_word ? " " + select.magic_word : ""
           }`}</option>
         ))}

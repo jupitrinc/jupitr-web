@@ -32,28 +32,14 @@ export const TalentProfileContextProvider: React.FC<any> = ({ children }) => {
 }
 
 const test_data = {
-  user_id: "test1d",
   active: true,
   skills: [
     { id: "1", name: "NLP", level: 3 },
     { id: "2", name: "Pytorch", level: 2 },
     { id: "3", name: "Python", level: 2 },
   ],
-  social_links: [
-    "https://linkedin.com",
-    "https://github.com",
-    "https://link.com",
-  ],
+  socials: ["https://linkedin.com", "https://github.com", "https://link.com"],
   preferences: {
-    location: ["UK"],
-    work_model: ["Remote"],
-    min_salary: 80000,
-    industry: ["Finance", "Biotech", "Media", "AI"],
-    technical_test: [
-      "Online challenge",
-      "Take-home challenge",
-      "Pair programming",
-      "None",
-    ],
+    location: { id: "1", name: "London" },
   },
 }

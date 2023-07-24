@@ -14,6 +14,7 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
       <textarea
         id={textarea.label}
         value={textarea.value}
+        defaultValue={textarea.defaultValue}
         name={textarea.name}
         placeholder={textarea.placeholder}
         disabled={textarea.disabled}

@@ -63,7 +63,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
               value={query}
             />
             <Combobox.Button className={styles.button}>
-              <ChevronDown className="text-gray-500 w-4 h-4" />
+              <ChevronDown className="text-gray-600 w-5 h-5" />
             </Combobox.Button>
           </div>
           {multiselect.options && multiselect.options.length && (

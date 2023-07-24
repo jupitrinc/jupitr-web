@@ -14,12 +14,12 @@ export const Sections = () => {
 
   return (
     <div className="grid grid-cols-1 gap-5">
+      <PreviewApplications />
+
       <div className="flex flex-col md:flex-row gap-5">
         <JobTitle title={company_job.title} />
         <Toolbar />
       </div>
-
-      <PreviewApplications />
 
       <div className="flex flex-col md:flex-row gap-5">
         <div className="basis-1/3 flex flex-col gap-5">
@@ -62,14 +62,6 @@ const Toolbar = () => {
     </div>
   )
 }
-
-export const SectionHeader = ({ title }: { title: string }) => (
-  <div className="grid grid-cols-1">
-    <Text as="p" size="lg">
-      {title}
-    </Text>
-  </div>
-)
 
 export const PreviewApplications = () => {
   const router = useRouter()

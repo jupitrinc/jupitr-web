@@ -61,99 +61,9 @@ export function useTalentProfileAction() {
     })
   }
 
-  const addIndustry = (industry: string) => {
-    if (!industry.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_INDUSTRY,
-      payload: industry,
-    })
-  }
-
-  const removeIndustry = (industry: string) => {
-    if (!industry.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_INDUSTRY,
-      payload: industry,
-    })
-  }
-
-  const addWorkModel = (work_model: string) => {
-    console.log(work_model)
-
-    if (!work_model.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_WORK_MODEL,
-      payload: work_model,
-    })
-  }
-
-  const removeWorkModel = (work_model: string) => {
-    if (!work_model.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_WORK_MODEL,
-      payload: work_model,
-    })
-  }
-
-  const addLocation = (location: string) => {
-    if (!location.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_LOCATION,
-      payload: location,
-    })
-  }
-
-  const removeLocation = (location: string) => {
-    if (!location.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_LOCATION,
-      payload: location,
-    })
-  }
-
-  const addTechTest = (test: string) => {
-    if (!test.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_TECH_TEST,
-      payload: test,
-    })
-  }
-
-  const removeTechTest = (test: string) => {
-    if (!test.trim()) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_TECH_TEST,
-      payload: test,
-    })
-  }
-
-  const updateSalary = (salary: number) => {
-    dispatch({
-      type: TalentProfileActionEnum.UPDATE_SALARY,
-      payload: salary,
-    })
-  }
-
   return {
     getProfile,
     addSkill,
     removeSkill,
-    addIndustry,
-    removeIndustry,
-    addWorkModel,
-    removeWorkModel,
-    addLocation,
-    removeLocation,
-    addTechTest,
-    removeTechTest,
-    updateSalary,
   }
 }

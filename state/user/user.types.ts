@@ -6,9 +6,16 @@ export interface IUserContext {
 export interface IUser {
   id: string
   name: string
-  account_type: "talent" | "company"
+  account_type: string
   email: string
-  avatar: string
+  avatar_url: string
+  created_at: string
+  updated_at: string
+}
+
+export enum AccountTypeEnum {
+  talent = "talent",
+  company = "company",
 }
 
 export type UserState = {
@@ -22,9 +29,7 @@ export type UserAction = {
     | UserActionEnum.SIGN_IN_BEGIN
     | UserActionEnum.SIGN_IN_FAILURE
     | UserActionEnum.SIGN_IN_SUCCESS
-    | UserActionEnum.SIGN_OUT_BEGIN
-    | UserActionEnum.SIGN_OUT_FAILURE
-    | UserActionEnum.SIGN_OUT_SUCCESS
+    | UserActionEnum.SIGN_OUT
   payload?: IUser
 }
 
@@ -33,7 +38,5 @@ export enum UserActionEnum {
   SIGN_IN_FAILURE = "SIGN_IN_FAILURE",
   SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS",
 
-  SIGN_OUT_BEGIN = "SIGN_OUT_BEGIN",
-  SIGN_OUT_FAILURE = "SIGN_OUT_FAILURE",
-  SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS",
+  SIGN_OUT = "SIGN_OUT",
 }

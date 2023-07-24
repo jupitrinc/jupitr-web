@@ -8,8 +8,8 @@ import { Card } from "ui-library/card/Card"
 import { Plus, X } from "lucide-react"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { ISkill } from "state/company_job/companyJob.types"
-import { SectionHeader } from "./Sections"
-import { job } from "data/job"
+import { static_data_job } from "data/job"
+import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
 export const Skills = () => {
   const { company_job } = useCompanyJobState()
@@ -70,7 +70,11 @@ export const SkillCard: React.FC<SkillCardProps> = (card) => {
         />
       </div>
 
-      <Tabs items={job.skill_levels} active_tab={level} onChange={setLevel} />
+      <Tabs
+        items={static_data_job.skill_levels}
+        active_tab={level}
+        onChange={setLevel}
+      />
     </Card>
   )
 }

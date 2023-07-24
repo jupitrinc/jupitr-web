@@ -12,16 +12,11 @@ export type TalentProfileState = {
 }
 
 export interface ITalentProfile {
-  user_id: string
   active: boolean
   skills: ISkill[]
-  social_links: string[]
+  socials: string[]
   preferences: {
-    location: string[]
-    work_model: string[]
-    min_salary: number
-    industry: string[]
-    technical_test: string[]
+    location: { id: string; name: string }
   }
 }
 
@@ -32,16 +27,8 @@ export type TalentProfileAction = {
     | TalentProfileActionEnum.GET_TALENT_PROFILE_SUCCESS
     | TalentProfileActionEnum.ADD_SKILL
     | TalentProfileActionEnum.REMOVE_SKILL
-    | TalentProfileActionEnum.ADD_INDUSTRY
-    | TalentProfileActionEnum.REMOVE_INDUSTRY
-    | TalentProfileActionEnum.ADD_WORK_MODEL
-    | TalentProfileActionEnum.REMOVE_WORK_MODEL
-    | TalentProfileActionEnum.ADD_LOCATION
-    | TalentProfileActionEnum.REMOVE_LOCATION
-    | TalentProfileActionEnum.ADD_TECH_TEST
-    | TalentProfileActionEnum.REMOVE_TECH_TEST
-    | TalentProfileActionEnum.UPDATE_SALARY
-  payload?: ITalentProfile | ISkill | string | boolean | number
+
+  payload?: ITalentProfile | ISkill
 }
 
 export enum TalentProfileActionEnum {
@@ -51,18 +38,4 @@ export enum TalentProfileActionEnum {
 
   ADD_SKILL = "ADD_SKILL",
   REMOVE_SKILL = "REMOVE_SKILL",
-
-  ADD_INDUSTRY = "ADD_INDUSTRY",
-  REMOVE_INDUSTRY = "REMOVE_INDUSTRY",
-
-  ADD_WORK_MODEL = "ADD_WORK_MODEL",
-  REMOVE_WORK_MODEL = "REMOVE_WORK_MODEL",
-
-  ADD_LOCATION = "DD_LOCATION",
-  REMOVE_LOCATION = "REMOVE_LOCATION",
-
-  ADD_TECH_TEST = "ADD_TECH_TEST",
-  REMOVE_TECH_TEST = "REMOVE_TECH_TEST",
-
-  UPDATE_SALARY = "UPDATE_SALARY",
 }
