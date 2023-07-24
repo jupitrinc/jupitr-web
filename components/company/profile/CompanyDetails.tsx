@@ -9,7 +9,7 @@ import { static_data_company } from "data/company"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { Textarea } from "ui-library/form/textarea/Textarea"
 
-export const Details: React.FC = () => {
+export const CompanyDetails: React.FC = () => {
   const { company_profile } = useCompanyProfileState()
   return (
     <Card type="section">

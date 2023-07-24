@@ -18,6 +18,11 @@ export enum AccountTypeEnum {
   company = "company",
 }
 
+export enum AccountPermissionEnum {
+  read = "read",
+  write = "write",
+}
+
 export type UserState = {
   data: IUser
   loading: boolean
