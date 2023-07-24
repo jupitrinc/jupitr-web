@@ -10,10 +10,11 @@ import { ICompanyJob } from "state/company_job/companyJob.types"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
-import { job } from "data/job"
-import { SectionHeader } from "./Sections"
 import { Textarea } from "ui-library/form/textarea/Textarea"
 import { Card } from "ui-library/card/Card"
+import { static_data_locations } from "data/location"
+import { static_data_job } from "data/job"
+import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
 export const Details = () => {
   const { company_job } = useCompanyJobState()
@@ -92,7 +93,7 @@ export const WorkModel = ({
 
   const items = useMemo(() => {
     const items_array = [] as CheckboxProps[]
-    for (const model of job.work_models) {
+    for (const model of static_data_job.work_models) {
       items_array.push({
         label: model,
         name: model,
@@ -115,7 +116,7 @@ export const WorkModel = ({
 }
 
 const Location = ({ location }: { location: ICompanyJob["location"] }) => {
-  return <Select options={job.locations} label="Location" />
+  return <Select options={static_data_locations} label="Location" />
 }
 
 export const TalentResponse = () => {
@@ -128,7 +129,7 @@ export const TalentResponse = () => {
         name="application_question"
       />
       <Select
-        options={job.video_duration}
+        options={static_data_job.video_duration}
         label="Video duration"
         magic_word="seconds"
       />

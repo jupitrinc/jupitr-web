@@ -6,7 +6,8 @@ import { useTalentProfileState } from "state/talent_profile/useTalentProfileStat
 
 export const SocialLinks = () => {
   const { talent_profile } = useTalentProfileState()
-  const links = talent_profile.social_links
+  const links = talent_profile.socials
+
   return (
     <div className="flex flex-col gap-5">
       {links.map((link, index) => (

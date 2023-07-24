@@ -1,5 +1,4 @@
 import React from "react"
-import { SectionHeader } from "./Sections"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { Text } from "ui-library/text/Text"
@@ -7,6 +6,7 @@ import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { Divider } from "ui-library/divider/Divider"
 import { Card } from "ui-library/card/Card"
 import { Plus, Users2 } from "lucide-react"
+import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
 export const Videos = () => {
   const { company_job } = useCompanyJobState()

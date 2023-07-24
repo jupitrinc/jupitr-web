@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
@@ -10,14 +10,14 @@ import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Textarea } from "ui-library/form/textarea/Textarea"
 import { Text } from "ui-library/text/Text"
 import { ChevronLeft } from "lucide-react"
-import { company } from "data/company"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
-import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
-import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
+import { useIndustryState } from "state/industry/useIndustryState"
+import { useIndustryAction } from "state/industry/useIndustryAction"
+import { static_data_company } from "data/company"
 
 export const SignUp = () => {
-  const { industries } = useCompanyProfileState()
-  const { getIndustries } = useCompanyProfileAction()
+  const { industries } = useIndustryState()
+  const { getIndustries } = useIndustryAction()
 
   useEffect(() => {
     const getData = () => {
@@ -25,6 +25,7 @@ export const SignUp = () => {
     }
     getData()
   }, [])
+
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
       <div className="mb-10 flex justify-between">
@@ -49,10 +50,11 @@ export const SignUp = () => {
         <NumberInput placeholder="Year founded" name="company-year-founded" />
         <TextInput placeholder="Website URL" name="company-website" />
         <Select
-          options={company.size_options}
+          options={static_data_company.size_options}
           magic_word="people"
           name="company-people"
         />
+
         <Multiselect options={industries} />
         <Textarea
           name="company-mission"

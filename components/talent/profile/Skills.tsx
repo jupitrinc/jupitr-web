@@ -4,12 +4,12 @@ import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/card/Card"
-import { SectionHeader } from "./Sections"
 import { Plus, X } from "lucide-react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { ISkill } from "state/company_job/companyJob.types"
-import { job } from "data/job"
+import { static_data_job } from "data/job"
+import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
 export const Skills = () => {
   const { talent_profile } = useTalentProfileState()
@@ -70,7 +70,11 @@ export const SkillCard: React.FC<SkillCardProps> = (card) => {
         />
       </div>
 
-      <Tabs items={job.skill_levels} active_tab={level} onChange={setLevel} />
+      <Tabs
+        items={static_data_job.skill_levels}
+        active_tab={level}
+        onChange={setLevel}
+      />
     </Card>
   )
 }
