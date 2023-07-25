@@ -29,11 +29,13 @@ export const Select: React.FC<SelectProps> = (select) => {
         name={select.name}
         className={styles.select}
         disabled={select.disabled}
+        defaultValue={select.defaultValue}
+        onChange={select.onChange}
       >
         {select.options.map((option) => (
-          <option key={getId(option)}>{`${getName(option)}${
-            select.magic_word ? " " + select.magic_word : ""
-          }`}</option>
+          <option key={getId(option)} value={getName(option)}>{`${getName(
+            option
+          )}${select.magic_word ? " " + select.magic_word : ""}`}</option>
         ))}
       </select>
     </div>
