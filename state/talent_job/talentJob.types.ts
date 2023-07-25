@@ -1,5 +1,5 @@
-import { ISkill } from "state/company_job/companyJob.types"
 import { ICompanyProfile } from "state/company_profile/companyProfile.types"
+import { ISkill } from "state/skill/skill.types"
 
 export interface ITalentJobContext {
   state: TalentJobState

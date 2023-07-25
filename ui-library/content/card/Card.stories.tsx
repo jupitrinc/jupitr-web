@@ -33,7 +33,7 @@ const SampleComponent = () => (
 )
 
 const meta: Meta<typeof Card> = {
-  title: "Card",
+  title: "Content/Card",
   component: Card,
   tags: ["autodocs"],
 }

@@ -1,27 +1,30 @@
-import { ChevronLeft, ChevronRight, MailCheck, X } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { Button } from "ui-library/button/Button"
-import { Divider } from "ui-library/divider/Divider"
+import { Divider } from "ui-library/content/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
 import useAuthService from "../../services/auth/useAuthService"
 import { useRouter } from "next/navigation"
 import { supabaseClientComponent } from "services/_supabase/client"
+import { Toast } from "ui-library/toast/Toast"
+import { useNotification } from "helper/hooks/useNotification"
 
 export const SignIn = () => {
-  const [isEmailSent, setIsEmailSent] = useState(false)
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const { signInWithOtp, signInWithGoogle } = useAuthService()
   const router = useRouter()
 
+  const { notification, showNotification, hideNotification } = useNotification()
+
   useEffect(() => {
     if (document.cookie == "") {
-      setIsEmailSent(false)
+      hideNotification()
     } else {
-      setIsEmailSent(true)
+      showNotification()
     }
   }, [])
 
@@ -48,11 +51,6 @@ export const SignIn = () => {
 
   const loginWithGoogle = async () => {
     await signInWithGoogle()
-  }
-
-  const toggleNotification = () => {
-    const sent = isEmailSent
-    setIsEmailSent(!sent)
   }
 
   return (
@@ -97,33 +95,11 @@ export const SignIn = () => {
         variant="contained"
       />
 
-      {isEmailSent && (
-        <EmailSentMessage toggleNotification={toggleNotification} />
-      )}
-    </div>
-  )
-}
-
-export const EmailSentMessage = ({ toggleNotification }) => {
-  return (
-    <div
-      id="alert-5"
-      className="flex items-center gap-2 p-4 rounded-lg bg-gray-50 fixed bottom-8"
-      role="alert"
-    >
-      <MailCheck />
-      <div className="inline-flex gap-2  text-sm text-gray-800">
-        <p>Check out your email for a link to sign in to the app.</p>
-      </div>
-      <button
-        onClick={toggleNotification}
-        type="button"
-        className="bg-gray-50 text-gray-500 rounded-lg p-1.5 hover:bg-gray-200 inline-flex items-center justify-center h-8 w-8"
-        data-dismiss-target="#alert-5"
-        aria-label="Close"
-      >
-        <X />
-      </button>
+      <Toast
+        onHide={hideNotification}
+        show={notification}
+        label="Log in using the One Time Password (OTP) sent to your inbox."
+      />
     </div>
   )
 }

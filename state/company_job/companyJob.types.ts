@@ -1,3 +1,5 @@
+import { ISkill } from "state/skill/skill.types"
+
 export interface ICompanyJobContext {
   state: CompanyJobState
   dispatch: ({ type }: CompanyJobAction) => void
@@ -48,12 +50,6 @@ export interface IJobApplication {
     social_links: string[]
     avatar: string
   }
-}
-
-export type ISkill = {
-  id: string
-  name: string
-  level: number
 }
 
 export type CompanyJobAction = {

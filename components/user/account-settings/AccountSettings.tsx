@@ -1,9 +1,9 @@
 import React from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { Text } from "ui-library/text/Text"
-import { Divider } from "ui-library/divider/Divider"
+import { Divider } from "ui-library/content/divider/Divider"
 import { useAccountSettings } from "./useAccountSettings"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 

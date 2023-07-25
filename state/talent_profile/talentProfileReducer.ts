@@ -1,4 +1,4 @@
-import { ISkill } from "state/company_job/companyJob.types"
+import { ISkill } from "state/skill/skill.types"
 import {
   ITalentProfile,
   TalentProfileActionEnum,

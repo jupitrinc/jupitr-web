@@ -3,13 +3,13 @@ import { Button } from "ui-library/button/Button"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { Plus, X } from "lucide-react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
-import { ISkill } from "state/company_job/companyJob.types"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
+import { ISkill } from "state/skill/skill.types"
 
 export const Skills = () => {
   const { talent_profile } = useTalentProfileState()
