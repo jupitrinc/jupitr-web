@@ -1,6 +1,5 @@
-import { numberHelper } from "helper/numberHelper"
-import { Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
 import React, { useState } from "react"
+import { Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
@@ -12,7 +11,8 @@ import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Application } from "./Application"
 import { Card } from "ui-library/card/Card"
 import { ISkill } from "state/company_job/companyJob.types"
-import { job } from "data/job"
+import { numberHelper } from "helper/numberHelper"
+import { static_data_job } from "data/job"
 
 export const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -162,10 +162,10 @@ export const SkillCard = ({ skill }: { skill: ISkill }) => {
       <ProgressBar value={skillLevel(skill.level)} />
       <div className="flex justify-between mt-2">
         <Text as="span" size="sm">
-          {job.skill_levels[0]}
+          {static_data_job.skill_levels[skill.level]}
         </Text>
         <Text as="span" size="sm">
-          {job.skill_levels[2]}
+          {static_data_job.skill_levels[skill.level]}
         </Text>
       </div>
     </Card>

@@ -55,13 +55,11 @@ export function useUserAction() {
   }
 
   const signOut = async () => {
-    dispatch({ type: UserActionEnum.SIGN_OUT_BEGIN })
     const { error } = await supabaseClientComponent.auth.signOut()
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_OUT_FAILURE })
     }
     dispatch({
-      type: UserActionEnum.SIGN_OUT_SUCCESS,
+      type: UserActionEnum.SIGN_OUT,
     })
     deleteAll()
     router.push("/")

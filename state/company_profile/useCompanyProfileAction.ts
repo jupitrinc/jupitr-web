@@ -1,11 +1,10 @@
 import { useContext } from "react"
-import { CompanyProfileActionEnum, IIndustry } from "./companyProfile.types"
+import { CompanyProfileActionEnum } from "./companyProfile.types"
 import { CompanyProfileContext } from "./CompanyProfileContext"
-import useIndustryService from "../../services/industry/useIndustryService"
+import { IIndustry } from "state/industry/industry.types"
 
 export function useCompanyProfileAction() {
   const { dispatch } = useContext(CompanyProfileContext)
-  const { getAllIndustries } = useIndustryService()
 
   const getProfile = async (language: string) => {
     if (!language) return
@@ -42,25 +41,6 @@ export function useCompanyProfileAction() {
     }
   }
 
-  const getIndustries = async () => {
-    dispatch({
-      type: CompanyProfileActionEnum.GET_INDUSTRIES_BEGIN,
-    })
-
-    const { industry, error } = await getAllIndustries()
-
-    if (error) {
-      dispatch({
-        type: CompanyProfileActionEnum.GET_INDUSTRIES_FAILURE,
-      })
-    }
-
-    dispatch({
-      type: CompanyProfileActionEnum.GET_INDUSTRIES_SUCCESS,
-      payload: industry,
-    })
-  }
-
   const addIndustry = (industry: IIndustry) => {
     if (!industry.name.trim()) return
 
@@ -81,7 +61,6 @@ export function useCompanyProfileAction() {
 
   return {
     getProfile,
-    getIndustries,
     addIndustry,
     removeIndustry,
   }

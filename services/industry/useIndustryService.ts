@@ -1,6 +1,6 @@
 import { PostgrestError } from "@supabase/supabase-js"
 import { supabase } from "services/_supabase/client"
-import { IIndustry } from "state/company_profile/companyProfile.types"
+import { IIndustry } from "state/industry/industry.types"
 
 type IndustryResponse = {
   industry?: IIndustry[]

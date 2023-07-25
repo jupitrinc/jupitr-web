@@ -8,20 +8,21 @@ export interface IUser {
   updated_at?: string
   avatar_url: string
   name: string
-  active: boolean
+  account_type: string
+  email: string
+  avatar_url: string
+  created_at: string
+  updated_at: string
 }
-export interface ICompanyMemberProfile {
-  //company member profile
-  job_title: string
-  company_id: number
-  roles: number
+
+export enum AccountTypeEnum {
+  talent = "talent",
+  company = "company",
 }
-export interface ITalentProfile {
-  // talent profile
-  skills: object[]
-  socials: object[]
-  preferences: object[]
-  jobs: object[]
+
+export enum AccountPermissionEnum {
+  read = "read",
+  write = "write",
 }
 
 export type UserState = {
@@ -35,9 +36,7 @@ export type UserAction = {
     | UserActionEnum.SIGN_IN_BEGIN
     | UserActionEnum.SIGN_IN_FAILURE
     | UserActionEnum.SIGN_IN_SUCCESS
-    | UserActionEnum.SIGN_OUT_BEGIN
-    | UserActionEnum.SIGN_OUT_FAILURE
-    | UserActionEnum.SIGN_OUT_SUCCESS
+    | UserActionEnum.SIGN_OUT
   payload?: IUser
 }
 
@@ -46,7 +45,5 @@ export enum UserActionEnum {
   SIGN_IN_FAILURE = "SIGN_IN_FAILURE",
   SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS",
 
-  SIGN_OUT_BEGIN = "SIGN_OUT_BEGIN",
-  SIGN_OUT_FAILURE = "SIGN_OUT_FAILURE",
-  SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS",
+  SIGN_OUT = "SIGN_OUT",
 }

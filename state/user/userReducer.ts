@@ -27,25 +27,9 @@ export const userReducer = (
         data: action.payload as IUser,
       }
 
-    case UserActionEnum.SIGN_OUT_BEGIN:
+    case UserActionEnum.SIGN_OUT:
       return {
         ...state,
-        loading: true,
-        error: false,
-      }
-
-    case UserActionEnum.SIGN_OUT_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-      }
-
-    case UserActionEnum.SIGN_OUT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: false,
         data: {} as IUser,
       }
 

@@ -6,6 +6,7 @@ import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { useUserAction } from "state/user/useUserAction"
+import { AccountTypeEnum } from "state/user/user.types"
 
 export const Navbar = () => {
   const { isLoggedIn, accountType } = useUserState()
@@ -20,8 +21,14 @@ export const Navbar = () => {
     if (isLoggedIn) {
       return (
         <div className="flex flex-row space-x-5 justify-between items-baseline">
-          <Brand link={accountType === "talent" ? "/jobs" : "/c/jobs"} />
-          {accountType === "talent" ? <TalentMenu /> : <CompanyMenu />}
+          <Brand
+            link={accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"}
+          />
+          {accountType === AccountTypeEnum.talent ? (
+            <TalentMenu />
+          ) : (
+            <CompanyMenu />
+          )}
         </div>
       )
     } else {
@@ -58,7 +65,7 @@ const TalentMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={user.avatar}
+        image_url={user.avatar_url}
         options={[
           {
             name: "Profile",
@@ -84,7 +91,7 @@ const CompanyMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={user.avatar}
+        image_url={user.avatar_url}
         options={[
           {
             name: "Profile",
