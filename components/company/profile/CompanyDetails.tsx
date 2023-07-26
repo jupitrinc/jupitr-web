@@ -43,9 +43,17 @@ export const CompanyDetails: React.FC = () => {
           label="Size"
           name="company-people"
           options={static_data_company.size_options}
+          defaultValue={company_profile.size}
+          magic_word="people"
+          onChange={(e) => alert(e.target.value)}
         />
 
-        <Multiselect options={company_profile.industry} />
+        <Multiselect
+          options={company_profile.industry}
+          placeholder=" E.g. AI, Metaverse"
+          onChange={(option) => alert(option.name)}
+          label="Industry/Market"
+        />
 
         <Textarea
           name="company-mission"
