@@ -1,5 +1,5 @@
 import React from "react"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { Select } from "ui-library/form/select/Select"
 import { Intro } from "../../user/Intro"
 import { SocialLinks } from "./SocialLinks"

@@ -1,5 +1,5 @@
 import React from "react"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { CompanyDetails } from "./CompanyDetails"
 import { Intro } from "components/user/Intro"
 import { AccountSettings } from "components/user/account-settings/AccountSettings"

@@ -4,12 +4,12 @@ import { Button } from "ui-library/button/Button"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { Plus, X } from "lucide-react"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
-import { ISkill } from "state/company_job/companyJob.types"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
+import { ISkill } from "state/skill/skill.types"
 
 export const Skills = () => {
   const { company_job } = useCompanyJobState()
