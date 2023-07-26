@@ -34,6 +34,7 @@ const useUserService = () => {
   }
   return {
     getUser,
+    updateUser,
   }
 }
 
