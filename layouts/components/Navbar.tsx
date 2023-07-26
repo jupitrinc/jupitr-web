@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useUserState } from "state/user/useUserState"
@@ -11,6 +11,11 @@ import { AccountTypeEnum } from "state/user/user.types"
 export const Navbar = () => {
   const { isLoggedIn, accountType } = useUserState()
   const router = useRouter()
+  const { loadSession } = useUserAction()
+
+  useEffect(() => {
+    loadSession()
+  }, [])
 
   if (
     router.pathname.includes("/login") ||

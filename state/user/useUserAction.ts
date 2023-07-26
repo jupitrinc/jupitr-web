@@ -12,35 +12,16 @@ export function useUserAction() {
   const { signInWithOtp, signInWithGoogle } = useAuthService()
   const router = useRouter()
 
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabaseClientComponent.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
-        dispatch({
-          type: UserActionEnum.SIGN_IN_SUCCESS,
-          payload: {
-            ...user,
-            id: session?.user?.id || "",
-            email: session?.user?.email || "",
-            account_type: session?.user?.user_metadata.accountType,
-          },
-        })
-        // router.replace("/profile")
-      }
-    })
-    return () => subscription.unsubscribe()
-  }, [supabaseClientComponent])
-
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithOtp(email)
     if (error) {
       dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+    } else {
+      dispatch({
+        type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
     }
-    dispatch({
-      type: UserActionEnum.SIGN_IN_SUCCESS,
-    })
   }
 
   const signInwithGoogleAccount = async () => {
@@ -48,10 +29,11 @@ export function useUserAction() {
     const { error } = await signInWithGoogle()
     if (error) {
       dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+    } else {
+      dispatch({
+        type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
     }
-    dispatch({
-      type: UserActionEnum.SIGN_IN_SUCCESS,
-    })
   }
 
   const signOut = async () => {
@@ -61,6 +43,7 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
+    localStorage.clear()
     router.push("/")
   }
 
@@ -68,5 +51,6 @@ export function useUserAction() {
     signInWithEmail,
     signInwithGoogleAccount,
     signOut,
+    loadSession,
   }
 }
