@@ -1,8 +1,14 @@
 import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
+import { useEffect } from "react"
+import { useUserState } from "state/user/useUserState"
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
+  const { isLoggedIn, user } = useUserState()
+  useEffect(() => {
+    if (isLoggedIn) console.log("user is logged in now", user)
+  }, [isLoggedIn])
   return (
     <>
       <Head>

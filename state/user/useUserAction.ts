@@ -1,31 +1,56 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
 import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./useUserState"
-import { cookieHelper } from "../../helper/cookieHelper"
+import useAuthService from "services/auth/useAuthService"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const { user } = useUserState()
+  const { signInWithOtp, signInWithGoogle } = useAuthService()
   const router = useRouter()
-  const { deleteAll } = cookieHelper
 
-  const signInWithOtp = async () => {
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabaseClientComponent.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN") {
+        dispatch({
+          type: UserActionEnum.SIGN_IN_SUCCESS,
+          payload: {
+            ...user,
+            id: session?.user?.id || "",
+            email: session?.user?.email || "",
+            account_type: session?.user?.user_metadata.accountType,
+          },
+        })
+        // router.replace("/profile")
+      }
+    })
+    return () => subscription.unsubscribe()
+  }, [supabaseClientComponent])
+
+  const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
-    const { data, error } = await supabaseClientComponent.auth.getUser()
+    const { error } = await signInWithOtp(email)
     if (error) {
       dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
     }
     dispatch({
       type: UserActionEnum.SIGN_IN_SUCCESS,
-      payload: {
-        ...user,
-        id: data.user?.id || "",
-        email: data.user?.email || "",
-        account_type: data.user?.user_metadata.accountType,
-      },
+    })
+  }
+
+  const signInwithGoogleAccount = async () => {
+    dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
+    const { error } = await signInWithGoogle()
+    if (error) {
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+    }
+    dispatch({
+      type: UserActionEnum.SIGN_IN_SUCCESS,
     })
   }
 
@@ -36,12 +61,12 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    deleteAll()
     router.push("/")
   }
 
   return {
-    signInWithOtp,
+    signInWithEmail,
+    signInwithGoogleAccount,
     signOut,
   }
 }

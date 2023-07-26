@@ -6,48 +6,26 @@ import { Divider } from "ui-library/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
-import useAuthService from "../../services/auth/useAuthService"
 import { useRouter } from "next/navigation"
 import { supabaseClientComponent } from "services/_supabase/client"
+import { useUserState } from "state/user/useUserState"
+import { useUserAction } from "state/user/useUserAction"
 
 export const SignIn = () => {
+  const { loading } = useUserState()
+  const { signInWithEmail, signInwithGoogleAccount } = useUserAction()
+
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const { signInWithOtp, signInWithGoogle } = useAuthService()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (document.cookie == "") {
-      setIsEmailSent(false)
-    } else {
-      setIsEmailSent(true)
-    }
-  }, [])
-
-  // hook to check if there is a session created
-  // social auth sessions like google are created client side,
-  // thats why we need to subscribe to this types of events.
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabaseClientComponent.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") router.replace("/profile")
-    })
-
-    return () => subscription.unsubscribe()
-  }, [supabaseClientComponent])
 
   const loginWithEmail = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    await signInWithOtp(email)
-    setLoading(false)
-    router.refresh()
+    await signInWithEmail(email)
+    toggleNotification()
   }
 
   const loginWithGoogle = async () => {
-    await signInWithGoogle()
+    await signInwithGoogleAccount()
   }
 
   const toggleNotification = () => {

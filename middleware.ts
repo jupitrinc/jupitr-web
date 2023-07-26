@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const allowedRoutes = ["/auth/callback", "/", "/login", "/c/signup", "/jobs"]
+  const allowedRoutes = ["/auth/callback", "/", "/login", "/c/signup", "/job"]
 
   const isRouteAllowed = allowedRoutes.includes(`${pathname}`)
 
