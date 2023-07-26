@@ -13,7 +13,8 @@
     "test-watch": "jest --watch",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "update-db-types": "npx supabase gen types typescript --project-id cgbrcxjbovzwarqujqoq --schema public > services/_supabase/database.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",

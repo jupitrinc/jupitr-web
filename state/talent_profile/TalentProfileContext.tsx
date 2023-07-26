@@ -6,6 +6,7 @@ import {
   ITalentProfileContext,
   TalentProfileState,
 } from "./talentProfile.types"
+import { supabase } from "../../services/_supabase/client"
 
 export const TalentProfileContext = createContext({} as ITalentProfileContext)
 

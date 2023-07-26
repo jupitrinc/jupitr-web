@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -11,67 +11,73 @@ export interface Database {
     Tables: {
       company: {
         Row: {
-          id: number
+          created_at: string | null
+          id: string
+          industry: Json | null
           logo: string | null
           mission: string | null
           name: string | null
-          size: number | null
+          size: string | null
           updated_at: string | null
           website: string | null
-          yearfounded: string | null
+          year_founded: string | null
         }
         Insert: {
-          id?: number
+          created_at?: string | null
+          id?: string
+          industry?: Json | null
           logo?: string | null
           mission?: string | null
           name?: string | null
-          size?: number | null
+          size?: string | null
           updated_at?: string | null
           website?: string | null
-          yearfounded?: string | null
+          year_founded?: string | null
         }
         Update: {
-          id?: number
+          created_at?: string | null
+          id?: string
+          industry?: Json | null
           logo?: string | null
           mission?: string | null
           name?: string | null
-          size?: number | null
+          size?: string | null
           updated_at?: string | null
           website?: string | null
-          yearfounded?: string | null
+          year_founded?: string | null
         }
         Relationships: []
       }
       company_member_profile: {
         Row: {
-          companyid: number
-          id: string
-          jobtile: string | null
-          roles: number
+          company_id: string
+          created_at: string | null
+          job_title: string | null
+          roles: string
+          updated_at: string | null
+          user_id: string
         }
         Insert: {
-          companyid: number
-          id: string
-          jobtile?: string | null
-          roles: number
+          company_id: string
+          created_at?: string | null
+          job_title?: string | null
+          roles: string
+          updated_at?: string | null
+          user_id: string
         }
         Update: {
-          companyid?: number
-          id?: string
-          jobtile?: string | null
-          roles?: number
+          company_id?: string
+          created_at?: string | null
+          job_title?: string | null
+          roles?: string
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "company_member_profile_companyid_fkey"
-            columns: ["companyid"]
+            foreignKeyName: "company_member_profile_company_id_fkey"
+            columns: ["company_id"]
             referencedRelation: "company"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "company_member_profile_id_fkey"
-            columns: ["id"]
-            referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
@@ -79,104 +85,96 @@ export interface Database {
             columns: ["roles"]
             referencedRelation: "company_member_roles"
             referencedColumns: ["id"]
-          }
-        ]
-      }
-      company_member_roles: {
-        Row: {
-          id: number
-          permission: Database["public"]["Enums"]["permission_type"] | null
-          servicelevel: Database["public"]["Enums"]["service_level_type"] | null
-          userid: string
-        }
-        Insert: {
-          id?: number
-          permission?: Database["public"]["Enums"]["permission_type"] | null
-          servicelevel?:
-            | Database["public"]["Enums"]["service_level_type"]
-            | null
-          userid: string
-        }
-        Update: {
-          id?: number
-          permission?: Database["public"]["Enums"]["permission_type"] | null
-          servicelevel?:
-            | Database["public"]["Enums"]["service_level_type"]
-            | null
-          userid?: string
-        }
-        Relationships: [
+          },
           {
-            foreignKeyName: "company_member_roles_userid_fkey"
-            columns: ["userid"]
+            foreignKeyName: "company_member_profile_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
       }
-      company_teams: {
+      company_member_roles: {
         Row: {
-          companyid: number
-          id: number
-          teamname: string | null
+          company_id: string
+          created_at: string | null
+          id: string
+          permission: Database["public"]["Enums"]["permission_type"] | null
+          service_level:
+            | Database["public"]["Enums"]["service_level_type"]
+            | null
+          updated_at: string | null
+          user_id: string
         }
         Insert: {
-          companyid: number
-          id?: number
-          teamname?: string | null
+          company_id: string
+          created_at?: string | null
+          id?: string
+          permission?: Database["public"]["Enums"]["permission_type"] | null
+          service_level?:
+            | Database["public"]["Enums"]["service_level_type"]
+            | null
+          updated_at?: string | null
+          user_id: string
         }
         Update: {
-          companyid?: number
-          id?: number
-          teamname?: string | null
+          company_id?: string
+          created_at?: string | null
+          id?: string
+          permission?: Database["public"]["Enums"]["permission_type"] | null
+          service_level?:
+            | Database["public"]["Enums"]["service_level_type"]
+            | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "company_teams_companyid_fkey"
-            columns: ["companyid"]
+            foreignKeyName: "company_member_roles_company_id_fkey"
+            columns: ["company_id"]
             referencedRelation: "company"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "company_member_roles_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
       }
       talent_profile: {
         Row: {
-          icon_url: string | null
-          id: string
+          active: boolean | null
           jobs: Json | null
-          new_profile: boolean | null
           preferences: Json | null
-          social_media: Json | null
-          status: string | null
-          talent_skills: Json | null
+          skills: Json | null
+          socials: Json | null
           updated_at: string | null
+          user_id: string
         }
         Insert: {
-          icon_url?: string | null
-          id: string
+          active?: boolean | null
           jobs?: Json | null
-          new_profile?: boolean | null
           preferences?: Json | null
-          social_media?: Json | null
-          status?: string | null
-          talent_skills?: Json | null
+          skills?: Json | null
+          socials?: Json | null
           updated_at?: string | null
+          user_id: string
         }
         Update: {
-          icon_url?: string | null
-          id?: string
+          active?: boolean | null
           jobs?: Json | null
-          new_profile?: boolean | null
           preferences?: Json | null
-          social_media?: Json | null
-          status?: string | null
-          talent_skills?: Json | null
+          skills?: Json | null
+          socials?: Json | null
           updated_at?: string | null
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "talent_profile_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "talent_profile_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
@@ -184,24 +182,30 @@ export interface Database {
       }
       users: {
         Row: {
-          accounttype: string | null
+          account_type: string | null
+          active: boolean | null
           avatar_url: string | null
           email: string | null
           id: string
+          name: string | null
           updated_at: string | null
         }
         Insert: {
-          accounttype?: string | null
+          account_type?: string | null
+          active?: boolean | null
           avatar_url?: string | null
           email?: string | null
           id: string
+          name?: string | null
           updated_at?: string | null
         }
         Update: {
-          accounttype?: string | null
+          account_type?: string | null
+          active?: boolean | null
           avatar_url?: string | null
           email?: string | null
           id?: string
+          name?: string | null
           updated_at?: string | null
         }
         Relationships: [
@@ -226,26 +230,25 @@ export interface Database {
           p_website: string
           p_size: number
           p_mission: string
-          p_team_name: string
           p_user_id: string
           p_permission: Database["public"]["Enums"]["permission_type"]
           p_service_level: Database["public"]["Enums"]["service_level_type"]
+          p_industry: Json
         }
         Returns: {
-          company_id: number
-          team_id: number
-          role_id: number
+          company_id: string
+          role_id: string
         }[]
       }
       handle_new_company_member: {
         Args: {
-          p_company_id: number
+          p_company_id: string
           p_user_id: string
           p_permission: Database["public"]["Enums"]["permission_type"]
           p_service_level: Database["public"]["Enums"]["service_level_type"]
         }
         Returns: {
-          role_id: number
+          role_id: string
         }[]
       }
     }

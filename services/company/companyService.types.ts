@@ -1,17 +1,24 @@
+import { IIndustry } from "../../state/industry/industry.types"
+import { Database } from "../_supabase/database"
+
 type PermissionTypes = "write" | "read"
-type AccessLevel = "company" | "job" | "team"
-export interface CreateCompanyPayload {
+type AccessLevel = "company" | "team"
+
+interface CompanyProfile {
   name: string
-  email: string
-  yearFounded: string
+  year_found: string
   logo: string
   website: string
   size: number
   mission: string
-  teamName: string
-  industry: string[]
+  industry: IIndustry[]
+}
+export interface CreateCompanyPayload extends CompanyProfile {
+  email: string
 }
 
+export type UpdateCompanyProfilePayload =
+  Database["public"]["Tables"]["company"]["Update"]
 export interface InviteCompanyMemberPayload {
   email: string
   companyId: string
@@ -19,3 +26,5 @@ export interface InviteCompanyMemberPayload {
   permission: PermissionTypes
   accessLevel: AccessLevel
 }
+export type UpdateCompanyMemberProfile =
+  Database["public"]["Tables"]["company_member_profile"]["Insert"]

@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useRouter } from "next/router"
 import { UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
-import { supabaseClientComponent } from "services/_supabase/client"
+import { supabase, supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./useUserState"
 import { cookieHelper } from "../../helper/cookieHelper"
 

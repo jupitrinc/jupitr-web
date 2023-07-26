@@ -5,12 +5,13 @@ export interface IUserContext {
 
 export interface IUser {
   id: string
+  updated_at?: string
+  avatar_url: string
   name: string
   account_type: string
   email: string
-  avatar_url: string
   created_at: string
-  updated_at: string
+  active: boolean
 }
 
 export enum AccountTypeEnum {
