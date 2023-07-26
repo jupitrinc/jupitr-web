@@ -1,7 +1,7 @@
 import React from "react"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { NumberInput } from "ui-library/form/number-input/NumberInput"
 import { Select } from "ui-library/form/select/Select"
 import { TextInput } from "ui-library/form/text-input/TextInput"

@@ -2,10 +2,11 @@ import { supabase } from "services/_supabase/client"
 import {
   CreateCompanyPayload,
   InviteCompanyMemberPayload,
+  UpdateCompanyProfilePayload,
 } from "./companyService.types"
 
 const useCompanyService = () => {
-  const registerCompany = async (payload: CreateCompanyPayload) => {
+  const addCompany = async (payload: CreateCompanyPayload) => {
     const { data, error } = await supabase.functions.invoke("create-company", {
       body: payload,
     })
@@ -17,7 +18,18 @@ const useCompanyService = () => {
       console.error("create company: ", error)
     }
   }
-
+  const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
+    const { data, error } = await supabase
+      .from("company")
+      .upsert({ ...payload, updated_at: new Date().toISOString() })
+      .select()
+    if (data) {
+      return data
+    }
+    if (error) {
+      console.error("create company: ", error)
+    }
+  }
   const inviteCompanyMember = async (payload: InviteCompanyMemberPayload) => {
     const { data, error } = await supabase.functions.invoke(
       "invite-company-member",
@@ -44,7 +56,12 @@ const useCompanyService = () => {
     }
   }
 
-  return { registerCompany, inviteCompanyMember, getCompanyProfile }
+  return {
+    addCompany,
+    inviteCompanyMember,
+    getCompanyProfile,
+    updateCompanyProfile,
+  }
 }
 
 export default useCompanyService

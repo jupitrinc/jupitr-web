@@ -31,4 +31,5 @@ const test_data = {
   email: "ava@jupitr.tech",
   created_at: "2023-06-11 18:13:59.232382+00",
   updated_at: "2023-06-11 18:13:59.232382+00",
+  active: true,
 }

@@ -11,11 +11,6 @@ import { AccountTypeEnum } from "state/user/user.types"
 export const Navbar = () => {
   const { isLoggedIn, accountType } = useUserState()
   const router = useRouter()
-  const { loadSession } = useUserAction()
-
-  useEffect(() => {
-    loadSession()
-  }, [])
 
   if (
     router.pathname.includes("/login") ||

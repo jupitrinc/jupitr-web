@@ -1,29 +1,19 @@
 import React, { useEffect } from "react"
 import { supabaseClientComponent } from "services/_supabase/client"
+import { useUserAction } from "state/user/useUserAction"
 
 export const Verify = () => {
+  const { getUser } = useUserAction()
+
   useEffect(() => {
     const {
       data: { subscription },
     } = supabaseClientComponent.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && session) {
-        localStorage.setItem("session", JSON.stringify(session))
+        getUser(session.access_token)
+        // localStorage.setItem("session", JSON.stringify(session))
         // router.replace("/profile")
       }
-
-      //   const data = JSON.parse(localStorage.getItem("session") || "{}")
-      //   if (data !== "{}") {
-      //     dispatch({
-      //       type: UserActionEnum.SIGN_IN_SUCCESS,
-      //       payload: {
-      //         ...user,
-      //         id: session?.user?.id || "",
-      //         email: session?.user?.email || "",
-      //         account_type: session?.user?.user_metadata.accountType,
-      //       },
-      //     })
-      //   }
-      //   console.log("useeffect")
     })
     return () => subscription.unsubscribe()
   }, [supabaseClientComponent])

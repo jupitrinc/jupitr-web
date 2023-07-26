@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { TalentProfileActionEnum } from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
-import { ISkill } from "state/company_job/companyJob.types"
+import { ISkill } from "state/skill/skill.types"
 
 export function useTalentProfileAction() {
   const { dispatch } = useContext(TalentProfileContext)

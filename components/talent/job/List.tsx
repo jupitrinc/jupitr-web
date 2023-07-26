@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { Card } from "ui-library/card/Card"
+import { Card } from "ui-library/content/card/Card"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Text } from "ui-library/text/Text"
 import { useTalentJobsState } from "state/talent_jobs/useTalentJobsState"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
-import { Divider } from "ui-library/divider/Divider"
+import { Divider } from "ui-library/content/divider/Divider"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 
 export const List = () => {
