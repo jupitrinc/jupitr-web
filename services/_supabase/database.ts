@@ -17,7 +17,7 @@ export interface Database {
           logo: string | null
           mission: string | null
           name: string | null
-          size: number | null
+          size: string | null
           updated_at: string | null
           website: string | null
           year_founded: string | null
@@ -29,7 +29,7 @@ export interface Database {
           logo?: string | null
           mission?: string | null
           name?: string | null
-          size?: number | null
+          size?: string | null
           updated_at?: string | null
           website?: string | null
           year_founded?: string | null
@@ -41,7 +41,7 @@ export interface Database {
           logo?: string | null
           mission?: string | null
           name?: string | null
-          size?: number | null
+          size?: string | null
           updated_at?: string | null
           website?: string | null
           year_founded?: string | null

@@ -9,7 +9,10 @@ const useAuthService = () => {
       },
     })
   }
-
+  const getSession = async () => {
+    const { data: session } = await supabaseClientComponent.auth.getSession()
+    return session
+  }
   const signInWithGoogle = async () => {
     return await supabaseClientComponent.auth.signInWithOAuth({
       provider: "google",
@@ -27,6 +30,6 @@ const useAuthService = () => {
     return await supabase.auth.signOut()
   }
 
-  return { logout, signInWithOtp, signInWithGoogle }
+  return { logout, signInWithOtp, signInWithGoogle, getSession }
 }
 export default useAuthService
