@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "prettier --write --list-different . && pnpm lint &&  pnpm check-format",
     "check-format": "prettier --check .",
     "format": "prettier --write .",
     "prepare": "husky install",
@@ -15,6 +16,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "update-db-types": "npx supabase gen types typescript --project-id cgbrcxjbovzwarqujqoq --schema public > services/_supabase/database.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm lint:fix"
+    }
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -45,11 +51,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.2",
-    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
     "autoprefixer": "^10.4.14",
     "camelcase-keys": "^8.0.2",
-    "eslint": "^8.41.0",
-    "eslint-config-next": "13.4.4",
+    "eslint": "^8.45.0",
+    "eslint-config-next": "13.4.12",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
