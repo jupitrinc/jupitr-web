@@ -1,18 +1,19 @@
 import { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
-import { UserActionEnum } from "./user.types"
+import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabase, supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./useUserState"
 import useAuthService from "services/auth/useAuthService"
 import useUserService from "services/user/useUserService"
+import { LocalStorage } from "helper/localStorage"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
-  const { user } = useUserState()
+  const router = useRouter()
   const { signInWithOtp, signInWithGoogle } = useAuthService()
   const { getUser: getUserService } = useUserService()
-  const router = useRouter()
+  const { setItem, removeItem } = LocalStorage
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -44,11 +45,20 @@ export function useUserAction() {
     if (error) {
       dispatch({ type: UserActionEnum.GET_USER_FAILURE })
     } else {
+      setItem("user", JSON.stringify(data))
       dispatch({
         type: UserActionEnum.GET_USER_SUCCESS,
         payload: data,
       })
     }
+  }
+
+  const setUser = (user: IUser) => {
+    setItem("user", JSON.stringify(user))
+    dispatch({
+      type: UserActionEnum.GET_USER_SUCCESS,
+      payload: user,
+    })
   }
 
   const signOut = async () => {
@@ -58,7 +68,7 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    localStorage.clear()
+    removeItem("user")
     router.push("/")
   }
 
@@ -67,5 +77,6 @@ export function useUserAction() {
     signInwithGoogleAccount,
     signOut,
     getUser,
+    setUser,
   }
 }

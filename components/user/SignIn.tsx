@@ -11,43 +11,23 @@ import { supabaseClientComponent } from "services/_supabase/client"
 import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import useAuthService from "services/auth/useAuthService"
+import { useUserState } from "state/user/useUserState"
+import { useUserAction } from "state/user/useUserAction"
 
 export const SignIn = () => {
   const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const { signInWithOtp, signInWithGoogle } = useAuthService()
-  const router = useRouter()
-
+  const { loading } = useUserState()
+  const { signInWithEmail, signInwithGoogleAccount } = useUserAction()
   const { notification, showNotification, hideNotification } = useNotification()
-
-  useEffect(() => {
-    if (document.cookie == "") {
-      hideNotification()
-    } else {
-      showNotification()
-    }
-  }, [])
-
-  // hook to check if there is a session created
-  // social auth sessions like google are created client side,
-  // thats why we need to subscribe to this types of events.
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabaseClientComponent.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") router.replace("/profile")
-    })
-
-    return () => subscription.unsubscribe()
-  }, [supabaseClientComponent])
 
   const loginWithEmail = async (e) => {
     e.preventDefault()
-    await signInWithOtp(email)
+    await signInWithEmail(email)
+    showNotification()
   }
 
   const loginWithGoogle = async () => {
-    await signInWithGoogle()
+    await signInwithGoogleAccount()
   }
 
   return (
