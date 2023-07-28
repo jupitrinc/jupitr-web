@@ -17,7 +17,7 @@ const useAuthService = () => {
     return await supabaseClientComponent.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${location.origin}/login`,
+        redirectTo: `${location.origin}/login/verify`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",

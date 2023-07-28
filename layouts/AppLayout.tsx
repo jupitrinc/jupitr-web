@@ -1,8 +1,22 @@
 import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
+import { useUserState } from "state/user/useUserState"
+import { useUserAction } from "state/user/useUserAction"
+import { useEffect } from "react"
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
+  const { isLoggedIn, user } = useUserState()
+  const { setUser } = useUserAction()
+
+  useEffect(() => {
+    const persistedUser = JSON.parse(localStorage.getItem("user"))
+
+    if (!isLoggedIn && persistedUser) {
+      setUser(persistedUser)
+    }
+  }, [isLoggedIn])
+
   return (
     <>
       <Head>

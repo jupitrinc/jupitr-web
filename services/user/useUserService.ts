@@ -10,10 +10,11 @@ const useUserService = () => {
     })
 
     if (data) {
-      return data
+      return { data, error: false }
     }
     if (error) {
       console.error("failed to getUser: ", error)
+      return { ...error, error: true }
     }
   }
 

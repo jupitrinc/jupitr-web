@@ -8,7 +8,7 @@ export const useUserState = () => {
     user: state.data,
     loading: state.loading,
     error: state.error,
-    isLoggedIn: state.data.id ? true : false,
-    accountType: state.data.account_type,
+    isLoggedIn: state.data?.id ? true : false,
+    accountType: state.data?.account_type,
   }
 }
