@@ -45,7 +45,7 @@ export const Navbar = () => {
 const Brand = ({ link }: { link: string }) => {
   return (
     <Link href={link}>
-      <Text as="h1" size="base" bold>
+      <Text as="h1" size="lg" bold>
         jupitr
       </Text>
     </Link>

@@ -6,7 +6,7 @@ import { ToastProps } from "./Toast.types"
 export const Toast: React.FC<ToastProps> = (toast) =>
   toast.show ? (
     <div
-      className="flex flex-row items-center gap-2 p-4 rounded-lg bg-gray-50 absolute m-auto bottom-10 max-w-md left-0 right-0 shadow-md"
+      className="flex flex-row items-center justify-between gap-2 p-4 rounded-lg bg-gray-50 absolute bottom-10 max-w-sm m-auto left-0 right-0 shadow-md"
       role="alert"
     >
       <Text as="span" align="left">

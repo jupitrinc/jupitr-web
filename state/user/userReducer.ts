@@ -9,42 +9,42 @@ export const userReducer = (
       return {
         ...state,
         loading: true,
-        error: false,
+        error: "",
       }
 
     case UserActionEnum.SIGN_IN_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload as string,
       }
 
     case UserActionEnum.SIGN_IN_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: "",
       }
 
     case UserActionEnum.GET_USER_BEGIN:
       return {
         ...state,
         loading: true,
-        error: false,
+        error: "",
       }
 
     case UserActionEnum.GET_USER_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload as string,
       }
 
     case UserActionEnum.GET_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: "",
         data: action.payload as IUser,
       }
 

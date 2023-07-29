@@ -26,10 +26,10 @@ const useAuthService = () => {
     })
   }
 
-  const logout = async () => {
+  const signOut = async () => {
     return await supabase.auth.signOut()
   }
 
-  return { logout, signInWithOtp, signInWithGoogle, getSession }
+  return { signOut, signInWithOtp, signInWithGoogle, getSession }
 }
 export default useAuthService

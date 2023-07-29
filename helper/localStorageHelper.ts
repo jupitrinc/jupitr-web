@@ -1,31 +1,12 @@
-// TODO crear tipado para la utilidad
-
-export const LocalStorage = {
-  /**
-   * Determine if browser supports local storage.
-   *
-   * @return {boolean}
-   */
+export const LocalStorageHelper = {
   isSupported() {
     return typeof Storage !== "undefined"
   },
 
-  /**
-   * Check if key exists in local storage.
-   *
-   * @param {string} key
-   * @return {boolean}
-   */
   hasItem(key) {
     return localStorage.hasOwnProperty(key)
   },
 
-  /**
-   * Retrieve an object from local storage.
-   *
-   * @param {string} key
-   * @return {any}
-   */
   getItem(key) {
     const item = localStorage.getItem(key)
 
@@ -47,13 +28,6 @@ export const LocalStorage = {
     return item
   },
 
-  /**
-   * Save some value to local storage.
-   *
-   * @param {string} key
-   * @param {any} value
-   * @return {void}
-   */
   setItem(key, value) {
     if (typeof key !== "string") {
       throw new TypeError(
@@ -68,12 +42,6 @@ export const LocalStorage = {
     localStorage.setItem(key, value)
   },
 
-  /**
-   * Remove element from local storage.
-   *
-   * @param {string} key
-   * @return {void}
-   */
   removeItem(key) {
     localStorage.removeItem(key)
   },
