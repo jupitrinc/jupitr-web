@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserAction } from "state/user/useUserAction"
-import { IUser } from "state/user/user.types"
+import { AccountTypeEnum, IUser } from "state/user/user.types"
 import { Loader } from "ui-library/loader/Loader"
 import { Text } from "ui-library/text/Text"
 
@@ -28,9 +28,9 @@ export const Verify = () => {
   }, [supabaseClientComponent])
 
   const redirectUser = (user: IUser) => {
-    if (user.account_type === "talent") {
+    if (user.account_type === AccountTypeEnum.talent) {
       router.push("/jobs")
-    } else if (user.account_type === "company") {
+    } else if (user.account_type === AccountTypeEnum.company) {
       router.push("/c/jobs")
     }
   }
