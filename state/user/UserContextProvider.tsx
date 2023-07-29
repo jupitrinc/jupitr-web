@@ -8,7 +8,7 @@ const User = () => {
   const initialState: UserState = {
     data: {} as IUser,
     loading: false,
-    error: false,
+    error: "",
   }
   const [state, dispatch] = useReducer(userReducer, initialState)
 

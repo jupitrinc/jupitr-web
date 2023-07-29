@@ -2,24 +2,27 @@ import { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
-import { supabase, supabaseClientComponent } from "services/_supabase/client"
-import { useUserState } from "./useUserState"
 import useAuthService from "services/auth/useAuthService"
 import useUserService from "services/user/useUserService"
-import { LocalStorage } from "helper/localStorage"
+import { LocalStorageHelper } from "helper/localStorageHelper"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const router = useRouter()
-  const { signInWithOtp, signInWithGoogle } = useAuthService()
+  
+  const {
+    signInWithOtp,
+    signInWithGoogle: signInWithGoogleService,
+    signOut: signOutService,
+  } = useAuthService()
   const { getUser: getUserService } = useUserService()
-  const { setItem, removeItem } = LocalStorage
+  const { setItem, removeItem } = LocalStorageHelper
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithOtp(email)
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
@@ -27,11 +30,11 @@ export function useUserAction() {
     }
   }
 
-  const signInwithGoogleAccount = async () => {
+  const signInWithGoogle = async () => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
-    const { error } = await signInWithGoogle()
+    const { error } = await signInWithGoogleService()
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
@@ -43,9 +46,12 @@ export function useUserAction() {
     dispatch({ type: UserActionEnum.GET_USER_BEGIN })
     const { data, error } = await getUserService(token)
     if (error) {
-      dispatch({ type: UserActionEnum.GET_USER_FAILURE })
+      dispatch({
+        type: UserActionEnum.GET_USER_FAILURE,
+        payload: error.message,
+      })
     } else {
-      setItem("user", JSON.stringify(data))
+      setItem("user", data)
       dispatch({
         type: UserActionEnum.GET_USER_SUCCESS,
         payload: data,
@@ -54,7 +60,7 @@ export function useUserAction() {
   }
 
   const setUser = (user: IUser) => {
-    setItem("user", JSON.stringify(user))
+    setItem("user", user)
     dispatch({
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
@@ -62,19 +68,17 @@ export function useUserAction() {
   }
 
   const signOut = async () => {
-    const { error } = await supabaseClientComponent.auth.signOut()
-    if (error) {
-    }
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
+    signOutService()
     removeItem("user")
     router.push("/")
   }
 
   return {
     signInWithEmail,
-    signInwithGoogleAccount,
+    signInWithGoogle,
     signOut,
     getUser,
     setUser,

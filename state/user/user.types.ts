@@ -27,7 +27,7 @@ export enum AccountPermissionEnum {
 export type UserState = {
   data: IUser
   loading: boolean
-  error: boolean
+  error: string
 }
 
 export type UserAction = {
@@ -39,7 +39,7 @@ export type UserAction = {
     | UserActionEnum.GET_USER_FAILURE
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
-  payload?: IUser
+  payload?: IUser | string
 }
 
 export enum UserActionEnum {

@@ -4,13 +4,14 @@ import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { useEffect } from "react"
+import { LocalStorageHelper } from "helper/localStorageHelper"
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { isLoggedIn } = useUserState()
   const { setUser } = useUserAction()
 
   useEffect(() => {
-    const persistedUser = JSON.parse(localStorage.getItem("user"))
+    const persistedUser = LocalStorageHelper.getItem("user")
 
     if (!isLoggedIn && persistedUser) {
       setUser(persistedUser)
