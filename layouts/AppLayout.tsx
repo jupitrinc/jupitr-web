@@ -6,7 +6,7 @@ import { useUserAction } from "state/user/useUserAction"
 import { useEffect } from "react"
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isLoggedIn, user } = useUserState()
+  const { isLoggedIn } = useUserState()
   const { setUser } = useUserAction()
 
   useEffect(() => {
