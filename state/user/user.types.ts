@@ -35,6 +35,9 @@ export type UserAction = {
     | UserActionEnum.SIGN_IN_BEGIN
     | UserActionEnum.SIGN_IN_FAILURE
     | UserActionEnum.SIGN_IN_SUCCESS
+    | UserActionEnum.GET_USER_BEGIN
+    | UserActionEnum.GET_USER_FAILURE
+    | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
   payload?: IUser
 }
@@ -43,6 +46,10 @@ export enum UserActionEnum {
   SIGN_IN_BEGIN = "SIGN_IN_BEGIN",
   SIGN_IN_FAILURE = "SIGN_IN_FAILURE",
   SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS",
+
+  GET_USER_BEGIN = "GET_USER_BEGIN",
+  GET_USER_FAILURE = "GET_USER_FAILURE",
+  GET_USER_SUCCESS = "GET_USER_SUCCESS",
 
   SIGN_OUT = "SIGN_OUT",
 }

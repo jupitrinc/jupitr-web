@@ -1,31 +1,63 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
-import { UserActionEnum } from "./user.types"
+import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import { supabase, supabaseClientComponent } from "services/_supabase/client"
 import { useUserState } from "./useUserState"
-import { cookieHelper } from "../../helper/cookieHelper"
+import useAuthService from "services/auth/useAuthService"
+import useUserService from "services/user/useUserService"
+import { LocalStorage } from "helper/localStorage"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
-  const { user } = useUserState()
   const router = useRouter()
-  const { deleteAll } = cookieHelper
+  const { signInWithOtp, signInWithGoogle } = useAuthService()
+  const { getUser: getUserService } = useUserService()
+  const { setItem, removeItem } = LocalStorage
 
-  const signInWithOtp = async () => {
+  const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
-    const { data, error } = await supabaseClientComponent.auth.getUser()
+    const { error } = await signInWithOtp(email)
     if (error) {
       dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+    } else {
+      dispatch({
+        type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
     }
+  }
+
+  const signInwithGoogleAccount = async () => {
+    dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
+    const { error } = await signInWithGoogle()
+    if (error) {
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+    } else {
+      dispatch({
+        type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
+    }
+  }
+
+  const getUser = async (token: string) => {
+    dispatch({ type: UserActionEnum.GET_USER_BEGIN })
+    const { data, error } = await getUserService(token)
+    if (error) {
+      dispatch({ type: UserActionEnum.GET_USER_FAILURE })
+    } else {
+      setItem("user", JSON.stringify(data))
+      dispatch({
+        type: UserActionEnum.GET_USER_SUCCESS,
+        payload: data,
+      })
+    }
+  }
+
+  const setUser = (user: IUser) => {
+    setItem("user", JSON.stringify(user))
     dispatch({
-      type: UserActionEnum.SIGN_IN_SUCCESS,
-      payload: {
-        ...user,
-        id: data.user?.id || "",
-        email: data.user?.email || "",
-        account_type: data.user?.user_metadata.accountType,
-      },
+      type: UserActionEnum.GET_USER_SUCCESS,
+      payload: user,
     })
   }
 
@@ -36,12 +68,15 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    deleteAll()
+    removeItem("user")
     router.push("/")
   }
 
   return {
-    signInWithOtp,
+    signInWithEmail,
+    signInwithGoogleAccount,
     signOut,
+    getUser,
+    setUser,
   }
 }

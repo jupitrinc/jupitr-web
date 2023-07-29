@@ -3,7 +3,7 @@ import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
-import { supabaseClientComponent } from "../../../services/_supabase/client"
+import { supabaseClientComponent } from "../../services/_supabase/client"
 
 export const Intro = () => {
   const { user } = useUserState()
