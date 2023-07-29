@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
@@ -9,6 +9,7 @@ import { LocalStorageHelper } from "helper/localStorageHelper"
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const router = useRouter()
+  
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -70,7 +71,6 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-
     signOutService()
     removeItem("user")
     router.push("/")

@@ -19,9 +19,12 @@ export const SignIn = () => {
 
   const loginWithEmail = async (e) => {
     e.preventDefault()
-
     await signInWithEmail(email)
     showNotification()
+  }
+
+  const loginWithGoogle = async () => {
+    await signInwithGoogleAccount()
   }
 
   return (
