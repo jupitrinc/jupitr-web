@@ -9,13 +9,11 @@ const useUserService = () => {
       },
     })
 
-    if (data) {
-      return { data, error: false }
-    }
     if (error) {
       console.error("failed to getUser: ", error)
-      return { ...error, error: true }
     }
+
+    return { data, error }
   }
 
   const updateUser = async (
@@ -26,12 +24,11 @@ const useUserService = () => {
       .upsert(payload)
       .select()
 
-    if (data) {
-      return data
-    }
     if (error) {
-      console.error("failed to update user: ", error)
+      console.error("failed to updateUser: ", error)
     }
+
+    return { data, error }
   }
   return {
     getUser,

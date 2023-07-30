@@ -1,3 +1,5 @@
+import { ITalentProfile } from "state/talent_profile/talentProfile.types"
+
 export interface IUserContext {
   state: UserState
   dispatch: ({ type }: UserAction) => void
@@ -5,13 +7,13 @@ export interface IUserContext {
 
 export interface IUser {
   id: string
-  updated_at?: string
   avatar_url: string
   name: string
   account_type: string
   email: string
-  created_at: string
   active: boolean
+  created_at: string
+  updated_at?: string
 }
 
 export enum AccountTypeEnum {
@@ -39,6 +41,7 @@ export type UserAction = {
     | UserActionEnum.GET_USER_FAILURE
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
+    | UserActionEnum.UPDATE_NAME
   payload?: IUser | string
 }
 
@@ -52,4 +55,6 @@ export enum UserActionEnum {
   GET_USER_SUCCESS = "GET_USER_SUCCESS",
 
   SIGN_OUT = "SIGN_OUT",
+
+  UPDATE_NAME = "UPDATE_NAME",
 }

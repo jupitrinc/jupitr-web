@@ -12,7 +12,7 @@ export type TalentProfileState = {
 }
 
 export interface ITalentProfile {
-  active: boolean
+  searching: boolean
   skills: ISkill[]
   socials: string[]
   preferences: {

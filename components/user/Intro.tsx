@@ -1,17 +1,57 @@
-import React, { useRef, useState } from "react"
+import React, { memo } from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
-import { AccountTypeEnum } from "state/user/user.types"
 import { supabaseClientComponent } from "../../services/_supabase/client"
+import { Uploader } from "ui-library/uploader/Uploader"
+import { useDataState } from "helper/hooks/useDataState"
+import { useUserAction } from "state/user/useUserAction"
 
 export const Intro = () => {
   const { user } = useUserState()
-  const [media, setMedia] = useState()
-  const fileUploadRef = useRef(null)
-  const triggerImageUpload = () => {
-    fileUploadRef?.current?.click()
+
+  return (
+    <div className="space-y-5 text-center">
+      <UserAvatar avatar={user.avatar_url} />
+      <UserName name={user.name} />
+    </div>
+  )
+}
+
+const UserName = memo(({ name }: { name: string }) => {
+  const { value: userName, setValue: setUserName } = useDataState(name)
+  const { user } = useUserState()
+  const { updateName } = useUserAction()
+
+  const update = () => {
+    if (userName && userName !== name) {
+      updateName(user.id, userName)
+    }
   }
+
+  return (
+    <TextInput
+      placeholder="My name is ..."
+      value={userName}
+      onChange={(e) => setUserName(e.target.value)}
+      onBlur={update}
+      light={true}
+      maxLength={50}
+    />
+  )
+})
+
+UserName.displayName = "UserName"
+
+const UserAvatar = memo(({ avatar }: { avatar: string }) => {
+  const { value, setValue } = useDataState(avatar)
+
+  const update = () => {
+    if (value && value !== avatar) {
+      //console.log(value)
+    }
+  }
+
   async function uploadAvatar(event) {
     try {
       if (!event.target.files || event.target.files.length === 0) {
@@ -46,28 +86,19 @@ export const Intro = () => {
       //setUploading(false)
     }
   }
-  return (
-    <div className="space-y-5 text-center">
-      <div>
-        <button onClick={triggerImageUpload}>
-          <Avatar size={36} name_initials="Rafael Magalhaes" />
-        </button>
 
-        <input
-          type="file"
-          ref={fileUploadRef}
-          accept="image/*"
-          onChangeCapture={uploadAvatar}
-          className="hidden"
+  return (
+    <div className="relative">
+      <div className="absolute top-[60%] right-[40%]">
+        <Uploader
+          onChange={uploadAvatar}
+          accept="image/jpg, image/jpeg, image/png"
         />
       </div>
 
-      <TextInput
-        placeholder="My name is ..."
-        defaultValue={user.name}
-        light={true}
-        maxLength={50}
-      />
+      <Avatar size={36} image_url={value} />
     </div>
   )
-}
+})
+
+UserAvatar.displayName = "UserAvatar"
