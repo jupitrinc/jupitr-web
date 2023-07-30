@@ -1,4 +1,5 @@
 import { ISkill } from "state/skill/skill.types"
+import { IUser } from "state/user/user.types"
 
 export interface ITalentProfileContext {
   state: TalentProfileState
@@ -8,10 +9,11 @@ export interface ITalentProfileContext {
 export type TalentProfileState = {
   data: ITalentProfile
   loading: boolean
-  error: boolean
+  error: string
 }
 
-export interface ITalentProfile {
+export interface ITalentProfile extends IUser {
+  user_id: string
   searching: boolean
   skills: ISkill[]
   socials: string[]
@@ -22,19 +24,19 @@ export interface ITalentProfile {
 
 export type TalentProfileAction = {
   type:
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE
-    | TalentProfileActionEnum.GET_TALENT_PROFILE_SUCCESS
+    | TalentProfileActionEnum.SET_TALENT_PROFILE_BEGIN
+    | TalentProfileActionEnum.SET_TALENT_PROFILE_FAILURE
+    | TalentProfileActionEnum.SET_TALENT_PROFILE_SUCCESS
     | TalentProfileActionEnum.ADD_SKILL
     | TalentProfileActionEnum.REMOVE_SKILL
 
-  payload?: ITalentProfile | ISkill
+  payload?: ITalentProfile | ISkill | string
 }
 
 export enum TalentProfileActionEnum {
-  GET_TALENT_PROFILE_BEGIN = "GET_TALENT_PROFILE_BEGIN",
-  GET_TALENT_PROFILE_FAILURE = "GET_TALENT_PROFILE_FAILURE",
-  GET_TALENT_PROFILE_SUCCESS = "GET_TALENT_PROFILE_SUCCESS",
+  SET_TALENT_PROFILE_BEGIN = "SET_TALENT_PROFILE_BEGIN",
+  SET_TALENT_PROFILE_FAILURE = "SET_TALENT_PROFILE_FAILURE",
+  SET_TALENT_PROFILE_SUCCESS = "SET_TALENT_PROFILE_SUCCESS",
 
   ADD_SKILL = "ADD_SKILL",
   REMOVE_SKILL = "REMOVE_SKILL",

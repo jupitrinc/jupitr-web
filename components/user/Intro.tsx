@@ -52,7 +52,7 @@ const UserAvatar = memo(({ avatar }: { avatar: string }) => {
     }
   }
 
-  async function uploadAvatar(event) {
+  /* async function uploadAvatar(event) {
     try {
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error("You must select an image to upload.")
@@ -85,13 +85,13 @@ const UserAvatar = memo(({ avatar }: { avatar: string }) => {
     } finally {
       //setUploading(false)
     }
-  }
+  } */
 
   return (
     <div className="relative">
       <div className="absolute top-[60%] right-[40%]">
         <Uploader
-          onChange={uploadAvatar}
+          // onChange={uploadAvatar}
           accept="image/jpg, image/jpeg, image/png"
         />
       </div>

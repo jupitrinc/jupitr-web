@@ -10,27 +10,26 @@ export const talentProfileReducer = (
   state: TalentProfileState,
   action: TalentProfileAction
 ): TalentProfileState => {
-  console.log(action)
   switch (action.type) {
-    case TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN:
+    case TalentProfileActionEnum.SET_TALENT_PROFILE_BEGIN:
       return {
         ...state,
         loading: true,
-        error: false,
+        error: "",
       }
 
-    case TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE:
+    case TalentProfileActionEnum.SET_TALENT_PROFILE_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload as string,
       }
 
-    case TalentProfileActionEnum.GET_TALENT_PROFILE_SUCCESS:
+    case TalentProfileActionEnum.SET_TALENT_PROFILE_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: "",
         data: action.payload as ITalentProfile,
       }
 
