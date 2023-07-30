@@ -5,7 +5,7 @@ import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { useEffect } from "react"
 import {
-  LocalStorageHelper,
+  localStorageHelper,
   LocalStorageItemEnum,
 } from "helper/localStorageHelper"
 
@@ -14,7 +14,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { setUser } = useUserAction()
 
   useEffect(() => {
-    const persistedUser = LocalStorageHelper.getItem(LocalStorageItemEnum.user)
+    const persistedUser = localStorageHelper.getItem(LocalStorageItemEnum.user)
 
     if (!isLoggedIn && persistedUser) {
       setUser(persistedUser)

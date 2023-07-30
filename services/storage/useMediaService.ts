@@ -1,7 +1,10 @@
 import { supabaseClientComponent } from "../_supabase/client"
-import { DownloadMediaPayload, MediaPayload } from "./media.types"
+import {
+  AddMediaPayload,
+  DownloadMediaPayload,
+  MediaPayload,
+} from "./media.types"
 
-const storageUrl = `https://cgbrcxjbovzwarqujqoq.supabase.co/storage/v1/object/public`
 const useMediaService = () => {
   const uploadMedia = async ({ bucketName, file, filePath }: MediaPayload) => {
     console.log("-> uploadMedia")
@@ -10,13 +13,9 @@ const useMediaService = () => {
       .from(bucketName)
       .upload(filePath, file)
 
-    if (data) {
-      return {
-        data: { url: `${storageUrl}/avatars/${data.path}` },
-      }
-    }
-    if (error) {
-      return { error, data: null }
+    return {
+      data,
+      error,
     }
   }
 
@@ -24,13 +23,10 @@ const useMediaService = () => {
     const { data, error } = await supabaseClientComponent.storage
       .from(bucketName)
       .update(filePath, file, { upsert: true })
-    if (data?.path) {
-      return {
-        data: { url: `${storageUrl}/avatars/${data.path}` },
-      }
-    }
-    if (error) {
-      return error
+
+    return {
+      data,
+      error,
     }
   }
 
@@ -44,6 +40,21 @@ const useMediaService = () => {
     return data
   }
 
-  return { uploadMedia, updateMedia, downloadMedia }
+  const addMedia = async ({
+    bucketName,
+    file,
+    filePath,
+    type,
+  }: AddMediaPayload) => {
+    if (type === "upload") {
+      const { data, error } = await uploadMedia({ bucketName, file, filePath })
+      return { data, error }
+    } else {
+      const { data, error } = await updateMedia({ bucketName, file, filePath })
+      return { data, error }
+    }
+  }
+
+  return { uploadMedia, updateMedia, addMedia, downloadMedia }
 }
 export default useMediaService

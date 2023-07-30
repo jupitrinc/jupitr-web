@@ -7,10 +7,11 @@ import { Button } from "ui-library/button/Button"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { useUserAction } from "state/user/useUserAction"
 import { AccountTypeEnum } from "state/user/user.types"
+import { urlHelper } from "helper/urlHelper"
 
 export const Navbar = () => {
-  const { isLoggedIn, accountType } = useUserState()
   const router = useRouter()
+  const { isLoggedIn, accountType } = useUserState()
 
   if (
     router.pathname.includes("/login") ||
@@ -56,6 +57,7 @@ const TalentMenu = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
+  const { avatarUrl } = urlHelper
 
   return (
     <div className="flex gap-5">
@@ -65,7 +67,7 @@ const TalentMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={user.avatar_url}
+        image_url={avatarUrl(user.avatar_url)}
         options={[
           {
             name: "Profile",
@@ -82,6 +84,7 @@ const CompanyMenu = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
+  const { avatarUrl } = urlHelper
 
   return (
     <div className="flex gap-5">
@@ -91,7 +94,7 @@ const CompanyMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={user.avatar_url}
+        image_url={avatarUrl(user.avatar_url)}
         options={[
           {
             name: "Profile",
