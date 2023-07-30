@@ -1,13 +1,11 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { AppLayout } from "layouts/AppLayout"
-import { GetServerSideProps } from "next"
+import Loading from "layouts/components/Loader"
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserAction } from "state/user/useUserAction"
 import { AccountTypeEnum, IUser } from "state/user/user.types"
-import { Loader } from "ui-library/loader/Loader"
-import { Text } from "ui-library/text/Text"
 
 export const Verify = () => {
   const { setUser } = useUserAction()
@@ -37,10 +35,7 @@ export const Verify = () => {
 
   return (
     <AppLayout>
-      <div className="max-w-sm mx-auto flex flex-col space-y-4 w-full items-center pt-20">
-        <Loader color="standard" className="w-5 h-5" />
-        <Text as="span">Loading...</Text>
-      </div>
+      <Loading />
     </AppLayout>
   )
 }

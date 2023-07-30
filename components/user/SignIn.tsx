@@ -24,7 +24,7 @@ export const SignIn = () => {
   }
 
   const loginWithGoogle = async () => {
-    await signInwithGoogleAccount()
+    await signInWithGoogle()
   }
 
   return (
@@ -63,7 +63,7 @@ export const SignIn = () => {
         color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
-        onClick={signInWithGoogle}
+        onClick={loginWithGoogle}
         size="lg"
         variant="contained"
         loading={loading}
