@@ -23,10 +23,6 @@ export const SignIn = () => {
     showNotification()
   }
 
-  const loginWithGoogle = async () => {
-    await signInWithGoogle()
-  }
-
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
       <div className="mb-20">
@@ -63,7 +59,7 @@ export const SignIn = () => {
         color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
-        onClick={loginWithGoogle}
+        onClick={signInWithGoogle}
         size="lg"
         variant="contained"
         loading={loading}

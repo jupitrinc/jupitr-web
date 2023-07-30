@@ -9,7 +9,7 @@ import { LocalStorageHelper } from "helper/localStorageHelper"
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const router = useRouter()
-  
+
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,

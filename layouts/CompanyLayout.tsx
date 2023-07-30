@@ -9,7 +9,7 @@ const CompanyLayout = ({ children }) => {
   if (user.account_type !== AccountTypeEnum.company) {
     return <Error />
   } else {
-    return <>{children}</>
+    return children
   }
 }
 

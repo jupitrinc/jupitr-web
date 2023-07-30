@@ -9,7 +9,7 @@ const TalentLayout = ({ children }) => {
   if (user.account_type !== AccountTypeEnum.talent) {
     return <Error />
   } else {
-    return <>{children}</>
+    return children
   }
 }
 
