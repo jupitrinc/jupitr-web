@@ -23,10 +23,6 @@ export const SignIn = () => {
     showNotification()
   }
 
-  const loginWithGoogle = async () => {
-    await signInwithGoogleAccount()
-  }
-
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
       <div className="mb-20">
@@ -48,6 +44,7 @@ export const SignIn = () => {
         icon={<ChevronRight />}
         placeHolder="Email address"
         loading={loading}
+        disabled={loading}
         required={true}
       />
 
@@ -66,7 +63,7 @@ export const SignIn = () => {
         onClick={signInWithGoogle}
         size="lg"
         variant="contained"
-        loading={loading}
+        disabled={loading}
       />
 
       <Toast

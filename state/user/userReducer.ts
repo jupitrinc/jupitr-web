@@ -54,6 +54,16 @@ export const userReducer = (
         data: {} as IUser,
       }
 
+    case UserActionEnum.UPDATE_NAME:
+      const update_name_payload = action.payload as string
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          name: update_name_payload,
+        } as IUser,
+      }
+
     default:
       return state
   }

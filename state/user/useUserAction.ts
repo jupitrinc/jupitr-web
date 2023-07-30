@@ -1,21 +1,24 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import useAuthService from "services/auth/useAuthService"
 import useUserService from "services/user/useUserService"
-import { LocalStorageHelper } from "helper/localStorageHelper"
+import {
+  LocalStorageHelper,
+  LocalStorageItemEnum,
+} from "helper/localStorageHelper"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const router = useRouter()
-  
+
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
   } = useAuthService()
-  const { getUser: getUserService } = useUserService()
+  const { getUser: getUserService, updateUser } = useUserService()
   const { setItem, removeItem } = LocalStorageHelper
 
   const signInWithEmail = async (email: string) => {
@@ -51,7 +54,7 @@ export function useUserAction() {
         payload: error.message,
       })
     } else {
-      setItem("user", data)
+      setItem(LocalStorageItemEnum.user, data)
       dispatch({
         type: UserActionEnum.GET_USER_SUCCESS,
         payload: data,
@@ -60,7 +63,7 @@ export function useUserAction() {
   }
 
   const setUser = (user: IUser) => {
-    setItem("user", user)
+    setItem(LocalStorageItemEnum.user, user)
     dispatch({
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
@@ -72,8 +75,19 @@ export function useUserAction() {
       type: UserActionEnum.SIGN_OUT,
     })
     signOutService()
-    removeItem("user")
+    removeItem(LocalStorageItemEnum.user)
     router.push("/")
+  }
+
+  const updateName = async (id: string, name: string) => {
+    const { data, error } = await updateUser({ id: id, name: name })
+
+    if (data) {
+      dispatch({
+        type: UserActionEnum.UPDATE_NAME,
+        payload: data.name,
+      })
+    }
   }
 
   return {
@@ -82,5 +96,6 @@ export function useUserAction() {
     signOut,
     getUser,
     setUser,
+    updateName,
   }
 }

@@ -1,20 +1,18 @@
 import { createContext, useReducer } from "react"
-
 import { talentProfileReducer } from "./talentProfileReducer"
 import {
   ITalentProfile,
   ITalentProfileContext,
   TalentProfileState,
 } from "./talentProfile.types"
-import { supabase } from "../../services/_supabase/client"
 
 export const TalentProfileContext = createContext({} as ITalentProfileContext)
 
 const TalentProfile = () => {
   const initialState: TalentProfileState = {
-    data: test_data as ITalentProfile,
+    data: {} as ITalentProfile,
     loading: false,
-    error: false,
+    error: "",
   }
   const [state, dispatch] = useReducer(talentProfileReducer, initialState)
 
@@ -33,7 +31,7 @@ export const TalentProfileContextProvider: React.FC<any> = ({ children }) => {
 }
 
 const test_data = {
-  active: true,
+  searching: true,
   skills: [
     { id: "1", name: "NLP", level: 3 },
     { id: "2", name: "Pytorch", level: 2 },

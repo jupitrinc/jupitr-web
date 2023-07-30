@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { memo, useState } from "react"
 import { Button } from "ui-library/button/Button"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
@@ -6,15 +6,11 @@ import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
 import { Plus, X } from "lucide-react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
-import { useTalentProfileState } from "state/talent_profile/useTalentProfileState"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import { ISkill } from "state/skill/skill.types"
 
-export const Skills = () => {
-  const { talent_profile } = useTalentProfileState()
-  const skills = talent_profile.skills
-
+export const Skills = memo(({ skills }: { skills: ISkill[] }) => {
   const [newSkill, setNewSkill] = useState<string>("")
   const { addSkill } = useTalentProfileAction()
 
@@ -39,30 +35,27 @@ export const Skills = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-5">
-        {skills.map((skill) => (
-          <SkillCard skill={skill} key={skill.id} />
-        ))}
+        {skills &&
+          skills.map((skill) => <SkillCard skill={skill} key={skill.id} />)}
       </div>
     </Card>
   )
-}
+})
 
-export interface SkillCardProps {
-  skill: ISkill
-}
+Skills.displayName = "Skills"
 
-export const SkillCard: React.FC<SkillCardProps> = (card) => {
-  const [level, setLevel] = useState(card.skill.level)
+export const SkillCard = ({ skill }: { skill: ISkill }) => {
+  const [level, setLevel] = useState(skill.level)
   const { removeSkill } = useTalentProfileAction()
   return (
     <Card type="static">
       <div className="flex justify-between mb-3">
         <Text as="span" size="lg">
-          {card.skill.name}
+          {skill.name}
         </Text>
 
         <Button
-          onClick={() => removeSkill(card.skill)}
+          onClick={() => removeSkill(skill)}
           icon={<X className="h-4 w-4" />}
           size="base"
           color="standard"

@@ -47,22 +47,18 @@ export const Skills = () => {
   )
 }
 
-export interface SkillCardProps {
-  skill: ISkill
-}
-
-export const SkillCard: React.FC<SkillCardProps> = (card) => {
-  const [level, setLevel] = useState(card.skill.level)
+export const SkillCard = ({ skill }: { skill: ISkill }) => {
+  const [level, setLevel] = useState(skill.level)
   const { removeSkill } = useTalentProfileAction()
   return (
     <Card type="static">
       <div className="flex justify-between mb-3">
         <Text as="span" size="lg">
-          {card.skill.name}
+          {skill.name}
         </Text>
 
         <Button
-          onClick={() => removeSkill(card.skill)}
+          onClick={() => removeSkill(skill)}
           icon={<X className="h-4 w-4" />}
           size="base"
           color="standard"

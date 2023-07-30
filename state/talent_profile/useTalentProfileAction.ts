@@ -1,43 +1,26 @@
 import { useContext } from "react"
-import { TalentProfileActionEnum } from "./talentProfile.types"
+import { ITalentProfile, TalentProfileActionEnum } from "./talentProfile.types"
 import { TalentProfileContext } from "./TalentProfileContext"
 import { ISkill } from "state/skill/skill.types"
 
 export function useTalentProfileAction() {
   const { dispatch } = useContext(TalentProfileContext)
 
-  const getProfile = async (language: string) => {
-    if (!language) return
+  const setProfile = async (user: ITalentProfile) => {
+    dispatch({
+      type: TalentProfileActionEnum.SET_TALENT_PROFILE_BEGIN,
+    })
 
-    const catchError = (errorMessage: string) => {
+    if (!user.user_id) {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE,
+        type: TalentProfileActionEnum.SET_TALENT_PROFILE_FAILURE,
+        payload: "Failed to get talent profile",
       })
-
-      console.log(errorMessage)
-    }
-
-    try {
+    } else {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN,
+        type: TalentProfileActionEnum.SET_TALENT_PROFILE_SUCCESS,
+        payload: user,
       })
-
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: TalentProfileActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
-          }
-        }
-      } */
-    } catch (error) {
-      catchError(error as string)
     }
   }
 
@@ -62,7 +45,7 @@ export function useTalentProfileAction() {
   }
 
   return {
-    getProfile,
+    setProfile,
     addSkill,
     removeSkill,
   }
