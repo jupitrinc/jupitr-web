@@ -44,59 +44,53 @@ const UserName = memo(({ name }: { name: string }) => {
 UserName.displayName = "UserName"
 
 const UserAvatar = memo(({ avatar }: { avatar: string }) => {
-  const { value, setValue } = useDataState(avatar)
-
-  const update = () => {
-    if (value && value !== avatar) {
-      //console.log(value)
-    }
-  }
-
-  /* async function uploadAvatar(event) {
+  const { value: avatar_url, setValue: setAvatar } = useDataState(avatar)
+  const { user } = useUserState()
+  const { updateAvatar, uploadAvatar } = useUserAction()
+  async function handleImageUpload(event) {
     try {
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error("You must select an image to upload.")
       }
 
       const file = event.target.files[0]
-
       const fileExt = file.name.split(".").pop()
       const fileName = `avatar.${fileExt}`
       const filePath = `${user.id}/${fileName}`
-
-      const { error: uploadError } = await supabaseClientComponent.storage
-        .from("avatars")
-        .upload(filePath, file)
-
-      if (uploadError) {
-        if (uploadError?.error.toLowerCase() === "duplicate") {
-          const { error } = await supabaseClientComponent.storage
-            .from("avatars")
-            .update(filePath, file, { upsert: true })
-          if (error) {
-            throw error
-          }
-        } else {
-          throw uploadError
-        }
+      if (user?.avatar_url && !user?.avatar_url.includes("google")) {
+        await updateAvatar(
+          {
+            file,
+            filePath,
+          },
+          user.id
+        )
+      } else {
+        await uploadAvatar(
+          {
+            file,
+            filePath,
+          },
+          user.id
+        )
       }
     } catch (error) {
       alert(error.message)
     } finally {
       //setUploading(false)
     }
-  } */
+  }
 
   return (
     <div className="relative">
       <div className="absolute top-[60%] right-[40%]">
         <Uploader
-          // onChange={uploadAvatar}
+          onChange={handleImageUpload}
           accept="image/jpg, image/jpeg, image/png"
         />
       </div>
 
-      <Avatar size={36} image_url={value} />
+      <Avatar size={36} image_url={avatar_url} />
     </div>
   )
 })

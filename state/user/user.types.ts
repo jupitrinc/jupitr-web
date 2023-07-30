@@ -42,6 +42,7 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
+    | UserActionEnum.UPDATE_AVATAR
   payload?: IUser | string
 }
 
@@ -57,4 +58,6 @@ export enum UserActionEnum {
   SIGN_OUT = "SIGN_OUT",
 
   UPDATE_NAME = "UPDATE_NAME",
+
+  UPDATE_AVATAR = "UPDATE_AVATAR",
 }

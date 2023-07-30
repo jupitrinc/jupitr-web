@@ -1,13 +1,16 @@
-import { supabase } from "../_supabase/client"
+import { supabaseClientComponent } from "../_supabase/client"
 import { Database } from "../_supabase/database"
 
 const useUserService = () => {
   const getUser = async (access_token: string) => {
-    const { data, error } = await supabase.functions.invoke("users", {
-      headers: {
-        "access_token": access_token,
-      },
-    })
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "users",
+      {
+        headers: {
+          "access_token": access_token,
+        },
+      }
+    )
 
     if (error) {
       console.error("failed to getUser: ", error)
@@ -19,7 +22,7 @@ const useUserService = () => {
   const updateUser = async (
     payload: Database["public"]["Tables"]["users"]["Insert"]
   ) => {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClientComponent
       .from("users")
       .upsert(payload)
       .select()

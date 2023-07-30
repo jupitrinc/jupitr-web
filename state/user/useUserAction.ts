@@ -8,18 +8,20 @@ import {
   LocalStorageHelper,
   LocalStorageItemEnum,
 } from "helper/localStorageHelper"
+import { MediaPayload } from "../../services/storage/media.types"
+import useMediaService from "../../services/storage/useMediaService"
 
 export function useUserAction() {
   const { dispatch } = useContext(UserContext)
   const router = useRouter()
-
+  const { updateMedia, uploadMedia } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
-  const { setItem, removeItem } = LocalStorageHelper
+  const { setItem, removeItem, getItem } = LocalStorageHelper
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -83,13 +85,62 @@ export function useUserAction() {
     const { data, error } = await updateUser({ id: id, name: name })
 
     if (data) {
+      setItem(LocalStorageItemEnum.user, {
+        ...getItem("user"),
+        name,
+      })
       dispatch({
         type: UserActionEnum.UPDATE_NAME,
         payload: data.name,
       })
     }
   }
-
+  const updateAvatar = async (payload: MediaPayload, userId: string) => {
+    const { data, error } = await updateMedia({
+      ...payload,
+      bucketName: "avatars",
+    })
+    if (data) {
+      await updateUser({
+        id: userId,
+        avatar_url: data.url,
+      })
+      setItem(LocalStorageItemEnum.user, {
+        ...getItem("user"),
+        avatar_url: data.url,
+      })
+      dispatch({
+        type: UserActionEnum.UPDATE_AVATAR,
+        payload: data.url,
+      })
+    }
+    if (error) {
+      console.error("updateAvatar -> error", error)
+    }
+  }
+  const uploadAvatar = async (payload: MediaPayload, userId: string) => {
+    const { data, error } = await uploadMedia({
+      ...payload,
+      bucketName: "avatars",
+    })
+    if (data) {
+      await updateUser({
+        id: userId,
+        avatar_url: data.url,
+      })
+      setItem(LocalStorageItemEnum.user, {
+        ...getItem("user"),
+        avatar_url: data.url,
+      })
+      dispatch({
+        type: UserActionEnum.UPDATE_AVATAR,
+        payload: data.url,
+      })
+    }
+    if (error) {
+      console.error("uploadAvatar -> error", error)
+    }
+  }
   return {
     signInWithEmail,
     signInWithGoogle,
@@ -97,5 +148,7 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    updateAvatar,
+    uploadAvatar,
   }
 }
