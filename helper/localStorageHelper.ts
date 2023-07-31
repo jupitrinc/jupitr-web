@@ -2,7 +2,7 @@ export enum LocalStorageItemEnum {
   user = "user",
 }
 
-export const LocalStorageHelper = {
+export const localStorageHelper = {
   isSupported() {
     return typeof Storage !== "undefined"
   },
