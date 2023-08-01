@@ -1,21 +1,16 @@
-import React, { memo } from "react"
+import React from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
-import { useUserState } from "state/user/useUserState"
-import { useDataState } from "helper/hooks/useDataState"
+import { useStringState } from "helper/hooks/useDataState"
 import { useUserAction } from "state/user/useUserAction"
-import { IUser } from "state/user/user.types"
+import { useUserState } from "state/user/useUserState"
 
-interface props {
-  name: IUser["name"]
-}
-
-export const UserName: React.FC<props> = memo((props) => {
-  const { value, setValue } = useDataState(props.name)
+export const UserName = () => {
   const { user } = useUserState()
   const { updateName } = useUserAction()
+  const { value, setValue } = useStringState(user.name)
 
   const update = () => {
-    if (value && value !== props.name) {
+    if (value && value !== user.name) {
       updateName(user.id, value)
     }
   }
@@ -30,6 +25,4 @@ export const UserName: React.FC<props> = memo((props) => {
       maxLength={50}
     />
   )
-})
-
-UserName.displayName = "UserName"
+}

@@ -9,7 +9,10 @@ export const Uploader: React.FC<UploaderProps> = (uploader) => {
   const styles = uploaderStyles
 
   return (
-    <fieldset>
+    <fieldset
+      className={styles.container}
+      onClick={() => inputRef.current?.click()}
+    >
       <input
         className={styles.input}
         type="file"
@@ -20,11 +23,14 @@ export const Uploader: React.FC<UploaderProps> = (uploader) => {
         ref={inputRef}
       ></input>
 
-      <Button
-        onClick={() => inputRef.current?.click()}
-        icon={<ImagePlus className={styles.icon} />}
-        disabled={uploader.disabled}
-      />
+      <div className={styles.button}>
+        <Button
+          icon={<ImagePlus className={styles.icon} />}
+          disabled={uploader.disabled}
+        />
+      </div>
+
+      {uploader.children}
     </fieldset>
   )
 }

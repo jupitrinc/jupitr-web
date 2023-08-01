@@ -1,17 +1,6 @@
 import { ISkill } from "state/skill/skill.types"
 import { IUser } from "state/user/user.types"
 
-export interface ITalentProfileContext {
-  state: TalentProfileState
-  dispatch: ({ type }: TalentProfileAction) => void
-}
-
-export type TalentProfileState = {
-  data: ITalentProfile
-  loading: boolean
-  error: string
-}
-
 export interface ITalentProfile extends IUser {
   user_id: string
   searching: boolean
@@ -24,20 +13,20 @@ export interface ITalentProfile extends IUser {
 
 export type TalentProfileAction = {
   type:
-    | TalentProfileActionEnum.SET_TALENT_PROFILE_BEGIN
-    | TalentProfileActionEnum.SET_TALENT_PROFILE_FAILURE
-    | TalentProfileActionEnum.SET_TALENT_PROFILE_SUCCESS
+    | TalentProfileActionEnum.UPDATE_SOCIALS
+    | TalentProfileActionEnum.UPDATE_LOCATION
     | TalentProfileActionEnum.ADD_SKILL
     | TalentProfileActionEnum.REMOVE_SKILL
+    | TalentProfileActionEnum.UPDATE_SKILL
 
-  payload?: ITalentProfile | ISkill | string
+  payload?: ITalentProfile["socials"] | ITalentProfile["preferences"] | ISkill[]
 }
 
 export enum TalentProfileActionEnum {
-  SET_TALENT_PROFILE_BEGIN = "SET_TALENT_PROFILE_BEGIN",
-  SET_TALENT_PROFILE_FAILURE = "SET_TALENT_PROFILE_FAILURE",
-  SET_TALENT_PROFILE_SUCCESS = "SET_TALENT_PROFILE_SUCCESS",
+  UPDATE_SOCIALS = "UPDATE_SOCIALS",
+  UPDATE_LOCATION = "UPDATE_LOCATION",
 
   ADD_SKILL = "ADD_SKILL",
   REMOVE_SKILL = "REMOVE_SKILL",
+  UPDATE_SKILL = "UPDATE_SKILL",
 }
