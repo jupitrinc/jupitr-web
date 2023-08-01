@@ -1,23 +1,8 @@
 import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
-import { useUserState } from "state/user/useUserState"
-import { useUserAction } from "state/user/useUserAction"
-import { useEffect } from "react"
-import { LocalStorageHelper } from "helper/localStorageHelper"
 
-export const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isLoggedIn } = useUserState()
-  const { setUser } = useUserAction()
-
-  useEffect(() => {
-    const persistedUser = LocalStorageHelper.getItem("user")
-
-    if (!isLoggedIn && persistedUser) {
-      setUser(persistedUser)
-    }
-  }, [isLoggedIn])
-
+export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>

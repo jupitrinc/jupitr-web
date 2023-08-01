@@ -1,5 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { AppLayout } from "layouts/AppLayout"
+import { WebsiteLayout } from "layouts/WebsiteLayout"
 import Loading from "layouts/components/Loader"
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
@@ -34,9 +33,9 @@ export const Verify = () => {
   }
 
   return (
-    <AppLayout>
+    <WebsiteLayout>
       <Loading />
-    </AppLayout>
+    </WebsiteLayout>
   )
 }
 

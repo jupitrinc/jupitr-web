@@ -1,12 +1,12 @@
-import { AppLayout } from "layouts/AppLayout"
+import { WebsiteLayout } from "layouts/WebsiteLayout"
 import { Text } from "ui-library/text/Text"
 
 export default function Home() {
   return (
-    <AppLayout>
+    <WebsiteLayout>
       <div className="text-center">
         <Text as="h1">Website homepage</Text>
       </div>
-    </AppLayout>
+    </WebsiteLayout>
   )
 }

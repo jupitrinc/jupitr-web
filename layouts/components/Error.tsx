@@ -8,7 +8,7 @@ const Error = () => {
         404 Page not found
       </Text>
       <Text as="span">
-        It looks like th epage you requested does not exists.
+        It looks like the page you requested does not exists.
       </Text>
     </div>
   )

@@ -72,8 +72,8 @@ export function useUserAction() {
       type: UserActionEnum.SIGN_OUT,
     })
     signOutService()
-    removeItem("user")
     router.push("/")
+    removeItem("user")
   }
 
   return {
