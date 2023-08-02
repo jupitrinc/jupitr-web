@@ -1,13 +1,13 @@
-import { AppLayout } from "layouts/AppLayout"
-import { CompanyProfileContextProvider } from "state/company_profile/CompanyProfileContext"
+import { CompanyAppLayout } from "layouts/CompanyAppLayout"
 import { Sections } from "components/company/profile/Sections"
+import { CompanyMemberProfileContextProvider } from "state/company_member_profile/CompanyMemberProfileContext"
 
 export default function CompanyProfile() {
   return (
-    <AppLayout>
-      <CompanyProfileContextProvider>
+    <CompanyAppLayout>
+      <CompanyMemberProfileContextProvider>
         <Sections />
-      </CompanyProfileContextProvider>
-    </AppLayout>
+      </CompanyMemberProfileContextProvider>
+    </CompanyAppLayout>
   )
 }
