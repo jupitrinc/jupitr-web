@@ -33,9 +33,12 @@ export const Select: React.FC<SelectProps> = (select) => {
         onChange={select.onChange}
       >
         {select.options.map((option) => (
-          <option key={getId(option)} value={getName(option)}>{`${getName(
-            option
-          )}${select.magic_word ? " " + select.magic_word : ""}`}</option>
+          <option
+            key={getId(option)}
+            value={JSON.stringify(option)}
+          >{`${getName(option)}${
+            select.magic_word ? " " + select.magic_word : ""
+          }`}</option>
         ))}
       </select>
     </div>

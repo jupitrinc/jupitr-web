@@ -1,8 +1,11 @@
+import { ReactNode } from "react"
+
 export interface UploaderProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   accept: FileType
   disabled?: boolean
   name?: string
+  children: ReactNode
 }
 
 type FileType =

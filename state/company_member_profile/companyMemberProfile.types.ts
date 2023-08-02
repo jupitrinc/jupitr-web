@@ -1,14 +1,3 @@
-export interface ICompanyMemberProfileContext {
-  state: CompanyMemberProfileState
-  dispatch: ({ type }: CompanyMemberProfileAction) => void
-}
-
-export type CompanyMemberProfileState = {
-  data: ICompanyMemberProfile
-  loading: boolean
-  error: boolean
-}
-
 export interface ICompanyMemberProfile {
   user_id: string
   job_title: string
@@ -17,16 +6,11 @@ export interface ICompanyMemberProfile {
 }
 
 export type CompanyMemberProfileAction = {
-  type:
-    | CompanyMemberProfileActionEnum.GET_COMPANY_MEMBER_PROFILE_BEGIN
-    | CompanyMemberProfileActionEnum.GET_COMPANY_MEMBER_PROFILE_FAILURE
-    | CompanyMemberProfileActionEnum.GET_COMPANY_MEMBER_PROFILE_SUCCESS
+  type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE
 
-  payload?: ICompanyMemberProfile
+  payload?: ICompanyMemberProfile["job_title"]
 }
 
 export enum CompanyMemberProfileActionEnum {
-  GET_COMPANY_MEMBER_PROFILE_BEGIN = "GET_COMPANY_MEMBER_PROFILE_BEGIN",
-  GET_COMPANY_MEMBER_PROFILE_FAILURE = "GET_COMPANY_MEMBER_PROFILE_FAILURE",
-  GET_COMPANY_MEMBER_PROFILE_SUCCESS = "GET_COMPANY_MEMBER_PROFILE_SUCCESS",
+  UPDATE_JOB_TITLE = "UPDATE_JOB_TITLE",
 }

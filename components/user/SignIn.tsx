@@ -44,6 +44,7 @@ export const SignIn = () => {
         icon={<ChevronRight />}
         placeHolder="Email address"
         loading={loading}
+        disabled={loading}
         required={true}
       />
 
@@ -62,7 +63,7 @@ export const SignIn = () => {
         onClick={signInWithGoogle}
         size="lg"
         variant="contained"
-        loading={loading}
+        disabled={loading}
       />
 
       <Toast

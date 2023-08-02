@@ -1,22 +1,24 @@
 import React from "react"
 import { Card } from "ui-library/content/card/Card"
-import { Select } from "ui-library/form/select/Select"
-import { Intro } from "../../user/Intro"
 import { SocialLinks } from "./SocialLinks"
 import { Skills } from "./Skills"
 import { AccountSettings } from "components/user/account-settings/AccountSettings"
-import { static_data_locations } from "data/location"
+import { useUserState } from "state/user/useUserState"
+import { UserProfile } from "components/user/profile/UserProfile"
+import { Location } from "./Location"
 
 export const Sections: React.FC = () => {
+  const { user } = useUserState()
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <Card type="section">
-        <Intro />
-        <SocialLinks />
-        <Select options={static_data_locations} label="Location" />
+        <UserProfile />
+        <SocialLinks socials={user.socials} user_id={user.user_id} />
+        <Location />
       </Card>
 
-      <Skills />
+      <Skills skills={user.skills} />
 
       <AccountSettings />
     </div>

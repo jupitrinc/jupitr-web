@@ -1,69 +1,130 @@
 import { useContext } from "react"
-import { TalentProfileActionEnum } from "./talentProfile.types"
-import { TalentProfileContext } from "./TalentProfileContext"
+import { ITalentProfile, TalentProfileActionEnum } from "./talentProfile.types"
 import { ISkill } from "state/skill/skill.types"
+import { useTalentProfileService } from "services/talent/useTalentProfileService"
+import { UserContext } from "state/user/UserContextProvider"
 
 export function useTalentProfileAction() {
-  const { dispatch } = useContext(TalentProfileContext)
+  const { updateProfile } = useTalentProfileService()
+  const { dispatch } = useContext(UserContext)
 
-  const getProfile = async (language: string) => {
-    if (!language) return
+  const updateSocials = async (
+    user_id: ITalentProfile["user_id"],
+    socials: ITalentProfile["socials"]
+  ) => {
+    if (!user_id) return
 
-    const catchError = (errorMessage: string) => {
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      socials: socials,
+    })
+
+    if (data) {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_FAILURE,
+        type: TalentProfileActionEnum.UPDATE_SOCIALS,
+        payload: data.socials,
       })
-
-      console.log(errorMessage)
     }
+  }
 
-    try {
+  const updateLocation = async (
+    user_id: ITalentProfile["user_id"],
+    newLocation: ITalentProfile["preferences"]["location"],
+    preferences: ITalentProfile["preferences"]
+  ) => {
+    if (!user_id) return
+
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      preferences: { ...preferences, location: newLocation },
+    })
+
+    if (data) {
       dispatch({
-        type: TalentProfileActionEnum.GET_TALENT_PROFILE_BEGIN,
+        type: TalentProfileActionEnum.UPDATE_LOCATION,
+        payload: data.preferences,
       })
+    }
+  }
 
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: TalentProfileActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
+  const addSkill = async (
+    user_id: ITalentProfile["user_id"],
+    newSkill: ISkill,
+    skills: ISkill[]
+  ) => {
+    if (
+      !user_id ||
+      !newSkill.id ||
+      (skills && skills.filter((s) => s.id === newSkill.id).length > 0)
+    )
+      return
+
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      skills: skills ? [...skills, newSkill] : [newSkill],
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.ADD_SKILL,
+        payload: data.skills,
+      })
+    }
+  }
+
+  const removeSkill = async (
+    user_id: ITalentProfile["user_id"],
+    skill: ISkill,
+    skills: ISkill[]
+  ) => {
+    if (!user_id || !skill.id) return
+
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      skills: skills.filter((s) => s.id !== skill.id),
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.REMOVE_SKILL,
+        payload: data.skills,
+      })
+    }
+  }
+
+  const updateSkill = async (
+    user_id: ITalentProfile["user_id"],
+    skill: ISkill,
+    skills: ISkill[]
+  ) => {
+    if (!user_id || !skill.id) return
+
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      skills: skills.map((s) => {
+        if (s.id === skill.id) {
+          return {
+            ...s,
+            level: skill.level,
           }
         }
-      } */
-    } catch (error) {
-      catchError(error as string)
+        return s
+      }),
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.REMOVE_SKILL,
+        payload: data.skills,
+      })
     }
-  }
-
-  const addSkill = (skill: ISkill) => {
-    const { id, name, level } = skill
-    if (!id || !name.trim() || !level) return
-
-    dispatch({
-      type: TalentProfileActionEnum.ADD_SKILL,
-      payload: skill,
-    })
-  }
-
-  const removeSkill = (skill: ISkill) => {
-    const { id, name, level } = skill
-    if (!id || !name.trim() || !level) return
-
-    dispatch({
-      type: TalentProfileActionEnum.REMOVE_SKILL,
-      payload: skill,
-    })
   }
 
   return {
-    getProfile,
+    updateSocials,
+    updateLocation,
     addSkill,
     removeSkill,
+    updateSkill,
   }
 }

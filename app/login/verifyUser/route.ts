@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 import useUserService from "services/user/useUserService"
 
 export async function GET() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { getUser: getUserService } = useUserService()
   const supabase = createServerComponentClient({ cookies })
   const userSession = await supabase.auth.getSession()

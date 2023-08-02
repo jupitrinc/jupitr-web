@@ -1,22 +1,26 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import useAuthService from "services/auth/useAuthService"
 import useUserService from "services/user/useUserService"
-import { LocalStorageHelper } from "helper/localStorageHelper"
+import {
+  MediaPayload,
+  StorageBucketsEnum,
+} from "../../services/storage/media.types"
+import useMediaService from "../../services/storage/useMediaService"
 
 export function useUserAction() {
-  const { dispatch } = useContext(UserContext)
   const router = useRouter()
+  const { dispatch } = useContext(UserContext)
 
+  const { addMedia } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
   } = useAuthService()
-  const { getUser: getUserService } = useUserService()
-  const { setItem, removeItem } = LocalStorageHelper
+  const { getUser: getUserService, updateUser } = useUserService()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -51,7 +55,6 @@ export function useUserAction() {
         payload: error.message,
       })
     } else {
-      setItem("user", data)
       dispatch({
         type: UserActionEnum.GET_USER_SUCCESS,
         payload: data,
@@ -60,7 +63,6 @@ export function useUserAction() {
   }
 
   const setUser = (user: IUser) => {
-    setItem("user", user)
     dispatch({
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
@@ -73,7 +75,44 @@ export function useUserAction() {
     })
     signOutService()
     router.push("/")
-    removeItem("user")
+  }
+
+  const updateName = async (id: string, name: string) => {
+    const { data, error } = await updateUser({ id: id, name: name })
+
+    if (data) {
+      dispatch({
+        type: UserActionEnum.UPDATE_NAME,
+        payload: data[0].name,
+      })
+    }
+  }
+  const updateAvatar = (
+    file: MediaPayload["file"],
+    filePath: MediaPayload["filePath"],
+    userId: string,
+    type: "update" | "upload"
+  ) => {
+    addMedia({
+      bucketName: StorageBucketsEnum.avatars,
+      file,
+      filePath,
+      type,
+    }).then(({ data, error }) => {
+      if (data?.path) {
+        updateUser({
+          id: userId,
+          avatar_url: data?.path,
+        }).then(({ data, error }) => {
+          if (data) {
+            dispatch({
+              type: UserActionEnum.UPDATE_AVATAR,
+              payload: data[0].avatar_url,
+            })
+          }
+        })
+      }
+    })
   }
 
   return {
@@ -82,5 +121,7 @@ export function useUserAction() {
     signOut,
     getUser,
     setUser,
+    updateName,
+    updateAvatar,
   }
 }
