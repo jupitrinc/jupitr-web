@@ -19,6 +19,7 @@ export const UserName = () => {
     <TextInput
       placeholder="My name is ..."
       value={value}
+      name="user-name"
       onChange={(e) => setValue(e.target.value)}
       onBlur={update}
       light={true}

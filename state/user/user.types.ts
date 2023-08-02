@@ -1,4 +1,7 @@
-import { ICompanyMemberProfile } from "state/company_member_profile/companyMemberProfile.types"
+import {
+  CompanyMemberProfileAction,
+  ICompanyMemberProfile,
+} from "state/company_member_profile/companyMemberProfile.types"
 import {
   ITalentProfile,
   TalentProfileAction,
@@ -6,7 +9,9 @@ import {
 
 export interface IUserContext {
   state: UserState
-  dispatch: ({ type }: UserAction | TalentProfileAction) => void
+  dispatch: ({
+    type,
+  }: UserAction | TalentProfileAction | CompanyMemberProfileAction) => void
 }
 
 export interface IUser {

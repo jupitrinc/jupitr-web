@@ -1,46 +1,37 @@
 import { useContext } from "react"
-import { CompanyMemberProfileActionEnum } from "./companyMemberProfile.types"
-import { CompanyMemberProfileContext } from "./CompanyMemberProfileContext"
+import {
+  CompanyMemberProfileActionEnum,
+  ICompanyMemberProfile,
+} from "./companyMemberProfile.types"
+import { UserContext } from "state/user/UserContextProvider"
+import useCompanyMemberProfileService from "services/company/useCompanyMemberProfileService"
 
 export function useCompanyMemberProfileAction() {
-  const { dispatch } = useContext(CompanyMemberProfileContext)
+  const { dispatch } = useContext(UserContext)
+  const { updateProfile } = useCompanyMemberProfileService()
 
-  const getProfile = async (language: string) => {
-    if (!language) return
+  const updateJobTitle = async (
+    user_id: ICompanyMemberProfile["user_id"],
+    job_title: ICompanyMemberProfile["job_title"]
+  ) => {
+    if (!user_id || !job_title) return
 
-    const catchError = (errorMessage: string) => {
-      dispatch({
-        type: CompanyMemberProfileActionEnum.GET_COMPANY_MEMBER_PROFILE_FAILURE,
-      })
+    /*const { data, error } = await updateProfile({
+      user_id: user_id,
+      company_id: company_id,
+      job_title: job_title,
+      roles: "write",
+    }) */
 
-      console.log(errorMessage)
-    }
-
-    try {
-      dispatch({
-        type: CompanyMemberProfileActionEnum.GET_COMPANY_MEMBER_PROFILE_BEGIN,
-      })
-
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: CompanyMemberProfileActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
-          }
-        }
-      } */
-    } catch (error) {
-      catchError(error as string)
-    }
+    // if (data) {
+    dispatch({
+      type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
+      payload: job_title,
+    })
+    //}
   }
 
   return {
-    getProfile,
+    updateJobTitle,
   }
 }
