@@ -24,7 +24,7 @@ const useUserService = () => {
   ) => {
     const { data, error } = await supabaseClientComponent
       .from("users")
-      .upsert(payload)
+      .upsert({ ...payload, updated_at: new Date().toISOString() })
       .select()
 
     if (error) {

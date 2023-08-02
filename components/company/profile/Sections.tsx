@@ -2,7 +2,6 @@ import React from "react"
 import { Card } from "ui-library/content/card/Card"
 import { CompanyDetails } from "./CompanyDetails"
 import { AccountSettings } from "components/user/account-settings/AccountSettings"
-import { TextInput } from "ui-library/form/text-input/TextInput"
 import { MemberDetails } from "./MemberDetails"
 import { UserProfile } from "components/user/profile/UserProfile"
 
