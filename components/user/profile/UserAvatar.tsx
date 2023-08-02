@@ -1,16 +1,11 @@
-import React, { memo } from "react"
+import React from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { useUserState } from "state/user/useUserState"
 import { Uploader } from "ui-library/uploader/Uploader"
 import { useUserAction } from "state/user/useUserAction"
-import { IUser } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
+import { useUserState } from "state/user/useUserState"
 
-interface props {
-  avatar: IUser["avatar_url"]
-}
-
-export const UserAvatar: React.FC<props> = memo((props) => {
+export const UserAvatar = () => {
   const { user } = useUserState()
   const { updateAvatar } = useUserAction()
   const { avatarUrl } = urlHelper
@@ -33,17 +28,8 @@ export const UserAvatar: React.FC<props> = memo((props) => {
   }
 
   return (
-    <div className="relative">
-      <div className="absolute top-[60%] right-[40%]">
-        <Uploader
-          onChange={handleUpload}
-          accept="image/jpg, image/jpeg, image/png"
-        />
-      </div>
-
-      <Avatar size={36} image_url={avatarUrl(props.avatar)} />
-    </div>
+    <Uploader onChange={handleUpload} accept="image/jpg, image/jpeg, image/png">
+      <Avatar size={36} image_url={avatarUrl(user.avatar_url)} />
+    </Uploader>
   )
-})
-
-UserAvatar.displayName = "UserAvatar"
+}

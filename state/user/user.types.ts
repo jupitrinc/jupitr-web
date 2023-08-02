@@ -1,8 +1,12 @@
-import { ITalentProfile } from "state/talent_profile/talentProfile.types"
+import { ICompanyMemberProfile } from "state/company_member_profile/companyMemberProfile.types"
+import {
+  ITalentProfile,
+  TalentProfileAction,
+} from "state/talent_profile/talentProfile.types"
 
 export interface IUserContext {
   state: UserState
-  dispatch: ({ type }: UserAction) => void
+  dispatch: ({ type }: UserAction | TalentProfileAction) => void
 }
 
 export interface IUser {
@@ -26,8 +30,10 @@ export enum AccountPermissionEnum {
   write = "write",
 }
 
+export type ISuperUser = ITalentProfile & ICompanyMemberProfile
+
 export type UserState = {
-  data: IUser
+  data: ISuperUser
   loading: boolean
   error: string
 }
@@ -58,6 +64,5 @@ export enum UserActionEnum {
   SIGN_OUT = "SIGN_OUT",
 
   UPDATE_NAME = "UPDATE_NAME",
-
   UPDATE_AVATAR = "UPDATE_AVATAR",
 }

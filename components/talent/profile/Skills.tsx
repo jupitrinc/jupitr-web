@@ -1,52 +1,59 @@
-import { memo, useState } from "react"
 import { Button } from "ui-library/button/Button"
-import { LightForm } from "ui-library/form/light-form/LightForm"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
-import { Plus, X } from "lucide-react"
+import { X } from "lucide-react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import { ISkill } from "state/skill/skill.types"
+import { useUserState } from "state/user/useUserState"
+import { Multiselect } from "ui-library/form/multiselect/Multiselect"
+import { static_data_skills } from "data/skills"
 
-export const Skills = memo(({ skills }: { skills: ISkill[] }) => {
-  const [newSkill, setNewSkill] = useState<string>("")
-  const { addSkill } = useTalentProfileAction()
-
-  const handleAddSkill = (e) => {
-    e.preventDefault()
-    addSkill({ id: "444", name: newSkill, level: 1 })
-    setNewSkill("")
-  }
+export const Skills = () => {
+  const { user } = useUserState()
+  const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
 
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <SectionHeader title="Skills" />
-        <LightForm
-          placeHolder="Search ..."
-          onChange={(e) => setNewSkill(e.target.value)}
-          value={newSkill}
-          onSubmit={handleAddSkill}
-          onClick={handleAddSkill}
-          icon={<Plus className="h-5 w-5" />}
+        <Multiselect
+          placeholder="Search skills"
+          options={static_data_skills}
+          onChange={(skill) =>
+            addSkill(user.id, { ...skill, level: 2 }, user.skills)
+          }
         />
       </div>
 
       <div className="grid grid-cols-1 gap-5">
-        {skills &&
-          skills.map((skill) => <SkillCard skill={skill} key={skill.id} />)}
+        {user.skills &&
+          user.skills.map((skill) => (
+            <SkillCard
+              skill={skill}
+              key={skill.id}
+              removeSkill={() => removeSkill(user.id, skill, user.skills)}
+              updateSkill={(level: number) =>
+                updateSkill(user.id, { ...skill, level: level }, user.skills)
+              }
+            />
+          ))}
       </div>
     </Card>
   )
-})
+}
 
-Skills.displayName = "Skills"
-
-export const SkillCard = ({ skill }: { skill: ISkill }) => {
-  const [level, setLevel] = useState(skill.level)
-  const { removeSkill } = useTalentProfileAction()
+export const SkillCard = ({
+  skill,
+  removeSkill,
+  updateSkill,
+}: {
+  skill: ISkill
+  removeSkill: () => Promise<void>
+  updateSkill: (level: number) => Promise<void>
+}) => {
   return (
     <Card type="static">
       <div className="flex justify-between mb-3">
@@ -55,7 +62,7 @@ export const SkillCard = ({ skill }: { skill: ISkill }) => {
         </Text>
 
         <Button
-          onClick={() => removeSkill(skill)}
+          onClick={removeSkill}
           icon={<X className="h-4 w-4" />}
           size="base"
           color="standard"
@@ -65,8 +72,8 @@ export const SkillCard = ({ skill }: { skill: ISkill }) => {
 
       <Tabs
         items={static_data_job.skill_levels}
-        active_tab={level}
-        onChange={setLevel}
+        active_tab={skill.level}
+        onChange={updateSkill}
       />
     </Card>
   )

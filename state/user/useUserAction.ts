@@ -11,8 +11,9 @@ import {
 import useMediaService from "../../services/storage/useMediaService"
 
 export function useUserAction() {
-  const { dispatch } = useContext(UserContext)
   const router = useRouter()
+  const { dispatch } = useContext(UserContext)
+
   const { addMedia } = useMediaService()
   const {
     signInWithOtp,
