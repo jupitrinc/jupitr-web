@@ -1,13 +1,13 @@
-import { TalentLayout } from "layouts/TalentLayout"
+import { TalentAppLayout } from "layouts/TalentAppLayout"
 import { Sections } from "components/talent/profile/Sections"
 import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
 
 export default function TalentProfile() {
   return (
-    <TalentLayout>
+    <TalentAppLayout>
       <TalentProfileContextProvider>
         <Sections />
       </TalentProfileContextProvider>
-    </TalentLayout>
+    </TalentAppLayout>
   )
 }

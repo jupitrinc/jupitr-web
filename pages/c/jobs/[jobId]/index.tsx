@@ -1,13 +1,13 @@
-import CompanyLayout from "layouts/CompanyLayout"
+import { WebsiteAppLayout } from "layouts/WebsiteAppLayout"
 import { CompanyJobContextProvider } from "state/company_job/CompanyJobContext"
 import { Sections } from "components/company/job/Sections"
 
 export default function CompanyJob() {
   return (
-    <CompanyLayout>
+    <WebsiteAppLayout>
       <CompanyJobContextProvider>
         <Sections />
       </CompanyJobContextProvider>
-    </CompanyLayout>
+    </WebsiteAppLayout>
   )
 }

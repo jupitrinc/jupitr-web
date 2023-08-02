@@ -6,12 +6,13 @@ import { useUserState } from "state/user/useUserState"
 export const usePersistedUser = () => {
   const { isLoggedIn } = useUserState()
   const { setUser } = useUserAction()
+  const persistedUser = LocalStorageHelper.getItem("user")
 
-  useEffect(() => {
-    const persistedUser = LocalStorageHelper.getItem("user")
-
-    if (!isLoggedIn && persistedUser) {
+  const persistUser = () => {
+    if (!isLoggedIn && LocalStorageHelper.getItem("LocalStorageEnums,user")) {
       setUser(persistedUser)
     }
-  }, [isLoggedIn])
+  }
+
+  return { persistUser }
 }

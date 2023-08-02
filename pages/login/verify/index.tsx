@@ -1,4 +1,4 @@
-import { WebsiteLayout } from "layouts/WebsiteLayout"
+import { WebsiteAppLayout } from "layouts/WebsiteAppLayout"
 import Loading from "layouts/components/Loader"
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
@@ -33,9 +33,9 @@ export const Verify = () => {
   }
 
   return (
-    <WebsiteLayout>
+    <WebsiteAppLayout>
       <Loading />
-    </WebsiteLayout>
+    </WebsiteAppLayout>
   )
 }
 

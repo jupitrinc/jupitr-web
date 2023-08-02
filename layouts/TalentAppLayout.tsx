@@ -7,7 +7,11 @@ import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
 import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
 
-export const TalentLayout = ({ children }: { children: React.ReactNode }) => {
+export const TalentAppLayout = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const { user } = useUserState()
   usePersistedUser()
 

@@ -2,7 +2,11 @@ import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 
-export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
+export const WebsiteAppLayout = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   return (
     <>
       <Head>

@@ -1,13 +1,13 @@
-import CompanyLayout from "layouts/CompanyLayout"
+import { WebsiteAppLayout } from "layouts/WebsiteAppLayout"
 import { SignUp } from "components/company/sign-up/SignUp"
 import { IndustryContextProvider } from "state/industry/IndustryContext"
 
 export default function CompanySignUp() {
   return (
-    <CompanyLayout>
+    <WebsiteAppLayout>
       <IndustryContextProvider>
         <SignUp />
       </IndustryContextProvider>
-    </CompanyLayout>
+    </WebsiteAppLayout>
   )
 }

@@ -7,7 +7,7 @@ import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
 import { CompanyProfileContextProvider } from "state/company_profile/CompanyProfileContext"
 
-const CompanyLayout = ({ children }) => {
+export const CompanyAppLayout = ({ children }) => {
   const { user } = useUserState()
   usePersistedUser()
 
@@ -60,5 +60,3 @@ const CompanyLayout = ({ children }) => {
     )
   }
 }
-
-export default CompanyLayout

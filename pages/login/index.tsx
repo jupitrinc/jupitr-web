@@ -1,10 +1,10 @@
 import { SignIn } from "components/user/SignIn"
-import { WebsiteLayout } from "layouts/WebsiteLayout"
+import { WebsiteAppLayout } from "layouts/WebsiteAppLayout"
 
 export default function Login() {
   return (
-    <WebsiteLayout>
+    <WebsiteAppLayout>
       <SignIn />
-    </WebsiteLayout>
+    </WebsiteAppLayout>
   )
 }
