@@ -6,10 +6,6 @@ export interface MediaPayload extends StoragePayload {
   file: File
 }
 
-export interface AddMediaPayload extends StoragePayload {
-  file: File
-  type: "update" | "upload"
-}
 export interface DownloadMediaPayload extends StoragePayload {}
 
 export type AvailableBucketsTypes = StorageBucketsEnum.avatars
