@@ -14,7 +14,7 @@ export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
 
-  const { addMedia } = useMediaService()
+  const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -90,14 +90,12 @@ export function useUserAction() {
   const updateAvatar = (
     file: MediaPayload["file"],
     filePath: MediaPayload["filePath"],
-    userId: string,
-    type: "update" | "upload"
+    userId: string
   ) => {
-    addMedia({
+    uploadMedia({
       bucketName: StorageBucketsEnum.avatars,
       file,
       filePath,
-      type,
     }).then(({ data, error }) => {
       if (data?.path) {
         updateUser({

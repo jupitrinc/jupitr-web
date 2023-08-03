@@ -10,12 +10,6 @@ const UserAvatar = () => {
   const { updateAvatar } = useUserAction()
   const { avatarUrl } = urlHelper
 
-  const uploadOrUpdate = () => {
-    return user.avatar_url && !user.avatar_url.includes("google")
-      ? "update"
-      : "upload"
-  }
-
   const handleUpload = async (event) => {
     if (event.target.files) {
       const file = event.target.files[0]
@@ -23,7 +17,7 @@ const UserAvatar = () => {
       const fileName = `avatar.${fileExt}`
       const filePath = `${user.id}/${fileName}`
 
-      updateAvatar(file, filePath, user.id, uploadOrUpdate())
+      updateAvatar(file, filePath, user.id)
     }
   }
 
