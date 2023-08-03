@@ -5,7 +5,7 @@ import { useUserAction } from "state/user/useUserAction"
 import { urlHelper } from "helper/urlHelper"
 import { useUserState } from "state/user/useUserState"
 
-export const UserAvatar = () => {
+const UserAvatar = () => {
   const { user } = useUserState()
   const { updateAvatar } = useUserAction()
   const { avatarUrl } = urlHelper
@@ -33,3 +33,5 @@ export const UserAvatar = () => {
     </Uploader>
   )
 }
+
+export default UserAvatar

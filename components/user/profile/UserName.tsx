@@ -4,7 +4,7 @@ import { useStringState } from "helper/hooks/useDataState"
 import { useUserAction } from "state/user/useUserAction"
 import { useUserState } from "state/user/useUserState"
 
-export const UserName = () => {
+const UserName = () => {
   const { user } = useUserState()
   const { updateName } = useUserAction()
   const { value, setValue } = useStringState(user.name)
@@ -27,3 +27,5 @@ export const UserName = () => {
     />
   )
 }
+
+export default UserName

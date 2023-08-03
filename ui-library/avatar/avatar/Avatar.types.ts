@@ -3,4 +3,5 @@ export interface AvatarProps {
   size: number
   name_initials?: string
   alt?: string
+  type?: "user" | "image"
 }

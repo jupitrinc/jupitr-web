@@ -7,7 +7,7 @@ import { Divider } from "ui-library/content/divider/Divider"
 import { useAccountSettings } from "./useAccountSettings"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
-export const AccountSettings = () => {
+const AccountSettings = () => {
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   return (
     <Card type="section">
@@ -48,6 +48,8 @@ export const AccountSettings = () => {
     </Card>
   )
 }
+
+export default AccountSettings
 
 interface SettingProps {
   name: string

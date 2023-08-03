@@ -11,24 +11,23 @@ const useCompanyService = () => {
       body: payload,
     })
 
-    if (data) {
-      return data
-    }
     if (error) {
       console.error("create company: ", error)
     }
+
+    return { data, error }
   }
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
     const { data, error } = await supabase
       .from("company")
       .upsert({ ...payload, updated_at: new Date().toISOString() })
       .select()
-    if (data) {
-      return data
-    }
+
     if (error) {
-      console.error("create company: ", error)
+      console.error("update company: ", error)
     }
+
+    return { data, error }
   }
   const inviteCompanyMember = async (payload: InviteCompanyMemberPayload) => {
     const { data, error } = await supabase.functions.invoke(
@@ -47,13 +46,13 @@ const useCompanyService = () => {
   }
 
   const getCompanyProfile = async (id: string) => {
-    const { data: company, error } = await supabase.from("company").select(id)
-    if (company) {
-      return company
-    }
+    const { data, error } = await supabase.from("company").select(id)
+
     if (error) {
-      console.error("failed to get company: ", error)
+      console.error("Get company: ", error)
     }
+
+    return { data, error }
   }
 
   return {

@@ -1,3 +1,4 @@
+import React from "react"
 import { Button } from "ui-library/button/Button"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
@@ -11,7 +12,7 @@ import { useUserState } from "state/user/useUserState"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { static_data_skills } from "data/skills"
 
-export const Skills = () => {
+const Skills = () => {
   const { user } = useUserState()
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
 
@@ -44,6 +45,8 @@ export const Skills = () => {
     </Card>
   )
 }
+
+export default Skills
 
 export const SkillCard = ({
   skill,

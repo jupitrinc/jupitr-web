@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { IndustryActionEnum } from "./industry.types"
+import { IIndustry, IndustryActionEnum } from "./industry.types"
 import { IndustryContext } from "./IndustryContext"
 import useIndustryService from "../../services/industry/useIndustryService"
 
@@ -12,7 +12,7 @@ export function useIndustryAction() {
       type: IndustryActionEnum.GET_INDUSTRIES_BEGIN,
     })
 
-    const { industry, error } = await getAllIndustries()
+    const { data, error } = await getAllIndustries()
 
     if (error) {
       dispatch({
@@ -21,7 +21,7 @@ export function useIndustryAction() {
     } else {
       dispatch({
         type: IndustryActionEnum.GET_INDUSTRIES_SUCCESS,
-        payload: industry,
+        payload: data as IIndustry[],
       })
     }
   }

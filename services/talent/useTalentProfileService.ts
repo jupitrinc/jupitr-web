@@ -15,6 +15,10 @@ export const useTalentProfileService = () => {
       .select()
       .single()
 
+    if (error) {
+      console.error("update talent profile: ", error)
+    }
+
     return { data, error }
   }
 

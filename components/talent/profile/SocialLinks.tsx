@@ -1,20 +1,16 @@
-import React, { memo } from "react"
+import React from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
 import { Github, Globe, Linkedin } from "lucide-react"
-import { ITalentProfile } from "state/talent_profile/talentProfile.types"
 import { useArrayState } from "helper/hooks/useDataState"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import { useUserState } from "state/user/useUserState"
 
-interface props {
-  user_id: ITalentProfile["user_id"]
-  socials: ITalentProfile["socials"]
-}
-
-export const SocialLinks: React.FC<props> = memo((props) => {
+const SocialLinks = () => {
+  const { user } = useUserState()
   const { updateSocials } = useTalentProfileAction()
 
-  const { value: socials, setValue: setSocials } = useArrayState(props.socials)
+  const { value: socials, setValue: setSocials } = useArrayState(user.socials)
 
   const onChange = (e: { target: { value: string } }, index: number) => {
     const updateSocials = [...socials]
@@ -23,7 +19,7 @@ export const SocialLinks: React.FC<props> = memo((props) => {
   }
 
   const save = () => {
-    updateSocials(props.user_id, socials)
+    updateSocials(user.user_id, socials)
   }
 
   return (
@@ -74,9 +70,9 @@ export const SocialLinks: React.FC<props> = memo((props) => {
       </div>
     </div>
   )
-})
+}
 
-SocialLinks.displayName = "SocialLinks"
+export default SocialLinks
 
 export const SocialIcon = ({ link }) => {
   const styles = "w-5 h-5 align-middle text-gray-600"

@@ -14,6 +14,7 @@ import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useIndustryState } from "state/industry/useIndustryState"
 import { useIndustryAction } from "state/industry/useIndustryAction"
 import { static_data_company } from "data/company"
+import { Uploader } from "ui-library/uploader/Uploader"
 
 export const SignUp = () => {
   const { industries } = useIndustryState()
@@ -34,7 +35,7 @@ export const SignUp = () => {
         </Link>
 
         <Link href="/login">
-          <Button variant="text" label="Sign in" />
+          <Button label="Sign in" />
         </Link>
       </div>
 
@@ -55,7 +56,7 @@ export const SignUp = () => {
           name="company-people"
         />
 
-        <Multiselect options={industries} />
+        <Multiselect options={industries} placeholder="Select industries" />
         <Textarea
           name="company-mission"
           maxLength={250}
@@ -64,9 +65,15 @@ export const SignUp = () => {
 
         <div className="flex flex-col gap-5 text-left">
           <Divider />
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-start">
             <Label value="Upload logo" htmlFor="" />
-            <Avatar size={36} />
+
+            <Uploader
+              accept="image/jpg, image/jpeg, image/png"
+              onChange={() => alert("")}
+            >
+              <Avatar size={20} type="image" />
+            </Uploader>
           </div>
 
           <Divider />

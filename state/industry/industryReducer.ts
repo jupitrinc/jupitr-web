@@ -9,7 +9,6 @@ export const companyProfileReducer = (
   state: IndustryState,
   action: IndustryAction
 ): IndustryState => {
-  console.log(action)
   switch (action.type) {
     case IndustryActionEnum.GET_INDUSTRIES_BEGIN:
       return {
