@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
-import { WebsiteAppLayout } from "layouts/WebsiteAppLayout"
+import { WebsiteLayout } from "layouts/WebsiteLayout"
 import Loading from "layouts/components/Loader"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { useUserAction } from "state/user/useUserAction"
@@ -33,9 +33,9 @@ export const Verify = () => {
   }
 
   return (
-    <WebsiteAppLayout>
+    <WebsiteLayout>
       <Loading />
-    </WebsiteAppLayout>
+    </WebsiteLayout>
   )
 }
 

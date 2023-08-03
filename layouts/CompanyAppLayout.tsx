@@ -2,14 +2,16 @@ import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
-import Error from "./components/Error"
 import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
 import { CompanyProfileContextProvider } from "state/company_profile/CompanyProfileContext"
+import PageNotFound from "./components/PageNotFound"
 
 export const CompanyAppLayout = ({ children }) => {
   const { user } = useUserState()
   usePersistedUser()
+
+  console.log(user)
 
   if (user.account_type === AccountTypeEnum.company) {
     return (
@@ -55,7 +57,7 @@ export const CompanyAppLayout = ({ children }) => {
   } else {
     return (
       <main className="my-10">
-        <Error />
+        <PageNotFound />
       </main>
     )
   }

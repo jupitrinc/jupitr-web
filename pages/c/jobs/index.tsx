@@ -1,16 +1,16 @@
-import { TalentAppLayout } from "layouts/TalentAppLayout"
+import { CompanyAppLayout } from "layouts/CompanyAppLayout"
 import { CompanyJobContextProvider } from "state/company_job/CompanyJobContext"
 import { CompanyJobsContextProvider } from "state/company_jobs/CompanyJobsContext"
 import { List } from "components/company/job/List"
 
 export default function CompanyJobs() {
   return (
-    <TalentAppLayout>
+    <CompanyAppLayout>
       <CompanyJobsContextProvider>
         <CompanyJobContextProvider>
           <List />
         </CompanyJobContextProvider>
       </CompanyJobsContextProvider>
-    </TalentAppLayout>
+    </CompanyAppLayout>
   )
 }
