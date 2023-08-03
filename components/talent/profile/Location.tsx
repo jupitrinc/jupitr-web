@@ -1,10 +1,10 @@
-import { static_data_locations } from "data/location"
 import React from "react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useUserState } from "state/user/useUserState"
 import { Select } from "ui-library/form/select/Select"
+import { static_data_locations } from "data/location"
 
-export const Location = () => {
+const Location = () => {
   const { user } = useUserState()
   const { updateLocation } = useTalentProfileAction()
 
@@ -22,3 +22,5 @@ export const Location = () => {
     />
   )
 }
+
+export default Location

@@ -1,8 +1,8 @@
 import React from "react"
-import { UserAvatar } from "./UserAvatar"
-import { UserName } from "./UserName"
+import UserAvatar from "./UserAvatar"
+import UserName from "./UserName"
 
-export const UserProfile = () => {
+const UserProfile = () => {
   return (
     <div className="space-y-5 text-center">
       <UserAvatar />
@@ -10,3 +10,5 @@ export const UserProfile = () => {
     </div>
   )
 }
+
+export default UserProfile

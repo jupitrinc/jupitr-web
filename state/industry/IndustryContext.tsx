@@ -1,30 +1,24 @@
-import { createContext, useReducer } from "react"
+import { createContext, useMemo, useReducer } from "react"
 
 import { companyProfileReducer } from "./industryReducer"
 import { IIndustry, IIndustryContext, IndustryState } from "./industry.types"
 
 export const IndustryContext = createContext({} as IIndustryContext)
 
-const Industry = () => {
+export const IndustryContextProvider: React.FC<any> = ({ children }) => {
   const initialState: IndustryState = {
-    data: test_data as IIndustry[],
+    data: {} as IIndustry[],
     loading: false,
     error: false,
   }
   const [state, dispatch] = useReducer(companyProfileReducer, initialState)
 
-  return {
-    state,
-    dispatch,
-  }
-}
-
-export const IndustryContextProvider: React.FC<any> = ({ children }) => {
+  const value = useMemo(() => {
+    return { state, dispatch }
+  }, [state])
   return (
-    <IndustryContext.Provider value={Industry()}>
+    <IndustryContext.Provider value={value}>
       {children}
     </IndustryContext.Provider>
   )
 }
-
-const test_data = [{ id: "1", name: "AI" }]

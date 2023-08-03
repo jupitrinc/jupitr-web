@@ -3,11 +3,12 @@ import { AvatarProps } from "./Avatar.types"
 import { avatarStyles } from "./Avatar.styles"
 import { stringHelper } from "helper/stringHelper"
 import { Image } from "ui-library/image/Image"
-import { User } from "lucide-react"
+import { ImageIcon, User } from "lucide-react"
 
 export const Avatar: React.FC<AvatarProps> = (avatar) => {
   const styles = avatarStyles
   const { getInitials } = stringHelper
+
   if (avatar.image_url) {
     return <Photo avatar={avatar} styles={styles} />
   } else if (!getInitials(avatar.name_initials as string)) {
@@ -38,6 +39,10 @@ const NameInitials = ({ avatar, styles }) => {
 
 const Placeholder = ({ avatar, styles }) => (
   <div className={clsx(styles.container, styles.size(avatar.size))}>
-    <User className={clsx(styles.icon)} />
+    {!avatar.type || avatar.type === "user" ? (
+      <User className={clsx(styles.icon)} />
+    ) : (
+      <ImageIcon className={clsx(styles.icon)} />
+    )}
   </div>
 )

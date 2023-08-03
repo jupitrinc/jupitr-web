@@ -9,6 +9,10 @@ const useCompanyMemberProfileService = () => {
       .select()
       .single()
 
+    if (error) {
+      console.error("update company member profile: ", error)
+    }
+
     return { data, error }
   }
   return { updateProfile }

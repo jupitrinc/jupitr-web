@@ -35,33 +35,35 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
           </Combobox.Button>
         </div>
 
-        <Transition
-          as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-          afterLeave={() => setQuery("")}
-        >
-          <Combobox.Options className={styles.options}>
-            {filteredOptions.length === 0 && query !== "" ? (
-              <div className={styles.option.noResult}>
-                No results found for "{query}"
-              </div>
-            ) : (
-              filteredOptions.map((option) => (
-                <Combobox.Option
-                  key={option.id}
-                  className={({ active }) =>
-                    active ? styles.option.active : styles.option.default
-                  }
-                  value={option}
-                >
-                  {option.name}
-                </Combobox.Option>
-              ))
-            )}
-          </Combobox.Options>
-        </Transition>
+        {multiselect.options && multiselect.options.length > 0 && (
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            afterLeave={() => setQuery("")}
+          >
+            <Combobox.Options className={styles.options}>
+              {filteredOptions.length === 0 && query !== "" ? (
+                <div className={styles.option.noResult}>
+                  No results found for "{query}"
+                </div>
+              ) : (
+                filteredOptions.map((option) => (
+                  <Combobox.Option
+                    key={option.id}
+                    className={({ active }) =>
+                      active ? styles.option.active : styles.option.default
+                    }
+                    value={option}
+                  >
+                    {option.name}
+                  </Combobox.Option>
+                ))
+              )}
+            </Combobox.Options>
+          </Transition>
+        )}
       </div>
     </Combobox>
   )

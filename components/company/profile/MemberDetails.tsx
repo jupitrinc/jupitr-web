@@ -4,7 +4,7 @@ import { useCompanyMemberProfileAction } from "state/company_member_profile/useC
 import { useUserState } from "state/user/useUserState"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 
-export const MemberDetails: React.FC = () => {
+const MemberDetails = () => {
   const { user } = useUserState()
   const { value, setValue } = useStringState(user.job_title)
   const { updateJobTitle } = useCompanyMemberProfileAction()
@@ -22,3 +22,5 @@ export const MemberDetails: React.FC = () => {
     </div>
   )
 }
+
+export default MemberDetails
