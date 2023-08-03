@@ -2,10 +2,9 @@ import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
-import Error from "./components/Error"
 import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
-import { TalentProfileContextProvider } from "state/talent_profile/TalentProfileContext"
+import PageNotFound from "./components/PageNotFound"
 
 export const TalentAppLayout = ({
   children,
@@ -47,11 +46,7 @@ export const TalentAppLayout = ({
           <header className="space-y-2">
             <Navbar />
           </header>
-          <main className="my-10">
-            <TalentProfileContextProvider>
-              {children}
-            </TalentProfileContextProvider>
-          </main>
+          <main className="my-10">{children}</main>
           <Footer />
         </div>
       </>
@@ -59,7 +54,7 @@ export const TalentAppLayout = ({
   } else {
     return (
       <main className="my-10">
-        <Error />
+        <PageNotFound />
       </main>
     )
   }

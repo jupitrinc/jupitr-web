@@ -1,12 +1,11 @@
 import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
+import { usePersistedUser } from "helper/hooks/usePersistedUser"
 
-export const WebsiteAppLayout = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
+  usePersistedUser()
+
   return (
     <>
       <Head>
