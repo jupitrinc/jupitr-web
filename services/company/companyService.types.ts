@@ -6,10 +6,10 @@ type AccessLevel = "company" | "team"
 
 interface CompanyProfile {
   name: string
-  year_found: string
+  year_founded: string
   logo: string
   website: string
-  size: number
+  size: string
   mission: string
   industry: IIndustry[]
 }

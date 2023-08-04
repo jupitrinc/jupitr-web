@@ -9,6 +9,8 @@ import {
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
 import useMediaService from "../../services/storage/useMediaService"
+import { AddCompany } from "state/company_profile/companyProfile.types"
+import useCompanyService from "services/company/useCompanyService"
 
 export function useUserAction() {
   const router = useRouter()
@@ -21,6 +23,7 @@ export function useUserAction() {
     signOut: signOutService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
+  const { addCompany } = useCompanyService()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -67,6 +70,29 @@ export function useUserAction() {
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
     })
+  }
+
+  const signUpCompany = async (company: AddCompany) => {
+    dispatch({ type: UserActionEnum.COMPANY_SIGN_UP_BEGIN })
+
+    // 1. upload the logo, get the url
+
+    // 2. add the company
+    const { data, error } = await addCompany({ ...company, logo: "logo-url" })
+
+    // 3. sign in the user?
+    if (error) {
+      dispatch({
+        type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
+      })
+
+      console.log(data)
+    }
   }
 
   const signOut = async () => {
@@ -117,6 +143,7 @@ export function useUserAction() {
     signInWithEmail,
     signInWithGoogle,
     signOut,
+    signUpCompany,
     getUser,
     setUser,
     updateName,

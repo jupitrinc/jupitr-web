@@ -19,6 +19,7 @@ const Location = () => {
       options={static_data_locations}
       label="Location"
       onChange={changeLocation}
+      defaultValue={user.preferences.location}
     />
   )
 }

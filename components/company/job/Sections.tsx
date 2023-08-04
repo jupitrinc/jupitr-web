@@ -40,7 +40,7 @@ const JobTitle = ({ title }: { title: string }) => {
     <div className="basis-1/3 w-full">
       <TextInput
         placeholder="Job title"
-        defaultValue={title}
+        value={title}
         autoFocus={!title}
         light
       />

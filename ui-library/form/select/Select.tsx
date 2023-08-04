@@ -28,9 +28,9 @@ export const Select: React.FC<SelectProps> = (select) => {
       <select
         name={select.name}
         className={styles.select}
-        disabled={select.disabled}
-        defaultValue={select.defaultValue}
+        defaultValue={JSON.stringify(select.defaultValue)}
         onChange={select.onChange}
+        disabled={select.disabled}
       >
         {select.options.map((option) => (
           <option

@@ -6,6 +6,7 @@ import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
 import { CompanyProfileContextProvider } from "state/company_profile/CompanyProfileContext"
 import PageNotFound from "./components/PageNotFound"
+import { IndustryContextProvider } from "state/industry/IndustryContext"
 
 export const CompanyAppLayout = ({ children }) => {
   const { user } = useUserState()
@@ -46,9 +47,11 @@ export const CompanyAppLayout = ({ children }) => {
             <Navbar />
           </header>
           <main className="my-10">
-            <CompanyProfileContextProvider>
-              {children}
-            </CompanyProfileContextProvider>
+            <IndustryContextProvider>
+              <CompanyProfileContextProvider>
+                {children}
+              </CompanyProfileContextProvider>
+            </IndustryContextProvider>
           </main>
           <Footer />
         </div>

@@ -24,13 +24,7 @@ export const Pill: React.FC<PillProps> = (pill) => {
     >
       <span>{pill.label}</span>
       {pill.type === "clickable" && (
-        <Button
-          size="xs"
-          color={pill.color ? pill.color : ThemeColorEnum.standard}
-          variant="text"
-          icon={<X className="h-4 w-4" />}
-          onClick={pill.onClick}
-        />
+        <X className="h-4 w-4 cursor-pointer" onClick={pill.onClick} />
       )}
     </span>
   )

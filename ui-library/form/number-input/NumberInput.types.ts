@@ -10,5 +10,4 @@ export interface NumberInputProps {
   disabled?: boolean
   autoFocus?: boolean
   onBlur?: ChangeEventHandler<HTMLInputElement>
-  defaultValue?: number
 }

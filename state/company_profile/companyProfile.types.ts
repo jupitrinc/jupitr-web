@@ -43,3 +43,11 @@ export enum CompanyProfileActionEnum {
   ADD_INDUSTRY = "ADD_INDUSTRY",
   REMOVE_INDUSTRY = "REMOVE_INDUSTRY",
 }
+
+export type AddCompany = Omit<
+  ICompanyProfile,
+  "id" | "created_at" | "updated_at" | "logo"
+> & {
+  email: string
+  logo: File | string
+}

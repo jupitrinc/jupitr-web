@@ -5,6 +5,7 @@ import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
+import { IndustryContextProvider } from "state/industry/IndustryContext"
 
 export const TalentAppLayout = ({
   children,
@@ -46,7 +47,9 @@ export const TalentAppLayout = ({
           <header className="space-y-2">
             <Navbar />
           </header>
-          <main className="my-10">{children}</main>
+          <main className="my-10">
+            <IndustryContextProvider>{children}</IndustryContextProvider>
+          </main>
           <Footer />
         </div>
       </>
