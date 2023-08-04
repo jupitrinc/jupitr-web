@@ -67,6 +67,27 @@ export const userReducer = (
         data: action.payload as ISuperUser,
       }
 
+    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: "",
+      }
+
+    case UserActionEnum.COMPANY_SIGN_UP_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload as string,
+      }
+
+    case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: "",
+      }
+
     case UserActionEnum.SIGN_OUT:
       removeItem(LocalStorageItemEnum.user)
 

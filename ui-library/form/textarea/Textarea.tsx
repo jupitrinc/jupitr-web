@@ -20,6 +20,7 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
         disabled={textarea.disabled}
         autoFocus={textarea.autoFocus}
         maxLength={textarea.maxLength}
+        onChange={textarea.onChange}
         cols={30}
         rows={5}
         className={styles.textarea}

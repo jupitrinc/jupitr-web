@@ -22,21 +22,21 @@ export const CompanyDetails: React.FC = () => {
           placeholder="Company name"
           name="company-name"
           label="Company name"
-          defaultValue={company_profile.name}
+          value={company_profile.name}
         />
 
         <NumberInput
           placeholder="Year founded"
           name="company-year-founded"
           label="Year founded"
-          defaultValue={Number(company_profile.year_founded)}
+          value={Number(company_profile.year_founded)}
         />
 
         <TextInput
           placeholder="Website"
           name="company-website"
           label="Website"
-          defaultValue={company_profile.website}
+          value={company_profile.website}
         />
 
         <Select
