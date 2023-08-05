@@ -4,6 +4,7 @@ import { Uploader } from "ui-library/uploader/Uploader"
 import { useUserAction } from "state/user/useUserAction"
 import { urlHelper } from "helper/urlHelper"
 import { useUserState } from "state/user/useUserState"
+import { imageHelper } from "helper/imageHelper"
 
 const UserAvatar = () => {
   const { user } = useUserState()
@@ -16,8 +17,8 @@ const UserAvatar = () => {
       const fileExt = file.name.split(".").pop()
       const fileName = `avatar.${fileExt}`
       const filePath = `${user.id}/${fileName}`
-
-      updateAvatar(file, filePath, user.id)
+      const resizedFile = await imageHelper.resize(file)
+      updateAvatar(resizedFile, filePath, user.id)
     }
   }
 
