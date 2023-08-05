@@ -9,7 +9,11 @@ export const Textarea: React.FC<TextAreaProps> = (textarea) => {
   return (
     <div className={styles.container}>
       {textarea.label && (
-        <Label htmlFor={textarea.label} value={textarea.label} />
+        <Label
+          htmlFor={textarea.label}
+          value={textarea.label}
+          invalid={textarea.invalid}
+        />
       )}
       <textarea
         id={textarea.label}

@@ -137,6 +137,21 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_socials_state.data)
       return update_socials_state
 
+    case TalentProfileActionEnum.TOGGLE_SEARCHING:
+      const toggle_searching_payload =
+        action.payload as ITalentProfile["searching"]
+
+      const toggle_searching_state = {
+        ...state,
+        data: {
+          ...state.data,
+          searching: toggle_searching_payload,
+        },
+      }
+
+      setItem(LocalStorageItemEnum.user, toggle_searching_state.data)
+      return toggle_searching_state
+
     case TalentProfileActionEnum.UPDATE_LOCATION:
       const update_location_payload =
         action.payload as ITalentProfile["preferences"]

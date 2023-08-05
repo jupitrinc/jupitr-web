@@ -7,7 +7,7 @@ export const IndustryContext = createContext({} as IIndustryContext)
 
 export const IndustryContextProvider: React.FC<any> = ({ children }) => {
   const initialState: IndustryState = {
-    data: {} as IIndustry[],
+    data: [] as IIndustry[],
     loading: false,
     error: false,
   }

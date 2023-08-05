@@ -47,6 +47,25 @@ export function useTalentProfileAction() {
     }
   }
 
+  const toggleSearching = async (
+    user_id: ITalentProfile["user_id"],
+    searching: ITalentProfile["searching"]
+  ) => {
+    if (!user_id) return
+
+    const { data, error } = await updateProfile({
+      user_id: user_id,
+      searching: searching,
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.TOGGLE_SEARCHING,
+        payload: data.searching,
+      })
+    }
+  }
+
   const addSkill = async (
     user_id: ITalentProfile["user_id"],
     newSkill: ISkill,
@@ -123,6 +142,7 @@ export function useTalentProfileAction() {
   return {
     updateSocials,
     updateLocation,
+    toggleSearching,
     addSkill,
     removeSkill,
     updateSkill,

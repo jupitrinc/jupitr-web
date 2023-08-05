@@ -10,4 +10,5 @@ export interface TextAreaProps {
   disabled?: boolean
   autoFocus?: boolean
   maxLength?: number
+  invalid?: boolean
 }

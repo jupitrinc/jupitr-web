@@ -1,10 +1,10 @@
 import { themeStyles } from "ui-library/_theme/Theme.styles"
 
 export const toggleStyles = {
-  container: "relative inline-flex items-center mb-5 cursor-pointer ",
+  container: "relative inline-flex items-center cursor-pointer ",
   input: "sr-only peer",
-  label: `ml-3 text-xs ${themeStyles.textColor.standard[600]}`,
-  toggle: `${themeStyles.backgroundColor.standard[200]} rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[""] after:absolute after:bg-white after:border-gray-300 after:border after:rounded-full after:transition-all peer-checked:bg-blue-500`,
+  label: `ml-3 text-sm ${themeStyles.textColor.standard[500]}`,
+  toggle: `${themeStyles.backgroundColor.standard[200]} rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[""] after:absolute after:bg-white after:border-gray-300 after:border after:rounded-full after:transition-all peer-checked:bg-gradient-to-r from-orange-400 to-rose-400`,
   size: {
     xs: "w-7 h-4 after:top-[2px] after:left-[2px] after:h-3 after:w-3",
     sm: "w-9 h-5 after:top-[2px] after:left-[2px] after:h-4 after:w-4",

@@ -18,6 +18,12 @@ export const themeStyles = {
       500: "text-blue-500",
       600: "text-blue-600",
     },
+
+    [`${ThemeColorEnum.dangerous}`]: {
+      400: "text-red-400",
+      500: "text-red-500",
+      600: "text-red-600",
+    },
   },
   backgroundColor: {
     [`${ThemeColorEnum.standard}`]: {

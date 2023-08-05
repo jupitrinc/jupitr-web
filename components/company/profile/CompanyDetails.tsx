@@ -41,6 +41,7 @@ export const CompanyDetails: React.FC = () => {
 
         <Select
           label="Size"
+          placeholder="Select"
           name="company-people"
           options={static_data_company.size_options}
           defaultValue={company_profile.size}

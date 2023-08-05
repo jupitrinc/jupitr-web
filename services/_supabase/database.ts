@@ -145,7 +145,7 @@ export interface Database {
       }
       talent_profile: {
         Row: {
-          active: boolean | null
+          searching: boolean | null
           jobs: Json | null
           preferences: Json | null
           skills: Json | null
@@ -154,7 +154,7 @@ export interface Database {
           user_id: string
         }
         Insert: {
-          active?: boolean | null
+          searching?: boolean | null
           jobs?: Json | null
           preferences?: Json | null
           skills?: Json | null
@@ -163,7 +163,7 @@ export interface Database {
           user_id: string
         }
         Update: {
-          active?: boolean | null
+          searching?: boolean | null
           jobs?: Json | null
           preferences?: Json | null
           skills?: Json | null
