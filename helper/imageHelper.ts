@@ -1,7 +1,7 @@
 const MAX_SIZE = 400
 
 export const imageHelper = {
-  resize: (file: File): Promise<File> => {
+  resize: (file: File, size = MAX_SIZE): Promise<File> => {
     return new Promise((resolve, reject) => {
       let reader = new FileReader()
 
