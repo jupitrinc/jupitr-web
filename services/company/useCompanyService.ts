@@ -1,4 +1,4 @@
-import { supabase } from "services/_supabase/client"
+import {supabaseClientComponent} from "services/_supabase/client"
 import {
   CreateCompanyPayload,
   InviteCompanyMemberPayload,
@@ -7,7 +7,7 @@ import {
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
-    const { data, error } = await supabase.functions.invoke("create-company", {
+    const { data, error } = await supabaseClientComponent.functions.invoke("create-company", {
       body: payload,
     })
 
@@ -18,7 +18,7 @@ const useCompanyService = () => {
     return { data, error }
   }
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClientComponent
       .from("company")
       .upsert({ ...payload, updated_at: new Date().toISOString() })
       .select()
@@ -30,7 +30,7 @@ const useCompanyService = () => {
     return { data, error }
   }
   const inviteCompanyMember = async (payload: InviteCompanyMemberPayload) => {
-    const { data, error } = await supabase.functions.invoke(
+    const { data, error } = await supabaseClientComponent.functions.invoke(
       "invite-company-member",
       {
         body: payload,
@@ -46,7 +46,7 @@ const useCompanyService = () => {
   }
 
   const getCompanyProfile = async (id: string) => {
-    const { data, error } = await supabase.from("company").select(id)
+    const { data, error } = await supabaseClientComponent.from("company").select(id)
 
     if (error) {
       console.error("Get company: ", error)
