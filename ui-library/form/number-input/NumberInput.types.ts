@@ -10,4 +10,5 @@ export interface NumberInputProps {
   disabled?: boolean
   autoFocus?: boolean
   onBlur?: ChangeEventHandler<HTMLInputElement>
+  invalid?: boolean
 }

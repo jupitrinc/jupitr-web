@@ -24,14 +24,27 @@ export const Select: React.FC<SelectProps> = (select) => {
 
   return (
     <div className={styles.container}>
-      {select.label && <Label htmlFor={select.label} value={select.label} />}
+      {select.label && (
+        <Label
+          htmlFor={select.label}
+          value={select.label}
+          invalid={select.invalid}
+        />
+      )}
       <select
         name={select.name}
         className={styles.select}
-        defaultValue={JSON.stringify(select.defaultValue)}
+        defaultValue={
+          JSON.stringify(select.defaultValue)
+            ? JSON.stringify(select.defaultValue)
+            : select.placeholder
+        }
         onChange={select.onChange}
         disabled={select.disabled}
       >
+        <option value={select.placeholder} disabled>
+          {select.placeholder}
+        </option>
         {select.options.map((option) => (
           <option
             key={getId(option)}

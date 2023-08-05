@@ -7,7 +7,11 @@ export const NumberInput: React.FC<NumberInputProps> = (input) => {
   return (
     <div className={styles.container}>
       {input.label && (
-        <Label htmlFor={input.label ? input.label : ""} value={input.label} />
+        <Label
+          htmlFor={input.label ? input.label : ""}
+          value={input.label}
+          invalid={input.invalid}
+        />
       )}
       <input
         type="number"

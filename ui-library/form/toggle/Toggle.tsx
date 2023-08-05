@@ -13,7 +13,7 @@ export const Toggle: React.FC<ToggleProps> = (toggle) => {
         type="checkbox"
         className={styles.input}
         disabled={toggle.disabled}
-        defaultChecked={toggle.checked}
+        checked={toggle.checked}
         onChange={toggle.onChange}
       />
       <div

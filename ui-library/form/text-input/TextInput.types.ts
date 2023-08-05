@@ -14,4 +14,5 @@ export interface TextInputProps {
   type?: string
   light?: boolean
   required?: boolean
+  invalid?: boolean
 }

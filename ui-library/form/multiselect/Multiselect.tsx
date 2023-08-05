@@ -22,7 +22,13 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   return (
     <Combobox onChange={multiselect.onChange}>
       <div className={styles.container}>
-        {multiselect.label && <Label htmlFor="" value={multiselect.label} />}
+        {multiselect.label && (
+          <Label
+            htmlFor=""
+            value={multiselect.label}
+            invalid={multiselect.invalid}
+          />
+        )}
         <div className={styles.multiselect}>
           <Combobox.Input
             placeholder={multiselect.placeholder}

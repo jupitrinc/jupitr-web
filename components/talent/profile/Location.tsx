@@ -14,12 +14,14 @@ const Location = () => {
 
     updateLocation(user.id, location, user.preferences)
   }
+
   return (
     <Select
       options={static_data_locations}
       label="Location"
+      placeholder="Select"
       onChange={changeLocation}
-      defaultValue={user.preferences.location}
+      defaultValue={user.preferences?.location}
     />
   )
 }

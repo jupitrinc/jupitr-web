@@ -12,8 +12,6 @@ export const CompanyAppLayout = ({ children }) => {
   const { user } = useUserState()
   usePersistedUser()
 
-  console.log(user)
-
   if (user.account_type === AccountTypeEnum.company) {
     return (
       <>
