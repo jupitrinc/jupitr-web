@@ -6,7 +6,6 @@ export interface LightFormProps {
   name?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   onSubmit?: FormEventHandler<HTMLFormElement>
-  onClick?: (event: React.MouseEvent) => void
   icon: JSX.Element
   label?: string
   placeHolder?: string
@@ -14,5 +13,6 @@ export interface LightFormProps {
   disabled?: boolean
   autocomplete?: boolean
   loading?: boolean
+  autoFocus?: boolean
   required?: boolean
 }

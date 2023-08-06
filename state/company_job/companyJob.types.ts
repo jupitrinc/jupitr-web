@@ -1,4 +1,4 @@
-import { ISkill } from "state/skill/skill.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export interface ICompanyJobContext {
   state: CompanyJobState

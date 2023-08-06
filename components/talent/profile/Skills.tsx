@@ -7,10 +7,10 @@ import { X } from "lucide-react"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
-import { ISkill } from "state/skill/skill.types"
 import { useUserState } from "state/user/useUserState"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
-import { static_data_skills } from "data/skills"
+import { ISkill } from "state/talent_profile/talentProfile.types"
+import { skill_test_data } from "state/skill/skill.testdata"
 
 const Skills = () => {
   const { user } = useUserState()
@@ -22,7 +22,7 @@ const Skills = () => {
         <SectionHeader title="Skills" />
         <Multiselect
           placeholder="Search skills"
-          options={static_data_skills}
+          options={skill_test_data}
           onChange={(skill) =>
             addSkill(user.id, { ...skill, level: 2 }, user.skills)
           }

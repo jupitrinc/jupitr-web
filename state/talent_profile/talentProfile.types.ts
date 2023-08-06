@@ -1,4 +1,3 @@
-import { ISkill } from "state/skill/skill.types"
 import { IUser } from "state/user/user.types"
 
 export interface ITalentProfile extends IUser {
@@ -9,6 +8,12 @@ export interface ITalentProfile extends IUser {
   preferences: {
     location: { id: string; name: string }
   }
+}
+
+export type ISkill = {
+  id: string
+  name: string
+  level: number
 }
 
 export type TalentProfileAction = {

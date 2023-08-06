@@ -8,6 +8,7 @@ import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { useUserAction } from "state/user/useUserAction"
 import { AccountTypeEnum } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
+import Jupi from "components/jupi/Jupi"
 
 export const Navbar = () => {
   const router = useRouter()
@@ -22,9 +23,15 @@ export const Navbar = () => {
     if (isLoggedIn) {
       return (
         <div className="flex flex-row space-x-5 justify-between items-baseline">
-          <Brand
-            link={accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"}
-          />
+          <div className="flex flex-row gap-3 items-center">
+            <Brand
+              link={
+                accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
+              }
+            />
+            <Jupi />
+          </div>
+
           {accountType === AccountTypeEnum.talent ? (
             <TalentMenu />
           ) : (
@@ -60,21 +67,19 @@ const TalentMenu = () => {
   const { avatarUrl } = urlHelper
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-2">
       <Link href="/jobs">
         <Button label="Jobs" size="base" variant="text" />
+      </Link>
+
+      <Link href="/profile">
+        <Button label="Profile" size="base" variant="text" />
       </Link>
 
       <Dropdown
         type="avatar"
         image_url={avatarUrl(user.avatar_url)}
-        options={[
-          {
-            name: "Profile",
-            onClick: () => router.push("/profile"),
-          },
-          { name: "Sign out", onClick: signOut },
-        ]}
+        options={[{ name: "Sign out", onClick: signOut }]}
       />
     </div>
   )

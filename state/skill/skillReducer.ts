@@ -1,4 +1,5 @@
-import { ISkill, SkillAction, SkillActionEnum, SkillState } from "./skill.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
+import { SkillAction, SkillActionEnum, SkillState } from "./skill.types"
 
 export const companyProfileReducer = (
   state: SkillState,

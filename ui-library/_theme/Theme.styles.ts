@@ -39,4 +39,9 @@ export const themeStyles = {
       default: "bg-gradient-to-r from-orange-400 to-rose-400",
     },
   },
+
+  animation: {
+    scale:
+      "cursor-pointer transition-[transform, opacity] hover:scale-125 ease-in-out duration-500",
+  },
 }

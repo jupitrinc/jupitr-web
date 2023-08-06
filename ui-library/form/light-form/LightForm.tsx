@@ -18,12 +18,12 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
         disabled={form.disabled}
         maxLength={form.maxLength}
         label={form.label}
+        autoFocus={form.autoFocus}
         required={form.required}
       />
       <div className={styles.buttonContainer}>
         <Button
           type="submit"
-          onClick={form.onClick}
           icon={form.icon}
           disabled={form.disabled}
           loading={form.loading}

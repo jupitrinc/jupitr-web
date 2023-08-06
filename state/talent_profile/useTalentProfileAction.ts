@@ -1,6 +1,9 @@
 import { useContext } from "react"
-import { ITalentProfile, TalentProfileActionEnum } from "./talentProfile.types"
-import { ISkill } from "state/skill/skill.types"
+import {
+  ISkill,
+  ITalentProfile,
+  TalentProfileActionEnum,
+} from "./talentProfile.types"
 import { useTalentProfileService } from "services/talent/useTalentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
 
