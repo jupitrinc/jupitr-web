@@ -90,8 +90,6 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
-
-      console.log(data)
     }
   }
 

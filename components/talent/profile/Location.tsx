@@ -21,7 +21,7 @@ const Location = () => {
       label="Location"
       placeholder="Select"
       onChange={changeLocation}
-      defaultValue={user.preferences?.location}
+      value={user.preferences?.location}
     />
   )
 }

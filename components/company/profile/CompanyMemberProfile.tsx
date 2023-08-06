@@ -4,7 +4,7 @@ import { useCompanyMemberProfileAction } from "state/company_member_profile/useC
 import { useUserState } from "state/user/useUserState"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 
-const MemberDetails = () => {
+const CompanyMemberProfile = () => {
   const { user } = useUserState()
   const { value, setValue } = useStringState(user.job_title)
   const { updateJobTitle } = useCompanyMemberProfileAction()
@@ -23,4 +23,4 @@ const MemberDetails = () => {
   )
 }
 
-export default MemberDetails
+export default CompanyMemberProfile
