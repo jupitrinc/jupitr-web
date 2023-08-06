@@ -1,4 +1,4 @@
-import React, { RefObject, forwardRef } from "react"
+import React, { forwardRef } from "react"
 import { TextAreaProps } from "./Textarea.types"
 import { textareaStyles } from "./Textarea.styles"
 import { Label } from "../label/Label"
