@@ -1,10 +1,10 @@
 import { UserActionEnum, UserAction, UserState, ISuperUser } from "./user.types"
 import {
+  ISkill,
   ITalentProfile,
   TalentProfileAction,
   TalentProfileActionEnum,
 } from "state/talent_profile/talentProfile.types"
-import { ISkill } from "state/skill/skill.types"
 import {
   CompanyMemberProfileAction,
   CompanyMemberProfileActionEnum,

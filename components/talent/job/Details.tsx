@@ -12,7 +12,7 @@ import { Application } from "./Application"
 import { Card } from "ui-library/content/card/Card"
 import { numberHelper } from "helper/numberHelper"
 import { static_data_job } from "data/job"
-import { ISkill } from "state/skill/skill.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export const Details = () => {
   const { talent_job } = useTalentJobState()

@@ -12,3 +12,7 @@ export interface TextAreaProps {
   maxLength?: number
   invalid?: boolean
 }
+
+export interface RefObject<T> {
+  readonly current: T | null
+}

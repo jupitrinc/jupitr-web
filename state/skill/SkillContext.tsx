@@ -1,7 +1,8 @@
 import { createContext, useReducer } from "react"
 
 import { companyProfileReducer } from "./skillReducer"
-import { ISkill, ISkillContext, SkillState } from "./skill.types"
+import { ISkillContext, SkillState } from "./skill.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export const SkillContext = createContext({} as ISkillContext)
 

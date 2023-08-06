@@ -1,4 +1,4 @@
-export const static_data_skills = [
+export const skill_test_data = [
   { id: "1", name: "Skill 1" },
   { id: "2", name: "Skill 2" },
   { id: "3", name: "Skill 3" },

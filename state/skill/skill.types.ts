@@ -4,23 +4,19 @@ export interface ISkillContext {
 }
 
 export type SkillState = {
-  data: ISkill[]
+  data: skill[]
   loading: boolean
   error: boolean
 }
 
-export type ISkill = {
-  id: string
-  name: string
-  level: number
-}
+type skill = { id: string; name: string }
 
 export type SkillAction = {
   type:
     | SkillActionEnum.GET_SKILLS_BEGIN
     | SkillActionEnum.GET_SKILLS_FAILURE
     | SkillActionEnum.GET_SKILLS_SUCCESS
-  payload?: ISkill[] | ISkill
+  payload?: skill[] | skill
 }
 
 export enum SkillActionEnum {

@@ -9,7 +9,7 @@ import { Plus, X } from "lucide-react"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { static_data_job } from "data/job"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
-import { ISkill } from "state/skill/skill.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export const Skills = () => {
   const { company_job } = useCompanyJobState()
