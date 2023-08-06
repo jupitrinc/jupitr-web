@@ -2,7 +2,6 @@ import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { usePersistedUser } from "helper/hooks/usePersistedUser"
-import { IndustryContextProvider } from "state/industry/IndustryContext"
 
 export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
   usePersistedUser()
@@ -38,9 +37,7 @@ export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
         <header className="space-y-2">
           <Navbar />
         </header>
-        <main className="my-10">
-          <IndustryContextProvider>{children}</IndustryContextProvider>
-        </main>
+        <main className="my-10">{children}</main>
         <Footer />
       </div>
     </>

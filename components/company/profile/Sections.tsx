@@ -1,9 +1,9 @@
 import React from "react"
 import { Card } from "ui-library/content/card/Card"
-import { CompanyDetails } from "./CompanyDetails"
 import AccountSettings from "components/user/account-settings/AccountSettings"
-import MemberDetails from "./MemberDetails"
 import UserProfile from "components/user/profile/UserProfile"
+import CompanyProfile from "./CompanyProfile"
+import CompanyMemberProfile from "./CompanyMemberProfile"
 
 const Sections = () => {
   return (
@@ -11,12 +11,12 @@ const Sections = () => {
       <div className="space-y-5">
         <Card type="section">
           <UserProfile />
-          <MemberDetails />
+          <CompanyMemberProfile />
         </Card>
         <AccountSettings />
       </div>
 
-      <CompanyDetails />
+      <CompanyProfile />
     </div>
   )
 }

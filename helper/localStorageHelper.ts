@@ -2,6 +2,7 @@ export enum LocalStorageItemEnum {
   user = "user",
   industries = "industries",
   skills = "skills",
+  company_profile = "company_profile",
 }
 
 export const localStorageHelper = {

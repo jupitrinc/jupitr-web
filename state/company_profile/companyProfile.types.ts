@@ -29,10 +29,22 @@ export type CompanyProfileAction = {
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_BEGIN
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS
-    | CompanyProfileActionEnum.ADD_INDUSTRY
-    | CompanyProfileActionEnum.REMOVE_INDUSTRY
+    | CompanyProfileActionEnum.UPDATE_NAME
+    | CompanyProfileActionEnum.UPDATE_YEAR_FOUNDED
+    | CompanyProfileActionEnum.UPDATE_WEBSITE
+    | CompanyProfileActionEnum.UPDATE_SIZE
+    | CompanyProfileActionEnum.UPDATE_INDUSTRY
+    | CompanyProfileActionEnum.UPDATE_MISSION
 
-  payload?: ICompanyProfile | IIndustry
+  payload?:
+    | ICompanyProfile
+    | IIndustry
+    | ICompanyProfile["name"]
+    | ICompanyProfile["year_founded"]
+    | ICompanyProfile["website"]
+    | ICompanyProfile["size"]
+    | ICompanyProfile["industry"]
+    | ICompanyProfile["mission"]
 }
 
 export enum CompanyProfileActionEnum {
@@ -40,8 +52,12 @@ export enum CompanyProfileActionEnum {
   GET_COMPANY_PROFILE_FAILURE = "GET_COMPANY_PROFILE_FAILURE",
   GET_COMPANY_PROFILE_SUCCESS = "GET_COMPANY_PROFILE_SUCCESS",
 
-  ADD_INDUSTRY = "ADD_INDUSTRY",
-  REMOVE_INDUSTRY = "REMOVE_INDUSTRY",
+  UPDATE_NAME = "UPDATE_NAME",
+  UPDATE_YEAR_FOUNDED = "UPDATE_YEAR_FOUNDED",
+  UPDATE_WEBSITE = "UPDATE_WEBSITE",
+  UPDATE_SIZE = "UPDATE_SIZE",
+  UPDATE_INDUSTRY = "UPDATE_INDUSTRY",
+  UPDATE_MISSION = "UPDATE_MISSION",
 }
 
 export type AddCompany = Omit<

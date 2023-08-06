@@ -5,6 +5,7 @@ export interface TextAreaProps {
   value?: string
   defaultValue?: string
   onChange?: ChangeEventHandler<HTMLTextAreaElement>
+  onBlur?: ChangeEventHandler<HTMLTextAreaElement>
   label?: string
   placeholder?: string
   disabled?: boolean

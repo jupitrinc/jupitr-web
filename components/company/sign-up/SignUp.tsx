@@ -72,6 +72,7 @@ export const SignUp = () => {
           value={company.name}
           onChange={(e) => setCompany({ ...company, name: e.target.value })}
           invalid={invalid.name}
+          maxLength={50}
         />
         <NumberInput
           label="Year founded"
@@ -90,6 +91,7 @@ export const SignUp = () => {
           value={company.website}
           onChange={(e) => setCompany({ ...company, website: e.target.value })}
           invalid={invalid.website}
+          maxLength={100}
         />
         <Select
           label="Size"
@@ -97,7 +99,7 @@ export const SignUp = () => {
           options={static_data_company.size_options}
           magic_word="people"
           name="company-people"
-          defaultValue={company.size}
+          value={company.size}
           onChange={(e) =>
             setCompany({ ...company, size: JSON.parse(e.target.value) })
           }
@@ -158,6 +160,7 @@ export const SignUp = () => {
           value={company.email}
           onChange={(e) => setCompany({ ...company, email: e.target.value })}
           invalid={invalid.email}
+          maxLength={100}
         />
 
         <Button

@@ -29,6 +29,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           cols={30}
           rows={5}
           className={styles.textarea}
+          onBlur={textarea.onBlur}
           ref={ref}
         />
       </div>
