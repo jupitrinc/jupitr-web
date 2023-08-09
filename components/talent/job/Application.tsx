@@ -83,12 +83,12 @@ export const Application: React.FC<application> = (application) => {
                 </Text>
 
                 <div className="flex flex-col flex-wrap gap-5">
-                  {/* <VideoRecorder
+                  <VideoRecorder
                     duration={
                       application.job.application_video
                         .duration as VideoRecorderProps["duration"]
                     }
-                  /> */}
+                  />
                 </div>
               </div>
             )}

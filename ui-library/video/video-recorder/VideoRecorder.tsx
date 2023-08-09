@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react"
-import { StatusMessages, useReactMediaRecorder } from "react-media-recorder"
 import { VideoPlayer } from "../video-player/VideoPlayer"
 import { Button } from "ui-library/button/Button"
 import { Video } from "lucide-react"
@@ -7,6 +6,11 @@ import { videoRecorderStyles } from "./VideoRecorder.styles"
 import { VIDEO_FILE_NAME, VideoRecorderProps } from "./VideoRecorder.types"
 import { Text } from "ui-library/text/Text"
 import { useCountDown } from "helper/hooks/useCountdown"
+import {
+  RecordingStatus,
+  useVideoRecorder,
+} from "helper/hooks/useVideoRecorder"
+import { useTimeout } from "helper/hooks/useTimeout"
 
 const styles = videoRecorderStyles
 
@@ -18,49 +22,43 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
     })
   }
 
-  const {
-    status,
-    startRecording,
-    stopRecording,
-    mediaBlobUrl,
-    previewStream,
-    clearBlobUrl,
-  } = useReactMediaRecorder({
-    askPermissionOnMount: false,
-    video: true,
-    onStop: async (_blobUrl, blob) => {
-      const file = blobToFile(blob, VIDEO_FILE_NAME)
-      console.log(file)
-    },
-  })
+  const { status, startRecording, stopRecording, stream, getRecording } =
+    useVideoRecorder()
+
+  const { setRef, clearRef } = useTimeout()
 
   const record = (duration: VideoRecorderProps["duration"]) => {
-    clearBlobUrl()
     startRecording()
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       stopRecording()
     }, duration * 1000)
+
+    setRef(timeout)
   }
 
-  const recordButtonLabel = (status: StatusMessages) => {
-    if (status === "recording") return "Stop"
-    else return "Reply"
+  const stop = () => {
+    stopRecording()
+    clearRef()
+  }
+
+  const recordButtonLabel = (status: RecordingStatus) => {
+    return status === "recording" ? "Stop" : "Reply"
   }
 
   return (
     <div className={styles.container}>
-      {status !== "recording" && mediaBlobUrl ? (
-        <VideoPlayer src={mediaBlobUrl} />
+      {status !== "recording" && getRecording() ? (
+        <VideoPlayer src={getRecording() as string} />
       ) : (
-        <Preview stream={previewStream} />
+        <Preview stream={stream} />
       )}
 
       <div className={styles.toolbar}>
         <Button
           icon={<Video className="h-6 w-6" />}
           onClick={() =>
-            status === "recording" ? stopRecording() : record(recorder.duration)
+            status === "recording" ? stop() : record(recorder.duration)
           }
           label={recordButtonLabel(status)}
           variant="text"
@@ -99,7 +97,7 @@ const Countdown = ({
   status,
 }: {
   duration: VideoRecorderProps["duration"]
-  status: StatusMessages
+  status: RecordingStatus
 }) => {
   const { counter, start, reset } = useCountDown(duration)
 
