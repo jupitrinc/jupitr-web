@@ -6,46 +6,64 @@ import { Text } from "ui-library/text/Text"
 import { Divider } from "ui-library/content/divider/Divider"
 import { useAccountSettings } from "./useAccountSettings"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
+import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 
 const AccountSettings = () => {
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   return (
-    <Card type="section">
-      <div className="flex flex-col gap-5">
-        <SectionHeader title="Account settings" />
-        <Divider />
-
+    <>
+      <Card type="section">
         <div className="flex flex-col gap-5">
-          {settings.map((setting) => (
-            <Setting key={setting.name} {...setting} />
-          ))}
-        </div>
+          <SectionHeader title="Account settings" />
+          <Divider />
 
-        <Modal open={modal} onClose={settingModal.onClose}>
           <div className="flex flex-col gap-5">
-            <Text as="span" size="xl">
-              {settingModal[activeSetting].title}
-            </Text>
-
-            <Text as="p">{settingModal[activeSetting].description}</Text>
-
-            <Divider />
-
-            <div className="flex flex-row justify-between">
-              <Button
-                label="Cancel"
-                onClick={settingModal.onClose}
-                variant="text"
-              />
-              <Button
-                label={settingModal[activeSetting].confirm_button_label}
-                color={settingModal[activeSetting].confirm_button_variant}
-              />
-            </div>
+            {settings.map((setting) => (
+              <Setting key={setting.name} {...setting} />
+            ))}
           </div>
-        </Modal>
-      </div>
-    </Card>
+
+          <Modal open={modal} onClose={settingModal.onClose}>
+            <div className="flex flex-col gap-5">
+              <Text as="span" size="xl">
+                {settingModal[activeSetting].title}
+              </Text>
+
+              <Text as="p">{settingModal[activeSetting].description}</Text>
+
+              <Divider />
+
+              <div className="flex flex-row justify-between">
+                <Button
+                  label="Cancel"
+                  onClick={settingModal.onClose}
+                  variant="text"
+                />
+                {activeSetting === "delete_account" && (
+                  <div className="inline-flex gap-4">
+                    <Button
+                      label={
+                        settingModal[activeSetting].deactivate_button_label
+                      }
+                      color={
+                        settingModal[activeSetting].deactivate_button_variant
+                      }
+                      onClick={settingModal[activeSetting].onDeactivate}
+                    />
+                    <Button
+                      label={settingModal[activeSetting].confirm_button_label}
+                      color={settingModal[activeSetting].confirm_button_variant}
+                      onClick={settingModal[activeSetting].onConfirm}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </Modal>
+        </div>
+      </Card>
+      <AccountDeactivation />
+    </>
   )
 }
 

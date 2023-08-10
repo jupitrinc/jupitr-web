@@ -1,4 +1,10 @@
-import { UserActionEnum, UserAction, UserState, ISuperUser } from "./user.types"
+import {
+  UserActionEnum,
+  UserAction,
+  UserState,
+  ISuperUser,
+  IUser,
+} from "./user.types"
 import {
   ISkill,
   ITalentProfile,
@@ -136,6 +142,19 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, update_socials_state.data)
       return update_socials_state
+
+    case UserActionEnum.TOGGLE_ACTIVE:
+      const toggle_user_payload = action.payload as IUser["active"]
+
+      const toggle_user_state = {
+        ...state,
+        data: {
+          ...state.data,
+          active: toggle_user_payload,
+        },
+      }
+      setItem(LocalStorageItemEnum.user, toggle_user_state)
+      return toggle_user_state
 
     case TalentProfileActionEnum.TOGGLE_SEARCHING:
       const toggle_searching_payload =
