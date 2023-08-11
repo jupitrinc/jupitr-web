@@ -27,20 +27,16 @@ const AccountDeactivation = () => {
     <Modal open={notification} onClose={hideNotification}>
       <div className="flex flex-col gap-5">
         <Text as="span" size="xl">
-          Account deactivated
+          Account paused
         </Text>
 
-        <Text as="p">Your account is deactivated.</Text>
+        <Text as="p">Resume your account to continue.</Text>
 
         <Divider />
 
         <div className="flex flex-row justify-between">
           <Button label="Cancel" onClick={hideNotification} variant="text" />
-          <Button
-            label="Reactivate"
-            color="important"
-            onClick={activateAccount}
-          />
+          <Button label="Resume" onClick={activateAccount} />
         </div>
       </div>
     </Modal>

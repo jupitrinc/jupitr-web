@@ -42,13 +42,9 @@ const AccountSettings = () => {
                 {activeSetting === "delete_account" && (
                   <div className="inline-flex gap-4">
                     <Button
-                      label={
-                        settingModal[activeSetting].deactivate_button_label
-                      }
-                      color={
-                        settingModal[activeSetting].deactivate_button_variant
-                      }
-                      onClick={settingModal[activeSetting].onDeactivate}
+                      label={settingModal[activeSetting].pause_button_label}
+                      color={settingModal[activeSetting].pause_button_variant}
+                      onClick={settingModal[activeSetting].onPause}
                     />
                     <Button
                       label={settingModal[activeSetting].confirm_button_label}
