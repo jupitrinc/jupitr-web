@@ -117,7 +117,7 @@ export function useUserAction() {
     userId: string
   ) => {
     uploadMedia({
-      bucketName: StorageBucketsEnum.avatars,
+      bucketName: StorageBucketsEnum.images,
       file,
       filePath,
     }).then(({ data, error }) => {

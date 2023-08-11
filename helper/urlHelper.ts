@@ -10,7 +10,7 @@ export const urlHelper = {
     if (avatar.includes("google")) {
       return avatar
     } else {
-      return `${STORAGE_DOMAIN}/${StorageBucketsEnum.avatars}/${avatar}`
+      return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${avatar}`
     }
   },
 }
