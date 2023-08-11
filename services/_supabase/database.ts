@@ -58,10 +58,10 @@ export interface Database {
           user_id: string
         }
         Insert: {
-          company_id: string
+          company_id?: string
           created_at?: string | null
           job_title?: string | null
-          roles: string
+          roles?: string
           updated_at?: string | null
           user_id: string
         }

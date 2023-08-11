@@ -6,19 +6,18 @@ import { urlHelper } from "helper/urlHelper"
 import { useUserState } from "state/user/useUserState"
 import { imageHelper } from "helper/imageHelper"
 
-const asset_folder = "user/profile"
-
 const UserAvatar = () => {
   const { user } = useUserState()
   const { updateAvatar } = useUserAction()
   const { avatarUrl } = urlHelper
+  const assetFolder = `user/${user.id}/profile`
 
   const handleUpload = useCallback(async (event) => {
     if (event.target.files) {
       const file = event.target.files[0]
       const fileExt = file.name.split(".").pop()
       const fileName = `${user.id}.${fileExt}`
-      const filePath = `${asset_folder}/${fileName}`
+      const filePath = `${assetFolder}/${fileName}`
       const resizedFile = await imageHelper.resize(file)
       updateAvatar(resizedFile, filePath, user.id)
     }
