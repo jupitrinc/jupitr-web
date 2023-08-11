@@ -17,7 +17,7 @@ const CompanyMemberProfile = () => {
         name="job-title"
         label="Job title"
         onChange={(e) => setValue(e.target.value)}
-        onBlur={() => updateJobTitle(user.id, user.company_id, value)}
+        onBlur={() => updateJobTitle(user.id, value)}
       />
     </div>
   )
