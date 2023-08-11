@@ -57,7 +57,8 @@ export type UserAction = {
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
     | UserActionEnum.UPDATE_AVATAR
-  payload?: IUser | string
+    | UserActionEnum.TOGGLE_ACTIVE
+  payload?: IUser | IUser["name"] | IUser["active"]
 }
 
 export enum UserActionEnum {
@@ -77,4 +78,6 @@ export enum UserActionEnum {
 
   UPDATE_NAME = "UPDATE_NAME",
   UPDATE_AVATAR = "UPDATE_AVATAR",
+
+  TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
 }
