@@ -2,10 +2,14 @@ import { supabaseClientComponent } from "../_supabase/client"
 import { UpdateCompanyMemberProfile } from "./companyService.types"
 
 const useCompanyMemberProfileService = () => {
-  const updateProfile = async (payload: UpdateCompanyMemberProfile) => {
+  const updateProfile = async (
+    payload: UpdateCompanyMemberProfile,
+    user_id: string
+  ) => {
     const { data, error } = await supabaseClientComponent
       .from("company_member_profile")
-      .upsert({ ...payload, updated_at: new Date().toISOString() })
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq("user_id", user_id)
       .select()
       .single()
 

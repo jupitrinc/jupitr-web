@@ -15,13 +15,12 @@ export function useCompanyMemberProfileAction() {
     job_title: ICompanyMemberProfile["job_title"]
   ) => {
     if (!user_id || !job_title) return
-
-    /*const { data, error } = await updateProfile({
-      user_id: user_id,
-      company_id: company_id,
-      job_title: job_title,
-      roles: "write",
-    }) */
+    const { data, error } = await updateProfile(
+      {
+        job_title: job_title,
+      },
+      user_id
+    )
 
     // if (data) {
     dispatch({
