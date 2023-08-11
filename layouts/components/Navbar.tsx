@@ -8,7 +8,7 @@ import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { useUserAction } from "state/user/useUserAction"
 import { AccountTypeEnum } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
-import Jupi from "components/jupi/Jupi"
+import Feedback from "components/user/feedback/Feedback"
 
 export const Navbar = () => {
   const router = useRouter()
@@ -29,7 +29,7 @@ export const Navbar = () => {
                 accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
               }
             />
-            <Jupi />
+            <Feedback />
           </div>
 
           {accountType === AccountTypeEnum.talent ? (

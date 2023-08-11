@@ -15,20 +15,19 @@ export function useCompanyMemberProfileAction() {
     job_title: ICompanyMemberProfile["job_title"]
   ) => {
     if (!user_id || !job_title) return
+    const { data, error } = await updateProfile(
+      {
+        job_title: job_title,
+      },
+      user_id
+    )
 
-    /*const { data, error } = await updateProfile({
-      user_id: user_id,
-      company_id: company_id,
-      job_title: job_title,
-      roles: "write",
-    }) */
-
-    // if (data) {
-    dispatch({
-      type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
-      payload: job_title,
-    })
-    //}
+    if (data) {
+      dispatch({
+        type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
+        payload: data.job_title,
+      })
+    }
   }
 
   return {

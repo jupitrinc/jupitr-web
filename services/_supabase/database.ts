@@ -63,7 +63,7 @@ export interface Database {
           job_title?: string | null
           roles?: string
           updated_at?: string | null
-          user_id: string
+          user_id?: string
         }
         Update: {
           company_id?: string
