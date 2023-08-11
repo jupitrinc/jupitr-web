@@ -12,6 +12,7 @@ export function useCompanyMemberProfileAction() {
 
   const updateJobTitle = async (
     user_id: ICompanyMemberProfile["user_id"],
+    company_id: ICompanyMemberProfile["company_id"],
     job_title: ICompanyMemberProfile["job_title"]
   ) => {
     if (!user_id || !job_title) return
@@ -22,12 +23,12 @@ export function useCompanyMemberProfileAction() {
       user_id
     )
 
-    // if (data) {
-    dispatch({
-      type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
-      payload: job_title,
-    })
-    //}
+    if (data) {
+      dispatch({
+        type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
+        payload: job_title,
+      })
+    }
   }
 
   return {
