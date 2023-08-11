@@ -40,6 +40,21 @@ export const companyProfileReducer = (
         data: action.payload as ICompanyProfile,
       }
 
+    case CompanyProfileActionEnum.UPDATE_LOGO:
+      const update_logo_payload = action.payload as ICompanyProfile["logo"]
+      const update_logo_state = {
+        ...state,
+        data: {
+          ...state.data,
+          logo: update_logo_payload,
+        },
+      }
+
+      console.log(update_logo_state.data)
+
+      setItem(LocalStorageItemEnum.company_profile, update_logo_state.data)
+      return update_logo_state
+
     case CompanyProfileActionEnum.UPDATE_NAME:
       const update_name_payload = action.payload as ICompanyProfile["name"]
       const update_name_state = {

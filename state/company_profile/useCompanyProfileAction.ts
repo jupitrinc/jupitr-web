@@ -9,11 +9,17 @@ import {
   LocalStorageItemEnum,
   localStorageHelper,
 } from "helper/localStorageHelper"
+import { MediaPayload, StorageBucketsEnum } from "services/storage/media.types"
+import useMediaService from "services/storage/useMediaService"
+import { imageHelper } from "helper/imageHelper"
+import { storageFolderHelper } from "helper/storageFolderHelper"
 
 export function useCompanyProfileAction() {
   const { dispatch } = useContext(CompanyProfileContext)
   const { getCompanyProfile, updateCompanyProfile } = useCompanyService()
+  const { uploadMedia } = useMediaService()
   const { getItem } = localStorageHelper
+  const { companyLogoFolder } = storageFolderHelper
 
   const getProfile = async (company_id: string) => {
     if (!company_id) return
@@ -43,6 +49,41 @@ export function useCompanyProfileAction() {
         })
       }
     }
+  }
+
+  const uploadLogo = (
+    file: MediaPayload["file"],
+    filePath: MediaPayload["filePath"],
+    id: string
+  ) => {
+    uploadMedia({
+      bucketName: StorageBucketsEnum.images,
+      file,
+      filePath,
+    }).then(({ data, error }) => {
+      if (data?.path) {
+        updateCompanyProfile({ id, logo: data?.path }).then(
+          ({ data, error }) => {
+            if (data) {
+              dispatch({
+                type: CompanyProfileActionEnum.UPDATE_LOGO,
+                payload: data[0].logo,
+              })
+            }
+          }
+        )
+      }
+    })
+  }
+
+  const updateLogo = async (company_id: string, logo: File) => {
+    if (!company_id || !logo) return
+
+    const fileExt = logo.name.split(".").pop()
+    const fileName = `${company_id}.${fileExt}`
+    const filePath = `${companyLogoFolder(company_id)}/${fileName}`
+    const resizedFile = await imageHelper.resize(logo)
+    uploadLogo(resizedFile, filePath, company_id)
   }
 
   const updateName = async (id: string, name: string) => {
@@ -142,6 +183,7 @@ export function useCompanyProfileAction() {
 
   return {
     getProfile,
+    updateLogo,
     updateName,
     updateYearFounded,
     updateWebsite,

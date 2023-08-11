@@ -153,7 +153,7 @@ export const userReducer = (
           active: toggle_user_payload,
         },
       }
-      setItem(LocalStorageItemEnum.user, toggle_user_state)
+      setItem(LocalStorageItemEnum.user, toggle_user_state.data)
       return toggle_user_state
 
     case TalentProfileActionEnum.TOGGLE_SEARCHING:

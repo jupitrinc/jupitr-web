@@ -4,13 +4,13 @@ import {
 } from "services/storage/media.types"
 
 export const urlHelper = {
-  avatarUrl: (avatar: string) => {
-    if (!avatar) return undefined
+  imageUrl: (image: string) => {
+    if (!image) return undefined
 
-    if (avatar.includes("google")) {
-      return avatar
+    if (image.includes("google")) {
+      return image
     } else {
-      return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${avatar}`
+      return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${image}`
     }
   },
 }
