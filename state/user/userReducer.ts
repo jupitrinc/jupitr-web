@@ -241,7 +241,7 @@ export const userReducer = (
         },
       }
 
-      //setItem(LocalStorageItemEnum.user, update_job_title_state.data)
+      setItem(LocalStorageItemEnum.user, update_job_title_state.data)
       return update_job_title_state
 
     default:
