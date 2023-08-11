@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { WebsiteLayout } from "layouts/WebsiteLayout"
 import Loading from "layouts/components/Loader"
@@ -16,7 +16,7 @@ export const Verify = () => {
     } = supabaseClientComponent.auth.onAuthStateChange(async (event) => {
       if (event === "SIGNED_IN") {
         const res = await fetch("/login/verifyUser")
-        const userData = await res.json()
+        const userData: IUser = await res.json()
         setUser(userData)
         redirectUser(userData)
       }
@@ -24,10 +24,10 @@ export const Verify = () => {
     return () => subscription.unsubscribe()
   }, [supabaseClientComponent])
 
-  const redirectUser = (user: IUser) => {
-    if (user.account_type === AccountTypeEnum.talent) {
+  const redirectUser = (userData: IUser) => {
+    if (userData.account_type === AccountTypeEnum.talent) {
       router.push("/jobs")
-    } else if (user.account_type === AccountTypeEnum.company) {
+    } else if (userData.account_type === AccountTypeEnum.company) {
       router.push("/c/jobs")
     }
   }

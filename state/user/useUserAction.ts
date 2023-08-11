@@ -111,6 +111,21 @@ export function useUserAction() {
       })
     }
   }
+
+  const toggleActive = async (id: string, active: boolean) => {
+    const { data, error } = await updateUser({ id, active: !active })
+
+    if (data) {
+      dispatch({
+        type: UserActionEnum.TOGGLE_ACTIVE,
+        payload: data[0].active,
+      })
+      if (!data[0].active) {
+        signOut()
+      }
+    }
+  }
+
   const updateAvatar = (
     file: MediaPayload["file"],
     filePath: MediaPayload["filePath"],
@@ -146,5 +161,6 @@ export function useUserAction() {
     setUser,
     updateName,
     updateAvatar,
+    toggleActive,
   }
 }
