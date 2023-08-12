@@ -115,6 +115,16 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_name_state.data)
       return update_name_state
 
+    case UserActionEnum.UPDATE_EMAIL:
+      const update_email_payload = action.payload as ISuperUser
+      const update_email_state = {
+        ...state,
+        data: update_email_payload as ISuperUser,
+      }
+
+      setItem(LocalStorageItemEnum.user, update_email_state.data)
+      return update_email_state
+
     case UserActionEnum.UPDATE_AVATAR:
       const update_avatar_payload = action.payload as string
       const update_avatar_state = {

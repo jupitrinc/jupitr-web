@@ -26,10 +26,17 @@ const useAuthService = () => {
     })
   }
 
+  const changeEmail = async (email: string) => {
+    const { data, error } = await supabaseClientComponent.auth.updateUser({
+      email,
+    })
+    return { data, error }
+  }
+
   const signOut = async () => {
     return await supabase.auth.signOut()
   }
 
-  return { signOut, signInWithOtp, signInWithGoogle, getSession }
+  return { signOut, signInWithOtp, signInWithGoogle, getSession, changeEmail }
 }
 export default useAuthService

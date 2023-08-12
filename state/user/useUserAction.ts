@@ -21,6 +21,7 @@ export function useUserAction() {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
+    changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
@@ -112,6 +113,17 @@ export function useUserAction() {
     }
   }
 
+  const updateEmail = async (email: string) => {
+    const { data, error } = await changeEmailService(email)
+    console.log(data)
+    if (data && data.user) {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL,
+        payload: data.user,
+      })
+    }
+  }
+
   const toggleActive = async (id: string, active: boolean) => {
     const { data, error } = await updateUser({ id, active: !active })
 
@@ -160,6 +172,7 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    updateEmail,
     updateAvatar,
     toggleActive,
   }

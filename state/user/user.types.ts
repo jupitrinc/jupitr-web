@@ -1,3 +1,4 @@
+import { User } from "@supabase/supabase-js"
 import {
   CompanyMemberProfileAction,
   ICompanyMemberProfile,
@@ -56,9 +57,10 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
+    | UserActionEnum.UPDATE_EMAIL
     | UserActionEnum.UPDATE_AVATAR
     | UserActionEnum.TOGGLE_ACTIVE
-  payload?: IUser | IUser["name"] | IUser["active"]
+  payload?: IUser | IUser["name"] | IUser["active"] | User
 }
 
 export enum UserActionEnum {
@@ -77,6 +79,7 @@ export enum UserActionEnum {
   SIGN_OUT = "SIGN_OUT",
 
   UPDATE_NAME = "UPDATE_NAME",
+  UPDATE_EMAIL = "UPDATE_EMAIL",
   UPDATE_AVATAR = "UPDATE_AVATAR",
 
   TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
