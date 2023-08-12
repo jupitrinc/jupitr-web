@@ -11,6 +11,7 @@ import {
 import useMediaService from "../../services/storage/useMediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
+import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 
 export function useUserAction() {
   const router = useRouter()
@@ -24,6 +25,8 @@ export function useUserAction() {
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
+
+  const { updateLogo } = useCompanyProfileAction()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -75,18 +78,18 @@ export function useUserAction() {
   const signUpCompany = async (company: AddCompany) => {
     dispatch({ type: UserActionEnum.COMPANY_SIGN_UP_BEGIN })
 
-    // 1. upload the logo, get the url
-
-    // 2. add the company
     const { data, error } = await addCompany({ ...company, logo: "logo-url" })
 
-    // 3. sign in the user?
     if (error) {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
         payload: error.message,
       })
     } else {
+      if (data.company_id && company.logo) {
+        updateLogo(data.company_id, company.logo)
+      }
+
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })

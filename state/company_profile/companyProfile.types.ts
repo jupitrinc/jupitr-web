@@ -29,6 +29,7 @@ export type CompanyProfileAction = {
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_BEGIN
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE
     | CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS
+    | CompanyProfileActionEnum.UPDATE_LOGO
     | CompanyProfileActionEnum.UPDATE_NAME
     | CompanyProfileActionEnum.UPDATE_YEAR_FOUNDED
     | CompanyProfileActionEnum.UPDATE_WEBSITE
@@ -39,6 +40,7 @@ export type CompanyProfileAction = {
   payload?:
     | ICompanyProfile
     | IIndustry
+    | ICompanyProfile["logo"]
     | ICompanyProfile["name"]
     | ICompanyProfile["year_founded"]
     | ICompanyProfile["website"]
@@ -52,6 +54,7 @@ export enum CompanyProfileActionEnum {
   GET_COMPANY_PROFILE_FAILURE = "GET_COMPANY_PROFILE_FAILURE",
   GET_COMPANY_PROFILE_SUCCESS = "GET_COMPANY_PROFILE_SUCCESS",
 
+  UPDATE_LOGO = "UPDATE_LOGO",
   UPDATE_NAME = "UPDATE_NAME",
   UPDATE_YEAR_FOUNDED = "UPDATE_YEAR_FOUNDED",
   UPDATE_WEBSITE = "UPDATE_WEBSITE",
@@ -65,5 +68,5 @@ export type AddCompany = Omit<
   "id" | "created_at" | "updated_at" | "logo"
 > & {
   email: string
-  logo: File | string
+  logo: File
 }

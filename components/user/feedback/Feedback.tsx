@@ -17,13 +17,16 @@ const Feedback = () => {
   const [message, setMessage] = useState<string>("")
   const [sent, setSent] = useState<boolean>(false)
 
-  const sendFeedback = useCallback((message: string) => {
-    if (!message.trim()) return
+  const sendFeedback = useCallback(
+    (message: string) => {
+      if (!message.trim()) return
 
-    addFeedback({ user_id: user.id, rating: 0, message: message })
-    setSent(true)
-    setMessage("")
-  }, [])
+      addFeedback({ user_id: user.id, rating: 0, message: message })
+      setSent(true)
+      setMessage("")
+    },
+    [message, user.id]
+  )
 
   return (
     <>

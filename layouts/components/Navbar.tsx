@@ -64,7 +64,7 @@ const TalentMenu = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
-  const { avatarUrl } = urlHelper
+  const { imageUrl } = urlHelper
 
   return (
     <div className="flex gap-2">
@@ -78,7 +78,7 @@ const TalentMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={avatarUrl(user.avatar_url)}
+        image_url={imageUrl(user.avatar_url)}
         options={[{ name: "Sign out", onClick: signOut }]}
       />
     </div>
@@ -89,7 +89,7 @@ const CompanyMenu = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
-  const { avatarUrl } = urlHelper
+  const { imageUrl } = urlHelper
 
   return (
     <div className="flex gap-5">
@@ -99,7 +99,7 @@ const CompanyMenu = () => {
 
       <Dropdown
         type="avatar"
-        image_url={avatarUrl(user.avatar_url)}
+        image_url={imageUrl(user.avatar_url)}
         options={[
           {
             name: "Profile",
