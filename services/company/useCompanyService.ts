@@ -23,7 +23,8 @@ const useCompanyService = () => {
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
     const { data, error } = await supabaseClientComponent
       .from("company")
-      .upsert({ ...payload, updated_at: new Date().toISOString() })
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq("id", payload.id)
       .select()
 
     if (error) {

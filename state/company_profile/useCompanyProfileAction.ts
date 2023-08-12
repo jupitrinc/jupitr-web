@@ -67,7 +67,7 @@ export function useCompanyProfileAction() {
             if (data) {
               dispatch({
                 type: CompanyProfileActionEnum.UPDATE_LOGO,
-                payload: data[0].logo,
+                payload: data.logo,
               })
             }
           }
@@ -93,7 +93,7 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_NAME,
-        payload: data[0].name,
+        payload: data.name,
       })
     }
   }
@@ -109,7 +109,7 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_YEAR_FOUNDED,
-        payload: data[0].year_founded,
+        payload: data.year_founded,
       })
     }
   }
@@ -125,7 +125,7 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_WEBSITE,
-        payload: data[0].website,
+        payload: data.website,
       })
     }
   }
@@ -141,7 +141,7 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_SIZE,
-        payload: data[0].size,
+        payload: data.size,
       })
     }
   }
@@ -160,7 +160,7 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_INDUSTRY,
-        payload: data[0].industry,
+        payload: data.industry,
       })
     }
   }
@@ -176,11 +176,10 @@ export function useCompanyProfileAction() {
     if (data) {
       dispatch({
         type: CompanyProfileActionEnum.UPDATE_MISSION,
-        payload: data[0].mission,
+        payload: data.mission,
       })
     }
   }
-
   return {
     getProfile,
     updateLogo,

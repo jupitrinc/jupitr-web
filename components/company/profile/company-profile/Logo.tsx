@@ -7,8 +7,10 @@ import { useCompanyProfileAction } from "state/company_profile/useCompanyProfile
 
 const Logo = () => {
   const { company_profile } = useCompanyProfileState()
-  const { updateLogo } = useCompanyProfileAction()
   const { imageUrl } = urlHelper
+  const { updateLogo } = useCompanyProfileAction()
+
+  const assetFolder = `company/${company_profile.id}/profile`
 
   const handleUpload = useCallback(
     async (event) => {

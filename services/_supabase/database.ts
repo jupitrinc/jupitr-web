@@ -36,7 +36,7 @@ export interface Database {
         }
         Update: {
           created_at?: string | null
-          id?: string
+          id: string
           industry?: Json | null
           logo?: string | null
           mission?: string | null
