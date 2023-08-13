@@ -8,8 +8,10 @@ import { useAccountSettings } from "./useAccountSettings"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
+import { useUserState } from "state/user/useUserState"
 
 const AccountSettings = () => {
+  const { error } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
   const [toggleEmailModal, setToggleEmailModal] = useState(false)
@@ -63,7 +65,14 @@ const AccountSettings = () => {
                       />
                     </form>
                   )}
-                  {toggleEmailModal && (
+                  {toggleEmailModal && error && (
+                    <div className="flex flex-col gap-5">
+                      <Text as="span" size="base">
+                        {error}
+                      </Text>
+                    </div>
+                  )}
+                  {toggleEmailModal && !error && (
                     <div className="flex flex-col gap-5">
                       <Text as="span" size="base">
                         The email has been changed!
@@ -109,9 +118,7 @@ const AccountSettings = () => {
                       }
                       color={settingModal[activeSetting].confirm_button_variant}
                       onClick={() => {
-                        !toggleEmailModal
-                          ? onEmailChange()
-                          : settingModal.onClose()
+                        !toggleEmailModal ? onEmailChange() : onClose()
                       }}
                     />
                   </div>

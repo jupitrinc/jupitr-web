@@ -113,14 +113,25 @@ export function useUserAction() {
     }
   }
 
-  const updateEmail = async (email: string) => {
+  const updateEmail = async (id: string, email: string) => {
+    dispatch({
+      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+    })
+
     const { data, error } = await changeEmailService(email)
-    console.log(data)
-    if (data && data.user) {
+    if (error) {
       dispatch({
-        type: UserActionEnum.UPDATE_EMAIL,
-        payload: data.user,
+        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        payload: error.message,
       })
+    } else {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
+        payload: data.user.email,
+      })
+
+      await updateUser({ id, email })
+      signOut()
     }
   }
 

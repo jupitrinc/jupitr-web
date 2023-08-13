@@ -57,7 +57,9 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
-    | UserActionEnum.UPDATE_EMAIL
+    | UserActionEnum.UPDATE_EMAIL_BEGIN
+    | UserActionEnum.UPDATE_EMAIL_SUCCESS
+    | UserActionEnum.UPDATE_EMAIL_FAILURE
     | UserActionEnum.UPDATE_AVATAR
     | UserActionEnum.TOGGLE_ACTIVE
   payload?: IUser | IUser["name"] | IUser["active"] | User
@@ -79,8 +81,11 @@ export enum UserActionEnum {
   SIGN_OUT = "SIGN_OUT",
 
   UPDATE_NAME = "UPDATE_NAME",
-  UPDATE_EMAIL = "UPDATE_EMAIL",
   UPDATE_AVATAR = "UPDATE_AVATAR",
+
+  UPDATE_EMAIL_BEGIN = "UPDATE_EMAIL_BEGIN",
+  UPDATE_EMAIL_SUCCESS = "UPDATE_EMAIL_SUCCESS",
+  UPDATE_EMAIL_FAILURE = "UPDATE_EMAIL_FAILURE",
 
   TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
 }
