@@ -24,7 +24,11 @@ const Logo = () => {
 
   return (
     <Uploader onChange={handleUpload} accept="image/jpg, image/jpeg, image/png">
-      <Avatar size={36} image_url={imageUrl(company_profile.logo)} />
+      <Avatar
+        size={36}
+        image_url={imageUrl(company_profile.logo)}
+        type="image"
+      />
     </Uploader>
   )
 }
