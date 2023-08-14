@@ -58,6 +58,9 @@ export type UserAction = {
     | UserActionEnum.UPDATE_NAME
     | UserActionEnum.UPDATE_AVATAR
     | UserActionEnum.TOGGLE_ACTIVE
+    | UserActionEnum.DELETE_USER_BEGIN
+    | UserActionEnum.DELETE_USER_FAILURE
+    | UserActionEnum.DELETE_USER_SUCCESS
   payload?: IUser | IUser["name"] | IUser["active"]
 }
 
@@ -80,4 +83,8 @@ export enum UserActionEnum {
   UPDATE_AVATAR = "UPDATE_AVATAR",
 
   TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
+
+  DELETE_USER_BEGIN = "DELETE_USER_BEGIN",
+  DELETE_USER_FAILURE = "DELETE_USER_FAILURE",
+  DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS",
 }

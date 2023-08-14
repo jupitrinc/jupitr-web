@@ -128,6 +128,40 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_avatar_state.data)
       return update_avatar_state
 
+    case UserActionEnum.TOGGLE_ACTIVE:
+      const toggle_user_payload = action.payload as IUser["active"]
+
+      const toggle_user_state = {
+        ...state,
+        data: {
+          ...state.data,
+          active: toggle_user_payload,
+        },
+      }
+      setItem(LocalStorageItemEnum.user, toggle_user_state)
+      return toggle_user_state
+
+    case UserActionEnum.DELETE_USER_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: "",
+      }
+
+    case UserActionEnum.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload as string,
+      }
+
+    case UserActionEnum.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: "",
+      }
+
     // talent_profile
     case TalentProfileActionEnum.UPDATE_SOCIALS:
       const update_socials_payload = action.payload as ITalentProfile["socials"]
@@ -142,19 +176,6 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, update_socials_state.data)
       return update_socials_state
-
-    case UserActionEnum.TOGGLE_ACTIVE:
-      const toggle_user_payload = action.payload as IUser["active"]
-
-      const toggle_user_state = {
-        ...state,
-        data: {
-          ...state.data,
-          active: toggle_user_payload,
-        },
-      }
-      setItem(LocalStorageItemEnum.user, toggle_user_state.data)
-      return toggle_user_state
 
     case TalentProfileActionEnum.TOGGLE_SEARCHING:
       const toggle_searching_payload =

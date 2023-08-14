@@ -10,11 +10,11 @@ enum SettingsEnum {
 }
 
 export const useAccountSettings = () => {
+  const { user } = useUserState()
+  const { toggleActive, deleteAccount } = useUserAction()
   const [modal, setModal] = useState<boolean>(false)
   const [activeSetting, setActiveSetting] =
     useState<SettingsType>("delete_account")
-  const { user } = useUserState()
-  const { toggleActive } = useUserAction()
 
   const settings = [
     {
@@ -50,7 +50,7 @@ export const useAccountSettings = () => {
       title: "Delete account",
       description:
         "This action is irreversible. Alternatively, pause your account to stop receiving emails and hide your profile.",
-      onConfirm: () => alert(""),
+      onConfirm: () => deleteAccount(user.id),
       confirm_button_label: "Delete",
       confirm_button_variant: "dangerous" as ColorType,
       onPause: () => toggleActive(user.id, user.active),

@@ -22,6 +22,7 @@ export function useUserAction() {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
+    deleteAccount: deleteAccountService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
@@ -155,6 +156,25 @@ export function useUserAction() {
     })
   }
 
+  const deleteAccount = async (id: string) => {
+    dispatch({
+      type: UserActionEnum.DELETE_USER_BEGIN,
+    })
+
+    const { error } = await deleteAccountService(id)
+    if (error) {
+      dispatch({
+        type: UserActionEnum.DELETE_USER_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.DELETE_USER_SUCCESS,
+      })
+      signOut()
+    }
+  }
+
   return {
     signInWithEmail,
     signInWithGoogle,
@@ -165,5 +185,6 @@ export function useUserAction() {
     updateName,
     updateAvatar,
     toggleActive,
+    deleteAccount,
   }
 }

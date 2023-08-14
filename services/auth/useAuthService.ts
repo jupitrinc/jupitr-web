@@ -30,6 +30,16 @@ const useAuthService = () => {
     return await supabase.auth.signOut()
   }
 
-  return { signOut, signInWithOtp, signInWithGoogle, getSession }
+  const deleteAccount = async (id: string) => {
+    return await supabase.auth.admin.deleteUser(id)
+  }
+
+  return {
+    signOut,
+    signInWithOtp,
+    signInWithGoogle,
+    getSession,
+    deleteAccount,
+  }
 }
 export default useAuthService
