@@ -14,7 +14,7 @@ export const useAccountSettings = () => {
   const [activeSetting, setActiveSetting] =
     useState<SettingsType>("delete_account")
   const { user } = useUserState()
-  const { updateEmail, toggleActive } = useUserAction()
+  const { requestEmailUpdate, toggleActive } = useUserAction()
 
   const settings = [
     {
@@ -42,7 +42,7 @@ export const useAccountSettings = () => {
     [SettingsEnum.change_email]: {
       title: "Change email address",
       description: "Enter the new email address.",
-      onConfirm: (email) => updateEmail(user.id, email),
+      onConfirm: (email) => requestEmailUpdate(email),
       confirm_button_label: "Change",
       confirm_button_variant: "standard" as ColorType,
     },

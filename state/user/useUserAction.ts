@@ -113,26 +113,28 @@ export function useUserAction() {
     }
   }
 
-  const updateEmail = async (id: string, email: string) => {
+  const requestEmailUpdate = async (email: string) => {
     dispatch({
-      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+      type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
     })
 
     const { data, error } = await changeEmailService(email)
     if (error) {
       dispatch({
-        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
         payload: error.message,
       })
     } else {
       dispatch({
-        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
-        payload: data.user.email,
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
+        payload: email,
       })
-
-      await updateUser({ id, email })
-      signOut()
     }
+  }
+
+  const updateEmail = async (id: string, email: string) => {
+    // await updateUser({ id, email })
+    // signOut()
   }
 
   const toggleActive = async (id: string, active: boolean) => {
@@ -183,6 +185,7 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    requestEmailUpdate,
     updateEmail,
     updateAvatar,
     toggleActive,

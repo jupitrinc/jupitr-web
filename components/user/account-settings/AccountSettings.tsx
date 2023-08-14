@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
@@ -9,12 +9,15 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
+import useAuthStateChanges from "helper/hooks/useAuthStateChanges"
 
 const AccountSettings = () => {
-  const { error } = useUserState()
+  const { user, error } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState(user.email)
   const [toggleEmailModal, setToggleEmailModal] = useState(false)
+
+  useAuthStateChanges()
 
   const onEmailChange = (e?) => {
     e && e.preventDefault()
