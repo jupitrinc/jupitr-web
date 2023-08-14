@@ -133,8 +133,8 @@ export function useUserAction() {
   }
 
   const updateEmail = async (id: string, email: string) => {
-    // await updateUser({ id, email })
-    // signOut()
+    await updateUser({ id, email })
+    signOut()
   }
 
   const toggleActive = async (id: string, active: boolean) => {
