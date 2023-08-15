@@ -18,7 +18,22 @@ const useUserService = () => {
 
     return { data, error }
   }
+  const deleteUser = async (access_token: string) => {
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "user-deletion",
+      {
+        headers: {
+          "access_token": access_token,
+        },
+      }
+    )
 
+    if (error) {
+      console.error("failed to delete user: ", error)
+    }
+
+    return { data, error }
+  }
   const updateUser = async (
     payload: Database["public"]["Tables"]["users"]["Insert"]
   ) => {
@@ -36,6 +51,7 @@ const useUserService = () => {
   return {
     getUser,
     updateUser,
+    deleteUser,
   }
 }
 
