@@ -5,10 +5,6 @@ import {
 } from "./companyProfile.types"
 import { CompanyProfileContext } from "./CompanyProfileContext"
 import useCompanyService from "services/company/useCompanyService"
-import {
-  LocalStorageItemEnum,
-  localStorageHelper,
-} from "helper/localStorageHelper"
 import { MediaPayload, StorageBucketsEnum } from "services/storage/media.types"
 import useMediaService from "services/storage/useMediaService"
 import { imageHelper } from "helper/imageHelper"
@@ -18,7 +14,6 @@ export function useCompanyProfileAction() {
   const { dispatch } = useContext(CompanyProfileContext)
   const { getCompanyProfile, updateCompanyProfile } = useCompanyService()
   const { uploadMedia } = useMediaService()
-  const { getItem } = localStorageHelper
   const { companyLogoFolder } = storageFolderHelper
 
   const getProfile = async (company_id: string) => {
@@ -28,26 +23,17 @@ export function useCompanyProfileAction() {
       type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_BEGIN,
     })
 
-    if (getItem(LocalStorageItemEnum.company_profile)) {
+    const { data, error } = await getCompanyProfile(company_id)
+
+    if (error) {
       dispatch({
-        type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS,
-        payload: getItem(
-          LocalStorageItemEnum.company_profile
-        ) as ICompanyProfile,
+        type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE,
       })
     } else {
-      const { data, error } = await getCompanyProfile(company_id)
-
-      if (error) {
-        dispatch({
-          type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE,
-        })
-      } else {
-        dispatch({
-          type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS,
-          payload: data as ICompanyProfile,
-        })
-      }
+      dispatch({
+        type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS,
+        payload: data as ICompanyProfile,
+      })
     }
   }
 
