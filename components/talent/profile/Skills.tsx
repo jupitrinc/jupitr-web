@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Button } from "ui-library/button/Button"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
@@ -10,11 +10,21 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import { useUserState } from "state/user/useUserState"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { ISkill } from "state/talent_profile/talentProfile.types"
-import { skill_test_data } from "state/skill/skill.testdata"
+import { useSkillAction } from "state/skill/useSkillAction"
+import { useSkillState } from "state/skill/useSkillState"
 
 const Skills = () => {
   const { user } = useUserState()
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
+  const { getSkills } = useSkillAction()
+  const { skills } = useSkillState()
+
+  useEffect(() => {
+    const getSkillList = async () => {
+      skills.length < 1 && (await getSkills())
+    }
+    getSkillList()
+  }, [])
 
   return (
     <Card type="section">
@@ -22,7 +32,7 @@ const Skills = () => {
         <SectionHeader title="Skills" />
         <Multiselect
           placeholder="Search skills"
-          options={skill_test_data}
+          options={skills}
           onChange={(skill) =>
             addSkill(user.id, { ...skill, level: 2 }, user.skills)
           }

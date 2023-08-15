@@ -1,11 +1,11 @@
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { SkillContext } from "./SkillContext"
 
 export const useSkillState = () => {
   const { state } = useContext(SkillContext)
 
   return {
-    skills: state.data,
+    skills: useMemo(() => state.data, [state.data]),
     loading: state.loading,
     error: state.error,
   }
