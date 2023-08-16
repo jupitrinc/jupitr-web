@@ -156,12 +156,12 @@ export function useUserAction() {
     })
   }
 
-  const deleteAccount = async (id: string) => {
+  const deleteAccount = async () => {
     dispatch({
       type: UserActionEnum.DELETE_USER_BEGIN,
     })
 
-    const { error } = await deleteAccountService(id)
+    const { error } = await deleteAccountService()
     if (error) {
       dispatch({
         type: UserActionEnum.DELETE_USER_FAILURE,

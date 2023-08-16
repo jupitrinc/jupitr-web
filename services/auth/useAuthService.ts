@@ -1,6 +1,9 @@
 import { supabase, supabaseClientComponent } from "services/_supabase/client"
+import useUserService from "services/user/useUserService"
 
 const useAuthService = () => {
+  const { deleteUser } = useUserService()
+
   const signInWithOtp = async (email: string) => {
     return await supabaseClientComponent.auth.signInWithOtp({
       email,
@@ -30,8 +33,9 @@ const useAuthService = () => {
     return await supabase.auth.signOut()
   }
 
-  const deleteAccount = async (id: string) => {
-    return await supabase.auth.admin.deleteUser(id)
+  const deleteAccount = async () => {
+    const userSession = await supabaseClientComponent.auth.getSession()
+    return await deleteUser(userSession.data.session!.access_token)
   }
 
   return {
