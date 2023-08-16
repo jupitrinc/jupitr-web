@@ -12,11 +12,13 @@ import useMediaService from "../../services/storage/useMediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
-
+import { localStorageHelper } from "../../helper/localStorageHelper"
+import { cookieHelper } from "../../helper/cookieHelper"
 export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-
+  const { clear } = localStorageHelper
+  const { deleteAll } = cookieHelper
   const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,
@@ -101,7 +103,9 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    signOutService()
+    await signOutService()
+    clear()
+    deleteAll()
     router.push("/")
   }
 
@@ -171,7 +175,9 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.DELETE_USER_SUCCESS,
       })
-      signOut()
+      clear()
+      deleteAll()
+      router.push("/login")
     }
   }
 

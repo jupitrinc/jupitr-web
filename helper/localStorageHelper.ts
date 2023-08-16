@@ -53,4 +53,7 @@ export const localStorageHelper = {
   removeItem(key) {
     localStorage.removeItem(key)
   },
+  clear() {
+    localStorage.clear()
+  },
 }
