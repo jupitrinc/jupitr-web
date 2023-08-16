@@ -133,8 +133,8 @@ export function useUserAction() {
   }
 
   const updateEmail = async (id: string, email: string) => {
+    //TODO update Localstorage with new data
     await updateUser({ id, email })
-    signOut()
   }
 
   const toggleActive = async (id: string, active: boolean) => {
