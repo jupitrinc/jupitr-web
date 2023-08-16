@@ -123,18 +123,12 @@ export const userReducer = (
       }
 
     case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
-      const update_email_payload = action.payload as string
       const update_email_state = {
         ...state,
         loading: false,
         error: "",
-        data: {
-          ...state.data,
-          email: update_email_payload,
-        } as ISuperUser,
       }
 
-      setItem(LocalStorageItemEnum.user, update_email_state.data)
       return update_email_state
 
     case UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE:
