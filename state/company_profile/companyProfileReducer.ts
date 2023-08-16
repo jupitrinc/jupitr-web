@@ -4,17 +4,11 @@ import {
   CompanyProfileAction,
   CompanyProfileState,
 } from "./companyProfile.types"
-import {
-  LocalStorageItemEnum,
-  localStorageHelper,
-} from "helper/localStorageHelper"
 
 export const companyProfileReducer = (
   state: CompanyProfileState,
   action: CompanyProfileAction
 ): CompanyProfileState => {
-  const { setItem } = localStorageHelper
-
   switch (action.type) {
     case CompanyProfileActionEnum.GET_COMPANY_PROFILE_BEGIN:
       return {
@@ -31,8 +25,6 @@ export const companyProfileReducer = (
       }
 
     case CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS:
-      setItem(LocalStorageItemEnum.company_profile, action.payload)
-
       return {
         ...state,
         loading: false,
@@ -52,7 +44,6 @@ export const companyProfileReducer = (
 
       console.log(update_logo_state.data)
 
-      setItem(LocalStorageItemEnum.company_profile, update_logo_state.data)
       return update_logo_state
 
     case CompanyProfileActionEnum.UPDATE_NAME:
@@ -65,7 +56,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(LocalStorageItemEnum.company_profile, update_name_state.data)
       return update_name_state
 
     case CompanyProfileActionEnum.UPDATE_YEAR_FOUNDED:
@@ -79,10 +69,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(
-        LocalStorageItemEnum.company_profile,
-        update_year_founded_state.data
-      )
       return update_year_founded_state
 
     case CompanyProfileActionEnum.UPDATE_WEBSITE:
@@ -96,7 +82,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(LocalStorageItemEnum.company_profile, update_website_state.data)
       return update_website_state
 
     case CompanyProfileActionEnum.UPDATE_SIZE:
@@ -109,7 +94,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(LocalStorageItemEnum.company_profile, update_size_state.data)
       return update_size_state
 
     case CompanyProfileActionEnum.UPDATE_INDUSTRY:
@@ -123,7 +107,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(LocalStorageItemEnum.company_profile, update_industry_state.data)
       return update_industry_state
 
     case CompanyProfileActionEnum.UPDATE_MISSION:
@@ -137,7 +120,6 @@ export const companyProfileReducer = (
         },
       }
 
-      setItem(LocalStorageItemEnum.company_profile, update_mission_state.data)
       return update_mission_state
 
     default:
