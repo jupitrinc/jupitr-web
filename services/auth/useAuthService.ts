@@ -34,7 +34,7 @@ const useAuthService = () => {
   }
 
   const signOut = async () => {
-    return await supabase.auth.signOut()
+    return await supabaseClientComponent.auth.signOut()
   }
 
   return { signOut, signInWithOtp, signInWithGoogle, getSession, changeEmail }
