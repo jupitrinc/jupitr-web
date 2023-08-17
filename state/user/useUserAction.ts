@@ -118,7 +118,7 @@ export function useUserAction() {
       type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
     })
 
-    const { data, error } = await changeEmailService(email)
+    const { error } = await changeEmailService(email)
     if (error) {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
@@ -133,8 +133,22 @@ export function useUserAction() {
   }
 
   const updateEmail = async (id: string, email: string) => {
-    //TODO update Localstorage with new data
-    await updateUser({ id, email })
+    dispatch({
+      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+    })
+
+    const { error } = await updateUser({ id, email })
+    if (error) {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
+        payload: email,
+      })
+    }
   }
 
   const toggleActive = async (id: string, active: boolean) => {

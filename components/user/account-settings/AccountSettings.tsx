@@ -78,7 +78,8 @@ const AccountSettings = () => {
                   {toggleEmailModal && !error && (
                     <div className="flex flex-col gap-5">
                       <Text as="span" size="base">
-                        The email has been changed!
+                        We&apos;ve sent a request to change your email. Please
+                        check your inbox to confirm the update.
                       </Text>
                     </div>
                   )}

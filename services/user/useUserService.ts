@@ -22,7 +22,6 @@ const useUserService = () => {
   const updateUser = async (
     payload: Database["public"]["Tables"]["users"]["Insert"]
   ) => {
-    console.log(payload)
     const { data, error } = await supabaseClientComponent
       .from("users")
       .update({ ...payload, updated_at: new Date().toISOString() })
