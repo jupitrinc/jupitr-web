@@ -6,7 +6,6 @@ export async function middleware(req: NextRequest) {
   const allowedRoutes = [
     "/auth/callback",
     "/",
-    "/login",
     "/c/signup",
     "/job",
     "/login/verify",
@@ -26,7 +25,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession()
 
   if (!session && !isRouteAllowed) {
-    return NextResponse.redirect(`${new URL(req.url).origin}/login`)
+    return NextResponse.redirect(`${new URL(req.url).origin}/`)
   }
 
   return res

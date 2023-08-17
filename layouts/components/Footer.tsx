@@ -9,28 +9,30 @@ export const Footer = () => {
 
   if (router.pathname === "/") {
     return (
-      <footer className="mt-20 flex flex-row gap-3 items-center">
-        <Text as="span" size="sm">
-          © {currentYear()} jupitr
-        </Text>
-        <a
-          href="https://medium.com/@jupitr/terms-of-use-68e069bc19f5"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+      <footer className="mt-32 max-w-sm mx-auto flex flex-col gap-5 ">
+        <div className="flex flex-row gap-3 items-center justify-center">
           <Text as="span" size="sm">
-            Terms
+            © {currentYear()} jupitr
           </Text>
-        </a>
-        <a
-          href="https://medium.com/@jupitr/privacy-policy-903f8d1fe156"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Text as="span" size="sm">
-            Privacy
-          </Text>
-        </a>
+          <a
+            href="https://medium.com/@jupitr/terms-of-use-68e069bc19f5"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Text as="span" size="sm">
+              Terms
+            </Text>
+          </a>
+          <a
+            href="https://medium.com/@jupitr/privacy-policy-903f8d1fe156"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Text as="span" size="sm">
+              Privacy
+            </Text>
+          </a>
+        </div>
       </footer>
     )
   } else {
