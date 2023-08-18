@@ -8,7 +8,7 @@ export const useTalentProfileService = () => {
   const updateProfile = async (payload: TalentProfilePayload) => {
     const { data, error } = await supabaseClientComponent
       .from("talent_profile")
-      .upsert({
+      .update({
         ...payload,
         updated_at: new Date().toISOString(),
       })

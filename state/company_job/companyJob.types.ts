@@ -8,17 +8,21 @@ export interface ICompanyJobContext {
 export type CompanyJobState = {
   data: ICompanyJob
   loading: boolean
-  error: boolean
+  error: string
 }
 
 export interface ICompanyJob {
   id: string
+  company_id: string
   title: string
-  salary: number
-  location: string
+  salary: string
+  status: "open" | "closed" | "draft" | "archived"
+  location: ILocation
   work_model: string[]
   visa_sponsorship: boolean
-  videos: {
+  skills: { id: string; name: string; level: number }[]
+  application_video: { duration: number; description: string }
+  videos?: {
     id: string
     job_id: string
     company_member_profile: {
@@ -29,14 +33,15 @@ export interface ICompanyJob {
 
     video_url: string
   }[]
-  technical_test: string[]
-  skills: { id: string; name: string; level: number }[]
-  application_video: { duration: number; description: string }
-  status: "open" | "closed" | "draft"
-  applications?: IJobApplication[]
 
-  // FIXME
-  date_posted: any
+  applications?: IJobApplication[]
+  created_at: string
+  updated_at?: string
+}
+
+interface ILocation {
+  id: string
+  name: string
 }
 
 export interface IJobApplication {
@@ -53,11 +58,44 @@ export interface IJobApplication {
 }
 
 export type CompanyJobAction = {
-  type: CompanyJobActionEnum.SET_COMPANY_JOB
+  type:
+    | CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN
+    | CompanyJobActionEnum.ADD_COMPANY_JOB_FAILURE
+    | CompanyJobActionEnum.ADD_COMPANY_JOB_SUCCESS
+    | CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN
+    | CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE
+    | CompanyJobActionEnum.GET_COMPANY_JOB_SUCCESS
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_TITLE
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_SALARY
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_WORK_MODEL
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_LOCATION
+    | CompanyJobActionEnum.ADD_COMPANY_JOB_SKILL
+    | CompanyJobActionEnum.REMOVE_COMPANY_JOB_SKILL
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILL
 
-  payload?: ICompanyJob
+  payload?:
+    | ICompanyJob
+    | string
+    | ICompanyJob["work_model"]
+    | ICompanyJob["location"]
+    | ICompanyJob["skills"]
 }
 
 export enum CompanyJobActionEnum {
-  SET_COMPANY_JOB = "SET_COMPANY_JOB",
+  ADD_COMPANY_JOB_BEGIN = "ADD_COMPANY_JOB_BEGIN",
+  ADD_COMPANY_JOB_FAILURE = "ADD_COMPANY_JOB_FAILURE",
+  ADD_COMPANY_JOB_SUCCESS = "ADD_COMPANY_JOB_SUCCESS",
+
+  GET_COMPANY_JOB_BEGIN = "GET_COMPANY_JOB_BEGIN",
+  GET_COMPANY_JOB_FAILURE = "GET_COMPANY_JOB_FAILURE",
+  GET_COMPANY_JOB_SUCCESS = "GET_COMPANY_JOB_SUCCESS",
+
+  UPDATE_COMPANY_JOB_TITLE = "UPDATE_COMPANY_JOB_TITLE",
+  UPDATE_COMPANY_JOB_SALARY = "UPDATE_COMPANY_JOB_SALARY",
+  UPDATE_COMPANY_JOB_WORK_MODEL = "UPDATE_COMPANY_JOB_WORK_MODEL",
+  UPDATE_COMPANY_JOB_LOCATION = "UPDATE_COMPANY_JOB_LOCATION",
+
+  ADD_COMPANY_JOB_SKILL = "ADD_COMPANY_JOB_SKILL",
+  REMOVE_COMPANY_JOB_SKILL = "REMOVE_COMPANY_JOB_SKILL",
+  UPDATE_COMPANY_JOB_SKILL = "UPDATE_COMPANY_JOB_SKILL",
 }

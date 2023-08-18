@@ -1,17 +1,17 @@
-import React, { useEffect } from "react"
 import { Card } from "ui-library/content/card/Card"
-import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
-import { useUserState } from "state/user/useUserState"
+import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
+import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
+import { useCompanyJobState } from "state/company_job/useCompanyJobState"
+import { static_data_job } from "data/job"
+import { useEffect } from "react"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
-import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
-import { static_data_job } from "data/job"
 
-const Skills = () => {
-  const { user } = useUserState()
-  const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
+export const Skills = () => {
+  const { company_job } = useCompanyJobState()
+  const { addSkill, removeSkill, updateSkill } = useCompanyJobAction()
   const { getSkills } = useSkillAction()
   const { skills } = useSkillState()
 
@@ -28,23 +28,29 @@ const Skills = () => {
         <SectionHeader title="Skills" />
         <Multiselect
           placeholder="Search skills"
-          options={skills}
+          options={company_job.skills}
           onChange={(skill) =>
-            addSkill(user.id, { ...skill, level: 2 }, user.skills)
+            addSkill(company_job.id, { ...skill, level: 2 }, company_job.skills)
           }
         />
       </div>
 
       <div className="grid grid-cols-1 gap-5">
-        {user.skills &&
-          user.skills.map((skill) => (
+        {company_job.skills &&
+          company_job.skills.map((skill) => (
             <SkillCard
               skill={skill}
               key={skill.id}
               levels={static_data_job.skill_levels}
-              removeSkill={() => removeSkill(user.id, skill, user.skills)}
+              removeSkill={() =>
+                removeSkill(company_job.id, skill, company_job.skills)
+              }
               updateSkill={(level: number) =>
-                updateSkill(user.id, { ...skill, level: level }, user.skills)
+                updateSkill(
+                  company_job.id,
+                  { ...skill, level: level },
+                  company_job.skills
+                )
               }
             />
           ))}
@@ -52,5 +58,3 @@ const Skills = () => {
     </Card>
   )
 }
-
-export default Skills

@@ -4,8 +4,8 @@ import { ICompanyJob } from "state/company_job/companyJob.types"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
-import { Button } from "ui-library/button/Button"
 import { useRouter } from "next/router"
+import NewJob from "./NewJob"
 
 export const List = () => {
   const {
@@ -82,13 +82,5 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
         </Text>
       </div>
     </Card>
-  )
-}
-
-const NewJob = () => {
-  return (
-    <div className="flex justify-end">
-      <Button label="New job" size="sm" color="special" />
-    </div>
   )
 }

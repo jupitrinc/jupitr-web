@@ -9,7 +9,7 @@ export const Checkbox: React.FC<CheckboxProps> = (checkbox) => {
     <label>
       <input
         type="checkbox"
-        defaultChecked={checkbox.checked}
+        checked={checkbox.checked}
         name={checkbox.label}
         value={checkbox.value}
         onChange={checkbox.onChange}
