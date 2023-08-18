@@ -1,3 +1,5 @@
+import { imageHelper } from "./imageHelper"
+
 export const storageFolderHelper = {
   userAvatarFolder: (user_id: string) => {
     if (!user_id) return undefined
@@ -9,4 +11,7 @@ export const storageFolderHelper = {
 
     return `company/${company_id}/logo`
   },
+}
+export const resizeFile = async (logo: File) => {
+  return await imageHelper.resize(logo)
 }

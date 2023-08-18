@@ -14,6 +14,8 @@ import useCompanyService from "services/company/useCompanyService"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "../../helper/cookieHelper"
+import { toBase64, imageHelper } from "../../helper/imageHelper"
+
 export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
@@ -82,7 +84,9 @@ export function useUserAction() {
   const signUpCompany = async (company: AddCompany) => {
     dispatch({ type: UserActionEnum.COMPANY_SIGN_UP_BEGIN })
 
-    const { data, error } = await addCompany({ ...company, logo: "logo-url" })
+    const resizedFile = await imageHelper.resize(company.logo)
+    const base64File = await toBase64(resizedFile)
+    const { error } = await addCompany({ ...company, logo: base64File })
 
     if (error) {
       dispatch({
@@ -90,10 +94,6 @@ export function useUserAction() {
         payload: error.message,
       })
     } else {
-      if (data.company_id && company.logo) {
-        updateLogo(data.company_id, company.logo)
-      }
-
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })

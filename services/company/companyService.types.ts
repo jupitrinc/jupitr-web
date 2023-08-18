@@ -7,7 +7,7 @@ type AccessLevel = "company" | "team"
 interface CompanyProfile {
   name: string
   year_founded: string
-  logo: string
+  logo: EventTarget | File | FileList | string | unknown
   website: string
   size: string
   mission: string
