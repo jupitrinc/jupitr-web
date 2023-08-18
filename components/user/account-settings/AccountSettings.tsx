@@ -50,13 +50,11 @@ const AccountSettings = () => {
                 {settingModal[activeSetting].title}
               </Text>
 
-              {activeSetting === "change_email" && (
-                <>
-                  {!toggleEmailModal && (
-                    <form className="w-full" onSubmit={onEmailChange}>
-                      <Text as="p">
-                        {settingModal[activeSetting].description}
-                      </Text>
+              <form className="w-full" onSubmit={onEmailChange}>
+                <Text as="p">{settingModal[activeSetting].description}</Text>
+                {activeSetting === "change_email" && (
+                  <>
+                    {!toggleEmailModal && (
                       <TextInput
                         placeholder="New email address"
                         value={email}
@@ -66,25 +64,25 @@ const AccountSettings = () => {
                         light={true}
                         required
                       />
-                    </form>
-                  )}
-                  {toggleEmailModal && error && (
-                    <div className="flex flex-col gap-5">
-                      <Text as="span" size="base">
-                        {error}
-                      </Text>
-                    </div>
-                  )}
-                  {toggleEmailModal && !error && (
-                    <div className="flex flex-col gap-5">
-                      <Text as="span" size="base">
-                        We&apos;ve sent a request to change your email. Please
-                        check your inbox to confirm the update.
-                      </Text>
-                    </div>
-                  )}
-                </>
-              )}
+                    )}
+                    {toggleEmailModal && error && (
+                      <div className="flex flex-col gap-5">
+                        <Text as="span" size="base">
+                          {error}
+                        </Text>
+                      </div>
+                    )}
+                    {toggleEmailModal && !error && (
+                      <div className="flex flex-col gap-5">
+                        <Text as="span" size="base">
+                          We&apos;ve sent a request to change your email. Please
+                          check your inbox to confirm the update.
+                        </Text>
+                      </div>
+                    )}
+                  </>
+                )}
+              </form>
 
               <Divider />
 
