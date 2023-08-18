@@ -29,7 +29,7 @@ const useAuthService = () => {
   const changeEmail = async (email: string) => {
     return await supabaseClientComponent.auth.updateUser(
       { email },
-      { emailRedirectTo: `${location.origin}/login` }
+      { emailRedirectTo: `${location.origin}/` }
     )
   }
 
