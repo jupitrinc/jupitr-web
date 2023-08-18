@@ -26,10 +26,17 @@ const useAuthService = () => {
     })
   }
 
-  const signOut = async () => {
-    return await supabase.auth.signOut()
+  const changeEmail = async (email: string) => {
+    return await supabaseClientComponent.auth.updateUser(
+      { email },
+      { emailRedirectTo: `${location.origin}/` }
+    )
   }
 
-  return { signOut, signInWithOtp, signInWithGoogle, getSession }
+  const signOut = async () => {
+    return await supabaseClientComponent.auth.signOut()
+  }
+
+  return { signOut, signInWithOtp, signInWithGoogle, getSession, changeEmail }
 }
 export default useAuthService

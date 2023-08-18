@@ -1,3 +1,4 @@
+import { User } from "@supabase/supabase-js"
 import {
   CompanyMemberProfileAction,
   ICompanyMemberProfile,
@@ -56,9 +57,15 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
+    | UserActionEnum.UPDATE_EMAIL_BEGIN
+    | UserActionEnum.UPDATE_EMAIL_SUCCESS
+    | UserActionEnum.UPDATE_EMAIL_FAILURE
     | UserActionEnum.UPDATE_AVATAR
     | UserActionEnum.TOGGLE_ACTIVE
-  payload?: IUser | IUser["name"] | IUser["active"]
+    | UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN
+    | UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS
+    | UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE
+  payload?: IUser | IUser["name"] | IUser["active"] | User
 }
 
 export enum UserActionEnum {
@@ -78,6 +85,14 @@ export enum UserActionEnum {
 
   UPDATE_NAME = "UPDATE_NAME",
   UPDATE_AVATAR = "UPDATE_AVATAR",
+
+  REQUEST_EMAIL_UPDATE_BEGIN = "REQUEST_EMAIL_UPDATE_BEGIN",
+  REQUEST_EMAIL_UPDATE_SUCCESS = "REQUEST_EMAIL_UPDATE_SUCCESS",
+  REQUEST_EMAIL_UPDATE_FAILURE = "REQUEST_EMAIL_UPDATE_FAILURE",
+
+  UPDATE_EMAIL_BEGIN = "UPDATE_EMAIL_BEGIN",
+  UPDATE_EMAIL_SUCCESS = "UPDATE_EMAIL_SUCCESS",
+  UPDATE_EMAIL_FAILURE = "UPDATE_EMAIL_FAILURE",
 
   TOGGLE_ACTIVE = "TOGGLE_ACTIVE",
 }

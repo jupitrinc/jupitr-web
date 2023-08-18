@@ -22,6 +22,7 @@ export function useUserAction() {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
+    changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
@@ -115,6 +116,44 @@ export function useUserAction() {
     }
   }
 
+  const requestEmailUpdate = async (email: string) => {
+    dispatch({
+      type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
+    })
+
+    const { error } = await changeEmailService(email)
+    if (error) {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
+        payload: email,
+      })
+    }
+  }
+
+  const updateEmail = async (id: string, email: string) => {
+    dispatch({
+      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+    })
+
+    const { error } = await updateUser({ id, email })
+    if (error) {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
+        payload: email,
+      })
+    }
+  }
+
   const toggleActive = async (id: string, active: boolean) => {
     const { data, error } = await updateUser({ id, active: !active })
 
@@ -163,6 +202,8 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    requestEmailUpdate,
+    updateEmail,
     updateAvatar,
     toggleActive,
   }

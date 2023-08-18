@@ -39,8 +39,10 @@ const useUserService = () => {
   ) => {
     const { data, error } = await supabaseClientComponent
       .from("users")
-      .upsert({ ...payload, updated_at: new Date().toISOString() })
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq("id", payload.id)
       .select()
+      .single()
 
     if (error) {
       console.error("failed to updateUser: ", error)
