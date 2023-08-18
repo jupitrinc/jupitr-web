@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
@@ -24,13 +23,7 @@ export const SignIn = () => {
   }
 
   return (
-    <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full">
-      <div className="mb-20">
-        <Link href="/">
-          <Button variant="text" icon={<ChevronLeft />} label="Back" />
-        </Link>
-      </div>
-
+    <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
       <Text as="h1" size="xl2">
         Sign in
       </Text>
@@ -61,7 +54,6 @@ export const SignIn = () => {
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
         onClick={signInWithGoogle}
-        size="lg"
         variant="contained"
         disabled={loading}
       />
