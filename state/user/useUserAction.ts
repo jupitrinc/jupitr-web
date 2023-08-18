@@ -25,6 +25,7 @@ export function useUserAction() {
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
     deleteAccount: deleteAccountService,
+    changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
@@ -105,7 +106,6 @@ export function useUserAction() {
     })
     await signOutService()
     clear()
-    deleteAll()
     router.push("/")
   }
 
@@ -116,6 +116,44 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.UPDATE_NAME,
         payload: data[0].name,
+      })
+    }
+  }
+
+  const requestEmailUpdate = async (email: string) => {
+    dispatch({
+      type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
+    })
+
+    const { error } = await changeEmailService(email)
+    if (error) {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
+        payload: email,
+      })
+    }
+  }
+
+  const updateEmail = async (id: string, email: string) => {
+    dispatch({
+      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+    })
+
+    const { error } = await updateUser({ id, email })
+    if (error) {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
+        payload: email,
       })
     }
   }
@@ -176,8 +214,7 @@ export function useUserAction() {
         type: UserActionEnum.DELETE_USER_SUCCESS,
       })
       clear()
-      deleteAll()
-      router.push("/login")
+      router.replace("/")
     }
   }
 
@@ -189,6 +226,8 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    requestEmailUpdate,
+    updateEmail,
     updateAvatar,
     toggleActive,
     deleteAccount,

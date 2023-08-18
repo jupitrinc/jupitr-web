@@ -29,12 +29,20 @@ const useAuthService = () => {
     })
   }
 
+  const changeEmail = async (email: string) => {
+    return await supabaseClientComponent.auth.updateUser(
+      { email },
+      { emailRedirectTo: `${location.origin}/` }
+    )
+  }
+
   const signOut = async () => {
-    return await supabase.auth.signOut()
+    return await supabaseClientComponent.auth.signOut()
   }
 
   const deleteAccount = async () => {
     const userSession = await supabaseClientComponent.auth.getSession()
+    signOut()
     return await deleteUser(userSession.data.session!.access_token)
   }
 
@@ -44,6 +52,7 @@ const useAuthService = () => {
     signInWithGoogle,
     getSession,
     deleteAccount,
+    changeEmail,
   }
 }
 export default useAuthService
