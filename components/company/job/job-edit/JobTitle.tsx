@@ -1,10 +1,13 @@
-import React, { memo, useCallback } from "react"
+import React, { useCallback } from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { useReactiveState } from "helper/hooks/useReactiveState"
+import { stringHelper } from "helper/stringHelper"
 
 const JobTitle = () => {
+  const { isEmpty } = stringHelper
+
   const { company_job } = useCompanyJobState()
   const { updateTitle } = useCompanyJobAction()
   const { value, setValue } = useReactiveState("", company_job.title)
@@ -20,7 +23,7 @@ const JobTitle = () => {
       <TextInput
         placeholder="Job title"
         value={value}
-        autoFocus={!value}
+        autoFocus={isEmpty(value)}
         onChange={(e) => setValue(e.target.value)}
         onBlur={update}
         light
@@ -29,4 +32,4 @@ const JobTitle = () => {
   )
 }
 
-export default memo(JobTitle)
+export default JobTitle

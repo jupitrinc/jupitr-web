@@ -1,8 +1,8 @@
 import {
-  CompanyJobs,
   CompanyJobsActionEnum,
   CompanyJobsAction,
   CompanyJobsState,
+  ICompanyJobs,
 } from "./companyJobs.types"
 
 export const companyJobsReducer = (
@@ -15,22 +15,28 @@ export const companyJobsReducer = (
       return {
         ...state,
         loading: true,
-        error: false,
+        error: "",
       }
 
     case CompanyJobsActionEnum.GET_COMPANY_JOBS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload as string,
       }
 
     case CompanyJobsActionEnum.GET_COMPANY_JOBS_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
-        data: action.payload as CompanyJobs,
+        error: "",
+        data: action.payload as ICompanyJobs,
+      }
+
+    case CompanyJobsActionEnum.CLEAR_COMPANY_JOBS:
+      return {
+        ...state,
+        data: [] as ICompanyJobs,
       }
 
     default:

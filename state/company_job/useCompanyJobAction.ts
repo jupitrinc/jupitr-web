@@ -1,5 +1,9 @@
 import { useContext } from "react"
-import { ICompanyJob, CompanyJobActionEnum } from "./companyJob.types"
+import {
+  ICompanyJob,
+  CompanyJobActionEnum,
+  JobStatusEnum,
+} from "./companyJob.types"
 import { CompanyJobContext } from "./CompanyJobContext"
 import useCompanyJobService from "services/company/useCompanyJobService"
 import { useRouter } from "next/router"
@@ -227,6 +231,20 @@ export function useCompanyJobAction() {
     }
   }
 
+  const deleteJob = async (job_id: ICompanyJob["id"]) => {
+    if (!job_id) return
+
+    const { data, error } = await updateJobService(job_id, {
+      status: JobStatusEnum.archived,
+    })
+
+    if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.CLEAR_COMPANY_JOB,
+      })
+    }
+  }
+
   return {
     addJob,
     getJob,
@@ -239,5 +257,6 @@ export function useCompanyJobAction() {
     removeSkill,
     updateSkill,
     updateApplicationVideo,
+    deleteJob,
   }
 }

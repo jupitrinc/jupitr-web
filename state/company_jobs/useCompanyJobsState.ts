@@ -23,5 +23,10 @@ export const useCompanyJobsState = () => {
       () => state.data.filter((job) => job.status === "draft"),
       [state.data]
     ),
+
+    company_jobs_archived: useMemo(
+      () => state.data.filter((job) => job.status === "archived"),
+      [state.data]
+    ),
   }
 }

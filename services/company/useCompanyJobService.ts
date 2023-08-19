@@ -44,6 +44,20 @@ const useCompanyJobService = () => {
     return { data, error }
   }
 
+  const getAllJobs = async (company_id: string) => {
+    const { data, error } = await supabaseClientComponent
+      .from(JOBS_TABLE)
+      .select("id, title, location, status")
+      .eq("company_id", company_id)
+      .neq("status", "archived")
+
+    if (error) {
+      console.error("get all job: ", error)
+    }
+
+    return { data, error }
+  }
+
   const updateJob = async (id: string, payload: UpdateJobPayload) => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
@@ -65,6 +79,7 @@ const useCompanyJobService = () => {
   return {
     addJob,
     getJob,
+    getAllJobs,
     updateJob,
   }
 }
