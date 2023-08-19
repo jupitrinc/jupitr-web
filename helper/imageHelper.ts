@@ -1,7 +1,7 @@
 const MAX_SIZE = 400
 
 export const imageHelper = {
-  resize: (file: File, size = MAX_SIZE): Promise<File> => {
+  resize: (file: File | unknown, size = MAX_SIZE): Promise<File> => {
     return new Promise((resolve, reject) => {
       let reader = new FileReader()
 
@@ -15,8 +15,8 @@ export const imageHelper = {
 
           if (context) {
             context.drawImage(image, 0, 0, canvas.width, canvas.height)
-            let new_image_url = canvas.toDataURL("image/jpeg", 98)
-            let resizedFile = urlToFile(new_image_url)
+            let new_image_url = canvas.toDataURL(file.type, 98)
+            let resizedFile = urlToFile(new_image_url, file.name)
             resolve(resizedFile)
           } else {
             reject(new Error("Could not create canvas context."))
@@ -58,7 +58,7 @@ const calculateRatio = (
   return canvas
 }
 
-const urlToFile = (url: string): File => {
+const urlToFile = (url: string, fileName): File => {
   let arr = url.split(",")
   let mime = arr[0].match(/:(.*?);/)![1]
   let data = arr[1]
@@ -68,6 +68,13 @@ const urlToFile = (url: string): File => {
   while (n--) {
     dataArr[n] = dataStr.charCodeAt(n)
   }
-  let file = new File([dataArr], "File.jpg", { type: mime })
-  return file
+  return new File([dataArr], fileName, { type: mime })
 }
+
+export const toBase64 = (file: File) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (item) => resolve(item?.target?.result)
+    reader.onerror = reject
+  })

@@ -11,7 +11,7 @@ export const useSignUp = () => {
 
   const [company, setCompany] = useState<AddCompany>({
     name: "",
-    logo: "",
+    logo: null,
     year_founded: "2023",
     mission: "",
     website: "",
@@ -20,7 +20,7 @@ export const useSignUp = () => {
     size: "1-10",
   })
 
-  const { preview: logoPreview } = useImagePreview(company.logo)
+  const { preview: logoPreview } = useImagePreview(company.logo as string)
 
   const { getIndustries } = useIndustryAction()
   const { industries } = useIndustryState()

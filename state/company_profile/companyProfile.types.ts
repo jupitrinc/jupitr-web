@@ -14,7 +14,7 @@ export type CompanyProfileState = {
 export interface ICompanyProfile {
   id: string
   name: string
-  logo: string
+  logo: EventTarget | File | FileList | string | unknown
   year_founded: string
   website: string
   size: string
@@ -68,5 +68,5 @@ export type AddCompany = Omit<
   "id" | "created_at" | "updated_at" | "logo"
 > & {
   email: string
-  logo: File
+  logo: EventTarget | File | FileList | string | unknown
 }
