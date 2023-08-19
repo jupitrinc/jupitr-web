@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { Select } from "ui-library/form/select/Select"
 import { static_data_locations } from "data/location"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
@@ -8,11 +8,14 @@ const Location = () => {
   const { company_job } = useCompanyJobState()
   const { updateLocation } = useCompanyJobAction()
 
-  const update = (e) => {
-    const location = JSON.parse(e.target.value)
-    if (!location) return
-    updateLocation(company_job.id, location)
-  }
+  const update = useCallback(
+    (e) => {
+      const location = JSON.parse(e.target.value)
+      if (!location) return
+      updateLocation(company_job.id, location)
+    },
+    [company_job.id]
+  )
 
   return (
     <Select

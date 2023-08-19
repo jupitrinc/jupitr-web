@@ -65,6 +65,12 @@ export function useCompanyJobAction() {
     }
   }
 
+  const clearJob = () => {
+    dispatch({
+      type: CompanyJobActionEnum.CLEAR_COMPANY_JOB,
+    })
+  }
+
   const updateTitle = async (
     job_id: ICompanyJob["id"],
     title: ICompanyJob["title"]
@@ -151,7 +157,7 @@ export function useCompanyJobAction() {
 
     if (data) {
       dispatch({
-        type: CompanyJobActionEnum.ADD_COMPANY_JOB_SKILL,
+        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS,
         payload: data.skills,
       })
     }
@@ -170,7 +176,7 @@ export function useCompanyJobAction() {
 
     if (data) {
       dispatch({
-        type: CompanyJobActionEnum.REMOVE_COMPANY_JOB_SKILL,
+        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS,
         payload: data.skills,
       })
     }
@@ -197,8 +203,26 @@ export function useCompanyJobAction() {
 
     if (data) {
       dispatch({
-        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILL,
+        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS,
         payload: data.skills,
+      })
+    }
+  }
+
+  const updateApplicationVideo = async (
+    job_id: ICompanyJob["id"],
+    application_video: ICompanyJob["application_video"]
+  ) => {
+    if (!job_id) return
+
+    const { data, error } = await updateJobService(job_id, {
+      application_video: application_video,
+    })
+
+    if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO,
+        payload: data.application_video,
       })
     }
   }
@@ -206,6 +230,7 @@ export function useCompanyJobAction() {
   return {
     addJob,
     getJob,
+    clearJob,
     updateTitle,
     updateSalary,
     updateWorkModel,
@@ -213,5 +238,6 @@ export function useCompanyJobAction() {
     addSkill,
     removeSkill,
     updateSkill,
+    updateApplicationVideo,
   }
 }

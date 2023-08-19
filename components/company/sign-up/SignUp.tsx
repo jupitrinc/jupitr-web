@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
@@ -18,8 +18,10 @@ import { useUserState } from "state/user/useUserState"
 import { useSignUp } from "./useSignUp"
 import { useNotification } from "helper/hooks/useNotification"
 import { Toast } from "ui-library/toast/Toast"
+import { stringHelper } from "helper/stringHelper"
 
 export const SignUp = () => {
+  const { isEmpty } = stringHelper
   const { loading, error } = useUserState()
   const {
     addCompany,
@@ -34,13 +36,9 @@ export const SignUp = () => {
     logoPreview,
   } = useSignUp()
 
-  const { notification, showNotification, hideNotification } = useNotification()
-
-  useEffect(() => {
-    if (error || validationFailed) {
-      showNotification()
-    }
-  }, [error, validationFailed])
+  const { notification, hideNotification } = useNotification(
+    !isEmpty(error) || validationFailed
+  )
 
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full relative">

@@ -35,12 +35,15 @@ const useUserService = () => {
     return { data, error }
   }
   const updateUser = async (
-    payload: Database["public"]["Tables"]["users"]["Insert"]
+    id: string,
+    payload: Database["public"]["Tables"]["users"]["Update"]
   ) => {
     const { data, error } = await supabaseClientComponent
       .from("users")
       .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq("id", id)
       .select()
+      .single()
 
     if (error) {
       console.error("failed to updateUser: ", error)

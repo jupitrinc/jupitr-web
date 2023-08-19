@@ -3,7 +3,6 @@ import { useRouter } from "next/router"
 import { Card } from "ui-library/content/card/Card"
 import { Skills } from "./Skills"
 import { Videos } from "./Videos"
-import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useUserState } from "state/user/useUserState"
 import JobTitle from "./JobTitle"
@@ -16,8 +15,7 @@ import Location from "./Location"
 
 export const Sections = () => {
   const { user } = useUserState()
-  const { company_job } = useCompanyJobState()
-  const { getJob } = useCompanyJobAction()
+  const { getJob, clearJob } = useCompanyJobAction()
 
   const router = useRouter()
   const { jobId } = router.query
@@ -26,11 +24,13 @@ export const Sections = () => {
     if (jobId && user.id) {
       getJob(jobId.toString())
     }
+
+    return () => clearJob()
   }, [jobId])
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      <JobApplicationsPreview />
+      {/*<JobApplicationsPreview /> */}
 
       <div className="flex flex-col md:flex-row gap-5">
         <JobTitle />

@@ -9,7 +9,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = (checkboxGroup) => {
   return (
     <fieldset className={styles.list}>
       {checkboxGroup.options.map((item) => (
-        <div>
+        <div key={item.label}>
           <Checkbox
             value={item.value}
             label={item.label}

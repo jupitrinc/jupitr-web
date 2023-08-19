@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { Check, Edit } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Label } from "ui-library/form/label/Label"
@@ -6,31 +6,31 @@ import { NumberInput } from "ui-library/form/number-input/NumberInput"
 import { Text } from "ui-library/text/Text"
 import { numberHelper } from "helper/numberHelper"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
-import { useStringState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 
 export const Salary = () => {
   const { company_job } = useCompanyJobState()
   const { updateSalary } = useCompanyJobAction()
 
-  const { value, setValue } = useStringState(company_job.salary)
+  const { value, setValue } = useReactiveState("", company_job.salary)
   const [editing, setEditing] = useState<boolean>(false)
 
   const { formatNumber } = numberHelper
 
-  const onChange = (e: { target: { value: string } }) => {
+  const onChange = useCallback((e) => {
     const { value } = e.target
     const max_salary_length = 7 // £m
     value.length <= max_salary_length && setValue(String(value))
-  }
+  }, [])
 
-  const update = () => {
+  const update = useCallback(() => {
     if (value && value !== company_job.salary) {
       updateSalary(company_job.id, value)
     }
 
     setEditing(false)
-  }
+  }, [value, company_job])
 
   return (
     <div className="flex flex-col gap-3">

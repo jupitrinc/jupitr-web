@@ -52,6 +52,12 @@ export const companyJobReducer = (
         data: action.payload as ICompanyJob,
       }
 
+    case CompanyJobActionEnum.CLEAR_COMPANY_JOB:
+      return {
+        ...state,
+        data: {} as ICompanyJob,
+      }
+
     case CompanyJobActionEnum.UPDATE_COMPANY_JOB_TITLE:
       return {
         ...state,
@@ -85,6 +91,24 @@ export const companyJobReducer = (
         data: {
           ...state.data,
           location: action.payload as ICompanyJob["location"],
+        },
+      }
+
+    case CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          skills: action.payload as ICompanyJob["skills"],
+        },
+      }
+
+    case CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          application_video: action.payload as ICompanyJob["application_video"],
         },
       }
 

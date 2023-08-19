@@ -10,12 +10,16 @@ import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
+import { stringHelper } from "helper/stringHelper"
 
 export const SignIn = () => {
+  const { isEmpty } = stringHelper
   const [email, setEmail] = useState("")
   const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { loading, error } = useUserState()
-  const { notification, showNotification, hideNotification } = useNotification()
+  const { notification, showNotification, hideNotification } = useNotification(
+    !isEmpty(error)
+  )
 
   const loginWithEmail = async (e) => {
     e.preventDefault()

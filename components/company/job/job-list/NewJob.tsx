@@ -1,22 +1,18 @@
-import { useNotification } from "helper/hooks/useNotification"
-import React, { useEffect } from "react"
+import React from "react"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { useUserState } from "state/user/useUserState"
+import { useNotification } from "helper/hooks/useNotification"
 import { Button } from "ui-library/button/Button"
 import { Toast } from "ui-library/toast/Toast"
+import { stringHelper } from "helper/stringHelper"
 
 const NewJob = () => {
+  const { isEmpty } = stringHelper
   const { user } = useUserState()
   const { addJob } = useCompanyJobAction()
   const { loading, error } = useCompanyJobState()
-  const { notification, showNotification, hideNotification } = useNotification()
-
-  useEffect(() => {
-    if (error) {
-      showNotification()
-    }
-  }, [error])
+  const { notification, hideNotification } = useNotification(!isEmpty(error))
 
   const createJob = () => {
     if (!user.company_id) return

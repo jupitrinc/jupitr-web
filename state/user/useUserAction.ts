@@ -105,25 +105,25 @@ export function useUserAction() {
   }
 
   const updateName = async (id: string, name: string) => {
-    const { data, error } = await updateUser({ id: id, name: name })
+    const { data, error } = await updateUser(id, { name: name })
 
     if (data) {
       dispatch({
         type: UserActionEnum.UPDATE_NAME,
-        payload: data[0].name,
+        payload: data.name,
       })
     }
   }
 
   const toggleActive = async (id: string, active: boolean) => {
-    const { data, error } = await updateUser({ id, active: !active })
+    const { data, error } = await updateUser(id, { active: !active })
 
     if (data) {
       dispatch({
         type: UserActionEnum.TOGGLE_ACTIVE,
-        payload: data[0].active,
+        payload: data.active,
       })
-      if (!data[0].active) {
+      if (!data.active) {
         signOut()
       }
     }
@@ -140,14 +140,13 @@ export function useUserAction() {
       filePath,
     }).then(({ data, error }) => {
       if (data?.path) {
-        updateUser({
-          id: userId,
+        updateUser(userId, {
           avatar_url: data?.path,
         }).then(({ data, error }) => {
           if (data) {
             dispatch({
               type: UserActionEnum.UPDATE_AVATAR,
-              payload: data[0].avatar_url,
+              payload: data.avatar_url,
             })
           }
         })

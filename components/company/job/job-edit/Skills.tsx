@@ -17,7 +17,7 @@ export const Skills = () => {
 
   useEffect(() => {
     const getSkillList = async () => {
-      skills.length < 1 && (await getSkills())
+      skills.length < 1 && getSkills()
     }
     getSkillList()
   }, [])
@@ -28,7 +28,7 @@ export const Skills = () => {
         <SectionHeader title="Skills" />
         <Multiselect
           placeholder="Search skills"
-          options={company_job.skills}
+          options={skills}
           onChange={(skill) =>
             addSkill(company_job.id, { ...skill, level: 2 }, company_job.skills)
           }

@@ -1,30 +1,34 @@
-import { useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { CheckboxGroup } from "ui-library/form/checkbox/checkbox-group/CheckboxGroup"
 import { CheckboxProps } from "ui-library/form/checkbox/checkbox/Checkbox.types"
 import { Label } from "ui-library/form/label/Label"
 import { static_data_job } from "data/job"
-import { useArrayState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 
 const WorkModel = () => {
   const { company_job } = useCompanyJobState()
   const { updateWorkModel } = useCompanyJobAction()
-  const { value: workModels, setValue: setWorkModels } = useArrayState(
+  const { value: workModels, setValue: setWorkModels } = useReactiveState(
+    [],
     company_job.work_model
   )
 
-  const update = (e) => {
-    const { value, checked } = e.target
+  const update = useCallback(
+    (e) => {
+      const { value, checked } = e.target
 
-    if (checked && !workModels.includes(value)) {
-      updateWorkModel(company_job.id, [...workModels, value])
-    } else if (!checked && workModels.includes(value)) {
-      updateWorkModel(company_job.id, [
-        ...workModels.filter((model) => model !== value),
-      ])
-    }
-  }
+      if (checked && !workModels.includes(value)) {
+        updateWorkModel(company_job.id, [...workModels, value])
+      } else if (!checked && workModels.includes(value)) {
+        updateWorkModel(company_job.id, [
+          ...workModels.filter((model) => model !== value),
+        ])
+      }
+    },
+    [workModels, company_job.id]
+  )
 
   const items = useMemo(() => {
     const items_array = [] as CheckboxProps[]
@@ -38,7 +42,7 @@ const WorkModel = () => {
       })
     }
     return items_array
-  }, [workModels])
+  }, [workModels, company_job.id])
 
   return (
     <div className="flex flex-col gap-2 justify-center">

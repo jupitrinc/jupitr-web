@@ -17,8 +17,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       socials: socials,
     })
 
@@ -37,8 +36,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       preferences: { ...preferences, location: newLocation },
     })
 
@@ -56,8 +54,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       searching: searching,
     })
 
@@ -81,14 +78,13 @@ export function useTalentProfileAction() {
     )
       return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       skills: skills ? [...skills, newSkill] : [newSkill],
     })
 
     if (data) {
       dispatch({
-        type: TalentProfileActionEnum.ADD_SKILL,
+        type: TalentProfileActionEnum.UPDATE_SKILLS,
         payload: data.skills,
       })
     }
@@ -101,14 +97,13 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       skills: skills.filter((s) => s.id !== skill.id),
     })
 
     if (data) {
       dispatch({
-        type: TalentProfileActionEnum.REMOVE_SKILL,
+        type: TalentProfileActionEnum.UPDATE_SKILLS,
         payload: data.skills,
       })
     }
@@ -121,8 +116,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile({
-      user_id: user_id,
+    const { data, error } = await updateProfile(user_id, {
       skills: skills.map((s) => {
         if (s.id === skill.id) {
           return {
@@ -136,7 +130,7 @@ export function useTalentProfileAction() {
 
     if (data) {
       dispatch({
-        type: TalentProfileActionEnum.REMOVE_SKILL,
+        type: TalentProfileActionEnum.UPDATE_SKILLS,
         payload: data.skills,
       })
     }

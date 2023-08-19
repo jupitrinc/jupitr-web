@@ -13,5 +13,8 @@ export const stringHelper = {
       return initials.toUpperCase()
     }
   },
+  isEmpty: (str: string) => {
+    return str.trim() === ""
+  },
   randomHash: () => (Math.random() + 1).toString(36).substring(7),
 }

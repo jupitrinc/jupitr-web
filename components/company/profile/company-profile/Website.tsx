@@ -1,12 +1,12 @@
 import React from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
-import { useStringState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 
 const Website = () => {
   const { company_profile } = useCompanyProfileState()
-  const { value, setValue } = useStringState(company_profile.website)
+  const { value, setValue } = useReactiveState("", company_profile.website)
   const { updateWebsite } = useCompanyProfileAction()
 
   const update = () => {

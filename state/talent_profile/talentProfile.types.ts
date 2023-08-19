@@ -21,9 +21,7 @@ export type TalentProfileAction = {
     | TalentProfileActionEnum.UPDATE_SOCIALS
     | TalentProfileActionEnum.UPDATE_LOCATION
     | TalentProfileActionEnum.TOGGLE_SEARCHING
-    | TalentProfileActionEnum.ADD_SKILL
-    | TalentProfileActionEnum.REMOVE_SKILL
-    | TalentProfileActionEnum.UPDATE_SKILL
+    | TalentProfileActionEnum.UPDATE_SKILLS
 
   payload?:
     | ITalentProfile["socials"]
@@ -36,8 +34,5 @@ export enum TalentProfileActionEnum {
   UPDATE_SOCIALS = "UPDATE_SOCIALS",
   UPDATE_LOCATION = "UPDATE_LOCATION",
   TOGGLE_SEARCHING = "TOGGLE_SEARCHING",
-
-  ADD_SKILL = "ADD_SKILL",
-  REMOVE_SKILL = "REMOVE_SKILL",
-  UPDATE_SKILL = "UPDATE_SKILL",
+  UPDATE_SKILLS = "UPDATE_SKILLS",
 }

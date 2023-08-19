@@ -189,47 +189,19 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_location_state.data)
       return update_location_state
 
-    case TalentProfileActionEnum.ADD_SKILL:
-      const add_skill_payload = action.payload as ISkill[]
+    case TalentProfileActionEnum.UPDATE_SKILLS:
+      const update_skills_payload = action.payload as ISkill[]
 
-      const add_skill_state = {
+      const update_skills_state = {
         ...state,
         data: {
           ...state.data,
-          skills: add_skill_payload,
+          skills: update_skills_payload,
         },
       }
 
-      setItem(LocalStorageItemEnum.user, add_skill_state.data)
-      return add_skill_state
-
-    case TalentProfileActionEnum.REMOVE_SKILL:
-      const remove_skill_payload = action.payload as ISkill[]
-
-      const remove_skill_state = {
-        ...state,
-        data: {
-          ...state.data,
-          skills: remove_skill_payload,
-        },
-      }
-
-      setItem(LocalStorageItemEnum.user, remove_skill_state.data)
-      return remove_skill_state
-
-    case TalentProfileActionEnum.UPDATE_SKILL:
-      const update_skill_payload = action.payload as ISkill[]
-
-      const update_skill_state = {
-        ...state,
-        data: {
-          ...state.data,
-          skills: update_skill_payload,
-        },
-      }
-
-      setItem(LocalStorageItemEnum.user, update_skill_state.data)
-      return update_skill_state
+      setItem(LocalStorageItemEnum.user, update_skills_state.data)
+      return update_skills_state
 
     // company_member_profile
     case CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE:
