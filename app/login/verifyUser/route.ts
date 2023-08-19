@@ -10,7 +10,9 @@ export async function GET() {
   const userSession = await supabase.auth.getSession()
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data } = await getUserService(userSession.data.session!.access_token)
-
-  // URL to redirect to after sign in process completes
-  return NextResponse.json(data)
+  const userData = {
+    user: data,
+    session: userSession.data.session,
+  }
+  return NextResponse.json(userData)
 }

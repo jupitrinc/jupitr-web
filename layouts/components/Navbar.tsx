@@ -14,10 +14,7 @@ export const Navbar = () => {
   const router = useRouter()
   const { isLoggedIn, accountType } = useUserState()
 
-  if (
-    router.pathname.includes("/login") ||
-    router.pathname.includes("/c/signup")
-  ) {
+  if (router.pathname.includes("/c/signup")) {
     return null
   } else {
     if (isLoggedIn) {
@@ -61,7 +58,6 @@ const Brand = ({ link }: { link: string }) => {
 }
 
 const TalentMenu = () => {
-  const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
   const { imageUrl } = urlHelper
@@ -116,10 +112,7 @@ const PublicMenu = () => {
   return (
     <div className="flex gap-5">
       <Link href="/c/signup">
-        <Button label="Post a job" size="base" variant="text" />
-      </Link>
-      <Link href="/login">
-        <Button label="Sign in" size="base" color="special" />
+        <Button label="Post a job" variant="contained" />
       </Link>
     </div>
   )

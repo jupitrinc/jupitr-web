@@ -12,16 +12,20 @@ import useMediaService from "../../services/storage/useMediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
-
+import { localStorageHelper } from "../../helper/localStorageHelper"
+import { cookieHelper } from "../../helper/cookieHelper"
 export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-
+  const { clear } = localStorageHelper
+  const { deleteAll } = cookieHelper
   const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
     signOut: signOutService,
+    deleteAccount: deleteAccountService,
+    changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
@@ -100,7 +104,8 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    signOutService()
+    await signOutService()
+    clear()
     router.push("/")
   }
 
@@ -111,6 +116,44 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.UPDATE_NAME,
         payload: data.name,
+      })
+    }
+  }
+
+  const requestEmailUpdate = async (email: string) => {
+    dispatch({
+      type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
+    })
+
+    const { error } = await changeEmailService(email)
+    if (error) {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
+        payload: email,
+      })
+    }
+  }
+
+  const updateEmail = async (id: string, email: string) => {
+    dispatch({
+      type: UserActionEnum.UPDATE_EMAIL_BEGIN,
+    })
+
+    const { error } = await updateUser({ id, email })
+    if (error) {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.UPDATE_EMAIL_SUCCESS,
+        payload: email,
       })
     }
   }
@@ -154,6 +197,26 @@ export function useUserAction() {
     })
   }
 
+  const deleteAccount = async () => {
+    dispatch({
+      type: UserActionEnum.DELETE_USER_BEGIN,
+    })
+
+    const { error } = await deleteAccountService()
+    if (error) {
+      dispatch({
+        type: UserActionEnum.DELETE_USER_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: UserActionEnum.DELETE_USER_SUCCESS,
+      })
+      clear()
+      router.replace("/")
+    }
+  }
+
   return {
     signInWithEmail,
     signInWithGoogle,
@@ -162,7 +225,10 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    requestEmailUpdate,
+    updateEmail,
     updateAvatar,
     toggleActive,
+    deleteAccount,
   }
 }

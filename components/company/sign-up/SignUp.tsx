@@ -47,7 +47,7 @@ export const SignUp = () => {
           <Button variant="text" icon={<ChevronLeft />} label="Back" />
         </Link>
 
-        <Link href="/login">
+        <Link href="/">
           <Button label="Sign in" />
         </Link>
       </div>
