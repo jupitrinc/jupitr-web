@@ -1,13 +1,13 @@
 import React from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
-import { useStringState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useUserAction } from "state/user/useUserAction"
 import { useUserState } from "state/user/useUserState"
 
 const UserName = () => {
   const { user } = useUserState()
   const { updateName } = useUserAction()
-  const { value, setValue } = useStringState(user.name)
+  const { value, setValue } = useReactiveState("", user.name)
 
   const update = () => {
     if (value && value !== user.name) {

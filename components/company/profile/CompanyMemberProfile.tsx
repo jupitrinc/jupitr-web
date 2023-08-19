@@ -1,4 +1,4 @@
-import { useStringState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import React from "react"
 import { useCompanyMemberProfileAction } from "state/company_member_profile/useCompanyMemberProfileAction"
 import { useUserState } from "state/user/useUserState"
@@ -6,7 +6,7 @@ import { TextInput } from "ui-library/form/text-input/TextInput"
 
 const CompanyMemberProfile = () => {
   const { user } = useUserState()
-  const { value, setValue } = useStringState(user.job_title)
+  const { value, setValue } = useReactiveState("", user.job_title)
   const { updateJobTitle } = useCompanyMemberProfileAction()
 
   return (

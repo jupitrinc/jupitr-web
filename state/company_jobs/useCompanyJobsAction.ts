@@ -1,46 +1,43 @@
 import { useContext } from "react"
-import { CompanyJobsActionEnum } from "./companyJobs.types"
+import { CompanyJobsActionEnum, ICompanyJobs } from "./companyJobs.types"
 import { CompanyJobsContext } from "./CompanyJobsContext"
+import useCompanyJobService from "services/company/useCompanyJobService"
 
 export function useCompanyJobsAction() {
   const { dispatch } = useContext(CompanyJobsContext)
 
-  const getJobs = async (language: string) => {
-    if (!language) return
+  const { getAllJobs: getJobsService } = useCompanyJobService()
 
-    const catchError = (errorMessage: string) => {
+  const getJobs = async (company_id: string) => {
+    if (!company_id) return
+
+    dispatch({
+      type: CompanyJobsActionEnum.GET_COMPANY_JOBS_BEGIN,
+    })
+
+    const { data, error } = await getJobsService(company_id)
+
+    if (error) {
       dispatch({
         type: CompanyJobsActionEnum.GET_COMPANY_JOBS_FAILURE,
+        payload: error.message,
       })
-
-      console.log(errorMessage)
-    }
-
-    try {
+    } else if (data) {
       dispatch({
-        type: CompanyJobsActionEnum.GET_COMPANY_JOBS_BEGIN,
+        type: CompanyJobsActionEnum.GET_COMPANY_JOBS_SUCCESS,
+        payload: data as ICompanyJobs,
       })
-
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: CompanyJobsActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
-          }
-        }
-      } */
-    } catch (error) {
-      catchError(error as string)
     }
+  }
+
+  const clearJobs = () => {
+    dispatch({
+      type: CompanyJobsActionEnum.CLEAR_COMPANY_JOBS,
+    })
   }
 
   return {
     getJobs,
+    clearJobs,
   }
 }

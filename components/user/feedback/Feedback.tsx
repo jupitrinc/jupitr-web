@@ -11,7 +11,8 @@ import SentMessage from "./SentMessage"
 
 const Feedback = () => {
   const { user } = useUserState()
-  const { notification, showNotification, hideNotification } = useNotification()
+  const { notification, showNotification, hideNotification } =
+    useNotification(false)
   const { addFeedback } = useFeedbackAction()
 
   const [message, setMessage] = useState<string>("")

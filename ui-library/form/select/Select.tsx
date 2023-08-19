@@ -34,7 +34,7 @@ export const Select: React.FC<SelectProps> = (select) => {
       <select
         name={select.name}
         className={styles.select}
-        value={JSON.stringify(select.value) || select.placeholder}
+        value={select.value ? JSON.stringify(select.value) : select.placeholder}
         onChange={select.onChange}
         disabled={select.disabled}
       >

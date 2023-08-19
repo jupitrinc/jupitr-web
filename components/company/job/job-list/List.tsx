@@ -1,39 +1,53 @@
-import React, { memo } from "react"
+import React, { memo, useEffect } from "react"
+import { useRouter } from "next/router"
 import { useCompanyJobsState } from "state/company_jobs/useCompanyJobsState"
 import { ICompanyJob } from "state/company_job/companyJob.types"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
-import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
-import { Button } from "ui-library/button/Button"
-import { useRouter } from "next/router"
+import { useCompanyJobsAction } from "state/company_jobs/useCompanyJobsAction"
+import { useUserState } from "state/user/useUserState"
+import NewJob from "./NewJob"
 
-export const List = () => {
+const List = () => {
+  const { getJobs, clearJobs } = useCompanyJobsAction()
   const {
     company_jobs_open,
     company_jobs_closed,
     company_jobs_draft,
+    company_jobs,
     loading,
     error,
   } = useCompanyJobsState()
+  const { user } = useUserState()
+
+  useEffect(() => {
+    if (company_jobs.length < 1 && user.company_id) {
+      getJobs(user.company_id)
+    }
+
+    return () => clearJobs()
+  }, [])
 
   return (
     <div className="flex flex-col gap-10">
       <NewJob />
 
-      {company_jobs_draft.length && (
+      {company_jobs_draft.length > 0 && (
         <ListGroup title="Draft" jobs={company_jobs_draft} />
       )}
 
-      {company_jobs_open.length && (
+      {company_jobs_open.length > 0 && (
         <ListGroup title="Open" jobs={company_jobs_open} />
       )}
 
-      {company_jobs_closed.length && (
+      {company_jobs_closed.length > 0 && (
         <ListGroup title="Closed" jobs={company_jobs_closed} />
       )}
     </div>
   )
 }
+
+export default List
 
 const ListGroup = memo(
   ({ title, jobs }: { title: string; jobs: ICompanyJob[] }) => {
@@ -62,11 +76,9 @@ ListGroup.displayName = "ListGroup"
 
 const ListCard = ({ job }: { job: ICompanyJob }) => {
   const router = useRouter()
-  const { setJob } = useCompanyJobAction()
 
   const viewJob = (e) => {
     e.stopPropagation()
-    setJob(job)
     router.push(`/c/jobs/${job.id}`)
   }
 
@@ -78,17 +90,9 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
         </Text>
 
         <Text as="span" size="base">
-          {job.location}
+          {job.location?.name}
         </Text>
       </div>
     </Card>
-  )
-}
-
-const NewJob = () => {
-  return (
-    <div className="flex justify-end">
-      <Button label="New job" size="sm" color="special" />
-    </div>
   )
 }

@@ -15,7 +15,7 @@ export const MenuBar: React.FC<MenuBarProps> = (menu) => {
           label={option.name}
           onClick={option.onClick}
           variant={menu.variant}
-          size="sm"
+          size={menu.size ? menu.size : "sm"}
         />
       ))}
 

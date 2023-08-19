@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react"
+import { createContext, useMemo, useReducer } from "react"
 
 import { companyJobReducer } from "./companyJobReducer"
 import {
@@ -6,27 +6,22 @@ import {
   ICompanyJobContext,
   CompanyJobState,
 } from "./companyJob.types"
-import { sample_job } from "state/company_jobs/CompanyJobsContext"
 
 export const CompanyJobContext = createContext({} as ICompanyJobContext)
 
-const CompanyJob = () => {
+export const CompanyJobContextProvider: React.FC<any> = ({ children }) => {
   const initialState: CompanyJobState = {
-    data: sample_job as ICompanyJob,
+    data: {} as ICompanyJob,
     loading: false,
-    error: false,
+    error: "",
   }
   const [state, dispatch] = useReducer(companyJobReducer, initialState)
 
-  return {
-    state,
-    dispatch,
-  }
-}
-
-export const CompanyJobContextProvider: React.FC<any> = ({ children }) => {
+  const value = useMemo(() => {
+    return { state, dispatch }
+  }, [state, dispatch])
   return (
-    <CompanyJobContext.Provider value={CompanyJob()}>
+    <CompanyJobContext.Provider value={value}>
       {children}
     </CompanyJobContext.Provider>
   )

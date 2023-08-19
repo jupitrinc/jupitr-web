@@ -2,7 +2,7 @@ import React from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
 import { Github, Globe, Linkedin } from "lucide-react"
-import { useArrayState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useUserState } from "state/user/useUserState"
 
@@ -10,7 +10,10 @@ const SocialLinks = () => {
   const { user } = useUserState()
   const { updateSocials } = useTalentProfileAction()
 
-  const { value: socials, setValue: setSocials } = useArrayState(user.socials)
+  const { value: socials, setValue: setSocials } = useReactiveState(
+    [],
+    user.socials
+  )
 
   const onChange = (e: { target: { value: string } }, index: number) => {
     const updateSocials = [...socials]
@@ -19,7 +22,7 @@ const SocialLinks = () => {
   }
 
   const save = () => {
-    updateSocials(user.user_id, socials)
+    updateSocials(user.id, socials)
   }
 
   return (

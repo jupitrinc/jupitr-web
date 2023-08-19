@@ -15,7 +15,7 @@ export const NumberInput: React.FC<NumberInputProps> = (input) => {
       )}
       <input
         type="number"
-        value={input.value}
+        value={input.value ? input.value : ""}
         name={input.name}
         placeholder={input.placeholder}
         onChange={input.onChange}

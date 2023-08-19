@@ -1,12 +1,12 @@
 import React from "react"
 import { Textarea } from "ui-library/form/textarea/Textarea"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
-import { useStringState } from "helper/hooks/useDataState"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 
 const Mission = () => {
   const { company_profile } = useCompanyProfileState()
-  const { value, setValue } = useStringState(company_profile.mission)
+  const { value, setValue } = useReactiveState("", company_profile.mission)
   const { updateMission } = useCompanyProfileAction()
 
   const update = () => {

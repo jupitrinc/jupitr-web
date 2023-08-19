@@ -8,20 +8,16 @@ import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 
 const AccountDeactivation = () => {
-  const { notification, showNotification, hideNotification } = useNotification()
   const { user } = useUserState()
+  const { notification, hideNotification } = useNotification(
+    user && !user.active
+  )
   const { toggleActive } = useUserAction()
 
   const activateAccount = () => {
     hideNotification()
     toggleActive(user.id, user.active)
   }
-
-  useEffect(() => {
-    if (user && !user.active) {
-      showNotification()
-    }
-  }, [])
 
   return (
     <Modal open={notification} onClose={hideNotification}>

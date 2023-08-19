@@ -4,11 +4,12 @@ import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Text } from "ui-library/text/Text"
-import { SkillCard } from "../profile/Skills"
 import { Button } from "ui-library/button/Button"
 import { Check } from "lucide-react"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { VideoRecorderProps } from "ui-library/video/video-recorder/VideoRecorder.types"
+import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
+import { static_data_job } from "data/job"
 
 interface application {
   job: ITalentJob
@@ -70,7 +71,11 @@ export const Application: React.FC<application> = (application) => {
 
                 <div className="flex flex-col flex-wrap gap-5">
                   {application.job.skills.map((skill) => (
-                    <SkillCard key={skill.id} skill={skill} />
+                    <SkillCard
+                      key={skill.id}
+                      skill={skill}
+                      levels={static_data_job.skill_levels}
+                    />
                   ))}
                 </div>
               </div>
