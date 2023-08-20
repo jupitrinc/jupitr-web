@@ -42,7 +42,14 @@ export function useIndustryAction() {
     }
   }
 
+  const clearIndustries = () => {
+    dispatch({
+      type: IndustryActionEnum.CLEAR_INDUSTRIES,
+    })
+  }
+
   return {
     getIndustries,
+    clearIndustries,
   }
 }

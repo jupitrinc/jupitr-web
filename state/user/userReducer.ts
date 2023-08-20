@@ -31,6 +31,11 @@ export const userReducer = (
 
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
+    case UserActionEnum.GET_USER_BEGIN:
+    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
+    case UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN:
+    case UserActionEnum.UPDATE_EMAIL_BEGIN:
+    case UserActionEnum.DELETE_USER_BEGIN:
       return {
         ...state,
         loading: true,
@@ -38,6 +43,11 @@ export const userReducer = (
       }
 
     case UserActionEnum.SIGN_IN_FAILURE:
+    case UserActionEnum.GET_USER_FAILURE:
+    case UserActionEnum.COMPANY_SIGN_UP_FAILURE:
+    case UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE:
+    case UserActionEnum.UPDATE_EMAIL_FAILURE:
+    case UserActionEnum.DELETE_USER_FAILURE:
       return {
         ...state,
         loading: false,
@@ -45,24 +55,12 @@ export const userReducer = (
       }
 
     case UserActionEnum.SIGN_IN_SUCCESS:
+    case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
+    case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
         error: "",
-      }
-
-    case UserActionEnum.GET_USER_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: "",
-      }
-
-    case UserActionEnum.GET_USER_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload as string,
       }
 
     case UserActionEnum.GET_USER_SUCCESS:
@@ -73,27 +71,6 @@ export const userReducer = (
         loading: false,
         error: "",
         data: action.payload as ISuperUser,
-      }
-
-    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: "",
-      }
-
-    case UserActionEnum.COMPANY_SIGN_UP_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload as string,
-      }
-
-    case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: "",
       }
 
     case UserActionEnum.SIGN_OUT:
@@ -118,36 +95,6 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_name_state.data)
       return update_name_state
 
-    case UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: "",
-      }
-
-    case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
-      const request_email_state = {
-        ...state,
-        loading: false,
-        error: "",
-      }
-
-      return request_email_state
-
-    case UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload as string,
-      }
-
-    case UserActionEnum.UPDATE_EMAIL_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: "",
-      }
-
     case UserActionEnum.UPDATE_EMAIL_SUCCESS:
       const update_email_payload = action.payload as string
       const update_email_state = {
@@ -161,13 +108,6 @@ export const userReducer = (
       }
       setItem(LocalStorageItemEnum.user, update_email_state.data)
       return update_email_state
-
-    case UserActionEnum.UPDATE_EMAIL_FAILURE:
-      return {
-        ...state,
-        loading: true,
-        error: action.payload as string,
-      }
 
     case UserActionEnum.UPDATE_AVATAR:
       const update_avatar_payload = action.payload as string
@@ -194,20 +134,6 @@ export const userReducer = (
       }
       setItem(LocalStorageItemEnum.user, toggle_user_state)
       return toggle_user_state
-
-    case UserActionEnum.DELETE_USER_BEGIN:
-      return {
-        ...state,
-        loading: true,
-        error: "",
-      }
-
-    case UserActionEnum.DELETE_USER_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload as string,
-      }
 
     case UserActionEnum.DELETE_USER_SUCCESS:
       return {
