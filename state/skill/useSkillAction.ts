@@ -7,12 +7,14 @@ import {
   localStorageHelper,
 } from "helper/localStorageHelper"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import { stringHelper } from "helper/stringHelper"
 
 export function useSkillAction() {
   const { dispatch } = useContext(SkillContext)
   const { getAllSkills, addSkill: addSkillService } = useSkillsService()
 
   const { getItem } = localStorageHelper
+  const { sentenceCase } = stringHelper
 
   const getSkills = async () => {
     dispatch({
@@ -51,7 +53,7 @@ export function useSkillAction() {
       type: SkillActionEnum.ADD_SKILL_BEGIN,
     })
 
-    const { data, error } = await addSkillService(name.trim())
+    const { data, error } = await addSkillService(sentenceCase(name))
 
     if (error) {
       dispatch({
