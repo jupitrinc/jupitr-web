@@ -12,6 +12,10 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = createRouteHandlerClient({ cookies })
     await supabase.auth.exchangeCodeForSession(code)
+  } else {
+    const res = NextResponse.redirect(`${requestUrl.origin}/`)
+    res.cookies.set("errorOTP", "true")
+    return res
   }
 
   // URL to redirect to after sign in process completes

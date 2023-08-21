@@ -9,4 +9,15 @@ export const cookieHelper = {
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
     }
   },
+
+  removeByName: (value) => {
+    document.cookie = value + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+  },
+
+  get: (value: string) => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${value}=`))
+      ?.split("=")[1]
+  },
 }

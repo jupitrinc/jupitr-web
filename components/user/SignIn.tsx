@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -10,21 +10,40 @@ import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { stringHelper } from "helper/stringHelper"
+import { cookieHelper } from "helper/cookieHelper"
 
 export const SignIn = () => {
   const { isEmpty } = stringHelper
+  const { removeByName } = cookieHelper
   const [email, setEmail] = useState("")
-  const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { loading, error } = useUserState()
+  const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { notification, showNotification, hideNotification } = useNotification(
-    !isEmpty(error)
+    !isEmpty(error) || Boolean(cookieHelper.get("errorOTP"))
   )
 
-  const loginWithEmail = async (e) => {
+  useNotification(Boolean(cookieHelper.get("errorOTP")))
+
+  const onHide = () => {
+    removeByName("errorOTP")
+    hideNotification()
+  }
+
+  const loginWithEmail = useCallback(async (e) => {
     e.preventDefault()
     await signInWithEmail(email)
     showNotification()
-  }
+  }, [])
+
+  const showErrorMsg = useMemo(() => {
+    if (!isEmpty(error)) {
+      return error
+    } else if (Boolean(cookieHelper.get("errorOTP"))) {
+      return "The email link is invalid or has expire. Please, try signing in again."
+    } else {
+      return "Log in using the One Time Password (OTP) sent to your inbox."
+    }
+  }, [error])
 
   return (
     <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
@@ -62,15 +81,7 @@ export const SignIn = () => {
         disabled={loading}
       />
 
-      <Toast
-        onHide={hideNotification}
-        show={notification}
-        label={
-          !error
-            ? "Log in using the One Time Password (OTP) sent to your inbox."
-            : error
-        }
-      />
+      <Toast show={notification} onHide={onHide} label={showErrorMsg} />
     </div>
   )
 }
