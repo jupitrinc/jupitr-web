@@ -33,7 +33,7 @@ const useCompanyService = () => {
     )
 
     if (error) {
-      console.error("create company: ", error)
+      console.error("failed to get company members: ", error)
     }
 
     return { data, error }
