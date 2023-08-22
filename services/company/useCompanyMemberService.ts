@@ -1,5 +1,6 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { UpdateCompanyMemberProfile } from "./companyService.types"
+import { AccountPermissionEnum } from "../../state/user/user.types"
 
 const useCompanyMemberService = () => {
   const updateProfile = async (
@@ -15,6 +16,43 @@ const useCompanyMemberService = () => {
 
     if (error) {
       console.error("update company member profile: ", error)
+    }
+
+    return { data, error }
+  }
+  const UpdateMembersPermission = async (payload: {
+    company_id: string
+    user_id: string
+    permission: AccountPermissionEnum
+  }) => {
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "members-company",
+      {
+        body: payload,
+        method: "PUT",
+      }
+    )
+
+    if (error) {
+      console.error("failed to update members: ", error)
+    }
+
+    return { data, error }
+  }
+  const deleteMember = async (payload: {
+    company_id: string
+    user_id: string
+  }) => {
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "members-company",
+      {
+        body: payload,
+        method: "DELETE",
+      }
+    )
+
+    if (error) {
+      console.error("failed to delete member: ", error)
     }
 
     return { data, error }
@@ -36,7 +74,7 @@ const useCompanyMemberService = () => {
 
     return { data, error }
   }
-  return { updateProfile, getMembers }
+  return { updateProfile, getMembers, UpdateMembersPermission, deleteMember }
 }
 
 export default useCompanyMemberService
