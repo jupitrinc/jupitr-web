@@ -1,5 +1,9 @@
+export enum CookieEnum {
+  errorOTP = "errorOTP",
+}
+
 export const cookieHelper = {
-  deleteAll: () => {
+  deleteAllCookies: () => {
     const cookies = document.cookie.split(";")
 
     for (let i = 0; i < cookies.length; i++) {
@@ -10,14 +14,18 @@ export const cookieHelper = {
     }
   },
 
-  removeByName: (value) => {
-    document.cookie = value + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+  deleteCookie: (name) => {
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
   },
 
-  get: (value: string) => {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${value}=`))
-      ?.split("=")[1]
+  getCookie: (name: string) => {
+    if (typeof window === "object") {
+      return document.cookie
+        .split("; ")
+        .find((row) => row.startsWith(`${name}=`))
+        ?.split("=")[1]
+    }
+
+    return null
   },
 }

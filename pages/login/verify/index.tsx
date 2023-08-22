@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react"
-import { useRouter } from "next/router"
+import React from "react"
 import { WebsiteLayout } from "layouts/WebsiteLayout"
 import Loading from "layouts/components/Loader"
 import useAuthStateChanges from "helper/hooks/useAuthStateChanges"

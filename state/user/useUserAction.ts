@@ -11,14 +11,15 @@ import {
 import useMediaService from "../../services/storage/useMediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
-import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { toBase64, imageHelper } from "../../helper/imageHelper"
+import { cookieHelper } from "helper/cookieHelper"
 
 export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
   const { clear } = localStorageHelper
+  const { deleteAllCookies } = cookieHelper
   const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,
@@ -29,8 +30,6 @@ export function useUserAction() {
   } = useAuthService()
   const { getUser: getUserService, updateUser } = useUserService()
   const { addCompany } = useCompanyService()
-
-  const { updateLogo } = useCompanyProfileAction()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -115,6 +114,7 @@ export function useUserAction() {
     })
     await signOutService()
     clear()
+    deleteAllCookies()
     router.push("/")
   }
 

@@ -1,4 +1,5 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
+import { CookieEnum } from "helper/cookieHelper"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
@@ -14,7 +15,7 @@ export async function GET(request: Request) {
     await supabase.auth.exchangeCodeForSession(code)
   } else {
     const res = NextResponse.redirect(`${requestUrl.origin}/`)
-    res.cookies.set("errorOTP", "true")
+    res.cookies.set(CookieEnum.errorOTP, "true")
     return res
   }
 
