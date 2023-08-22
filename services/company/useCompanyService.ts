@@ -4,6 +4,7 @@ import {
   InviteCompanyMemberPayload,
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
+import { headers } from "next/headers"
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
@@ -11,6 +12,23 @@ const useCompanyService = () => {
       "create-company",
       {
         body: payload,
+      }
+    )
+
+    if (error) {
+      console.error("create company: ", error)
+    }
+
+    return { data, error }
+  }
+  const getMembers = async (company_id: string) => {
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "members-company",
+      {
+        headers: {
+          company_id,
+        },
+        method: "GET",
       }
     )
 
@@ -69,6 +87,7 @@ const useCompanyService = () => {
     inviteCompanyMember,
     getCompanyProfile,
     updateCompanyProfile,
+    getMembers,
   }
 }
 
