@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -10,36 +10,39 @@ import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { stringHelper } from "helper/stringHelper"
-import { cookieHelper } from "helper/cookieHelper"
+import { CookieEnum, cookieHelper } from "helper/cookieHelper"
 
 export const SignIn = () => {
   const { isEmpty } = stringHelper
-  const { removeByName } = cookieHelper
+  const { deleteCookie } = cookieHelper
   const [email, setEmail] = useState("")
   const { loading, error } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { notification, showNotification, hideNotification } = useNotification(
-    !isEmpty(error) || Boolean(cookieHelper.get("errorOTP"))
+    !isEmpty(error) || Boolean(cookieHelper.getCookie(CookieEnum.errorOTP))
   )
 
   const onHide = () => {
-    removeByName("errorOTP")
+    deleteCookie(CookieEnum.errorOTP)
     hideNotification()
   }
 
-  const loginWithEmail = useCallback(async (e) => {
-    e.preventDefault()
-    await signInWithEmail(email)
-    showNotification()
-  }, [])
+  const loginWithEmail = useCallback(
+    async (e) => {
+      e.preventDefault()
+      await signInWithEmail(email)
+      showNotification()
+    },
+    [email]
+  )
 
   const showErrorMsg = useMemo(() => {
     if (!isEmpty(error)) {
       return error
-    } else if (Boolean(cookieHelper.get("errorOTP"))) {
-      return "The email link is invalid or has expire. Please, try signing in again."
+    } else if (Boolean(cookieHelper.getCookie(CookieEnum.errorOTP))) {
+      return "Your one-time-password (OTP) has expired. Sign in again."
     } else {
-      return "Log in using the One Time Password (OTP) sent to your inbox."
+      return "Log in using the one-time-password (OTP) sent to your inbox."
     }
   }, [error])
 

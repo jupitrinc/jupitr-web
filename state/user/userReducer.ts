@@ -27,7 +27,6 @@ export const userReducer = (
   action: UserAction | TalentProfileAction | CompanyMemberProfileAction
 ): UserState => {
   const { setItem, removeItem } = localStorageHelper
-  const { deleteAll } = cookieHelper
 
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
@@ -75,7 +74,6 @@ export const userReducer = (
 
     case UserActionEnum.SIGN_OUT:
       removeItem(LocalStorageItemEnum.user)
-      deleteAll()
 
       return {
         ...state,
