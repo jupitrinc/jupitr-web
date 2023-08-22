@@ -1,13 +1,13 @@
 import { IIndustry } from "../../state/industry/industry.types"
 import { Database } from "../_supabase/database"
 
-type PermissionTypes = "write" | "read"
-type AccessLevel = "company" | "team"
+export type PermissionTypes = "write" | "read"
+export type AccessLevel = "company"
 
 interface CompanyProfile {
   name: string
   year_founded: string
-  logo: EventTarget | File | FileList | string | unknown
+  logo: File | string
   website: string
   size: string
   mission: string

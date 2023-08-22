@@ -1,6 +1,8 @@
 import { supabaseClientComponent } from "../_supabase/client"
-import { UpdateCompanyMemberProfile } from "./companyService.types"
-import { AccountPermissionEnum } from "../../state/user/user.types"
+import {
+  PermissionTypes,
+  UpdateCompanyMemberProfile,
+} from "./companyService.types"
 
 const useCompanyMemberService = () => {
   const updateProfile = async (
@@ -20,10 +22,10 @@ const useCompanyMemberService = () => {
 
     return { data, error }
   }
-  const UpdateMembersPermission = async (payload: {
+  const updateMembersPermission = async (payload: {
     company_id: string
     user_id: string
-    permission: AccountPermissionEnum
+    permission: PermissionTypes
   }) => {
     const { data, error } = await supabaseClientComponent.functions.invoke(
       "members-company",
@@ -74,7 +76,7 @@ const useCompanyMemberService = () => {
 
     return { data, error }
   }
-  return { updateProfile, getMembers, UpdateMembersPermission, deleteMember }
+  return { updateProfile, getMembers, updateMembersPermission, deleteMember }
 }
 
 export default useCompanyMemberService
