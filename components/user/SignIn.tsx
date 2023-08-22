@@ -22,8 +22,6 @@ export const SignIn = () => {
     !isEmpty(error) || Boolean(cookieHelper.get("errorOTP"))
   )
 
-  useNotification(Boolean(cookieHelper.get("errorOTP")))
-
   const onHide = () => {
     removeByName("errorOTP")
     hideNotification()
