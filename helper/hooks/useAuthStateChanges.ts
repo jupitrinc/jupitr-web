@@ -13,7 +13,7 @@ const useAuthStateChanges = () => {
     const {
       data: { subscription },
     } = supabaseClientComponent.auth.onAuthStateChange(async (event) => {
-      if (event === "SIGNED_IN") {
+      if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
         const res = await fetch("/api/login/verifyUser")
         const { user, session } = await res.json()
         verifyEmails(user, session)
