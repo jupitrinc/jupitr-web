@@ -4,11 +4,11 @@ import {
   ICompanyMemberProfile,
 } from "./companyMemberProfile.types"
 import { UserContext } from "state/user/UserContextProvider"
-import useCompanyMemberProfileService from "services/company/useCompanyMemberProfileService"
+import useCompanyMemberService from "services/company/useCompanyMemberService"
 
 export function useCompanyMemberProfileAction() {
   const { dispatch } = useContext(UserContext)
-  const { updateProfile } = useCompanyMemberProfileService()
+  const { updateProfile } = useCompanyMemberService()
 
   const updateJobTitle = async (
     user_id: ICompanyMemberProfile["user_id"],

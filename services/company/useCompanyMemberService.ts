@@ -1,7 +1,7 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { UpdateCompanyMemberProfile } from "./companyService.types"
 
-const useCompanyMemberProfileService = () => {
+const useCompanyMemberService = () => {
   const updateProfile = async (
     payload: UpdateCompanyMemberProfile,
     user_id: string
@@ -19,7 +19,24 @@ const useCompanyMemberProfileService = () => {
 
     return { data, error }
   }
-  return { updateProfile }
+  const getMembers = async (company_id: string) => {
+    const { data, error } = await supabaseClientComponent.functions.invoke(
+      "members-company",
+      {
+        headers: {
+          company_id,
+        },
+        method: "GET",
+      }
+    )
+
+    if (error) {
+      console.error("failed to get company members: ", error)
+    }
+
+    return { data, error }
+  }
+  return { updateProfile, getMembers }
 }
 
-export default useCompanyMemberProfileService
+export default useCompanyMemberService

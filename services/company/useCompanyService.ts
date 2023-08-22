@@ -21,23 +21,7 @@ const useCompanyService = () => {
 
     return { data, error }
   }
-  const getMembers = async (company_id: string) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
-      "members-company",
-      {
-        headers: {
-          company_id,
-        },
-        method: "GET",
-      }
-    )
 
-    if (error) {
-      console.error("failed to get company members: ", error)
-    }
-
-    return { data, error }
-  }
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
     const { data, error } = await supabaseClientComponent.functions.invoke(
       "update-company",
@@ -87,7 +71,6 @@ const useCompanyService = () => {
     inviteCompanyMember,
     getCompanyProfile,
     updateCompanyProfile,
-    getMembers,
   }
 }
 
