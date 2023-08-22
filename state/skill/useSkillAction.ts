@@ -7,12 +7,14 @@ import {
   localStorageHelper,
 } from "helper/localStorageHelper"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import { stringHelper } from "helper/stringHelper"
 
 export function useSkillAction() {
   const { dispatch } = useContext(SkillContext)
-  const { getAllSkills } = useSkillsService()
+  const { getAllSkills, addSkill: addSkillService } = useSkillsService()
 
   const { getItem } = localStorageHelper
+  const { sentenceCase } = stringHelper
 
   const getSkills = async () => {
     dispatch({
@@ -33,6 +35,7 @@ export function useSkillAction() {
       if (error) {
         dispatch({
           type: SkillActionEnum.GET_SKILLS_FAILURE,
+          payload: error.message,
         })
       } else {
         dispatch({
@@ -42,7 +45,42 @@ export function useSkillAction() {
       }
     }
   }
+
+  const addSkill = async (name: string) => {
+    if (!name.trim()) return
+
+    dispatch({
+      type: SkillActionEnum.ADD_SKILL_BEGIN,
+    })
+
+    const { data, error } = await addSkillService(sentenceCase(name))
+
+    if (error) {
+      dispatch({
+        type: SkillActionEnum.ADD_SKILL_FAILURE,
+        payload: error.message,
+      })
+
+      return null
+    } else if (data) {
+      dispatch({
+        type: SkillActionEnum.ADD_SKILL_SUCCESS,
+        payload: data,
+      })
+
+      return data
+    }
+  }
+
+  const clearSkills = async () => {
+    dispatch({
+      type: SkillActionEnum.CLEAR_SKILLS,
+    })
+  }
+
   return {
     getSkills,
+    addSkill,
+    clearSkills,
   }
 }

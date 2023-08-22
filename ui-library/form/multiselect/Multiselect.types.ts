@@ -8,5 +8,7 @@ export interface MultiselectProps {
   placeholder: string
   label?: string
   onChange: (option: option) => void
+  allowAddOption?: boolean
+  addOption?: (option: string) => void
   invalid?: boolean
 }

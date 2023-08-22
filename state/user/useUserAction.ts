@@ -13,14 +13,12 @@ import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
 import { localStorageHelper } from "../../helper/localStorageHelper"
-import { cookieHelper } from "../../helper/cookieHelper"
 import { toBase64, imageHelper } from "../../helper/imageHelper"
 
 export function useUserAction() {
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
   const { clear } = localStorageHelper
-  const { deleteAll } = cookieHelper
   const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,

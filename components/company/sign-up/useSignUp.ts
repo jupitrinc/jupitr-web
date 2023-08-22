@@ -22,14 +22,15 @@ export const useSignUp = () => {
 
   const { preview: logoPreview } = useImagePreview(company.logo as string)
 
-  const { getIndustries } = useIndustryAction()
+  const { getIndustries, clearIndustries } = useIndustryAction()
   const { industries } = useIndustryState()
 
   useEffect(() => {
-    const getIndustryList = async () => {
-      await getIndustries()
+    getIndustries()
+
+    return () => {
+      clearIndustries()
     }
-    getIndustryList()
   }, [])
 
   const addIndustry = (option: IIndustry) => {

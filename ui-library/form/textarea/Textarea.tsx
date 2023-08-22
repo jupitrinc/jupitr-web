@@ -1,4 +1,9 @@
-import React, { forwardRef } from "react"
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react"
 import { TextAreaProps } from "./Textarea.types"
 import { textareaStyles } from "./Textarea.styles"
 import { Label } from "../label/Label"
@@ -6,6 +11,15 @@ import { Label } from "../label/Label"
 export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (textarea, ref) => {
     const styles = textareaStyles
+
+    const innerRef = useRef<HTMLTextAreaElement>(null)
+    useImperativeHandle(ref, () => innerRef.current as HTMLTextAreaElement)
+
+    useEffect(() => {
+      if (innerRef.current && textarea.autoFocus) {
+        innerRef.current.focus()
+      }
+    }, [])
 
     return (
       <div className={styles.container}>
@@ -30,7 +44,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           rows={5}
           className={styles.textarea}
           onBlur={textarea.onBlur}
-          ref={ref}
+          ref={innerRef}
         />
       </div>
     )
