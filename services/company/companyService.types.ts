@@ -22,9 +22,7 @@ export type UpdateCompanyProfilePayload =
 export interface InviteCompanyMemberPayload {
   email: string
   companyId: string
-  jobId?: string
   permission: PermissionTypes
-  accessLevel: AccessLevel
 }
 export type UpdateCompanyMemberProfile =
   Database["public"]["Tables"]["company_member_profile"]["Insert"]

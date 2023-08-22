@@ -16,7 +16,6 @@ const useAuthStateChanges = () => {
       if (event === "SIGNED_IN") {
         const res = await fetch("/api/login/verifyUser")
         const { user, session } = await res.json()
-        console.log("=>(useAuthStateChanges.ts:24) user", user)
         verifyEmails(user, session)
         setUser(user)
         redirectUser(user)

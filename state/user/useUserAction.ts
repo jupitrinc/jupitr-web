@@ -100,19 +100,14 @@ export function useUserAction() {
       const action_link: string = data?.opt?.action_link as string
       // Create a URL object from the original link
       const url = new URL(action_link)
-
       // Update the value of the "redirect_to" query parameter
       url.searchParams.set("redirect_to", `${location.origin}/auth/callback`)
-
       // Get the modified URL as a string
+      /*
+      TODO complete autologin
       const modified_link = url.toString()
-      console.log(
-        "=>(useUserAction.ts:110) modified_link",
-        decodeURIComponent(modified_link)
-      )
-      // setTimeout(() => {
-      //   location.replace(modified_link)
-      // }, 2000)
+       */
+      await signInWithEmail(company.email)
     }
   }
 
