@@ -10,7 +10,7 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 
 export const Videos = () => {
   const { company_job } = useCompanyJobState()
-  const videos = company_job.videos
+
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
@@ -18,9 +18,10 @@ export const Videos = () => {
         <ActionBar />
       </div>
 
-      {videos.map((video) => (
-        <VideoCard key={video.id} video={video} />
-      ))}
+      {company_job.videos &&
+        company_job.videos.map((video) => (
+          <VideoCard key={video.id} video={video} />
+        ))}
     </Card>
   )
 }

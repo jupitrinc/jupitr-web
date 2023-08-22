@@ -48,7 +48,7 @@ export const Sections = () => {
           <Skills />
         </div>
         <div className="basis-2/3 flex flex-col gap-5">
-          {/*<Videos /> */}
+          <Videos />
           <TalentApplication />
         </div>
       </div>
