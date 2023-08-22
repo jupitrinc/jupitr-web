@@ -16,5 +16,14 @@ export const stringHelper = {
   isEmpty: (str: string) => {
     return str.trim() === ""
   },
+
+  sentenceCase: (str: string) => {
+    const words = str.trim().split(" ")
+    return words
+      .map((word) => {
+        return word[0].toUpperCase() + word.substring(1)
+      })
+      .join(" ")
+  },
   randomHash: () => (Math.random() + 1).toString(36).substring(7),
 }

@@ -11,14 +11,12 @@ import Industry from "./company-profile/Industry"
 import Mission from "./company-profile/Mission"
 import Logo from "./company-profile/Logo"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
-import { useIndustryState } from "state/industry/useIndustryState"
 
 const CompanyProfile: React.FC = () => {
   const { user } = useUserState()
   const { company_profile } = useCompanyProfileState()
-  const { industries } = useIndustryState()
   const { getProfile } = useCompanyProfileAction()
-  const { getIndustries } = useIndustryAction()
+  const { getIndustries, clearIndustries } = useIndustryAction()
 
   useEffect(() => {
     if (user.company_id && !company_profile.id) {
@@ -27,8 +25,10 @@ const CompanyProfile: React.FC = () => {
   }, [user.company_id])
 
   useEffect(() => {
-    if (industries.length < 1) {
-      getIndustries()
+    getIndustries()
+
+    return () => {
+      clearIndustries()
     }
   }, [])
 

@@ -19,12 +19,18 @@ const Feedback = () => {
   const [sent, setSent] = useState<boolean>(false)
 
   const sendFeedback = useCallback(
-    (message: string) => {
+    async (message: string) => {
       if (!message.trim()) return
 
-      addFeedback({ user_id: user.id, rating: 0, message: message })
-      setSent(true)
-      setMessage("")
+      const feedback = await addFeedback({
+        user_id: user.id,
+        rating: 0,
+        message: message,
+      })
+      if (feedback) {
+        setSent(true)
+        setMessage("")
+      }
     },
     [message, user.id]
   )

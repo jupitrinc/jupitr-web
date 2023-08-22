@@ -10,8 +10,10 @@ export function useFeedbackAction() {
 
     const { data, error } = await addFeedbackService(feedback)
 
-    if (data) {
-      console.log("feedback submitted")
+    if (error) {
+      return false
+    } else {
+      return true
     }
   }
 

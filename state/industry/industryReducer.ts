@@ -41,6 +41,12 @@ export const companyProfileReducer = (
         data: action.payload as IIndustry[],
       }
 
+    case IndustryActionEnum.CLEAR_INDUSTRIES:
+      return {
+        ...state,
+        data: [] as IIndustry[],
+      }
+
     default:
       return state
   }

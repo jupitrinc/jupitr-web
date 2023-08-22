@@ -12,6 +12,7 @@ export const companyJobReducer = (
   console.log(action)
   switch (action.type) {
     case CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN:
+    case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
       return {
         ...state,
         loading: false,
@@ -19,6 +20,7 @@ export const companyJobReducer = (
       }
 
     case CompanyJobActionEnum.ADD_COMPANY_JOB_FAILURE:
+    case CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE:
       return {
         ...state,
         loading: false,
@@ -29,20 +31,6 @@ export const companyJobReducer = (
       return {
         ...state,
         loading: false,
-      }
-
-    case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
-      return {
-        ...state,
-        loading: false,
-        error: "",
-      }
-
-    case CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload as string,
       }
 
     case CompanyJobActionEnum.GET_COMPANY_JOB_SUCCESS:

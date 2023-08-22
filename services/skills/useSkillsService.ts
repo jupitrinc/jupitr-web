@@ -1,9 +1,11 @@
 import { supabaseClientComponent } from "services/_supabase/client"
 
+const SKILLS_TABLE = "skills"
+
 const useSkillsService = () => {
   const getAllSkills = async () => {
     const { data, error } = await supabaseClientComponent
-      .from("skills")
+      .from(SKILLS_TABLE)
       .select("*")
       .order("name", { ascending: true })
 
@@ -16,7 +18,7 @@ const useSkillsService = () => {
 
   const searchSkills = async (name: string) => {
     const { data, error } = await supabaseClientComponent
-      .from("skills")
+      .from(SKILLS_TABLE)
       .select("*")
       .ilike("name", `%${name}%`)
 
@@ -28,8 +30,10 @@ const useSkillsService = () => {
   }
   const addSkill = async (name: string) => {
     const { data, error } = await supabaseClientComponent
-      .from("skills")
+      .from(SKILLS_TABLE)
       .insert({ name })
+      .select()
+      .single()
 
     if (error) {
       console.error("failed to add skill: ", error)
