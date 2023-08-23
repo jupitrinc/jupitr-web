@@ -101,8 +101,6 @@ export function useUserAction() {
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
 
-      console.log(data)
-
       return company.email
     }
   }
