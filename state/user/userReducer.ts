@@ -20,13 +20,14 @@ import {
   localStorageHelper,
   LocalStorageItemEnum,
 } from "helper/localStorageHelper"
-import { cookieHelper } from "helper/cookieHelper"
 
 export const userReducer = (
   state: UserState,
   action: UserAction | TalentProfileAction | CompanyMemberProfileAction
 ): UserState => {
   const { setItem, removeItem } = localStorageHelper
+
+  console.log(action.type)
 
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:

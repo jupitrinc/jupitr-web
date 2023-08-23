@@ -1,4 +1,4 @@
-import { supabase, supabaseClientComponent } from "services/_supabase/client"
+import { supabaseClientComponent } from "services/_supabase/client"
 import useUserService from "services/user/useUserService"
 
 const useAuthService = () => {

@@ -7,7 +7,7 @@ export type AccessLevel = "company"
 interface CompanyProfile {
   name: string
   year_founded: string
-  logo: File | string
+  logo: string
   website: string
   size: string
   mission: string
