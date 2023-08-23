@@ -36,13 +36,13 @@ export const SignIn = () => {
     [email]
   )
 
-  const showErrorMsg = useMemo(() => {
+  const errorMessage = useMemo(() => {
     if (!isEmpty(error)) {
       return error
     } else if (Boolean(cookieHelper.getCookie(CookieEnum.errorOTP))) {
-      return "Your one-time-password (OTP) has expired. Sign in again."
+      return "Your one-time-password (OTP) has expired. Sign in again"
     } else {
-      return "Log in using the one-time-password (OTP) sent to your inbox."
+      return "Sign in using the one-time-password (OTP) sent to your inbox"
     }
   }, [error])
 
@@ -82,7 +82,7 @@ export const SignIn = () => {
         disabled={loading}
       />
 
-      <Toast show={notification} onHide={onHide} label={showErrorMsg} />
+      <Toast show={notification} onHide={onHide} label={errorMessage} />
     </div>
   )
 }

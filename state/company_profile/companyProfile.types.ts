@@ -14,7 +14,7 @@ export type CompanyProfileState = {
 export interface ICompanyProfile {
   id: string
   name: string
-  logo: EventTarget | File | FileList | string | unknown
+  logo: string
   year_founded: string
   website: string
   size: string
@@ -36,6 +36,7 @@ export type CompanyProfileAction = {
     | CompanyProfileActionEnum.UPDATE_SIZE
     | CompanyProfileActionEnum.UPDATE_INDUSTRY
     | CompanyProfileActionEnum.UPDATE_MISSION
+    | CompanyProfileActionEnum.CLEAR_COMPANY_PROFILE
 
   payload?:
     | ICompanyProfile
@@ -61,6 +62,8 @@ export enum CompanyProfileActionEnum {
   UPDATE_SIZE = "UPDATE_SIZE",
   UPDATE_INDUSTRY = "UPDATE_INDUSTRY",
   UPDATE_MISSION = "UPDATE_MISSION",
+
+  CLEAR_COMPANY_PROFILE = "CLEAR_COMPANY_PROFILE",
 }
 
 export type AddCompany = Omit<
@@ -68,5 +71,5 @@ export type AddCompany = Omit<
   "id" | "created_at" | "updated_at" | "logo"
 > & {
   email: string
-  logo: EventTarget | File | FileList | string | unknown
+  logo: File | null
 }

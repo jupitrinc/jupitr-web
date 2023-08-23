@@ -1,15 +1,25 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
 import { useIndustryState } from "state/industry/useIndustryState"
 import { Pill } from "ui-library/pill/Pill"
 import { IIndustry } from "state/industry/industry.types"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
+import { useIndustryAction } from "state/industry/useIndustryAction"
 
 const Industry = () => {
   const { company_profile } = useCompanyProfileState()
   const { industries } = useIndustryState()
   const { updateIndustry } = useCompanyProfileAction()
+  const { getIndustries, clearIndustries } = useIndustryAction()
+
+  useEffect(() => {
+    getIndustries()
+
+    return () => {
+      clearIndustries()
+    }
+  }, [])
 
   const addIndustry = (option: IIndustry) => {
     if (!company_profile.industry.find((i) => i.id === option.id)) {

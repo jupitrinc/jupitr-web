@@ -2,7 +2,7 @@ export interface ICompanyMemberProfile {
   user_id: string
   job_title: string
   company_id: string
-  permission: string
+  permission: "read" | "write"
 }
 
 export type CompanyMemberProfileAction = {

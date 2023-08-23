@@ -4,7 +4,6 @@ import {
   InviteCompanyMemberPayload,
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
-import { headers } from "next/headers"
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {

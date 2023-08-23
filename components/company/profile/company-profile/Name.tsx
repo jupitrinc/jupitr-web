@@ -3,9 +3,11 @@ import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
 import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyProfileAction } from "state/company_profile/useCompanyProfileAction"
+import { useUserState } from "state/user/useUserState"
 
 const Name = () => {
   const { company_profile } = useCompanyProfileState()
+  const { user } = useUserState()
   const { value, setValue } = useReactiveState("", company_profile.name)
   const { updateName } = useCompanyProfileAction()
 
@@ -24,6 +26,7 @@ const Name = () => {
       onChange={(e) => setValue(e.target.value)}
       onBlur={update}
       maxLength={50}
+      disabled={user.permission !== "write"}
     />
   )
 }
