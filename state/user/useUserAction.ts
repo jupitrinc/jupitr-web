@@ -127,11 +127,13 @@ export function useUserAction() {
   }
 
   const requestEmailUpdate = async (email: string) => {
+    console.log(email)
     dispatch({
       type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
     })
 
     const { error } = await changeEmailService(email)
+    console.log(error)
     if (error) {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
