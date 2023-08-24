@@ -24,7 +24,7 @@ const useMediaService = () => {
     }
   }
 
-  const uploadJobMedia = async (payload: JobMediaPayload) => {
+  const uploadJobVideo = async (payload: JobMediaPayload) => {
     const formData = new FormData()
     formData.append("file", payload.file)
     formData.append("job_id", payload.job_id)
@@ -32,7 +32,7 @@ const useMediaService = () => {
     formData.append("user_id", payload.user_id)
 
     const { data, error } = await supabaseClientComponent.functions.invoke(
-      "jobs",
+      "jobs-video",
       {
         body: FormData,
       }
@@ -72,6 +72,6 @@ const useMediaService = () => {
     return data
   }
 
-  return { uploadMedia, updateMedia, downloadMedia, uploadJobMedia }
+  return { uploadMedia, updateMedia, downloadMedia, uploadJobVideo }
 }
 export default useMediaService
