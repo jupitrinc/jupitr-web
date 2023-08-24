@@ -29,7 +29,7 @@ const Logo = () => {
       disabled={user.permission !== "write"}
     >
       <Avatar
-        size={36}
+        size={28}
         image_url={imageUrl(company_profile.logo)}
         type="image"
       />

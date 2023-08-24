@@ -5,7 +5,7 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { useReactiveState } from "helper/hooks/useReactiveState"
 import { stringHelper } from "helper/stringHelper"
 
-const JobTitle = () => {
+const Title = () => {
   const { isEmpty } = stringHelper
 
   const { company_job } = useCompanyJobState()
@@ -32,4 +32,4 @@ const JobTitle = () => {
   )
 }
 
-export default JobTitle
+export default Title

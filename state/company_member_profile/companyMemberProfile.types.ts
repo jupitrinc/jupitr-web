@@ -2,7 +2,14 @@ export interface ICompanyMemberProfile {
   user_id: string
   job_title: string
   company_id: string
-  permission: "read" | "write"
+  permission: CompanyMemberPermission
+}
+
+export type CompanyMemberPermission = "read" | "write"
+
+export enum CompanyMemberPermissionEnum {
+  read = "read",
+  write = "write",
 }
 
 export type CompanyMemberProfileAction = {

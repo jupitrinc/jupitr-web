@@ -128,8 +128,6 @@ export const companyProfileReducer = (
         data: {} as ICompanyProfile,
       }
 
-      return update_mission_state
-
     default:
       return state
   }
