@@ -32,6 +32,16 @@ export const Footer = () => {
               Privacy
             </Text>
           </a>
+
+          <a
+            href="https://medium.com/@jupitr/contact-c1b711fe2794"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Text as="span" size="sm">
+              Contact
+            </Text>
+          </a>
         </div>
       </footer>
     )

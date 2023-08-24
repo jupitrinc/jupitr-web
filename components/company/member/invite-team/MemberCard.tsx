@@ -24,7 +24,7 @@ const MemberCard = ({ member }: { member: ICompanyMember }) => {
         <div className="flex flex-row gap-2 items-center">
           <Avatar image_url={urlHelper.imageUrl(member.avatar_url)} size={10} />
           <Text as="span" size="lg">
-            {member.name}
+            {member.name ? member.name : "Invited"}
           </Text>
         </div>
 
