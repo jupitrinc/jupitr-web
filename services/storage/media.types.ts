@@ -23,4 +23,4 @@ export enum StorageBucketsEnum {
   videos = "videos",
 }
 
-export const STORAGE_DOMAIN = `http://localhost:54321/storage/v1/object/public`
+export const STORAGE_DOMAIN = `https://cgbrcxjbovzwarqujqoq.supabase.co/storage/v1/object/public`
