@@ -1,12 +1,13 @@
 import React from "react"
-import { useCompanyJobState } from "state/company_job/useCompanyJobState"
+import { Plus } from "lucide-react"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { Text } from "ui-library/text/Text"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
 import { Divider } from "ui-library/content/divider/Divider"
 import { Card } from "ui-library/content/card/Card"
-import { Plus, Users2 } from "lucide-react"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
+import { useCompanyJobState } from "state/company_job/useCompanyJobState"
+import InviteTeam from "components/company/member/InviteTeam"
 
 export const Videos = () => {
   const { company_job } = useCompanyJobState()
@@ -28,9 +29,9 @@ export const Videos = () => {
 
 const ActionBar = () => {
   return (
-    <div className="grid grid-cols-2 gap-5">
+    <div className="grid grid-cols-2 gap-5 justify-center">
       <Card type="linked">
-        <div className="flex flex-col gap-1 justify-center items-center">
+        <div className="flex flex-col gap-1 justify-center items-center self-center">
           <Plus className="h-5 w-5 text-gray-600" />
           <Text as="span" size="base">
             Add video
@@ -38,14 +39,7 @@ const ActionBar = () => {
         </div>
       </Card>
 
-      <Card type="linked">
-        <div className="flex flex-col gap-1 justify-center items-center">
-          <Users2 className="h-5 w-5 text-gray-600" />
-          <Text as="span" size="base">
-            Invite team
-          </Text>
-        </div>
-      </Card>
+      <InviteTeam />
     </div>
   )
 }

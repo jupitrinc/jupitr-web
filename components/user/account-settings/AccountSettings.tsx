@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
@@ -72,8 +72,8 @@ const AccountSettings = () => {
                     {toggleEmailModal && !error && (
                       <div className="flex flex-col gap-5">
                         <Text as="span" size="base">
-                          We&apos;ve sent a request to change your email. Please
-                          check your inbox to confirm the update.
+                          Check your inbox and confirm your email update
+                          request.
                         </Text>
                       </div>
                     )}

@@ -3,7 +3,7 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { Button } from "ui-library/button/Button"
 import { Text } from "ui-library/text/Text"
 
-export const JobApplicationsPreview = () => {
+export const PreviewApplications = () => {
   const router = useRouter()
   const { company_job } = useCompanyJobState()
 
@@ -28,4 +28,4 @@ export const JobApplicationsPreview = () => {
   )
 }
 
-export default JobApplicationsPreview
+export default PreviewApplications

@@ -5,7 +5,7 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { Button } from "ui-library/button/Button"
 import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 
-const JobToolbar = () => {
+const Toolbar = () => {
   const router = useRouter()
   const { company_job } = useCompanyJobState()
   const { deleteJob } = useCompanyJobAction()
@@ -33,4 +33,4 @@ const JobToolbar = () => {
   )
 }
 
-export default JobToolbar
+export default Toolbar
