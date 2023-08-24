@@ -48,19 +48,23 @@ const AccountSettings = () => {
               </Text>
 
               <form className="w-full" onSubmit={onEmailChange}>
-                <Text as="p">{settingModal[activeSetting].description}</Text>
                 {activeSetting === "change_email" && (
                   <>
                     {!toggleEmailModal && (
-                      <TextInput
-                        placeholder="New email address"
-                        value={email}
-                        name="new_email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        type="email"
-                        light={true}
-                        required
-                      />
+                      <>
+                        <Text as="p">
+                          {settingModal[activeSetting].description}
+                        </Text>
+                        <TextInput
+                          placeholder="New email address"
+                          value={email}
+                          name="new_email"
+                          onChange={(e) => setEmail(e.target.value)}
+                          type="email"
+                          light={true}
+                          required
+                        />
+                      </>
                     )}
                     {toggleEmailModal && error && (
                       <div className="flex flex-col gap-5">

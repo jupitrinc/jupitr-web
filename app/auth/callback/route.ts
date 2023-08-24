@@ -7,15 +7,19 @@ export async function GET(request: Request) {
   // The `/auth/callback` route is required for the server-side auth flow implemented
   // by the Auth Helpers package. It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
+  const supabase = createRouteHandlerClient({ cookies })
+
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get("code")
 
-  if (code) {
-    const supabase = createRouteHandlerClient({ cookies })
-    await supabase.auth.exchangeCodeForSession(code)
-  } else {
+  if (!code) {
     const res = NextResponse.redirect(`${requestUrl.origin}/`)
-    res.cookies.set(CookieEnum.errorOTP, "true")
+    return res
+  }
+
+  const { error } = await supabase.auth.exchangeCodeForSession(code)
+  if (error) {
+    const res = NextResponse.redirect(`${requestUrl.origin}/`)
     return res
   }
 
