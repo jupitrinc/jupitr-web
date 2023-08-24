@@ -12,14 +12,16 @@ import useMediaService from "../../services/storage/useMediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
 import useCompanyService from "services/company/useCompanyService"
 import { localStorageHelper } from "../../helper/localStorageHelper"
-import { toBase64, imageHelper } from "../../helper/imageHelper"
 import { cookieHelper } from "helper/cookieHelper"
+import { imageHelper } from "helper/imageHelper"
 
 export function useUserAction() {
-  const router = useRouter()
-  const { dispatch } = useContext(UserContext)
   const { clear } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
+  const { toBase64 } = imageHelper
+
+  const router = useRouter()
+  const { dispatch } = useContext(UserContext)
   const { uploadMedia } = useMediaService()
   const {
     signInWithOtp,
@@ -81,30 +83,25 @@ export function useUserAction() {
   const signUpCompany = async (company: AddCompany) => {
     dispatch({ type: UserActionEnum.COMPANY_SIGN_UP_BEGIN })
 
-    const resizedFile = await imageHelper.resize(company.logo)
+    const resizedFile = await imageHelper.resize(company.logo as File)
     const base64File = await toBase64(resizedFile)
     const { data, error } = await addCompany({ ...company, logo: base64File })
 
     if (error) {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
-        payload: error.message,
+        payload: error.message.includes("non-2xx status")
+          ? "You already have an account. Sign in"
+          : error.message,
       })
+
+      return null
     } else {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
-      const action_link: string = data?.opt?.action_link as string
-      // Create a URL object from the original link
-      const url = new URL(action_link)
-      // Update the value of the "redirect_to" query parameter
-      url.searchParams.set("redirect_to", `${location.origin}/auth/callback`)
-      // Get the modified URL as a string
-      /*
-      TODO complete autologin
-      const modified_link = url.toString()
-       */
-      await signInWithEmail(company.email)
+
+      return company.email
     }
   }
 
@@ -153,7 +150,7 @@ export function useUserAction() {
       type: UserActionEnum.UPDATE_EMAIL_BEGIN,
     })
 
-    const { error } = await updateUser({ id, email })
+    const { error } = await updateUser(id, { email: email })
     if (error) {
       dispatch({
         type: UserActionEnum.UPDATE_EMAIL_FAILURE,

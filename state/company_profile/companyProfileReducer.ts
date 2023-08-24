@@ -122,6 +122,14 @@ export const companyProfileReducer = (
 
       return update_mission_state
 
+    case CompanyProfileActionEnum.CLEAR_COMPANY_PROFILE:
+      return {
+        ...state,
+        data: {} as ICompanyProfile,
+      }
+
+      return update_mission_state
+
     default:
       return state
   }

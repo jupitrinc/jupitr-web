@@ -7,7 +7,7 @@ import { useIndustryState } from "state/industry/useIndustryState"
 import { IIndustry } from "state/industry/industry.types"
 
 export const useSignUp = () => {
-  const { signUpCompany } = useUserAction()
+  const { signUpCompany, signInWithEmail } = useUserAction()
 
   const [company, setCompany] = useState<AddCompany>({
     name: "",
@@ -20,7 +20,7 @@ export const useSignUp = () => {
     size: "1-10",
   })
 
-  const { preview: logoPreview } = useImagePreview(company.logo as string)
+  const { preview: logoPreview } = useImagePreview(company.logo as File)
 
   const { getIndustries, clearIndustries } = useIndustryAction()
   const { industries } = useIndustryState()
@@ -67,11 +67,11 @@ export const useSignUp = () => {
   })
 
   const [validationFailed, setValidationFailed] = useState<boolean>(false)
+  const [signUpSuccess, setSignUpSuccess] = useState<boolean>(false)
 
   const validateCompany = useCallback(
     async (company: AddCompany) => {
       const fields = { ...invalid }
-
       fields.name = !company.name
       fields.logo = !company.logo
       fields.year_founded = !company.year_founded
@@ -97,7 +97,12 @@ export const useSignUp = () => {
       const failed = await validateCompany(company)
 
       if (!failed) {
-        signUpCompany(company)
+        const success = await signUpCompany(company)
+
+        if (success) {
+          setSignUpSuccess(true)
+          await signInWithEmail(success)
+        }
       }
     },
     [company]
@@ -108,6 +113,7 @@ export const useSignUp = () => {
     setCompany,
     invalid,
     validationFailed,
+    signUpSuccess,
     logoPreview,
     industries,
     addIndustry,

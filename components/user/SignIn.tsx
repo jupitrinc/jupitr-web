@@ -44,11 +44,11 @@ export const SignIn = () => {
     [email]
   )
 
-  const showErrorMsg = useMemo(() => {
+  const errorMessage = useMemo(() => {
     if (!isEmpty(error)) {
       return error
     } else {
-      return "Log in using the one-time-password (OTP) sent to your inbox."
+      return "Sign in using the one-time-password (OTP) sent to your inbox"
     }
   }, [error])
 
@@ -88,12 +88,7 @@ export const SignIn = () => {
         disabled={loading}
       />
 
-      <Toast
-        show={notification}
-        onHide={onHide}
-        label="Log in using the one-time-password (OTP) sent to your inbox."
-      />
-      <Toast show={notification} onHide={onHide} label={error} />
+      <Toast show={notification} onHide={onHide} label={errorMessage} />
       <Toast
         show={otpSent}
         onHide={hideOtpSent}
