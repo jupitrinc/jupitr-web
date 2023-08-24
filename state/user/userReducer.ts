@@ -20,7 +20,6 @@ import {
   localStorageHelper,
   LocalStorageItemEnum,
 } from "helper/localStorageHelper"
-import { cookieHelper } from "helper/cookieHelper"
 
 export const userReducer = (
   state: UserState,

@@ -1,5 +1,5 @@
 export enum CookieEnum {
-  errorOTP = "errorOTP",
+  authError = "authError",
 }
 
 export const cookieHelper = {

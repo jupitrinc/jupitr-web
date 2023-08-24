@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useNotification = (toggle: boolean) => {
+export const useNotification = (toggle?: boolean) => {
   const [notification, setNotification] = useState<boolean>(false)
 
   useEffect(() => {

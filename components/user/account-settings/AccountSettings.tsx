@@ -9,15 +9,12 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
-import useAuthStateChanges from "helper/hooks/useAuthStateChanges"
 
 const AccountSettings = () => {
   const { user, error } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState(user.email)
   const [toggleEmailModal, setToggleEmailModal] = useState(false)
-
-  useAuthStateChanges()
 
   const onEmailChange = (e?) => {
     e && e.preventDefault()
@@ -51,19 +48,23 @@ const AccountSettings = () => {
               </Text>
 
               <form className="w-full" onSubmit={onEmailChange}>
-                <Text as="p">{settingModal[activeSetting].description}</Text>
                 {activeSetting === "change_email" && (
                   <>
                     {!toggleEmailModal && (
-                      <TextInput
-                        placeholder="New email address"
-                        value={email}
-                        name="new_email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        type="email"
-                        light={true}
-                        required
-                      />
+                      <>
+                        <Text as="p">
+                          {settingModal[activeSetting].description}
+                        </Text>
+                        <TextInput
+                          placeholder="New email address"
+                          value={email}
+                          name="new_email"
+                          onChange={(e) => setEmail(e.target.value)}
+                          type="email"
+                          light={true}
+                          required
+                        />
+                      </>
                     )}
                     {toggleEmailModal && error && (
                       <div className="flex flex-col gap-5">
