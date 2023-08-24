@@ -20,14 +20,14 @@ export const SignIn = () => {
     !isEmpty(error)
   )
   const {
-    notification: otpSent,
-    showNotification: showOtpSent,
-    hideNotification: hideOtpSent,
+    notification: otpError,
+    showNotification: showOtpError,
+    hideNotification: hideOtpError,
   } = useNotification()
 
   useEffect(() => {
     if (window.location.href.includes("error_code")) {
-      showOtpSent()
+      showOtpError()
     }
   }, [])
 
@@ -90,8 +90,8 @@ export const SignIn = () => {
 
       <Toast show={notification} onHide={onHide} label={errorMessage} />
       <Toast
-        show={otpSent}
-        onHide={hideOtpSent}
+        show={otpError}
+        onHide={hideOtpError}
         label={"Email link is invalid or has expired. Sign in again."}
       />
     </div>
