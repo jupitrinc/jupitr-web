@@ -19,7 +19,7 @@ const UserAvatar = () => {
         const fileName = `${user.id}.${fileExt}`
         const filePath = `${storageFolderHelper.userAvatarFolder(
           user.id
-        )}/${fileName}`
+        )}/${fileName}&updated=${Date.now()}`
         const resizedFile = await imageHelper.resize(file)
         updateAvatar(resizedFile, filePath, user.id)
       }
