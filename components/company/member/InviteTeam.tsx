@@ -8,22 +8,18 @@ import { AvatarGroup } from "ui-library/avatar/avatar-group/AvatarGroup"
 import { urlHelper } from "helper/urlHelper"
 import { Modal } from "ui-library/modal/Modal"
 import { useNotification } from "helper/hooks/useNotification"
-import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Divider } from "ui-library/content/divider/Divider"
-import { Select } from "ui-library/form/select/Select"
-import { CompanyMemberPermissionEnum } from "state/company_member_profile/companyMemberProfile.types"
-import { ICompanyMember } from "state/company_members/companyMembers.types"
-
-enum RolesEnum {
-  admin = "admin",
-  member = "member",
-}
+import { Toast } from "ui-library/toast/Toast"
+import { stringHelper } from "helper/stringHelper"
+import MemberCard from "./invite-team/MemberCard"
+import InviteMember from "./invite-team/InviteMember"
 
 const InviteTeam = () => {
   const { user } = useUserState()
   const { notification, hideNotification, showNotification } = useNotification()
   const { getMembers, clearMembers } = useCompanyMembersAction()
-  const { company_members } = useCompanyMembersState()
+  const { company_members, error } = useCompanyMembersState()
+  const { notification: errorMessage, hideNotification: hideError } =
+    useNotification(!stringHelper.isEmpty(error))
 
   useEffect(() => {
     if (user.company_id && company_members.length < 1) {
@@ -67,7 +63,9 @@ const InviteTeam = () => {
             Invite team
           </Text>
 
-          <div className="flex flex-col gap-5">
+          <InviteMember />
+
+          <div className="flex flex-col gap-3">
             {company_members &&
               company_members.map((member) => (
                 <MemberCard key={member.user_id} member={member} />
@@ -75,47 +73,10 @@ const InviteTeam = () => {
           </div>
         </div>
       </Modal>
+
+      <Toast onHide={hideError} show={errorMessage} label={error} />
     </>
   )
 }
 
 export default InviteTeam
-
-const MemberCard = ({ member }: { member: ICompanyMember }) => {
-  const { user } = useUserState()
-  const { updateRole } = useCompanyMembersAction()
-
-  return (
-    <>
-      <div className="flex flex-row gap-3 justify-between">
-        <div className="flex flex-row gap-2 items-center">
-          <Avatar image_url={urlHelper.imageUrl(member.avatar_url)} size={10} />
-          <Text as="span" size="lg">
-            {member.name}
-          </Text>
-        </div>
-
-        <Select
-          placeholder="Role"
-          onChange={(e) =>
-            updateRole({
-              user_id: member.user_id,
-              company_id: user.company_id,
-              permission:
-                JSON.parse(e.target.value) === RolesEnum.admin
-                  ? "write"
-                  : "read",
-            })
-          }
-          value={
-            member.permission === CompanyMemberPermissionEnum.write
-              ? RolesEnum.admin
-              : RolesEnum.member
-          }
-          options={[RolesEnum.admin, RolesEnum.member]}
-        ></Select>
-      </div>
-      <Divider />
-    </>
-  )
-}

@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { CompanyMembersContext } from "./CompanyMembersContext"
 import useCompanyMemberService from "services/company/useCompanyMemberService"
 import {
+  AddCompanyMemberPayload,
   CompanyMembersActionEnum,
   ICompanyMember,
   UpdateRolePayload,
@@ -13,6 +14,7 @@ export function useCompanyMembersAction() {
   const {
     getMembers: getMembersService,
     updateMembersPermission: updateRoleService,
+    addMember: addMemberService,
   } = useCompanyMemberService()
 
   const getMembers = async (company_id: ISuperUser["company_id"]) => {
@@ -32,7 +34,7 @@ export function useCompanyMembersAction() {
     } else {
       dispatch({
         type: CompanyMembersActionEnum.GET_MEMBERS_SUCCESS,
-        payload: data as ICompanyMember[],
+        payload: data as ICompanyMember,
       })
     }
   }
@@ -52,10 +54,30 @@ export function useCompanyMembersAction() {
         payload: error.message,
       })
     } else {
-      console.log(data)
       dispatch({
         type: CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_SUCCESS,
         payload: data as ICompanyMember[],
+      })
+    }
+  }
+
+  const addMember = async (payload: AddCompanyMemberPayload) => {
+    if (!payload.companyId || !payload.email || !payload.permission) return
+
+    dispatch({
+      type: CompanyMembersActionEnum.ADD_MEMBER_BEGIN,
+    })
+
+    const { data, error } = await addMemberService(payload)
+
+    if (error) {
+      dispatch({
+        type: CompanyMembersActionEnum.ADD_MEMBER_FAILURE,
+        payload: error.message,
+      })
+    } else {
+      dispatch({
+        type: CompanyMembersActionEnum.ADD_MEMBER_SUCCESS,
       })
     }
   }
@@ -69,6 +91,7 @@ export function useCompanyMembersAction() {
   return {
     getMembers,
     updateRole,
+    addMember,
     clearMembers,
   }
 }

@@ -12,7 +12,7 @@ export const CompanyMembersContextProvider: React.FC<any> = ({ children }) => {
   const initialState: CompanyMembersState = {
     data: [] as ICompanyMember[],
     loading: false,
-    error: false,
+    error: "",
   }
   const [state, dispatch] = useReducer(companyMembersReducer, initialState)
 

@@ -59,7 +59,7 @@ export const SignIn = () => {
         value={email}
         onSubmit={loginWithEmail}
         icon={<ChevronRight />}
-        placeHolder="Email address"
+        placeholder="Email address"
         loading={loading}
         disabled={loading}
         required={true}

@@ -9,7 +9,7 @@ export interface ICompanyMembersContext {
 export type CompanyMembersState = {
   data: ICompanyMember[]
   loading: boolean
-  error: boolean
+  error: string
 }
 
 export interface ICompanyMember {
@@ -28,9 +28,12 @@ export type CompanyMembersAction = {
     | CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_BEGIN
     | CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_FAILURE
     | CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_SUCCESS
+    | CompanyMembersActionEnum.ADD_MEMBER_BEGIN
+    | CompanyMembersActionEnum.ADD_MEMBER_FAILURE
+    | CompanyMembersActionEnum.ADD_MEMBER_SUCCESS
     | CompanyMembersActionEnum.CLEAR_MEMBERS
 
-  payload?: ICompanyMember[] | ICompanyMember["permission"]
+  payload?: ICompanyMember[] | ICompanyMember | string
 }
 
 export enum CompanyMembersActionEnum {
@@ -42,6 +45,10 @@ export enum CompanyMembersActionEnum {
   UPDATE_MEMBER_ROLE_FAILURE = "UPDATE_MEMBER_ROLE_FAILURE",
   UPDATE_MEMBER_ROLE_SUCCESS = "UPDATE_MEMBER_ROLE_SUCCESS",
 
+  ADD_MEMBER_BEGIN = "ADD_MEMBER_BEGIN",
+  ADD_MEMBER_FAILURE = "ADD_MEMBER_FAILURE",
+  ADD_MEMBER_SUCCESS = "ADD_MEMBER_SUCCESS",
+
   CLEAR_MEMBERS = "CLEAR_MEMBERS",
 }
 
@@ -49,4 +56,10 @@ export interface UpdateRolePayload {
   company_id: ISuperUser["company_id"]
   user_id: ICompanyMember["user_id"]
   permission: ICompanyMember["permission"]
+}
+
+export interface AddCompanyMemberPayload {
+  email: string
+  companyId: string
+  permission: CompanyMemberPermission
 }
