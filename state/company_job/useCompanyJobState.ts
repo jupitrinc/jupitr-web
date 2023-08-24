@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { CompanyJobContext } from "./CompanyJobContext"
 
 export const useCompanyJobState = () => {
@@ -8,5 +8,10 @@ export const useCompanyJobState = () => {
     company_job: state.data,
     loading: state.loading,
     error: state.error,
+
+    videos: useMemo(
+      () => state.data.company_videos,
+      [state.data.company_videos]
+    ),
   }
 }

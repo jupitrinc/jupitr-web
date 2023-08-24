@@ -12,24 +12,22 @@ import { IJobVideo } from "state/company_job/companyJob.types"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 
 export const Videos = () => {
-  const { company_job } = useCompanyJobState()
+  const { videos } = useCompanyJobState()
 
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <SectionHeader title="Videos" />
-        <ActionBar />
+        <AddVideos />
       </div>
 
-      {company_job.company_videos &&
-        company_job.company_videos.map((video) => (
-          <VideoCard key={video.id} video={video} />
-        ))}
+      {videos &&
+        videos.map((video) => <VideoCard key={video.id} video={video} />)}
     </Card>
   )
 }
 
-const ActionBar = () => {
+const AddVideos = () => {
   return (
     <div className="grid grid-cols-2 gap-5 justify-center">
       <Card type="linked">
@@ -41,7 +39,7 @@ const ActionBar = () => {
         </div>
       </Card>
 
-      <InviteTeam />
+      <InviteTeam title="Collaborate" />
     </div>
   )
 }

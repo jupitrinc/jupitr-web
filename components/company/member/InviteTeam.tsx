@@ -13,7 +13,7 @@ import { stringHelper } from "helper/stringHelper"
 import MemberCard from "./invite-team/MemberCard"
 import InviteMember from "./invite-team/InviteMember"
 
-const InviteTeam = () => {
+const InviteTeam = ({ title }: { title: string }) => {
   const { user } = useUserState()
   const { notification, hideNotification, showNotification } = useNotification()
   const { getMembers, clearMembers } = useCompanyMembersAction()
@@ -48,11 +48,11 @@ const InviteTeam = () => {
       <Card type="linked" onClick={showNotification}>
         <div className="flex flex-col gap-1 justify-center items-center">
           <div className="h-10">
-            <AvatarGroup max_number={5} avatars={avatars} />
+            <AvatarGroup max_number={3} avatars={avatars} />
           </div>
 
           <Text as="span" size="base">
-            Invite team
+            {title}
           </Text>
         </div>
       </Card>
@@ -60,7 +60,7 @@ const InviteTeam = () => {
       <Modal open={notification} onClose={hideNotification}>
         <div className="flex flex-col gap-10">
           <Text as="span" size="xl">
-            Invite team
+            {title}
           </Text>
 
           <InviteMember />

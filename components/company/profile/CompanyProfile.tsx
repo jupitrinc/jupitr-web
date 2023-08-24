@@ -34,7 +34,7 @@ const CompanyProfile: React.FC = () => {
           <Logo />
         </div>
 
-        <InviteTeam />
+        <InviteTeam title="Add team" />
 
         <Name />
 

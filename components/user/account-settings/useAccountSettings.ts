@@ -41,6 +41,7 @@ export const useAccountSettings = () => {
     },
     [SettingsEnum.change_email]: {
       title: "Change email address",
+      description: "",
       onConfirm: (email) => requestEmailUpdate(email),
       confirm_button_label: "Change",
       confirm_button_variant: "standard" as ColorType,

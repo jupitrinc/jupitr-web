@@ -55,6 +55,8 @@ const AccountSettings = () => {
                 {settingModal[activeSetting].title}
               </Text>
 
+              <Text as="p">{settingModal[activeSetting].description}</Text>
+
               <form className="w-full" onSubmit={onEmailChange}>
                 {activeSetting === "change_email" && (
                   <>

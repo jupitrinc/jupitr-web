@@ -17,7 +17,6 @@ export const LightForm: React.FC<LightFormProps> = (form) => {
         placeholder={form.placeholder}
         disabled={form.disabled}
         maxLength={form.maxLength}
-        label={form.label}
         autoFocus={form.autoFocus}
         required={form.required}
       />
