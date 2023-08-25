@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 
 export type RecordingStatus = "recording" | "inactive" | "paused"
 
 export const useVideoRecorder = () => {
   const [permission, setPermission] = useState<boolean>(false)
   const [status, setStatus] = useState<RecordingStatus>("inactive")
-  const [stream, setStream] = useState<MediaStream | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null)
-  const [chunks, setChunks] = useState<Blob[]>([])
+  const [recording, setRecording] = useState<string | null>(null)
+  const [videoFile, setVideoFile] = useState<File | null>(null)
 
   useEffect(() => {
     getStream()
 
-    return releaseStream
+    return unregister
   }, [])
 
   const getStream = async () => {
@@ -22,7 +24,7 @@ export const useVideoRecorder = () => {
           audio: true,
           video: true,
         })
-        setStream(stream)
+        streamRef.current = stream
         setRecorder(new MediaRecorder(stream))
         setPermission(true)
       } catch (error) {
@@ -35,18 +37,24 @@ export const useVideoRecorder = () => {
     }
   }
 
-  const releaseStream = () => {
-    if (stream !== null) {
-      stream.getTracks().forEach((track) => track.stop())
+  const unregister = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.src = ""
     }
-  }
+
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop())
+    }
+  }, [])
 
   const startRecording = async () => {
-    if (stream && recorder) {
-      setChunks([])
-
+    if (streamRef.current && recorder) {
       recorder.start()
       setStatus("recording")
+
+      setRecording(null)
+      setVideoFile(null)
 
       handleDataAvailable(recorder)
     }
@@ -61,27 +69,29 @@ export const useVideoRecorder = () => {
 
   const handleDataAvailable = (recorder: MediaRecorder) => {
     recorder.ondataavailable = (event) => {
-      if (typeof event.data === "undefined") return
-      if (event.data.size === 0) return
-      setChunks([event.data])
-    }
-  }
+      if (typeof event.data === "undefined" || event.data.size === 0) return
+      const chunks = [event.data]
 
-  const getRecording = () => {
-    if (chunks.length) {
       const blob = new Blob(chunks, { type: chunks[0].type })
-      return URL.createObjectURL(blob)
-    } else {
-      return null
+
+      setRecording(URL.createObjectURL(blob))
+      setVideoFile(
+        new File([blob], "jupitr-recording", {
+          lastModified: new Date().getTime(),
+          type: blob.type,
+        })
+      )
     }
   }
 
   return {
     permission,
     status,
-    stream,
+    streamRef,
+    videoRef,
     startRecording,
     stopRecording,
-    getRecording,
+    recording,
+    videoFile,
   }
 }

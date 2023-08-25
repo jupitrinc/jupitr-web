@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react"
+import { RefObject, useEffect } from "react"
 import { VideoPlayer } from "../video-player/VideoPlayer"
 import { Button } from "ui-library/button/Button"
 import { Video } from "lucide-react"
 import { videoRecorderStyles } from "./VideoRecorder.styles"
-import { VIDEO_FILE_NAME, VideoRecorderProps } from "./VideoRecorder.types"
+import { VideoRecorderProps } from "./VideoRecorder.types"
 import { Text } from "ui-library/text/Text"
 import { useCountDown } from "helper/hooks/useCountdown"
 import {
@@ -15,15 +15,15 @@ import { useTimeout } from "helper/hooks/useTimeout"
 const styles = videoRecorderStyles
 
 export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
-  const blobToFile = (theBlob: Blob, fileName: string): File => {
-    return new File([theBlob as Blob], fileName, {
-      lastModified: new Date().getTime(),
-      type: theBlob.type,
-    })
-  }
-
-  const { status, startRecording, stopRecording, stream, getRecording } =
-    useVideoRecorder()
+  const {
+    status,
+    streamRef,
+    videoRef,
+    startRecording,
+    stopRecording,
+    recording,
+    videoFile,
+  } = useVideoRecorder()
 
   const { setRef, clearRef } = useTimeout()
 
@@ -42,16 +42,24 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
     clearRef()
   }
 
+  useEffect(() => {
+    recorder.onChange(videoFile)
+  }, [videoFile])
+
   const recordButtonLabel = (status: RecordingStatus) => {
-    return status === "recording" ? "Stop" : "Reply"
+    return status === "recording"
+      ? "Stop"
+      : recorder.recordLabel
+      ? recorder.recordLabel
+      : "Start"
   }
 
   return (
     <div className={styles.container}>
-      {status !== "recording" && getRecording() ? (
-        <VideoPlayer src={getRecording() as string} />
+      {status !== "recording" && recording ? (
+        <VideoPlayer src={recording as string} />
       ) : (
-        <Preview stream={stream} />
+        <Preview stream={streamRef.current} videoRef={videoRef} />
       )}
 
       <div className={styles.toolbar}>
@@ -74,14 +82,19 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   )
 }
 
-const Preview = ({ stream }: { stream: MediaStream | null }) => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
+const Preview = ({
+  stream,
+  videoRef,
+}: {
+  stream: MediaStream | null
+  videoRef: RefObject<HTMLVideoElement>
+}) => {
   useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream
     }
   }, [stream])
+
   if (!stream) {
     return null
   }
