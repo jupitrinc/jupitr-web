@@ -4,6 +4,7 @@ import {
   JobMediaPayload,
   MediaPayload,
 } from "./media.types"
+import { storageFolderHelper } from "../../helper/storageFolderHelper"
 
 const useMediaService = () => {
   const uploadMedia = async ({ bucketName, file, filePath }: MediaPayload) => {
@@ -25,21 +26,16 @@ const useMediaService = () => {
   }
 
   const uploadJobVideo = async (payload: JobMediaPayload) => {
+    const folderPath =
+      storageFolderHelper.companyJobApplicantsVideoFolder(payload)
+    const newFileName = payload.user_id
     const formData = new FormData()
     formData.append("file", payload.file)
-    formData.append("job_id", payload.job_id)
-    formData.append("company_id", payload.company_id)
-    formData.append("user_id", payload.user_id)
-
-    const { data, error } = await supabaseClientComponent.functions.invoke(
-      "jobs-video",
-      {
-        body: FormData,
-      }
-    )
-    if (error) {
-      console.error("jobMedia: ", error)
-    }
+    formData.append("public_id", `${folderPath}/${newFileName}`)
+    const { data, error } = await fetch("/api/jobs-video-upload", {
+      method: "POST",
+      body: formData,
+    }).then((r) => r.json())
 
     return {
       data,
