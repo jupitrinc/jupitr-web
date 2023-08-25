@@ -73,7 +73,15 @@ const AccountSettings = () => {
                       </>
                     )}
 
-                    {toggleEmailModal && !error && (
+                    {toggleEmailModal && loading && !error && (
+                      <div className="flex flex-col gap-5">
+                        <Text as="span" size="base">
+                          Updating your email.
+                        </Text>
+                      </div>
+                    )}
+
+                    {toggleEmailModal && !loading && !error && (
                       <div className="flex flex-col gap-5">
                         <Text as="span" size="base">
                           Check your inbox and confirm your email update
