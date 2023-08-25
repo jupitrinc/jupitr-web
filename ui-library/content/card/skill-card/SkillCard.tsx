@@ -6,8 +6,8 @@ import { Tabs } from "ui-library/menu/tabs/Tabs"
 
 export interface props {
   skill: { id: string; name: string; level: number }
-  removeSkill: () => Promise<void>
-  updateSkill: (level: number) => Promise<void>
+  removeSkill?: () => Promise<void>
+  updateSkill?: (level: number) => Promise<void> | undefined
   levels: string[]
 }
 
@@ -31,7 +31,11 @@ export const SkillCard: React.FC<props> = (props) => {
       <Tabs
         items={props.levels}
         active_tab={props.skill.level}
-        onChange={props.updateSkill}
+        onChange={() => {
+          if (props.updateSkill) {
+            props.updateSkill
+          }
+        }}
       />
     </Card>
   )

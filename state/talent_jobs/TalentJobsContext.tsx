@@ -11,7 +11,7 @@ export const TalentJobsContext = createContext({} as ITalentJobsContext)
 
 const TalentJobs = () => {
   const initialState: TalentJobsState = {
-    data: test_data as TalentJobs,
+    data: {} as TalentJobs,
     loading: false,
     error: false,
   }
