@@ -1,4 +1,5 @@
 import { imageHelper } from "./imageHelper"
+import { JobMediaPayload } from "../services/storage/media.types"
 
 export const storageFolderHelper = {
   userAvatarFolder: (user_id: string) => {
@@ -10,6 +11,12 @@ export const storageFolderHelper = {
     if (!company_id) return undefined
 
     return `company/${company_id}/logo`
+  },
+  companyJobApplicantsVideoFolder: ({
+    company_id,
+    job_id,
+  }: JobMediaPayload) => {
+    return `company/${company_id}/jobs/${job_id}/applicants`
   },
 }
 export const resizeFile = async (logo: File) => {
