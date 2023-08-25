@@ -15,13 +15,7 @@ const UserAvatar = () => {
     async (event) => {
       if (event.target.files && user.id) {
         const file = event.target.files[0]
-        const fileExt = file.name.split(".").pop()
-        const fileName = `${user.id}.${fileExt}`
-        const filePath = `${storageFolderHelper.userAvatarFolder(
-          user.id
-        )}/${fileName}&updated=${Date.now()}`
-        const resizedFile = await imageHelper.resize(file)
-        updateAvatar(resizedFile, filePath, user.id)
+        updateAvatar(file, user.id)
       }
     },
     [user.id]

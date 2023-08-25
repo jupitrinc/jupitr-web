@@ -67,7 +67,9 @@ export function useCompanyProfileAction() {
 
     const fileExt = logo.name.split(".").pop()
     const fileName = `${company_id}.${fileExt}`
-    const filePath = `${companyLogoFolder(company_id)}/${fileName}`
+    const filePath = `${companyLogoFolder(
+      company_id
+    )}/${fileName}&updated=${Date.now()}`
     const resizedFile = await imageHelper.resize(logo)
     uploadLogo(resizedFile, filePath, company_id)
   }
