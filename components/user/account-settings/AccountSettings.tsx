@@ -9,17 +9,25 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
+import { Toast } from "ui-library/toast/Toast"
+import { useNotification } from "helper/hooks/useNotification"
+import { stringHelper } from "helper/stringHelper"
 
 const AccountSettings = () => {
-  const { user, error } = useUserState()
+  const { user, error, loading } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
-  const [email, setEmail] = useState(user.email)
+  const [email, setEmail] = useState("")
+  const { notification, hideNotification } = useNotification(
+    !stringHelper.isEmpty(error)
+  )
   const [toggleEmailModal, setToggleEmailModal] = useState(false)
 
-  const onEmailChange = (e?) => {
-    e && e.preventDefault()
+  const onEmailChange = () => {
+    if (!email.trim()) return
+
     settingModal[activeSetting].onConfirm(email)
     setToggleEmailModal(true)
+    setEmail("")
   }
 
   const onClose = () => {
@@ -43,36 +51,28 @@ const AccountSettings = () => {
 
           <Modal open={modal} onClose={onClose}>
             <div className="flex flex-col gap-5">
-              <Text as="span" size="xl">
+              <Text as="span" size="base">
                 {settingModal[activeSetting].title}
               </Text>
+
+              <Text as="p">{settingModal[activeSetting].description}</Text>
 
               <form className="w-full" onSubmit={onEmailChange}>
                 {activeSetting === "change_email" && (
                   <>
                     {!toggleEmailModal && (
                       <>
-                        <Text as="p">
-                          {settingModal[activeSetting].description}
-                        </Text>
                         <TextInput
                           placeholder="New email address"
                           value={email}
                           name="new_email"
                           onChange={(e) => setEmail(e.target.value)}
                           type="email"
-                          light={true}
                           required
                         />
                       </>
                     )}
-                    {toggleEmailModal && error && (
-                      <div className="flex flex-col gap-5">
-                        <Text as="span" size="base">
-                          {error}
-                        </Text>
-                      </div>
-                    )}
+
                     {toggleEmailModal && !error && (
                       <div className="flex flex-col gap-5">
                         <Text as="span" size="base">
@@ -119,11 +119,18 @@ const AccountSettings = () => {
                       onClick={() => {
                         !toggleEmailModal ? onEmailChange() : onClose()
                       }}
+                      loading={loading}
                     />
                   </div>
                 )}
               </div>
             </div>
+
+            <Toast
+              show={notification}
+              onHide={hideNotification}
+              label={error}
+            />
           </Modal>
         </div>
       </Card>

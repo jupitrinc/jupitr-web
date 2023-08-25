@@ -3,11 +3,13 @@ import {
   ICompanyJob,
   CompanyJobActionEnum,
   JobStatusEnum,
+  IJobVideo,
 } from "./companyJob.types"
 import { CompanyJobContext } from "./CompanyJobContext"
 import useCompanyJobService from "services/company/useCompanyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import useCompanyJobVideoService from "services/company/useCompanyJobVideoService"
 
 export function useCompanyJobAction() {
   const router = useRouter()
@@ -17,6 +19,8 @@ export function useCompanyJobAction() {
     getJob: getJobService,
     updateJob: updateJobService,
   } = useCompanyJobService()
+
+  const { deleteVideo } = useCompanyJobVideoService()
 
   const addJob = async (
     status: ICompanyJob["status"],
@@ -231,6 +235,19 @@ export function useCompanyJobAction() {
     }
   }
 
+  const deleteJobVideo = async (video_id: IJobVideo["id"]) => {
+    if (!video_id) return
+
+    const { error } = await deleteVideo(video_id)
+
+    if (!error) {
+      dispatch({
+        type: CompanyJobActionEnum.DELETE_JOB_VIDEO,
+        payload: video_id,
+      })
+    }
+  }
+
   const deleteJob = async (job_id: ICompanyJob["id"]) => {
     if (!job_id) return
 
@@ -258,5 +275,6 @@ export function useCompanyJobAction() {
     updateSkill,
     updateApplicationVideo,
     deleteJob,
+    deleteJobVideo,
   }
 }
