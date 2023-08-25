@@ -130,7 +130,6 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
     })
-
     const { error } = await changeEmailService(email)
     if (error) {
       dispatch({
