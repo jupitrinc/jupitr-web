@@ -9,7 +9,7 @@ export interface JobMediaPayload {
   file: File
   company_id: string
   user_id: string
-  job_id
+  job_id: string
 }
 
 export interface DownloadMediaPayload extends StoragePayload {}
