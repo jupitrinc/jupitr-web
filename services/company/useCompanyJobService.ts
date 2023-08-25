@@ -34,7 +34,9 @@ const useCompanyJobService = () => {
   const getJob = async (id: string) => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
-      .select()
+      .select(
+        "*, company_videos(*, company_member_profile(job_title, users(name)))"
+      )
       .eq("id", id)
       .single()
     if (error) {

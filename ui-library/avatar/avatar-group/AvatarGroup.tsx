@@ -17,11 +17,12 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = (avatarGroup) => {
           />
         ))}
 
-      {avatarGroup.avatars.length > avatarGroup.max_number && (
-        <span className={styles.label}>
-          + {avatarGroup.avatars.length - avatarGroup.max_number}
-        </span>
-      )}
+      {avatarGroup.avatars.length > avatarGroup.max_number &&
+        !avatarGroup.hideLabel && (
+          <span className={styles.label}>
+            + {avatarGroup.avatars.length - avatarGroup.max_number}
+          </span>
+        )}
     </div>
   )
 }

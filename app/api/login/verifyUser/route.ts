@@ -7,11 +7,8 @@ export async function GET(request: Request) {
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { getUser: getUserService } = useUserService()
-    const cookieStore = cookies()
 
-    const supabase = createRouteHandlerClient({
-      cookies: () => cookieStore,
-    })
+    const supabase = createRouteHandlerClient({ cookies })
     const userSession = await supabase.auth.getSession()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { data, error } = await getUserService(

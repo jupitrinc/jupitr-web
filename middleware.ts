@@ -26,9 +26,9 @@ export async function middleware(req: NextRequest) {
 
   if (!session && !isRouteAllowed) {
     return NextResponse.redirect(`${new URL(req.url).origin}/`)
+  } else {
+    return res
   }
-
-  return res
 }
 
 export const config = {

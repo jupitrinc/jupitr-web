@@ -31,11 +31,6 @@ export enum AccountTypeEnum {
   company = "company",
 }
 
-export enum AccountPermissionEnum {
-  read = "read",
-  write = "write",
-}
-
 export type ISuperUser = ITalentProfile & ICompanyMemberProfile
 
 export type UserState = {

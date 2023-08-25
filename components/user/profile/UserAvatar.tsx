@@ -10,8 +10,6 @@ import { storageFolderHelper } from "helper/storageFolderHelper"
 const UserAvatar = () => {
   const { user } = useUserState()
   const { updateAvatar } = useUserAction()
-  const { imageUrl } = urlHelper
-  const { userAvatarFolder } = storageFolderHelper
 
   const handleUpload = useCallback(
     async (event) => {
@@ -19,7 +17,9 @@ const UserAvatar = () => {
         const file = event.target.files[0]
         const fileExt = file.name.split(".").pop()
         const fileName = `${user.id}.${fileExt}`
-        const filePath = `${userAvatarFolder(user.id)}/${fileName}`
+        const filePath = `${storageFolderHelper.userAvatarFolder(
+          user.id
+        )}/${fileName}&updated=${Date.now()}`
         const resizedFile = await imageHelper.resize(file)
         updateAvatar(resizedFile, filePath, user.id)
       }
@@ -29,7 +29,7 @@ const UserAvatar = () => {
 
   return (
     <Uploader onChange={handleUpload} accept="image/jpg, image/jpeg, image/png">
-      <Avatar size={36} image_url={imageUrl(user.avatar_url)} />
+      <Avatar size={28} image_url={urlHelper.imageUrl(user.avatar_url)} />
     </Uploader>
   )
 }

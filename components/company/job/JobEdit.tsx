@@ -1,19 +1,19 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import { Card } from "ui-library/content/card/Card"
-import { Skills } from "./Skills"
-import { Videos } from "./Videos"
+import { Skills } from "./job-edit/Skills"
+import { Videos } from "./job-edit/Videos"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useUserState } from "state/user/useUserState"
-import JobTitle from "./JobTitle"
-import JobToolbar from "./JobToolbar"
-import JobApplicationsPreview from "./JobApplicationsPreview"
-import Salary from "./Salary"
-import WorkModel from "./WorkModel"
-import TalentApplication from "./TalentApplication"
-import Location from "./Location"
+import Title from "./job-edit/Title"
+import Toolbar from "./job-edit/Toolbar"
+import PreviewApplications from "./job-edit/PreviewApplications"
+import Salary from "./job-edit/Salary"
+import WorkModel from "./job-edit/WorkModel"
+import TalentApplication from "./job-edit/TalentApplication"
+import Location from "./job-edit/Location"
 
-export const Sections = () => {
+export const JobEdit = () => {
   const { user } = useUserState()
   const { getJob, clearJob } = useCompanyJobAction()
 
@@ -30,11 +30,11 @@ export const Sections = () => {
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      {/*<JobApplicationsPreview /> */}
+      {/*<PreviewApplications /> */}
 
       <div className="flex flex-col md:flex-row gap-5">
-        <JobTitle />
-        <JobToolbar />
+        <Title />
+        <Toolbar />
       </div>
 
       <div className="flex flex-col md:flex-row gap-5">

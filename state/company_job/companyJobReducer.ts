@@ -100,6 +100,21 @@ export const companyJobReducer = (
         },
       }
 
+    case CompanyJobActionEnum.DELETE_JOB_VIDEO:
+      const delete_job_video_payload = action.payload as string
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          company_videos: [
+            ...state.data.company_videos.filter(
+              (video) => video.id !== delete_job_video_payload
+            ),
+          ],
+        },
+      }
+
     default:
       return state
   }

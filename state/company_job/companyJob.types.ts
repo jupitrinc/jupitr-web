@@ -16,27 +16,13 @@ export interface ICompanyJob {
   company_id: string
   title: string
   salary: string
-  status:
-    | JobStatusEnum.open
-    | JobStatusEnum.closed
-    | JobStatusEnum.draft
-    | JobStatusEnum.archived
+  status: "open" | "closed" | "draft" | "archived"
   location: ILocation
   work_model: string[]
   visa_sponsorship: boolean
   skills: { id: string; name: string; level: number }[]
   application_video: { duration: string; description: string }
-  videos?: {
-    id: string
-    job_id: string
-    company_member_profile: {
-      user_id: string
-      name: string
-      job_title: string
-    }
-
-    video_url: string
-  }[]
+  company_videos: IJobVideo[]
 
   applications?: IJobApplication[]
   created_at: string
@@ -53,6 +39,20 @@ export enum JobStatusEnum {
 interface ILocation {
   id: string
   name: string
+}
+
+export interface IJobVideo {
+  id: string
+  job_id: string
+  user_id: string
+  video_url: string
+  created_at: string
+  company_member_profile: {
+    job_title: string
+    users: {
+      name: string
+    }
+  }
 }
 
 export interface IJobApplication {
@@ -83,6 +83,7 @@ export type CompanyJobAction = {
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_LOCATION
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO
+    | CompanyJobActionEnum.DELETE_JOB_VIDEO
 
   payload?:
     | ICompanyJob
@@ -110,4 +111,6 @@ export enum CompanyJobActionEnum {
   UPDATE_COMPANY_JOB_LOCATION = "UPDATE_COMPANY_JOB_LOCATION",
   UPDATE_COMPANY_JOB_SKILLS = "UPDATE_COMPANY_JOB_SKILLS",
   UPDATE_COMPANY_JOB_APPLICATION_VIDEO = "UPDATE_COMPANY_JOB_APPLICATION_VIDEO",
+
+  DELETE_JOB_VIDEO = "DELETE_JOB_VIDEO",
 }

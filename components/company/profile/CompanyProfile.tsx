@@ -10,6 +10,7 @@ import Industry from "./company-profile/Industry"
 import Mission from "./company-profile/Mission"
 import Logo from "./company-profile/Logo"
 import { useCompanyProfileState } from "state/company_profile/useCompanyProfileState"
+import InviteTeam from "../member/InviteTeam"
 
 const CompanyProfile: React.FC = () => {
   const { user } = useUserState()
@@ -32,6 +33,8 @@ const CompanyProfile: React.FC = () => {
         <div className="flex justify-center">
           <Logo />
         </div>
+
+        <InviteTeam title="Add team" />
 
         <Name />
 

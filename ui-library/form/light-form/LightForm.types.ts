@@ -7,8 +7,7 @@ export interface LightFormProps {
   onChange?: ChangeEventHandler<HTMLInputElement>
   onSubmit?: FormEventHandler<HTMLFormElement>
   icon: JSX.Element
-  label?: string
-  placeHolder?: string
+  placeholder?: string
   maxLength?: number
   disabled?: boolean
   autocomplete?: boolean
