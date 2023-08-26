@@ -2,6 +2,7 @@ import { Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
 import { Text } from "ui-library/text/Text"
 import { Pill } from "ui-library/pill/Pill"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
+import { numberHelper } from "helper/numberHelper"
 
 const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -12,7 +13,10 @@ const Details = () => {
         <Text as="span" size="base">
           <span className="flex flex-row flex-wrap gap-1 items-center">
             <PoundSterling className="h-5 w-5" />
-            <Pill label={talent_job.salary} size="base" />
+            <Pill
+              label={numberHelper.formatNumber(Number(talent_job.salary))}
+              size="base"
+            />
           </span>
         </Text>
 

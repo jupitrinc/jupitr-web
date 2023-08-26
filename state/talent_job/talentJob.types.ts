@@ -27,7 +27,7 @@ export interface ITalentJob {
   location: ILocation
   work_model: string[]
   visa_sponsorship?: boolean
-  videos: IJobVideo[]
+  company_videos: IJobVideo[]
   skills: ISkill[]
   application_video: IApplicationVideo
   company: ICompanyProfile

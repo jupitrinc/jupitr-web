@@ -35,6 +35,12 @@ export const talentJobsReducer = (
         data: action.payload as TalentJobs,
       }
 
+    case TalentJobsActionEnum.CLEAR_JOBS:
+      return {
+        ...state,
+        data: [],
+      }
+
     default:
       return state
   }

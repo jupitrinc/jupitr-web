@@ -52,4 +52,16 @@ const sample_job_1 = {
   created_at: "2023-06-11 18:13:59.232382+00",
 }
 
-export const talent_jobs_test_data = [sample_job_1]
+export const talent_jobs_test_data = [
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+  sample_job_1,
+]

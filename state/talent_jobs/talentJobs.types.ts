@@ -19,6 +19,7 @@ export type TalentJobsAction = {
     | TalentJobsActionEnum.GET_JOBS_BEGIN
     | TalentJobsActionEnum.GET_JOBS_FAILURE
     | TalentJobsActionEnum.GET_JOBS_SUCCESS
+    | TalentJobsActionEnum.CLEAR_JOBS
 
   payload?: TalentJobs | string
 }
@@ -27,4 +28,6 @@ export enum TalentJobsActionEnum {
   GET_JOBS_BEGIN = "GET_JOBS_BEGIN",
   GET_JOBS_FAILURE = "GET_JOBS_FAILURE",
   GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS",
+
+  CLEAR_JOBS = "CLEAR_JOBS",
 }

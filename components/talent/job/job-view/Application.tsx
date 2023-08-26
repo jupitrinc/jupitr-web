@@ -97,7 +97,7 @@ const Application = () => {
                   <div className="flex flex-col flex-wrap gap-5">
                     <VideoRecorder
                       duration={Number(talent_job.application_video.duration)}
-                      //onChange={(video) => console.log(video)}
+                      onChange={(video) => null}
                       recordLabel="Start"
                     />
                   </div>

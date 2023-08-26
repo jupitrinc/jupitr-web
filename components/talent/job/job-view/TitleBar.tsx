@@ -2,6 +2,7 @@ import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Text } from "ui-library/text/Text"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import Application from "./Application"
+import { urlHelper } from "helper/urlHelper"
 
 const TitleBar = () => {
   const { talent_job } = useTalentJobState()
@@ -10,7 +11,7 @@ const TitleBar = () => {
       <div className="flex flex-col sm:flex-row justify-between gap-5 items-center">
         <div className="flex flex-row gap-5 items-center">
           <Avatar
-            image_url={talent_job.company.logo}
+            image_url={urlHelper.imageUrl(talent_job.company.logo)}
             size={14}
             alt={`${talent_job.company.name} logo`}
           />

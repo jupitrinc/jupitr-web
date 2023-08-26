@@ -1,18 +1,13 @@
 import { createContext, useMemo, useReducer } from "react"
 
 import { talentJobsReducer } from "./talentJobsReducer"
-import {
-  TalentJobs,
-  ITalentJobsContext,
-  TalentJobsState,
-} from "./talentJobs.types"
-import { talent_jobs_test_data } from "./talentJobs.testdata"
+import { ITalentJobsContext, TalentJobsState } from "./talentJobs.types"
 
 export const TalentJobsContext = createContext({} as ITalentJobsContext)
 
 export const TalentJobsContextProvider: React.FC<any> = ({ children }) => {
   const initialState: TalentJobsState = {
-    data: talent_jobs_test_data as TalentJobs,
+    data: [],
     loading: false,
     error: "",
     success: false,
