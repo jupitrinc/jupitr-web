@@ -1,16 +1,16 @@
-import { RefObject, useEffect } from "react"
+import { useEffect } from "react"
 import { VideoPlayer } from "../video-player/VideoPlayer"
 import { Button } from "ui-library/button/Button"
 import { Video } from "lucide-react"
 import { videoRecorderStyles } from "./VideoRecorder.styles"
 import { VideoRecorderProps } from "./VideoRecorder.types"
-import { Text } from "ui-library/text/Text"
-import { useCountDown } from "helper/hooks/useCountdown"
 import {
   RecordingStatus,
   useVideoRecorder,
 } from "helper/hooks/useVideoRecorder"
 import { useTimeout } from "helper/hooks/useTimeout"
+import Preview from "./video-recorder/Preview"
+import Countdown from "./video-recorder/Countdown"
 
 const styles = videoRecorderStyles
 
@@ -69,9 +69,9 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
             status === "recording" ? stop() : record(recorder.duration)
           }
           label={recordButtonLabel(status)}
-          variant="text"
           size="base"
-          color={status !== "recording" ? "special" : "standard"}
+          variant="outlined"
+          disabled={recorder.disabled}
         />
 
         {status === "recording" && (
@@ -79,52 +79,5 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         )}
       </div>
     </div>
-  )
-}
-
-const Preview = ({
-  stream,
-  videoRef,
-}: {
-  stream: MediaStream | null
-  videoRef: RefObject<HTMLVideoElement>
-}) => {
-  useEffect(() => {
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream
-    }
-  }, [stream])
-
-  if (!stream) {
-    return null
-  }
-  return (
-    <div className={styles.container}>
-      <video ref={videoRef} className={styles.previewer} autoPlay muted />
-    </div>
-  )
-}
-
-const Countdown = ({
-  duration,
-  status,
-}: {
-  duration: VideoRecorderProps["duration"]
-  status: RecordingStatus
-}) => {
-  const { counter, start, reset } = useCountDown(duration)
-
-  useEffect(() => {
-    if (status === "recording") {
-      start()
-    } else {
-      reset()
-    }
-  }, [status])
-
-  return (
-    <Text as="span" size="base">
-      {`${counter}`}
-    </Text>
   )
 }

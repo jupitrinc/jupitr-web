@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Plus } from "lucide-react"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
@@ -26,7 +26,7 @@ const AddVideos = () => {
   const { notification: errorMessage, hideNotification: hideError } =
     useNotification(Boolean(error))
 
-  const handleAddVideo = () => {
+  const handleAddVideo = useCallback(() => {
     if (!videoFile) return
 
     addVideo({
@@ -35,7 +35,11 @@ const AddVideos = () => {
       company_id: user.company_id,
       job_id: company_job.id,
     })
-  }
+  }, [videoFile, user, company_job])
+
+  useEffect(() => {
+    success && hideNotification()
+  }, [success])
 
   return (
     <div className="grid grid-cols-2 gap-5 justify-center">
@@ -55,25 +59,29 @@ const AddVideos = () => {
           </Text>
 
           <VideoRecorder
-            duration={Number(static_data_job.video_duration[0])}
-            recordLabel="Start"
+            duration={Number(static_data_job.video_duration[2])}
+            recordLabel={videoFile ? "Record again" : "Start"}
             onChange={(videoFile) => setVideoFile(videoFile)}
+            disabled={loading}
           />
 
           {videoFile && (
-            <Button
-              label="Add video"
-              size="base"
-              loading={loading}
-              onClick={handleAddVideo}
-            />
+            <div className="flex justify-center">
+              <Button
+                label={loading ? "Saving..." : "Save"}
+                size="base"
+                variant="outlined"
+                loading={loading}
+                onClick={handleAddVideo}
+              />
+            </div>
           )}
         </div>
 
         <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
 
-      <InviteTeam title="Collaborate" />
+      <InviteTeam title="Add team" />
     </div>
   )
 }
