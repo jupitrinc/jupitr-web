@@ -16,18 +16,20 @@ export interface ICompanyJob {
   company_id: string
   title: string
   salary: string
-  status: "open" | "closed" | "draft" | "archived"
+  status: IJobStatus
   location: ILocation
   work_model: string[]
   visa_sponsorship: boolean
-  skills: { id: string; name: string; level: number }[]
-  application_video: { duration: string; description: string }
+  skills: ISkill[]
+  application_video: IApplicationVideo
   company_videos: IJobVideo[]
 
   applications?: IJobApplication[]
   created_at: string
   updated_at?: string
 }
+
+export type IJobStatus = "open" | "closed" | "draft" | "archived"
 
 export enum JobStatusEnum {
   open = "open",
@@ -36,9 +38,14 @@ export enum JobStatusEnum {
   archived = "archived",
 }
 
-interface ILocation {
+export interface ILocation {
   id: string
   name: string
+}
+
+export interface IApplicationVideo {
+  duration: string
+  description: string
 }
 
 export interface IJobVideo {

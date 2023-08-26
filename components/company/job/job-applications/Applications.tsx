@@ -1,4 +1,4 @@
-import { SkillCard } from "components/talent/job/Details"
+import SkillCard from "components/talent/job/job-view/SkillCard"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { useRouter } from "next/router"
 import React from "react"

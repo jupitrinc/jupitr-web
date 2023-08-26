@@ -8,22 +8,23 @@ export interface ITalentJobsContext {
 export type TalentJobsState = {
   data: TalentJobs
   loading: boolean
-  error: boolean
+  error: string
+  success: boolean
 }
 
 export type TalentJobs = ITalentJob[]
 
 export type TalentJobsAction = {
   type:
-    | TalentJobsActionEnum.GET_TALENT_JOBS_BEGIN
-    | TalentJobsActionEnum.GET_TALENT_JOBS_FAILURE
-    | TalentJobsActionEnum.GET_TALENT_JOBS_SUCCESS
+    | TalentJobsActionEnum.GET_JOBS_BEGIN
+    | TalentJobsActionEnum.GET_JOBS_FAILURE
+    | TalentJobsActionEnum.GET_JOBS_SUCCESS
 
-  payload?: TalentJobs
+  payload?: TalentJobs | string
 }
 
 export enum TalentJobsActionEnum {
-  GET_TALENT_JOBS_BEGIN = "GET_TALENT_JOBS_BEGIN",
-  GET_TALENT_JOBS_FAILURE = "GET_TALENT_JOBS_FAILURE",
-  GET_TALENT_JOBS_SUCCESS = "GET_TALENT_JOBS_SUCCESS",
+  GET_JOBS_BEGIN = "GET_JOBS_BEGIN",
+  GET_JOBS_FAILURE = "GET_JOBS_FAILURE",
+  GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS",
 }

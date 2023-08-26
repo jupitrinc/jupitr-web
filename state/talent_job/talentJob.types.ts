@@ -1,5 +1,10 @@
 import { ICompanyProfile } from "state/company_profile/companyProfile.types"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import {
+  IApplicationVideo,
+  IJobVideo,
+  ILocation,
+} from "state/company_job/companyJob.types"
 
 export interface ITalentJobContext {
   state: TalentJobState
@@ -9,44 +14,33 @@ export interface ITalentJobContext {
 export type TalentJobState = {
   data: ITalentJob
   loading: boolean
-  error: boolean
+  error: string
+  success: boolean
 }
 
 export interface ITalentJob {
   id: string
+  company_id: string
   title: string
-  salary: number
-  currency: string
-  location: string
+  status: "open"
+  salary: string
+  location: ILocation
   work_model: string[]
-  interview_steps: string[]
-  videos: {
-    id: string
-    job_id: string
-    company_member_profile: {
-      user_id: string
-      name: string
-      job_title: string
-    }
-
-    video_url: string
-  }[]
-  technical_test: string[]
+  visa_sponsorship?: boolean
+  videos: IJobVideo[]
   skills: ISkill[]
-  application_video: { duration: number; description: string }
-  active: boolean
+  application_video: IApplicationVideo
   company: ICompanyProfile
-
-  // FIXME
-  date_posted: any
+  created_at: string
+  updated_at?: string
 }
 
 export type TalentJobAction = {
-  type: TalentJobActionEnum.SET_TALENT_JOB
+  type: TalentJobActionEnum.SET_JOB
 
   payload?: ITalentJob
 }
 
 export enum TalentJobActionEnum {
-  SET_TALENT_JOB = "SET_TALENT_JOB",
+  SET_JOB = "SET_JOB",
 }

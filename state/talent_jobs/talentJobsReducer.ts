@@ -11,25 +11,27 @@ export const talentJobsReducer = (
 ): TalentJobsState => {
   console.log(action)
   switch (action.type) {
-    case TalentJobsActionEnum.GET_TALENT_JOBS_BEGIN:
+    case TalentJobsActionEnum.GET_JOBS_BEGIN:
       return {
         ...state,
         loading: true,
-        error: false,
+        error: "",
+        success: false,
       }
 
-    case TalentJobsActionEnum.GET_TALENT_JOBS_FAILURE:
+    case TalentJobsActionEnum.GET_JOBS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
+        error: action.payload as string,
       }
 
-    case TalentJobsActionEnum.GET_TALENT_JOBS_SUCCESS:
+    case TalentJobsActionEnum.GET_JOBS_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: "",
+        success: true,
         data: action.payload as TalentJobs,
       }
 
