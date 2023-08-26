@@ -83,6 +83,7 @@ export type CompanyJobAction = {
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_LOCATION
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO
+    | CompanyJobActionEnum.ADD_JOB_VIDEO
     | CompanyJobActionEnum.DELETE_JOB_VIDEO
 
   payload?:
@@ -92,6 +93,7 @@ export type CompanyJobAction = {
     | ICompanyJob["location"]
     | ICompanyJob["skills"]
     | ICompanyJob["application_video"]
+    | IJobVideo
 }
 
 export enum CompanyJobActionEnum {
@@ -112,5 +114,6 @@ export enum CompanyJobActionEnum {
   UPDATE_COMPANY_JOB_SKILLS = "UPDATE_COMPANY_JOB_SKILLS",
   UPDATE_COMPANY_JOB_APPLICATION_VIDEO = "UPDATE_COMPANY_JOB_APPLICATION_VIDEO",
 
+  ADD_JOB_VIDEO = "ADD_JOB_VIDEO",
   DELETE_JOB_VIDEO = "DELETE_JOB_VIDEO",
 }

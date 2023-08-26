@@ -3,6 +3,7 @@ import {
   CompanyJobAction,
   CompanyJobState,
   ICompanyJob,
+  IJobVideo,
 } from "./companyJob.types"
 
 export const companyJobReducer = (
@@ -97,6 +98,17 @@ export const companyJobReducer = (
         data: {
           ...state.data,
           application_video: action.payload as ICompanyJob["application_video"],
+        },
+      }
+
+    case CompanyJobActionEnum.ADD_JOB_VIDEO:
+      const add_job_video_payload = action.payload as IJobVideo
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          company_videos: [...state.data.company_videos, add_job_video_payload],
         },
       }
 

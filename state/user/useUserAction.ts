@@ -23,7 +23,7 @@ export function useUserAction() {
 
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-  const { uploadMedia } = useMediaService()
+  const { uploadImage } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -185,7 +185,7 @@ export function useUserAction() {
       userId
     )}/${fileName}&updated=${Date.now()}`
     const resizedFile = await imageHelper.resize(file)
-    uploadMedia({
+    uploadImage({
       bucketName: StorageBucketsEnum.images,
       file: resizedFile,
       filePath,

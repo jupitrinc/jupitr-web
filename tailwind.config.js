@@ -10,6 +10,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./components/**/**/*.{js,ts,jsx,tsx}",
     "./components/**/**/**/*.{js,ts,jsx,tsx}",
+    "./components/**/**/**/**/*.{js,ts,jsx,tsx}",
     "./ui-library/**/*.{js,ts,jsx,tsx}",
     "./ui-library/**/**/*.{js,ts,jsx,tsx}",
     "./ui-library/**/**/**/*.{js,ts,jsx,tsx}",

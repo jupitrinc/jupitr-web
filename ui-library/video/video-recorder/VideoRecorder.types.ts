@@ -1,5 +1,6 @@
 export interface VideoRecorderProps {
-  duration: 15 | 30 | 45 | 60
+  duration: number
+  recordLabel?: string
+  disabled?: boolean
+  onChange: (videoFile: File | null) => void
 }
-
-export const VIDEO_FILE_NAME = "jupitr-recording"
