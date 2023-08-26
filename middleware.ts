@@ -7,8 +7,8 @@ export async function middleware(req: NextRequest) {
     "/auth/callback",
     "/",
     "/c/signup",
-    "/job",
     "/login/verify",
+    // "/jobs",
   ]
 
   const isRouteAllowed = allowedRoutes.includes(`${pathname}`)
