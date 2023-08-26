@@ -14,6 +14,7 @@ import useCompanyService from "services/company/useCompanyService"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
+import { storageFolderHelper } from "helper/storageFolderHelper"
 
 export function useUserAction() {
   const { clear } = localStorageHelper
@@ -130,7 +131,6 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN,
     })
-
     const { error } = await changeEmailService(email)
     if (error) {
       dispatch({
@@ -178,14 +178,16 @@ export function useUserAction() {
     }
   }
 
-  const updateAvatar = (
-    file: MediaPayload["file"],
-    filePath: MediaPayload["filePath"],
-    userId: string
-  ) => {
+  const updateAvatar = async (file: MediaPayload["file"], userId: string) => {
+    const fileExt = file.name.split(".").pop()
+    const fileName = `${userId}.${fileExt}`
+    const filePath = `${storageFolderHelper.userAvatarFolder(
+      userId
+    )}/${fileName}&updated=${Date.now()}`
+    const resizedFile = await imageHelper.resize(file)
     uploadImage({
       bucketName: StorageBucketsEnum.images,
-      file,
+      file: resizedFile,
       filePath,
     }).then(({ data, error }) => {
       if (data?.path) {

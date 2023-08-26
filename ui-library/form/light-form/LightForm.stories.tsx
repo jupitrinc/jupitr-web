@@ -14,7 +14,7 @@ type Story = StoryObj<typeof LightForm>
 
 export const lightForm: Story = {
   args: {
-    placeHolder: "add a kill",
+    placeholder: "",
     icon: <PlusIcon />,
   },
 }

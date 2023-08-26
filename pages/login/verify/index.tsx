@@ -21,7 +21,7 @@ export const Verify = () => {
             const res = await fetch("/api/login/verifyUser")
             const { user, session: userSession } = await res.json()
             if (user && userSession) {
-              verifyEmailUpdate(user, userSession)
+              changeEmailIfRequested(user, userSession)
               setUser(user)
               redirectUser(user)
             }
@@ -42,11 +42,11 @@ export const Verify = () => {
     }
   }
 
-  const verifyEmailUpdate = (db: IUser, supabase: Session) => {
-    if (!db.email || !supabase.user.email) return
+  const changeEmailIfRequested = (custoDB: IUser, supabase: Session) => {
+    if (!custoDB.email || !supabase.user.email) return
 
-    if (db.email !== supabase.user.email) {
-      updateEmail(db.id, db.email)
+    if (custoDB.email !== supabase.user.email) {
+      updateEmail(supabase.user.id, supabase.user.email)
     }
   }
 
