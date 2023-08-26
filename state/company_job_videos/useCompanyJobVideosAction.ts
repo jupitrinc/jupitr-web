@@ -57,8 +57,12 @@ export function useCompanyJobVideosAction() {
       if (error) {
         dispatch({
           type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-          payload: "You seem to have already added a video",
+          payload: error.message.includes("company_videos_video_url")
+            ? "You have already added a video for this job"
+            : error.message,
         })
+
+        console.log(error)
       } else {
         companyJobDispatch({
           type: CompanyJobActionEnum.ADD_JOB_VIDEO,
