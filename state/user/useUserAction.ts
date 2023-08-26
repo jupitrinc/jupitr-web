@@ -22,7 +22,7 @@ export function useUserAction() {
 
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-  const { uploadMedia } = useMediaService()
+  const { uploadImage } = useMediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -183,7 +183,7 @@ export function useUserAction() {
     filePath: MediaPayload["filePath"],
     userId: string
   ) => {
-    uploadMedia({
+    uploadImage({
       bucketName: StorageBucketsEnum.images,
       file,
       filePath,

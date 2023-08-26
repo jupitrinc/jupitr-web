@@ -5,11 +5,10 @@ export interface StoragePayload {
 export interface MediaPayload extends StoragePayload {
   file: File
 }
-export interface JobMediaPayload {
+export interface UploadVideoPayload {
   file: File
-  company_id: string
-  user_id: string
-  job_id: string
+  folderPath: string
+  fileName: string
 }
 
 export interface DownloadMediaPayload extends StoragePayload {}
@@ -24,3 +23,4 @@ export enum StorageBucketsEnum {
 }
 
 export const STORAGE_DOMAIN = `https://cgbrcxjbovzwarqujqoq.supabase.co/storage/v1/object/public`
+export const VIDEO_CDN_DOMAIN = `https://res.cloudinary.com/dyfg2jhz8/video/upload/f_auto:video,q_auto/v1`

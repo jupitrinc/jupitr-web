@@ -1,13 +1,12 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import {
   DownloadMediaPayload,
-  JobMediaPayload,
   MediaPayload,
+  UploadVideoPayload,
 } from "./media.types"
-import { storageFolderHelper } from "../../helper/storageFolderHelper"
 
 const useMediaService = () => {
-  const uploadMedia = async ({ bucketName, file, filePath }: MediaPayload) => {
+  const uploadImage = async ({ bucketName, file, filePath }: MediaPayload) => {
     const { data, error } = await supabaseClientComponent.storage
       .from(bucketName)
       .upload(filePath, file, {
@@ -16,7 +15,7 @@ const useMediaService = () => {
       })
 
     if (error) {
-      console.error("uploadMedia: ", error)
+      console.error("uploadImage: ", error)
     }
 
     return {
@@ -25,30 +24,13 @@ const useMediaService = () => {
     }
   }
 
-  const uploadJobVideo = async (payload: JobMediaPayload) => {
-    const folderPath =
-      storageFolderHelper.companyJobApplicantsVideoFolder(payload)
-    const newFileName = payload.user_id
-    const formData = new FormData()
-    formData.append("file", payload.file)
-    formData.append("public_id", `${folderPath}/${newFileName}`)
-    const { data, error } = await fetch("/api/jobs-video-upload", {
-      method: "POST",
-      body: formData,
-    }).then((r) => r.json())
-
-    return {
-      data,
-      error,
-    }
-  }
-  const updateMedia = async ({ bucketName, file, filePath }: MediaPayload) => {
+  const updateImage = async ({ bucketName, file, filePath }: MediaPayload) => {
     const { data, error } = await supabaseClientComponent.storage
       .from(bucketName)
       .update(filePath, file, { upsert: true })
 
     if (error) {
-      console.error("updateMedia: ", error)
+      console.error("updateImage: ", error)
     }
 
     return {
@@ -57,7 +39,7 @@ const useMediaService = () => {
     }
   }
 
-  const downloadMedia = async ({
+  const downloadImage = async ({
     bucketName,
     filePath,
   }: DownloadMediaPayload) => {
@@ -68,6 +50,21 @@ const useMediaService = () => {
     return data
   }
 
-  return { uploadMedia, updateMedia, downloadMedia, uploadJobVideo }
+  const uploadVideo = async (payload: UploadVideoPayload) => {
+    const formData = new FormData()
+    formData.append("file", payload.file)
+    formData.append("public_id", `${payload.folderPath}/${payload.fileName}`)
+    const { data, error } = await fetch("/api/jobs-video-upload", {
+      method: "POST",
+      body: formData,
+    }).then((r) => r.json())
+
+    return {
+      data,
+      error,
+    }
+  }
+
+  return { uploadImage, updateImage, downloadImage, uploadVideo }
 }
 export default useMediaService

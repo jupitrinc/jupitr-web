@@ -9,8 +9,8 @@ import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
 import { Button } from "ui-library/button/Button"
 import { Toast } from "ui-library/toast/Toast"
-import { useCompanyVideosState } from "state/company_videos/useCompanyVideosState"
-import { useCompanyVideosAction } from "state/company_videos/useCompanyVideosAction"
+import { useCompanyJobVideosState } from "state/company_job_videos/useCompanyJobVideosState"
+import { useCompanyJobVideosAction } from "state/company_job_videos/useCompanyJobVideosAction"
 import { useUserState } from "state/user/useUserState"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 
@@ -19,8 +19,8 @@ const AddVideos = () => {
   const { company_job } = useCompanyJobState()
 
   const [videoFile, setVideoFile] = useState<File | null>(null)
-  const { loading, error, success } = useCompanyVideosState()
-  const { addVideo } = useCompanyVideosAction()
+  const { loading, error, success } = useCompanyJobVideosState()
+  const { addVideo } = useCompanyJobVideosAction()
 
   const { notification, showNotification, hideNotification } = useNotification()
   const { notification: errorMessage, hideNotification: hideError } =

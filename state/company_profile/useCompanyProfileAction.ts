@@ -13,7 +13,7 @@ import { storageFolderHelper } from "helper/storageFolderHelper"
 export function useCompanyProfileAction() {
   const { dispatch } = useContext(CompanyProfileContext)
   const { getCompanyProfile, updateCompanyProfile } = useCompanyService()
-  const { uploadMedia } = useMediaService()
+  const { uploadImage } = useMediaService()
   const { companyLogoFolder } = storageFolderHelper
 
   const getProfile = async (company_id: string) => {
@@ -42,7 +42,7 @@ export function useCompanyProfileAction() {
     filePath: MediaPayload["filePath"],
     id: string
   ) => {
-    uploadMedia({
+    uploadImage({
       bucketName: StorageBucketsEnum.images,
       file,
       filePath,
