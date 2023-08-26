@@ -1,3 +1,4 @@
 export interface ProgressBarProps {
-  value: number
+  progress: number
+  type?: "standard" | "sticky"
 }

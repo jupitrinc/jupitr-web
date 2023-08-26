@@ -9,7 +9,7 @@ export function useTalentJobAction() {
     if (!job.id) return
 
     dispatch({
-      type: TalentJobActionEnum.SET_TALENT_JOB,
+      type: TalentJobActionEnum.SET_JOB,
       payload: job,
     })
   }

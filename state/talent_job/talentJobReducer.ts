@@ -11,11 +11,11 @@ export const talentJobReducer = (
 ): TalentJobState => {
   console.log(action)
   switch (action.type) {
-    case TalentJobActionEnum.SET_TALENT_JOB:
+    case TalentJobActionEnum.SET_JOB:
       return {
         ...state,
         loading: false,
-        error: false,
+        error: "",
         data: action.payload as ITalentJob,
       }
 

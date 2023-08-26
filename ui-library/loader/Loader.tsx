@@ -9,7 +9,7 @@ export const Loader: React.FC<LoaderProps> = (loader) => {
       aria-hidden="true"
       role="status"
       className={clsx(
-        loader.className,
+        loader.type === "custom" ? loader.className : "h-6 w-6 mx-auto",
         styles.color[loader.color ? loader.color : styles.color.default],
         "animate-spin"
       )}

@@ -1,46 +1,41 @@
 import { useContext } from "react"
 import { TalentJobsActionEnum } from "./talentJobs.types"
 import { TalentJobsContext } from "./TalentJobsContext"
+import useTalentJobService from "services/talent/useTalentJobService"
+import { ITalentJob } from "state/talent_job/talentJob.types"
 
 export function useTalentJobsAction() {
   const { dispatch } = useContext(TalentJobsContext)
+  const { getJobs: getJobsService } = useTalentJobService()
 
-  const getJobs = async (language: string) => {
-    if (!language) return
+  const getJobs = async () => {
+    dispatch({
+      type: TalentJobsActionEnum.GET_JOBS_BEGIN,
+    })
 
-    const catchError = (errorMessage: string) => {
+    const { data, error } = await getJobsService()
+
+    if (error) {
       dispatch({
-        type: TalentJobsActionEnum.GET_TALENT_JOBS_FAILURE,
+        type: TalentJobsActionEnum.GET_JOBS_FAILURE,
+        payload: error.message,
       })
-
-      console.log(errorMessage)
-    }
-
-    try {
+    } else {
       dispatch({
-        type: TalentJobsActionEnum.GET_TALENT_JOBS_BEGIN,
+        type: TalentJobsActionEnum.GET_JOBS_SUCCESS,
+        payload: data as ITalentJob[],
       })
-
-      /* const response = await fetchRepos(language)
-      if (response) {
-        if (!response.ok) {
-          getReposFailed(`No repositories found for the keyword ${language} :(`)
-        } else {
-          const data = await response.json()
-          if (data.items) {
-            dispatch({
-              type: TalentJobsActionEnum.GET_USER_SUCCESS,
-              payload: data.items,
-            })
-          }
-        }
-      } */
-    } catch (error) {
-      catchError(error as string)
     }
+  }
+
+  const clearJobs = async () => {
+    dispatch({
+      type: TalentJobsActionEnum.CLEAR_JOBS,
+    })
   }
 
   return {
     getJobs,
+    clearJobs,
   }
 }

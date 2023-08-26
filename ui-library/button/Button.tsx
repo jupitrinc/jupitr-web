@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = (button) => {
     >
       {button.icon && !button.loading && button.icon}
       {button.loading && (
-        <Loader color={button.color} className={styles.loader} />
+        <Loader color={button.color} className={styles.loader} type="custom" />
       )}
       <span>{button.label}</span>
 

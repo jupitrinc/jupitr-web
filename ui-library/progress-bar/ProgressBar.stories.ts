@@ -13,6 +13,6 @@ type Story = StoryObj<typeof ProgressBar>
 
 export const value: Story = {
   args: {
-    value: 70,
+    progress: 70,
   },
 }

@@ -4,6 +4,7 @@ import { videoPlayerStyles } from "./VideoPlayer.styles"
 import { VideoPlayerProps } from "./VideoPlayer.types"
 import { Button } from "ui-library/button/Button"
 import { Pause, Play } from "lucide-react"
+import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 
 const styles = videoPlayerStyles
 
@@ -44,7 +45,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (video) => {
         <source src={video.src} type="video/mp4" />
       </video>
       <PlayButton playing={player.playing} />
-      <ProgressBar progress={player.progress} />
+      <ProgressBar progress={player.progress} type="sticky" />
     </div>
   )
 }
@@ -62,19 +63,6 @@ const PlayButton = ({ playing }: { playing: boolean }) => {
           playing ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7" />
         }
       />
-    </div>
-  )
-}
-
-const ProgressBar = ({ progress }: { progress: number }) => {
-  return (
-    <div className={styles.progress_bar.container}>
-      <div className={styles.progress_bar.bar}>
-        <div
-          className={styles.progress_bar.progress}
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
     </div>
   )
 }
