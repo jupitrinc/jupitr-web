@@ -24,7 +24,7 @@ export interface ICompanyJob {
   application_video: IApplicationVideo
   company_videos: IJobVideo[]
 
-  applications?: IJobApplication[]
+  applications?: number
   created_at: string
   updated_at?: string
 }

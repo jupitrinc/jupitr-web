@@ -7,12 +7,14 @@ import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 
 const Toolbar = () => {
   const router = useRouter()
+  const { jobId } = router.query
+
   const { company_job } = useCompanyJobState()
   const { deleteJob } = useCompanyJobAction()
 
   const options = useMemo(
     () => [
-      { name: "Preview", onClick: () => alert("") },
+      { name: "Preview", onClick: () => router.push(`/c/jobs/${jobId}/apps`) },
       { name: "Share", onClick: () => alert("") },
       {
         name: "Delete",

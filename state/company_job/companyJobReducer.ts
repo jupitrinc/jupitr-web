@@ -10,7 +10,6 @@ export const companyJobReducer = (
   state: CompanyJobState,
   action: CompanyJobAction
 ): CompanyJobState => {
-  console.log(action)
   switch (action.type) {
     case CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN:
     case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
