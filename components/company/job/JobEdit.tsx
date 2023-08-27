@@ -12,7 +12,6 @@ import Salary from "./job-edit/Salary"
 import WorkModel from "./job-edit/WorkModel"
 import TalentApplication from "./job-edit/TalentApplication"
 import Location from "./job-edit/Location"
-import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 
 export const JobEdit = () => {
   const { user } = useUserState()

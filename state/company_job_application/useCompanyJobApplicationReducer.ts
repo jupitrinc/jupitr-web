@@ -16,6 +16,7 @@ export const useCompanyJobApplicationReducer = (
         ...state,
         loading: true,
         error: "",
+        success: false,
       }
 
     case CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE:
@@ -30,6 +31,7 @@ export const useCompanyJobApplicationReducer = (
         ...state,
         loading: false,
         data: action.payload as ICompanyJobApplication,
+        success: true,
       }
 
     default:

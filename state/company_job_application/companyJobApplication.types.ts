@@ -1,9 +1,5 @@
-import { ICompanyJob, ILocation } from "state/company_job/companyJob.types"
-import {
-  ISkill,
-  ITalentProfile,
-} from "state/talent_profile/talentProfile.types"
-import { IUser } from "state/user/user.types"
+import { ICompanyJob } from "state/company_job/companyJob.types"
+import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export interface ICompanyJobApplicationContext {
   state: CompanyJobApplicationState
@@ -14,27 +10,11 @@ export type CompanyJobApplicationState = {
   data: ICompanyJobApplication
   loading: boolean
   error: string
+  success: boolean
 }
 
-export interface ICompanyJobApplication {
-  id: string
-  company_id: string
-  title: string
-  status: string
-  salary: string
-  location: ILocation
-  work_model: string[]
-  visa_sponsorship: boolean
-  skills: ISkill[]
-  application_video: ApplicationVideo
-  created_at: string
-  updated_at: string
+export interface ICompanyJobApplication extends ICompanyJob {
   applications: IApplication[]
-}
-
-interface ApplicationVideo {
-  duration: string
-  description: string
 }
 
 export interface IApplication {
@@ -46,27 +26,15 @@ export interface IApplication {
   skills: ISkill[]
   created_at: string
   updated_at: string
-  users: IApplicantUser
+  users: IApplicant
 }
 
-interface IApplicantUser extends IUser {
+interface IApplicant {
+  name: string
+  email: string
   talent_profile: {
-    user_id: string
-    updated_at: string
-    skills: ISkill[]
     socials: string[]
-    preferences: string
-    jobs: null
-    searching: boolean
-    id: string
   }
-}
-
-export enum JobStatusEnum {
-  open = "open",
-  closed = "closed",
-  draft = "draft",
-  archived = "archived",
 }
 
 export type CompanyJobApplicationAction = {
@@ -74,7 +42,7 @@ export type CompanyJobApplicationAction = {
     | CompanyJobApplicationActionEnum.GET_APPLICATIONS_BEGIN
     | CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE
     | CompanyJobApplicationActionEnum.GET_APPLICATIONS_SUCCESS
-    | CompanyJobApplicationActionEnum.CLEAR_COMPANY_JOB_APPLICATIONS
+    | CompanyJobApplicationActionEnum.CLEAR_APPLICATIONS
 
   payload?:
     | ICompanyJobApplication
@@ -88,5 +56,5 @@ export enum CompanyJobApplicationActionEnum {
   GET_APPLICATIONS_FAILURE = "GET_APPLICATIONS_FAILURE",
   GET_APPLICATIONS_SUCCESS = "GET_APPLICATIONS_SUCCESS",
 
-  CLEAR_COMPANY_JOB_APPLICATIONS = "CLEAR_COMPANY_JOB_APPLICATIONS",
+  CLEAR_APPLICATIONS = "CLEAR_APPLICATIONS",
 }

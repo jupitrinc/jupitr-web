@@ -18,6 +18,7 @@ export const CompanyJobApplicationContextProvider: React.FC<any> = ({
     data: {} as ICompanyJobApplication,
     loading: false,
     error: "",
+    success: false,
   }
   const [state, dispatch] = useReducer(
     useCompanyJobApplicationReducer,

@@ -2,7 +2,6 @@ import { useContext } from "react"
 import {
   ICompanyJobApplication,
   CompanyJobApplicationActionEnum,
-  JobStatusEnum,
 } from "./companyJobApplication.types"
 import { CompanyJobApplicationContext } from "./CompanyJobApplicationContext"
 import useCompanyJobApplicationService from "services/company/useCompanyJobApplicationService"
@@ -25,22 +24,22 @@ export function useCompanyJobApplicationAction() {
         type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE,
         payload: error.message,
       })
-    } else if (data) {
+    } else {
       dispatch({
         type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_SUCCESS,
-        payload: data as ICompanyJobApplication[],
+        payload: data as ICompanyJobApplication,
       })
     }
   }
 
-  const clearJobApplications = () => {
+  const clearApplications = () => {
     dispatch({
-      type: CompanyJobApplicationActionEnum.CLEAR_COMPANY_JOB_APPLICATIONS,
+      type: CompanyJobApplicationActionEnum.CLEAR_APPLICATIONS,
     })
   }
 
   return {
     getAllApplications,
-    clearJobApplications,
+    clearApplications,
   }
 }

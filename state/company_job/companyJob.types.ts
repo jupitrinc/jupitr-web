@@ -1,5 +1,3 @@
-import { ISkill } from "state/talent_profile/talentProfile.types"
-
 export interface ICompanyJobContext {
   state: CompanyJobState
   dispatch: ({ type }: CompanyJobAction) => void
@@ -23,8 +21,7 @@ export interface ICompanyJob {
   skills: ISkill[]
   application_video: IApplicationVideo
   company_videos: IJobVideo[]
-
-  applications?: number
+  applications: [{ count: number }]
   created_at: string
   updated_at?: string
 }
@@ -59,19 +56,6 @@ export interface IJobVideo {
     users: {
       name: string
     }
-  }
-}
-
-export interface IJobApplication {
-  id: string
-  job_id: string
-  skills: ISkill[]
-  video_url: string
-  talent_profile: {
-    name: string
-    email: string
-    social_links: string[]
-    avatar: string
   }
 }
 

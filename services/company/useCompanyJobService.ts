@@ -35,18 +35,17 @@ const useCompanyJobService = () => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
       .select(
-        "*,  applications(*), company_videos(*, company_member_profile(job_title, users(name)))"
+        "*,  applications(count), company_videos(*, company_member_profile(job_title, users(name)))"
       )
       .eq("id", id)
       .single()
+
     if (error) {
       console.error("get job: ", error)
     }
+
     return {
-      data: {
-        ...data,
-        applications: data.applications.length,
-      },
+      data,
       error,
     }
   }
