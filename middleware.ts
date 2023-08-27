@@ -3,17 +3,11 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const allowedRoutes = [
-    "/auth/callback",
-    "/",
-    "/c/signup",
-    "/login/verify",
-    // "/jobs",
-  ]
+  const allowedRoutes = ["/auth/callback", "/", "/c/signup", "/login/verify"]
 
   const isRouteAllowed = allowedRoutes.includes(`${pathname}`)
-
   const res = NextResponse.next()
+  const parts = pathname.split("/")
 
   // Create a Supabase client configured to use cookies
   const supabase = createMiddlewareClient({ req, res })
@@ -23,7 +17,9 @@ export async function middleware(req: NextRequest) {
   const {
     data: { session },
   } = await supabase.auth.getSession()
-
+  if (parts[1] === "jobs" && parts.length === 3) {
+    return res
+  }
   if (!session && !isRouteAllowed) {
     return NextResponse.redirect(`${new URL(req.url).origin}/`)
   } else {
