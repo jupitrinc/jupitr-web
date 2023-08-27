@@ -5,7 +5,7 @@ const useCompanyJobApplicationService = () => {
     const { data, error } = await supabaseClientComponent
       .from("jobs")
       .select(
-        "*, applications(*, job_id, users(*, id, talent_profile(*, user_id)))"
+        "*, applications(*, job_id, users(id, name, email, talent_profile(user_id ,socials, skills)))"
       )
       .eq("id", job_id)
       .single()

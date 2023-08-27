@@ -14,7 +14,7 @@ const Toolbar = () => {
 
   const options = useMemo(
     () => [
-      { name: "Preview", onClick: () => router.push(`/c/jobs/${jobId}/apps`) },
+      { name: "Preview", onClick: () => alert("") },
       { name: "Share", onClick: () => alert("") },
       {
         name: "Delete",

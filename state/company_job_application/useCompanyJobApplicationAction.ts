@@ -16,24 +16,24 @@ export function useCompanyJobApplicationAction() {
     if (!job_id) return
 
     dispatch({
-      type: CompanyJobApplicationActionEnum.GET_ALL_COMPANY_JOB_APPLICATIONS_BEGIN,
+      type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_BEGIN,
     })
 
     const { data, error } = await getApplicationsService(job_id)
     if (error) {
       dispatch({
-        type: CompanyJobApplicationActionEnum.GET_ALL_COMPANY_JOB_APPLICATIONS_FAILURE,
+        type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE,
         payload: error.message,
       })
     } else if (data) {
       dispatch({
-        type: CompanyJobApplicationActionEnum.GET_ALL_COMPANY_JOB_APPLICATIONS_SUCCESS,
+        type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_SUCCESS,
         payload: data as ICompanyJobApplication[],
       })
     }
   }
 
-  const clearJobApplication = () => {
+  const clearJobApplications = () => {
     dispatch({
       type: CompanyJobApplicationActionEnum.CLEAR_COMPANY_JOB_APPLICATIONS,
     })
@@ -41,6 +41,6 @@ export function useCompanyJobApplicationAction() {
 
   return {
     getAllApplications,
-    clearJobApplication,
+    clearJobApplications,
   }
 }

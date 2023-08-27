@@ -5,7 +5,7 @@ export const useCompanyJobApplicationState = () => {
   const { state } = useContext(CompanyJobApplicationContext)
 
   return {
-    company_job_applications: state.data,
+    company_job_applications: useMemo(() => state.data, [state.data]),
     loading: state.loading,
     error: state.error,
   }

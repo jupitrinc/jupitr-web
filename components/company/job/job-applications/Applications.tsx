@@ -17,14 +17,14 @@ export const Applications = () => {
   const { jobId } = router.query
   const { company_job_applications: jobApplications } =
     useCompanyJobApplicationState()
-  const { getAllApplications, clearJobApplication } =
+  const { getAllApplications, clearJobApplications } =
     useCompanyJobApplicationAction()
 
   useEffect(() => {
     getAllApplications(String(jobId))
 
     return () => {
-      clearJobApplication()
+      clearJobApplications()
     }
   }, [])
 
@@ -34,7 +34,7 @@ export const Applications = () => {
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
+      {/* <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
         <div className="flex flex-col md:flex-row gap-5 items-center">
           <Text as="span" size="xl" align="left">
             {jobApplications.title}
@@ -58,7 +58,7 @@ export const Applications = () => {
         {jobApplications.applications?.map((application) => (
           <ApplicationCard key={application.id} application={application} />
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }
