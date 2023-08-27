@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Text } from "ui-library/text/Text"
 import { useCountDown } from "helper/hooks/useCountdown"
-import { RecordingStatus } from "helper/hooks/useVideoRecorder"
+import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
 import { VideoRecorderProps } from "../VideoRecorder.types"
 
 const Countdown = ({

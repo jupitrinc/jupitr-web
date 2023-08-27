@@ -67,9 +67,12 @@ const InviteTeam = ({ title }: { title: string }) => {
 
           <div className="flex flex-col gap-3">
             {company_members &&
-              company_members.map((member) => (
-                <MemberCard key={member.user_id} member={member} />
-              ))}
+              company_members.map(
+                (member) =>
+                  member.name && (
+                    <MemberCard key={member.user_id} member={member} />
+                  )
+              )}
           </div>
         </div>
       </Modal>

@@ -19,17 +19,23 @@ export function useCompanyJobVideosAction() {
     useCompanyJobVideoService()
 
   const addVideo = async (payload: AddVideoPayload) => {
+    dispatch({
+      type: CompanyJobVideosActionEnum.ADD_VIDEO_BEGIN,
+    })
+
     if (
       !payload.file ||
       !payload.company_id ||
       !payload.job_id ||
       !payload.user_id
-    )
-      return
+    ) {
+      dispatch({
+        type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
+        payload: "Something went wrong, try again",
+      })
 
-    dispatch({
-      type: CompanyJobVideosActionEnum.ADD_VIDEO_BEGIN,
-    })
+      return
+    }
 
     const folderPath = storageFolderHelper.companyJobVideoFolder(payload)
     const fileName = payload.user_id
@@ -61,8 +67,6 @@ export function useCompanyJobVideosAction() {
             ? "You have already added a video for this job"
             : error.message,
         })
-
-        console.log(error)
       } else {
         companyJobDispatch({
           type: CompanyJobActionEnum.ADD_JOB_VIDEO,
