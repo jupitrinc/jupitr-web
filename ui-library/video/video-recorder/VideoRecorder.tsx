@@ -7,12 +7,13 @@ import { VideoRecorderProps } from "./VideoRecorder.types"
 import {
   RecordingStatus,
   useVideoRecorder,
-} from "helper/hooks/useVideoRecorder"
+} from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
 import { useTimeout } from "helper/hooks/useTimeout"
 import Preview from "./video-recorder/Preview"
 import Countdown from "./video-recorder/Countdown"
 
 const styles = videoRecorderStyles
+const default_duration = 30
 
 export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   const {
@@ -66,7 +67,9 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         <Button
           icon={<Video className="h-6 w-6" />}
           onClick={() =>
-            status === "recording" ? stop() : record(recorder.duration)
+            status === "recording"
+              ? stop()
+              : record(recorder.duration ? recorder.duration : default_duration)
           }
           label={recordButtonLabel(status)}
           size="base"
@@ -75,7 +78,10 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         />
 
         {status === "recording" && (
-          <Countdown duration={recorder.duration} status={status} />
+          <Countdown
+            duration={recorder.duration ? recorder.duration : default_duration}
+            status={status}
+          />
         )}
       </div>
     </div>

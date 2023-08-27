@@ -33,6 +33,7 @@ const InviteMember = () => {
       <LightForm
         placeholder="e.g. rafa@company.com"
         value={email}
+        name="invite-member-email"
         onChange={(e) => setEmail(e.target.value)}
         onSubmit={sendInvite}
         icon={<Plus />}

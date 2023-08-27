@@ -5,7 +5,7 @@ import Link from "next/link"
 
 const NoMatches = () => {
   return (
-    <div className="flex flex-col gap-5 items-center absolute top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
+    <div className="flex flex-col gap-5 items-center fixed top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
       <Text as="span">0 jobs found matching your profile</Text>
 
       <Link href="/profile">

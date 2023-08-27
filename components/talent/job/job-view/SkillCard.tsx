@@ -33,10 +33,10 @@ const SkillCard = ({ skill }: { skill: ISkill }) => {
       <ProgressBar progress={skillLevel(skill.level)} />
       <div className="flex justify-between mt-2">
         <Text as="span" size="sm">
-          {static_data_job.skill_levels[skill.level]}
+          {static_data_job.skill_levels[0]}
         </Text>
         <Text as="span" size="sm">
-          {static_data_job.skill_levels[skill.level]}
+          {static_data_job.skill_levels[2]}
         </Text>
       </div>
     </Card>

@@ -8,24 +8,29 @@ import ListCard from "./job-list/ListCard"
 import NoMatches from "./job-list/NoMatches"
 import { Loader } from "ui-library/loader/Loader"
 import { useTalentJobsAction } from "state/talent_jobs/useTalentJobsAction"
+import { useTalentJobState } from "state/talent_job/useTalentJobState"
 
 const JobList = () => {
   const { talent_jobs, loading } = useTalentJobsState()
   const { getJobs, clearJobs } = useTalentJobsAction()
   const { setJob } = useTalentJobAction()
+  const { talent_job } = useTalentJobState()
 
   useEffect(() => {
     if (talent_jobs.length < 1) {
       getJobs()
-    }
-    if (talent_jobs.length) {
-      setJob(talent_jobs[0])
     }
 
     return () => {
       clearJobs()
     }
   }, [])
+
+  useEffect(() => {
+    if (talent_jobs.length && !talent_job.id) {
+      setJob(talent_jobs[0])
+    }
+  }, [talent_jobs])
 
   if (loading) {
     return <Loader />

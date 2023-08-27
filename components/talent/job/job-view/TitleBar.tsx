@@ -3,6 +3,7 @@ import { Text } from "ui-library/text/Text"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import Application from "./Application"
 import { urlHelper } from "helper/urlHelper"
+import { TalentApplicationContextProvider } from "state/talent_application/TalentApplicationContext"
 
 const TitleBar = () => {
   const { talent_job } = useTalentJobState()
@@ -26,7 +27,9 @@ const TitleBar = () => {
           </div>
         </div>
         <div className="w-full sm:w-auto">
-          <Application />
+          <TalentApplicationContextProvider>
+            <Application />
+          </TalentApplicationContextProvider>
         </div>
       </div>
     </>

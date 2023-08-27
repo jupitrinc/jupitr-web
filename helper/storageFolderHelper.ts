@@ -18,7 +18,7 @@ export const storageFolderHelper = {
   }) => {
     return `company/${company_id}/jobs/${job_id}`
   },
-  companyJobApplicantsVideoFolder: ({
+  jobApplicationVideoFolder: ({
     company_id,
     job_id,
   }: {

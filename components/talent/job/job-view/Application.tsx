@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect } from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
@@ -10,32 +10,51 @@ import { static_data_job } from "data/job"
 import { useNotification } from "helper/hooks/useNotification"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
+import { urlHelper } from "helper/urlHelper"
+import { useApplication } from "./application/useApplication"
+import { useTalentApplicationAction } from "state/talent_application/useTalentApplicationAction"
+import { useUserState } from "state/user/useUserState"
+import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
+import { Toast } from "ui-library/toast/Toast"
 
 const Application = () => {
+  const { user } = useUserState()
   const { talent_job } = useTalentJobState()
-  const [step, setStep] = useState<number>(1)
   const { notification, showNotification, hideNotification } = useNotification()
+  const {
+    progress,
+    step,
+    nextStep,
+    prevStep,
+    skills,
+    updateSkill,
+    videoFile,
+    setVideoFile,
+  } = useApplication(talent_job.skills)
 
-  const progress = (step: number) => {
-    switch (step) {
-      case 1:
-        return 50
+  const { addApplication } = useTalentApplicationAction()
+  const { success, error, loading } = useTalentApplicationState()
+  const { notification: errorMessage, hideNotification: hideError } =
+    useNotification(Boolean(error))
 
-      case 2:
-        return 90
+  const submitApplication = useCallback(() => {
+    if (!videoFile) return
 
-      default:
-        return 100
+    const data = {
+      file: videoFile,
+      user_id: user.id,
+      company_id: talent_job.company_id,
+      job_id: talent_job.id,
+      skills: skills,
     }
-  }
 
-  const handleStepBack = () => {
-    setStep(step > 1 ? step - 1 : 1)
-  }
+    addApplication(data)
+  }, [videoFile, user, talent_job])
 
-  const handleNextStep = () => {
-    setStep(step + 1)
-  }
+  useEffect(() => {
+    success && nextStep()
+  }, [success])
+
   return (
     <>
       <Button
@@ -52,7 +71,7 @@ const Application = () => {
           <div className="overflow-y-scroll h-full flex flex-col pb-28">
             <div className="flex flex-row gap-5 items-center">
               <Avatar
-                image_url={talent_job.company.logo}
+                image_url={urlHelper.imageUrl(talent_job.company.logo)}
                 size={10}
                 alt={`${talent_job.company.name} logo`}
               />
@@ -76,12 +95,14 @@ const Application = () => {
                   </Text>
 
                   <div className="flex flex-col flex-wrap gap-5">
-                    {talent_job.skills &&
-                      talent_job.skills.map((skill) => (
+                    {skills &&
+                      skills.map((skill) => (
                         <SkillCard
                           key={skill.id}
                           skill={skill}
                           levels={static_data_job.skill_levels}
+                          updateSkill={(level) => updateSkill(level, skill)}
+                          hideRemove={true}
                         />
                       ))}
                   </div>
@@ -91,14 +112,17 @@ const Application = () => {
               {step === 2 && (
                 <div className="flex flex-col gap-5 mt-10">
                   <Text as="span" size="base" align="left">
-                    {talent_job.application_video.description}
+                    {talent_job.application_video?.description
+                      ? talent_job.application_video?.description
+                      : "Why are you the best person for this job?"}
                   </Text>
 
                   <div className="flex flex-col flex-wrap gap-5">
                     <VideoRecorder
-                      duration={Number(talent_job.application_video.duration)}
-                      onChange={(video) => null}
-                      recordLabel="Start"
+                      duration={Number(talent_job.application_video?.duration)}
+                      onChange={(video) => setVideoFile(video)}
+                      recordLabel={videoFile ? "Record again" : "Start"}
+                      disabled={loading}
                     />
                   </div>
                 </div>
@@ -126,18 +150,22 @@ const Application = () => {
                   label="Back"
                   size="base"
                   variant="text"
-                  onClick={handleStepBack}
+                  onClick={prevStep}
+                  disabled={loading}
                 />
               )}
               <Button
                 label={step === 2 ? "Submit" : "Next"}
                 size="base"
                 variant="outlined"
-                onClick={handleNextStep}
+                onClick={step === 2 ? submitApplication : nextStep}
+                disabled={step === 2 && (!videoFile || skills.length < 1)}
+                loading={loading}
               />
             </div>
           )}
         </div>
+        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
     </>
   )

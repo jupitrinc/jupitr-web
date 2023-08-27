@@ -5,14 +5,19 @@ import { urlHelper } from "helper/urlHelper"
 const Videos = () => {
   const { talent_job } = useTalentJobState()
 
-  if (talent_job.company_videos) {
+  if (talent_job.company_videos.length > 1) {
     return (
-      <div className="flex flex-row">
-        {talent_job.company_videos.map((video, index) => (
-          <div key={video.id} className={`${index === 0 ? "" : "basis-1/3"}`}>
-            <VideoPlayer src={urlHelper.videoUrl(video.video_url) as string} />
-          </div>
-        ))}
+      <div className="flex flex-col gap-5">
+        {talent_job.company_videos.map(
+          (video, index) =>
+            index !== 0 && (
+              <div key={video.id}>
+                <VideoPlayer
+                  src={urlHelper.videoUrl(video.video_url) as string}
+                />
+              </div>
+            )
+        )}
       </div>
     )
   } else {
