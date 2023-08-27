@@ -10,19 +10,17 @@ import { Loader } from "ui-library/loader/Loader"
 import { useTalentJobsAction } from "state/talent_jobs/useTalentJobsAction"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { useUserState } from "../../../state/user/useUserState"
-import { ISkill } from "../../../state/talent_profile/talentProfile.types"
 
 const JobList = () => {
+  const { user } = useUserState()
   const { talent_jobs, loading } = useTalentJobsState()
   const { getJobs, clearJobs } = useTalentJobsAction()
   const { setJob } = useTalentJobAction()
   const { talent_job } = useTalentJobState()
-  const { user } = useUserState()
 
-  const skills = () => user.skills as ISkill[]
   useEffect(() => {
-    if (talent_jobs.length < 1) {
-      getJobs(skills())
+    if (talent_jobs.length < 1 && user.id) {
+      getJobs({ user_id: user.user_id, skills: user.skills })
     }
 
     return () => {

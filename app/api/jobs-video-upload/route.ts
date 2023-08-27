@@ -12,6 +12,7 @@ async function uploadToCloudinary(buffer, public_id) {
       {
         resource_type: "video",
         public_id,
+        invalidate: true,
         eager: {
           quality: "auto:good", // handle video compression
         },
