@@ -25,12 +25,14 @@ export const JobEdit = () => {
       getJob(jobId.toString())
     }
 
-    return () => clearJob()
+    return () => {
+      clearJob()
+    }
   }, [jobId])
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      {/*<PreviewApplications /> */}
+      <PreviewApplications />
 
       <div className="flex flex-col md:flex-row gap-5">
         <Title />

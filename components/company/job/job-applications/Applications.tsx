@@ -1,9 +1,11 @@
 import SkillCard from "components/talent/job/job-view/SkillCard"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { useEffect } from "react"
 import { IJobApplication } from "state/company_job/companyJob.types"
-import { useCompanyJobState } from "state/company_job/useCompanyJobState"
+import { IApplication } from "state/company_job_application/companyJobApplication.types"
+import { useCompanyJobApplicationAction } from "state/company_job_application/useCompanyJobApplicationAction"
+import { useCompanyJobApplicationState } from "state/company_job_application/useCompanyJobApplicationState"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
 import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
@@ -11,11 +13,23 @@ import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 
 export const Applications = () => {
-  const { company_job } = useCompanyJobState()
   const router = useRouter()
+  const { jobId } = router.query
+  const { company_job_applications: jobApplications } =
+    useCompanyJobApplicationState()
+  const { getAllApplications, clearJobApplications } =
+    useCompanyJobApplicationAction()
+
+  useEffect(() => {
+    getAllApplications(String(jobId))
+
+    return () => {
+      clearJobApplications()
+    }
+  }, [])
 
   const viewJob = () => {
-    router.push(`/c/jobs/${company_job.id}`)
+    router.push(`/c/jobs/${jobId}`)
   }
 
   return (
@@ -23,7 +37,7 @@ export const Applications = () => {
       <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
         <div className="flex flex-col md:flex-row gap-5 items-center">
           <Text as="span" size="xl" align="left">
-            {company_job.title}
+            {jobApplications.title}
           </Text>
           <Button
             label="View job"
@@ -33,15 +47,15 @@ export const Applications = () => {
           />
         </div>
 
-        {company_job.applications?.length && (
+        {jobApplications.applications?.length && (
           <Text as="span" size="sm" align="right">
-            {`${company_job.applications?.length} applications`}
+            {`${jobApplications.applications?.length} applications`}
           </Text>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {company_job.applications?.map((application) => (
+        {jobApplications.applications?.map((application) => (
           <ApplicationCard key={application.id} application={application} />
         ))}
       </div>
@@ -49,27 +63,27 @@ export const Applications = () => {
   )
 }
 
-const ApplicationCard = ({ application }: { application: IJobApplication }) => {
+const ApplicationCard = ({ application }: { application: IApplication }) => {
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <div>
           <Text as="span" size="lg">
-            {application.talent_profile.name}
+            {application.users.name}
           </Text>
 
           <div className="flex flex-row gap-1 items-center justify-between">
             <div className="flex flex-col">
               <div className="flex flex-row gap-2 items-center">
                 <Text as="span" size="sm">
-                  {application.talent_profile.email}
+                  {application.users.email}
                 </Text>
-                <CopyClipboard value={application.talent_profile.email} />
+                <CopyClipboard value={application.users.email} />
               </div>
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.talent_profile.social_links.map((link) => (
+              {application.users.talent_profile.socials?.map((link) => (
                 <a
                   key={link}
                   href={link.trim()}
@@ -86,7 +100,7 @@ const ApplicationCard = ({ application }: { application: IJobApplication }) => {
         <VideoPlayer src={application.video_url} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {application.skills.map((skill) => (
+          {application.users.talent_profile.skills?.map((skill) => (
             <SkillCard key={skill.id} skill={skill} />
           ))}
         </div>

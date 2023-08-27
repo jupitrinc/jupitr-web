@@ -11,11 +11,16 @@ export const PreviewApplications = () => {
     e.stopPropagation()
     router.push(`/c/jobs/${company_job.id}/apps`)
   }
+
   return (
     <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
-      {company_job.applications?.length && (
+      {company_job.applications && (
         <Text as="span" size="sm" align="right">
-          {`${company_job.applications?.length} applications`}
+          {`${company_job.applications[0].count} ${
+            company_job.applications[0].count === 1
+              ? "application"
+              : "applications"
+          }`}
         </Text>
       )}
       <Button

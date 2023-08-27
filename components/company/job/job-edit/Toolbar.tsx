@@ -7,6 +7,8 @@ import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 
 const Toolbar = () => {
   const router = useRouter()
+  const { jobId } = router.query
+
   const { company_job } = useCompanyJobState()
   const { deleteJob } = useCompanyJobAction()
 
