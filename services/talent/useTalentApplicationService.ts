@@ -20,9 +20,20 @@ const useTalentApplicationService = () => {
 
     return { data, error }
   }
+  const getApplications = async (user_id: string) => {
+    const { data, error } = await supabaseClientComponent
+      .from(APPLICATIONS_TABLE)
+      .select("*")
+      .eq("user_id", user_id)
+    if (error) {
+      console.error("talent add application: ", error)
+    }
 
+    return { data, error }
+  }
   return {
     addApplication,
+    getApplications,
   }
 }
 export default useTalentApplicationService
