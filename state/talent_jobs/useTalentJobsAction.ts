@@ -4,31 +4,37 @@ import { TalentJobsContext } from "./TalentJobsContext"
 import useTalentJobService from "services/talent/useTalentJobService"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { ISkill } from "../talent_profile/talentProfile.types"
+import useTalentApplicationService from "../../services/talent/useTalentApplicationService"
 
 export function useTalentJobsAction() {
   const { dispatch } = useContext(TalentJobsContext)
   const { getJobs: getJobsService } = useTalentJobService()
-
-  const getJobs = async (skills: ISkill[]) => {
+  const { getApplications } = useTalentApplicationService()
+  const getJobs = async (skills: ISkill[], user_id: string) => {
     dispatch({
       type: TalentJobsActionEnum.GET_JOBS_BEGIN,
     })
     const skillIds = skills.map((skill) => skill.id)
     const { data, error } = await getJobsService()
+    const { data: jobsApplied, error: getApplicationsError } =
+      await getApplications(user_id)
 
-    if (error) {
+    if (error || getApplicationsError) {
       dispatch({
         type: TalentJobsActionEnum.GET_JOBS_FAILURE,
         payload: error.message,
       })
     } else {
-      const filteredJobs = data?.filter((job: ITalentJob) =>
+      const filteredJobsByUserSkills = data?.filter((job: ITalentJob) =>
         job.skills.some((field) => skillIds.includes(field.id))
       )
-
+      const removeJobsUserApplied = filteredJobsByUserSkills?.filter(
+        (job: ITalentJob) =>
+          !jobsApplied?.some((jApplied) => jApplied.job_id === job.id)
+      )
       dispatch({
         type: TalentJobsActionEnum.GET_JOBS_SUCCESS,
-        payload: filteredJobs as ITalentJob[],
+        payload: removeJobsUserApplied as ITalentJob[],
       })
     }
   }
