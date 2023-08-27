@@ -9,16 +9,20 @@ import NoMatches from "./job-list/NoMatches"
 import { Loader } from "ui-library/loader/Loader"
 import { useTalentJobsAction } from "state/talent_jobs/useTalentJobsAction"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
+import { useUserState } from "../../../state/user/useUserState"
+import { ISkill } from "../../../state/talent_profile/talentProfile.types"
 
 const JobList = () => {
   const { talent_jobs, loading } = useTalentJobsState()
   const { getJobs, clearJobs } = useTalentJobsAction()
   const { setJob } = useTalentJobAction()
   const { talent_job } = useTalentJobState()
+  const { user } = useUserState()
 
+  const skills = () => user.skills as ISkill[]
   useEffect(() => {
     if (talent_jobs.length < 1) {
-      getJobs()
+      getJobs(skills())
     }
 
     return () => {
