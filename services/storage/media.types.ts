@@ -22,5 +22,5 @@ export enum StorageBucketsEnum {
   videos = "videos",
 }
 
-export const STORAGE_DOMAIN = `https://cgbrcxjbovzwarqujqoq.supabase.co/storage/v1/object/public`
+export const STORAGE_DOMAIN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public`
 export const VIDEO_CDN_DOMAIN = `https://res.cloudinary.com/dyfg2jhz8/video/upload/f_auto:video,q_auto/v1`
