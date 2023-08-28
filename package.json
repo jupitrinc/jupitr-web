@@ -19,7 +19,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm lint:fix && pnpm build"
+      "pre-commit": "pnpm lint:fix",
+      "pre-push": "pnpm build"
     }
   },
   "dependencies": {
