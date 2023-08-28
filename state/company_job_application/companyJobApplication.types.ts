@@ -13,9 +13,7 @@ export type CompanyJobApplicationState = {
   success: boolean
 }
 
-export interface ICompanyJobApplication extends ICompanyJob {
-  applications: IApplication[]
-}
+export interface ICompanyJobApplication extends ICompanyJob {}
 
 export interface IApplication {
   id: string
