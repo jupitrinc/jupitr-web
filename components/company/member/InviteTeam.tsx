@@ -35,10 +35,11 @@ const InviteTeam = ({ title }: { title: string }) => {
     let data = [] as { image_url?: string; size: number }[]
 
     for (const member of company_members)
-      data = [
-        ...data,
-        { image_url: urlHelper.imageUrl(member.avatar_url), size: 10 },
-      ]
+      if (member.name)
+        data = [
+          ...data,
+          { image_url: urlHelper.imageUrl(member.avatar_url), size: 10 },
+        ]
 
     return data
   }, [company_members])

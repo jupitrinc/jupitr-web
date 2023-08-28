@@ -1,5 +1,4 @@
-import React from "react"
-import { SkillCard } from "components/talent/job/Details"
+import React, { useCallback, useMemo } from "react"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { IApplication } from "state/company_job_application/companyJobApplication.types"
 import { Card } from "ui-library/content/card/Card"
@@ -7,8 +6,13 @@ import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
+import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
 
 const ApplicationCard = ({ application }: { application: IApplication }) => {
+  const socialLink = useCallback((link: string) => {
+    return !link.includes("http") ? `https://${link.trim()}` : link.trim()
+  }, [])
+
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
@@ -31,7 +35,7 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
               {application.users.talent_profile.socials?.map((link) => (
                 <a
                   key={link}
-                  href={link.trim()}
+                  href={socialLink(link)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

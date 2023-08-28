@@ -3,9 +3,12 @@ import { Text } from "ui-library/text/Text"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Card } from "ui-library/content/card/Card"
 import { static_data_job } from "data/job"
-import { ISkill } from "state/talent_profile/talentProfile.types"
 
-const SkillCard = ({ skill }: { skill: ISkill }) => {
+export interface props {
+  skill: { id: string; name: string; level: number }
+}
+
+const SkillCard: React.FC<props> = ({ skill }) => {
   const skillLevel = (level: number) => {
     switch (level) {
       case 1:

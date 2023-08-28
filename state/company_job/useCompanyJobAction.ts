@@ -8,7 +8,6 @@ import { CompanyJobContext } from "./CompanyJobContext"
 import useCompanyJobService from "services/company/useCompanyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
-import useCompanyJobVideoService from "services/company/useCompanyJobVideoService"
 
 export function useCompanyJobAction() {
   const router = useRouter()
@@ -232,6 +231,27 @@ export function useCompanyJobAction() {
     }
   }
 
+  const updateStatus = async ({
+    job_id,
+    status,
+  }: {
+    job_id: string
+    status: string
+  }) => {
+    if (!job_id || !status) return
+
+    const { data, error } = await updateJobService(job_id, {
+      status: status,
+    })
+
+    if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_STATUS,
+        payload: data.status,
+      })
+    }
+  }
+
   const deleteJob = async (job_id: ICompanyJob["id"]) => {
     if (!job_id) return
 
@@ -250,6 +270,7 @@ export function useCompanyJobAction() {
     addJob,
     getJob,
     clearJob,
+    updateStatus,
     updateTitle,
     updateSalary,
     updateWorkModel,

@@ -1,3 +1,5 @@
+import { ISkill } from "state/talent_profile/talentProfile.types"
+
 export interface ICompanyJobContext {
   state: CompanyJobState
   dispatch: ({ type }: CompanyJobAction) => void
@@ -26,10 +28,11 @@ export interface ICompanyJob {
   updated_at?: string
 }
 
-export type IJobStatus = "open" | "closed" | "draft" | "archived"
+export type IJobStatus = "open" | "closed" | "draft" | "archived" | "paused"
 
 export enum JobStatusEnum {
   open = "open",
+  paused = "paused",
   closed = "closed",
   draft = "draft",
   archived = "archived",
@@ -68,6 +71,7 @@ export type CompanyJobAction = {
     | CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE
     | CompanyJobActionEnum.GET_COMPANY_JOB_SUCCESS
     | CompanyJobActionEnum.CLEAR_COMPANY_JOB
+    | CompanyJobActionEnum.UPDATE_COMPANY_JOB_STATUS
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_TITLE
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_SALARY
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_WORK_MODEL
@@ -98,6 +102,7 @@ export enum CompanyJobActionEnum {
 
   CLEAR_COMPANY_JOB = "CLEAR_COMPANY_JOB",
 
+  UPDATE_COMPANY_JOB_STATUS = "UPDATE_COMPANY_JOB_STATUS",
   UPDATE_COMPANY_JOB_TITLE = "UPDATE_COMPANY_JOB_TITLE",
   UPDATE_COMPANY_JOB_SALARY = "UPDATE_COMPANY_JOB_SALARY",
   UPDATE_COMPANY_JOB_WORK_MODEL = "UPDATE_COMPANY_JOB_WORK_MODEL",

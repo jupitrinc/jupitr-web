@@ -57,16 +57,11 @@ const Feedback = () => {
                     👋
                   </span>
                 </Text>
-
-                <Text as="span" size="base">
-                  how can we make <span className="font-medium">jupitr</span>{" "}
-                  better?
-                </Text>
               </div>
 
               <Textarea
                 value={message}
-                placeholder="feedback ..."
+                placeholder="how can we make jupitr better?"
                 onChange={(e) => setMessage(e.target.value)}
                 name="feedback"
                 maxLength={250}
