@@ -14,6 +14,11 @@ export const useCompanyJobsState = () => {
       [state.data]
     ),
 
+    company_jobs_paused: useMemo(
+      () => state.data.filter((job) => job.status === "paused"),
+      [state.data]
+    ),
+
     company_jobs_closed: useMemo(
       () => state.data.filter((job) => job.status === "closed"),
       [state.data]

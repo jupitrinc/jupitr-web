@@ -2,6 +2,7 @@ import React, { memo } from "react"
 import { ICompanyJob } from "state/company_job/companyJob.types"
 import { Text } from "ui-library/text/Text"
 import ListCard from "./Card"
+import Pulse from "ui-library/pulse/Pulse"
 
 const Group = memo(
   ({ title, jobs }: { title: string; jobs: ICompanyJob[] }) => {
@@ -12,9 +13,13 @@ const Group = memo(
           highlight && "bg-white rounded-lg"
         }`}
       >
-        <Text as="h2" size="sm" align="left">
-          {title}
-        </Text>
+        <div className="flex flex-row gap-2 items-center">
+          {highlight && <Pulse />}
+
+          <Text as="h2" size="sm" align="left">
+            {title}
+          </Text>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 overflow-x-auto p-1">
           {jobs.map((job) => (

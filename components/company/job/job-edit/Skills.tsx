@@ -1,6 +1,5 @@
 import { Card } from "ui-library/content/card/Card"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
-import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
@@ -11,6 +10,7 @@ import { useSkillState } from "state/skill/useSkillState"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
 import { Toast } from "ui-library/toast/Toast"
+import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 
 export const Skills = () => {
   const { isEmpty } = stringHelper

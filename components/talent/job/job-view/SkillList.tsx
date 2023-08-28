@@ -1,7 +1,7 @@
 import { Text } from "ui-library/text/Text"
 import { Divider } from "ui-library/content/divider/Divider"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
-import SkillCard from "./SkillCard"
+import SkillCard from "../../../../ui-library/content/card/skill-card-progress-bar/SkillCard"
 
 const SkillList = () => {
   const { talent_job } = useTalentJobState()

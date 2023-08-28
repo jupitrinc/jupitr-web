@@ -9,6 +9,7 @@ const JobList = () => {
   const { getJobs, clearJobs } = useCompanyJobsAction()
   const {
     company_jobs_open,
+    company_jobs_paused,
     company_jobs_closed,
     company_jobs_draft,
     company_jobs,
@@ -31,6 +32,10 @@ const JobList = () => {
 
       {company_jobs_draft.length > 0 && (
         <Group title="Draft" jobs={company_jobs_draft} />
+      )}
+
+      {company_jobs_paused.length > 0 && (
+        <Group title="Paused" jobs={company_jobs_paused} />
       )}
 
       {company_jobs_open.length > 0 && (

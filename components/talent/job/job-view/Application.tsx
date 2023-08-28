@@ -5,7 +5,6 @@ import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { Check } from "lucide-react"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
-import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
 import { static_data_job } from "data/job"
 import { useNotification } from "helper/hooks/useNotification"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
@@ -16,6 +15,7 @@ import { useTalentApplicationAction } from "state/talent_application/useTalentAp
 import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
 import { Toast } from "ui-library/toast/Toast"
+import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 
 const Application = () => {
   const { user } = useUserState()

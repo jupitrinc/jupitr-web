@@ -6,11 +6,11 @@ import { useUserState } from "state/user/useUserState"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
-import { SkillCard } from "ui-library/content/card/skill-card/SkillCard"
 import { static_data_job } from "data/job"
 import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
+import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 
 const Skills = () => {
   const { isEmpty } = stringHelper

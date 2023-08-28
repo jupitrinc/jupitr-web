@@ -46,6 +46,15 @@ export const companyJobReducer = (
         data: {} as ICompanyJob,
       }
 
+    case CompanyJobActionEnum.UPDATE_COMPANY_JOB_STATUS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          status: action.payload as ICompanyJob["status"],
+        },
+      }
+
     case CompanyJobActionEnum.UPDATE_COMPANY_JOB_TITLE:
       return {
         ...state,

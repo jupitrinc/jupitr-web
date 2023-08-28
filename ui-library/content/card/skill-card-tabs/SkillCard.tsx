@@ -12,7 +12,7 @@ export interface props {
   hideRemove?: boolean
 }
 
-export const SkillCard: React.FC<props> = (props) => {
+const SkillCard: React.FC<props> = (props) => {
   return (
     <Card type="static">
       <div className="flex justify-between mb-3">
@@ -39,3 +39,5 @@ export const SkillCard: React.FC<props> = (props) => {
     </Card>
   )
 }
+
+export default SkillCard
