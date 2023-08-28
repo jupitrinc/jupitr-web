@@ -13,7 +13,8 @@ export type CompanyJobApplicationState = {
   success: boolean
 }
 
-export interface ICompanyJobApplication extends ICompanyJob {
+export interface ICompanyJobApplication
+  extends Omit<ICompanyJob, "applications"> {
   applications: IApplication[]
 }
 
