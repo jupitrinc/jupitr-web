@@ -42,8 +42,6 @@ export const companyProfileReducer = (
         },
       }
 
-      console.log(update_logo_state.data)
-
       return update_logo_state
 
     case CompanyProfileActionEnum.UPDATE_NAME:

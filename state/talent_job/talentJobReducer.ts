@@ -9,7 +9,6 @@ export const talentJobReducer = (
   state: TalentJobState,
   action: TalentJobAction
 ): TalentJobState => {
-  console.log(action)
   switch (action.type) {
     case TalentJobActionEnum.SET_JOB:
       return {

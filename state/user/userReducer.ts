@@ -27,8 +27,6 @@ export const userReducer = (
 ): UserState => {
   const { setItem, removeItem } = localStorageHelper
 
-  console.log(action.type)
-
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
     case UserActionEnum.GET_USER_BEGIN:

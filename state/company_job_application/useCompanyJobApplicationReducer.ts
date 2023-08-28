@@ -9,7 +9,6 @@ export const useCompanyJobApplicationReducer = (
   state: CompanyJobApplicationState,
   action: CompanyJobApplicationAction
 ): CompanyJobApplicationState => {
-  // console.log(action)
   switch (action.type) {
     case CompanyJobApplicationActionEnum.GET_APPLICATIONS_BEGIN:
       return {
