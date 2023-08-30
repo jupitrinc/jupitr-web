@@ -43,7 +43,7 @@ const AddVideos = () => {
 
   return (
     <div className="grid grid-cols-2 gap-5 justify-center">
-      <Card type="linked" onClick={showNotification}>
+      <Card type="linked" onClick={showNotification} justifyContent="center">
         <div className="flex flex-col gap-1 justify-center items-center self-center">
           <Plus className="h-5 w-5 text-gray-600" />
           <Text as="span" size="base">
