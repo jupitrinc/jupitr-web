@@ -11,7 +11,9 @@ import {
 import { useTimeout } from "helper/hooks/useTimeout"
 import Preview from "./video-recorder/Preview"
 import Countdown from "./video-recorder/Countdown"
-import { Text } from "ui-library/text/Text"
+import { useNotification } from "helper/hooks/useNotification"
+import { Toast } from "ui-library/toast/Toast"
+import { stringHelper } from "helper/stringHelper"
 
 const styles = videoRecorderStyles
 const default_duration = 30
@@ -19,6 +21,7 @@ const default_duration = 30
 export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   const {
     cameraPermission,
+    error,
     status,
     streamRef,
     videoRef,
@@ -29,6 +32,9 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   } = useVideoRecorder()
 
   const { setRef, clearRef } = useTimeout()
+  const { notification, hideNotification } = useNotification(
+    !stringHelper.isEmpty(error)
+  )
 
   const record = (duration: VideoRecorderProps["duration"]) => {
     startRecording()
@@ -79,7 +85,7 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
             label={recordButtonLabel(status)}
             size="base"
             variant="outlined"
-            disabled={recorder.disabled}
+            disabled={recorder.disabled || !cameraPermission}
           />
 
           {status === "recording" && (
@@ -93,11 +99,7 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         </div>
       )}
 
-      {!cameraPermission && (
-        <Text as="span">
-          Unblock browser camera and microphone and try again
-        </Text>
-      )}
+      <Toast show={notification} onHide={hideNotification} label={error} />
     </div>
   )
 }
