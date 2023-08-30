@@ -35,12 +35,17 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (video) => {
     }
   }
 
+  const onPause = () => {
+    setPlayer({ ...player, playing: false })
+  }
+
   return (
     <div className={styles.container} onClick={togglePlay}>
       <video
         className={styles.player}
         ref={videoRef}
         onTimeUpdate={onTimeUpdate}
+        onPause={onPause}
       >
         <source src={video.src} type="video/mp4" />
       </video>

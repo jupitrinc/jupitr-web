@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 export type RecordingStatus = "recording" | "inactive" | "paused"
 
 export const useVideoRecorder = () => {
-  const [permission, setPermission] = useState<boolean>(false)
+  const [cameraPermission, setCameraPermission] = useState<boolean>(true)
   const [status, setStatus] = useState<RecordingStatus>("inactive")
   const streamRef = useRef<MediaStream | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -27,14 +27,14 @@ export const useVideoRecorder = () => {
         })
         streamRef.current = stream
         setRecorder(new MediaRecorder(stream))
-        setPermission(true)
+        setCameraPermission(true)
       } catch (error) {
         console.error(error.message)
-        setPermission(false)
+        setCameraPermission(false)
       }
     } else {
       console.error("Your browser doesn't support media recording.")
-      setPermission(false)
+      setCameraPermission(false)
     }
   }
 
@@ -86,7 +86,7 @@ export const useVideoRecorder = () => {
   }
 
   return {
-    permission,
+    cameraPermission,
     status,
     streamRef,
     videoRef,
