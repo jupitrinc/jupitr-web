@@ -48,7 +48,7 @@ export const SignIn = () => {
     if (!isEmpty(error)) {
       return error
     } else {
-      return "Sign in using the one-time-password (OTP) sent to your inbox"
+      return "Sign in using the link sent to your inbox"
     }
   }, [error])
 
