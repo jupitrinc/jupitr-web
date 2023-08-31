@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useRouter } from "next/router"
-import { Button } from "ui-library/button/Button"
-import { Text } from "ui-library/text/Text"
 import { useCompanyJobApplicationAction } from "state/company_job_application/useCompanyJobApplicationAction"
 import { useCompanyJobApplicationState } from "state/company_job_application/useCompanyJobApplicationState"
 import ApplicationCard from "./job-applications/ApplicationCard"
@@ -31,32 +29,24 @@ export const JobApplications = () => {
     }
   }, [jobId])
 
-  const viewJob = useCallback(() => {
-    router.push(`/c/jobs/${jobId}`)
-  }, [jobId])
-
   if (loading) return <Loader />
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      <Header viewJob={viewJob} />
+      <Header />
 
-      {!error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {company_job_applications.applications &&
-            company_job_applications.applications.map((application) => (
-              <ApplicationCard key={application.id} application={application} />
-            ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {company_job_applications.applications &&
+          company_job_applications.applications.map((application) => (
+            <ApplicationCard key={application.id} application={application} />
+          ))}
+      </div>
 
-      {error && (
-        <Toast
-          onHide={hideNotification}
-          show={notification}
-          label={"Oops, something went wrong. Try refreshing the page."}
-        />
-      )}
+      <Toast
+        onHide={hideNotification}
+        show={notification}
+        label={"Oops, something went wrong. Try refreshing the page."}
+      />
     </div>
   )
 }
