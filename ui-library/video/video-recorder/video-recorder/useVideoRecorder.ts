@@ -3,7 +3,8 @@ import { useState, useEffect, useRef, useCallback } from "react"
 export type RecordingStatus = "recording" | "inactive" | "paused"
 
 export const useVideoRecorder = () => {
-  const [permission, setPermission] = useState<boolean>(false)
+  const [cameraPermission, setCameraPermission] = useState<boolean>(true)
+  const [error, setError] = useState<string>("")
   const [status, setStatus] = useState<RecordingStatus>("inactive")
   const streamRef = useRef<MediaStream | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -27,14 +28,14 @@ export const useVideoRecorder = () => {
         })
         streamRef.current = stream
         setRecorder(new MediaRecorder(stream))
-        setPermission(true)
+        setCameraPermission(true)
       } catch (error) {
-        console.error(error.message)
-        setPermission(false)
+        setError("Unblock browser camera and microphone and try again")
+        setCameraPermission(false)
       }
     } else {
-      console.error("Your browser doesn't support media recording.")
-      setPermission(false)
+      setError("Your browser doesn't support media recording.")
+      setCameraPermission(false)
     }
   }
 
@@ -51,26 +52,35 @@ export const useVideoRecorder = () => {
 
   const startRecording = async () => {
     if (streamRef.current && recorder) {
-      recorder.start()
-      setStatus("recording")
+      try {
+        recorder.start()
+        setStatus("recording")
 
-      setRecording(null)
-      setVideoFile(null)
+        setRecording(null)
+        setVideoFile(null)
 
-      handleDataAvailable(recorder)
+        handleDataAvailable(recorder)
+      } catch (error) {
+        setError(error.message)
+      }
     }
   }
 
   const stopRecording = async () => {
     if (recorder) {
-      recorder.stop()
-      setStatus("inactive")
+      try {
+        recorder.stop()
+        setStatus("inactive")
+      } catch (error) {
+        setError(error.message)
+      }
     }
   }
 
   const handleDataAvailable = (recorder: MediaRecorder) => {
     recorder.ondataavailable = (event) => {
       if (typeof event.data === "undefined" || event.data.size === 0) return
+
       const chunks = [event.data]
 
       const blob = new Blob(chunks, { type: chunks[0].type })
@@ -86,7 +96,7 @@ export const useVideoRecorder = () => {
   }
 
   return {
-    permission,
+    cameraPermission,
     status,
     streamRef,
     videoRef,
@@ -94,5 +104,6 @@ export const useVideoRecorder = () => {
     stopRecording,
     recording,
     videoFile,
+    error,
   }
 }
