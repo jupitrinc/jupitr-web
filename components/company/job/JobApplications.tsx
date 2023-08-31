@@ -9,6 +9,7 @@ import { Loader } from "ui-library/loader/Loader"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
 import { Toast } from "ui-library/toast/Toast"
+import Header from "./job-applications/Header"
 
 export const JobApplications = () => {
   const router = useRouter()
@@ -34,68 +35,28 @@ export const JobApplications = () => {
     router.push(`/c/jobs/${jobId}`)
   }, [jobId])
 
-  if (loading) {
-    return <Loader />
-  } else if (!error && company_job_applications) {
-    return (
-      <div className="grid grid-cols-1 gap-5">
-        <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
-          <div className="flex flex-col md:flex-row gap-5 items-center">
-            <Text as="span" size="xl" align="left">
-              {company_job_applications.title}
-            </Text>
-            <Button
-              label="View job"
-              variant="outlined"
-              size="xs"
-              onClick={viewJob}
-            />
-          </div>
+  if (loading) return <Loader />
 
-          <Text as="span" size="sm" align="right">
-            {`${company_job_applications.applications?.length} ${
-              company_job_applications.applications?.length === 1
-                ? "application"
-                : "applications"
-            } `}
-          </Text>
-        </div>
+  return (
+    <div className="grid grid-cols-1 gap-5">
+      <Header viewJob={viewJob} />
 
+      {!error && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {company_job_applications.applications &&
             company_job_applications.applications.map((application) => (
               <ApplicationCard key={application.id} application={application} />
             ))}
         </div>
-      </div>
-    )
-  } else {
-    return (
-      <div className="grid grid-cols-1 gap-5">
-        <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
-          <div className="flex flex-col md:flex-row gap-5 items-center">
-            <Text as="span" size="xl" align="left">
-              {company_job_applications.title}
-            </Text>
-            <Button
-              label="View job"
-              variant="outlined"
-              size="xs"
-              onClick={viewJob}
-            />
-          </div>
+      )}
 
-          <Text as="span" size="sm" align="right">
-            {`0 applications`}
-          </Text>
-        </div>
-
+      {error && (
         <Toast
           onHide={hideNotification}
           show={notification}
           label={"There has been an error fetching the notifications."}
         />
-      </div>
-    )
-  }
+      )}
+    </div>
+  )
 }
