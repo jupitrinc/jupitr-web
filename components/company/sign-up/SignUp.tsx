@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -40,6 +40,12 @@ export const SignUp = () => {
   const { notification, hideNotification } = useNotification(
     !isEmpty(error) || validationFailed
   )
+
+  const errorMessage = useMemo(() => {
+    if (error) return error
+    else if (validationFailed) return "Please provide the required information"
+    else return "Oops, something went wrong. Refresh the page and try again"
+  }, [error, validationFailed])
 
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full relative">
@@ -168,13 +174,13 @@ export const SignUp = () => {
           </form>
         </>
       ) : (
-        <Confirmation />
+        !error && <Confirmation />
       )}
 
       <Toast
         show={notification}
         onHide={hideNotification}
-        label={error ? error : "Please provide the required information"}
+        label={errorMessage}
       />
     </div>
   )
