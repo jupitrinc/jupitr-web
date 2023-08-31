@@ -31,6 +31,7 @@ const Application = () => {
     videoFile,
     setVideoFile,
   } = useApplication(talent_job.skills)
+  const { status } = useTalentApplicationState()
 
   const { addApplication } = useTalentApplicationAction()
   const { success, error, loading } = useTalentApplicationState()
@@ -151,7 +152,7 @@ const Application = () => {
                   size="base"
                   variant="text"
                   onClick={prevStep}
-                  disabled={loading}
+                  disabled={loading || status === "recording"}
                 />
               )}
               <Button

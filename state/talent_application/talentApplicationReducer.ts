@@ -32,6 +32,13 @@ export const talentApplicationReducer = (
         success: true,
       }
 
+    case TalentApplicationActionEnum.TOGGLE_STATUS:
+      const toggle_payload = action.payload as TalentApplicationState["status"]
+      return {
+        ...state,
+        status: toggle_payload,
+      }
+
     default:
       return state
   }

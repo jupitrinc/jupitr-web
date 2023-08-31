@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react"
+import { useTalentApplicationAction } from "state/talent_application/useTalentApplicationAction"
 
 export type RecordingStatus = "recording" | "inactive" | "paused"
 
@@ -11,6 +12,8 @@ export const useVideoRecorder = () => {
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null)
   const [recording, setRecording] = useState<string | null>(null)
   const [videoFile, setVideoFile] = useState<File | null>(null)
+
+  const { toggleStatus } = useTalentApplicationAction()
 
   useEffect(() => {
     getStream()
@@ -55,6 +58,7 @@ export const useVideoRecorder = () => {
       try {
         recorder.start()
         setStatus("recording")
+        toggleStatus("recording")
 
         setRecording(null)
         setVideoFile(null)
@@ -71,6 +75,7 @@ export const useVideoRecorder = () => {
       try {
         recorder.stop()
         setStatus("inactive")
+        toggleStatus("inactive")
       } catch (error) {
         setError(error.message)
       }
