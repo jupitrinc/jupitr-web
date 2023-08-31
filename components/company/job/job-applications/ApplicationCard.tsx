@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback } from "react"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { IApplication } from "state/company_job_application/companyJobApplication.types"
 import { Card } from "ui-library/content/card/Card"
