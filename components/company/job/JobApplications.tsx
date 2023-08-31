@@ -54,7 +54,7 @@ export const JobApplications = () => {
         <Toast
           onHide={hideNotification}
           show={notification}
-          label={"There has been an error fetching the notifications."}
+          label={"Oops, something went wrong. Try refreshing the page."}
         />
       )}
     </div>
