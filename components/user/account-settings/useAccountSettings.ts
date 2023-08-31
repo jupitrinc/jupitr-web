@@ -18,7 +18,7 @@ export const useAccountSettings = () => {
 
   const settings = [
     {
-      name: "Email address",
+      name: user.email,
       button_label: "Change",
       onClick: () => {
         setActiveSetting("change_email")
