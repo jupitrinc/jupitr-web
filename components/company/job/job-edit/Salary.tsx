@@ -37,7 +37,7 @@ export const Salary = () => {
       <Label value="Salary" htmlFor="" />
 
       {editing && (
-        <div className="relative">
+        <form className="relative" onSubmit={update}>
           <NumberInput
             value={Number(value)}
             onChange={onChange}
@@ -52,7 +52,7 @@ export const Salary = () => {
               onClick={update}
             />
           </div>
-        </div>
+        </form>
       )}
 
       {!editing && (
