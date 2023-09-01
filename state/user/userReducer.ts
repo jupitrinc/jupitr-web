@@ -136,7 +136,7 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
+        error: "Account deleted",
         data: {} as ISuperUser,
       }
 
