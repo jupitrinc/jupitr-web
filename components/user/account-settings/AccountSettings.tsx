@@ -25,7 +25,7 @@ const AccountSettings = () => {
   const [emailValidationError, setEmailValidationError] = useState("")
 
   const onEmailChange = () => {
-    if (!email.trim() || emailHelper.isEmailValid(email)) {
+    if (!email.trim() || !emailHelper.isEmailValid(email)) {
       setEmailValidationError(
         "Email is not valid. Please, provide a valid email."
       )

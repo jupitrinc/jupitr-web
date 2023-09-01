@@ -17,7 +17,7 @@ const InviteMember = () => {
   const sendInvite = async (e) => {
     e.preventDefault()
 
-    if (!user.company_id || !email.trim() || emailHelper.isEmailValid(email))
+    if (!user.company_id || !email.trim() || !emailHelper.isEmailValid(email))
       return
 
     await addMember({
