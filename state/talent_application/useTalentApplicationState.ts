@@ -8,6 +8,5 @@ export const useTalentApplicationState = () => {
     loading: state.loading,
     error: state.error,
     success: state.success,
-    status: state.status,
   }
 }

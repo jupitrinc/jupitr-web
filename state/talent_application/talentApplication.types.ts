@@ -9,7 +9,6 @@ export type TalentApplicationState = {
   loading: boolean
   error: string
   success: boolean
-  status: string
 }
 
 export interface ITalentApplication {
@@ -25,7 +24,6 @@ export type TalentApplicationAction = {
     | TalentApplicationActionEnum.ADD_APPLICATION_BEGIN
     | TalentApplicationActionEnum.ADD_APPLICATION_FAILURE
     | TalentApplicationActionEnum.ADD_APPLICATION_SUCCESS
-    | TalentApplicationActionEnum.TOGGLE_STATUS
 
   payload?: string
 }
@@ -34,7 +32,6 @@ export enum TalentApplicationActionEnum {
   ADD_APPLICATION_BEGIN = "ADD_APPLICATION_BEGIN",
   ADD_APPLICATION_FAILURE = "ADD_APPLICATION_FAILURE",
   ADD_APPLICATION_SUCCESS = "ADD_APPLICATION_SUCCESS",
-  TOGGLE_STATUS = "TOGGLE_STATUS",
 }
 
 export interface AddApplicationPayload {

@@ -14,13 +14,6 @@ export function useTalentApplicationAction() {
   const { addApplication: addApplicationService } =
     useTalentJobApplicationService()
 
-  const toggleStatus = (value: string) => {
-    dispatch({
-      type: TalentApplicationActionEnum.TOGGLE_STATUS,
-      payload: value,
-    })
-  }
-
   const addApplication = async (payload: AddApplicationPayload) => {
     dispatch({
       type: TalentApplicationActionEnum.ADD_APPLICATION_BEGIN,
@@ -82,6 +75,5 @@ export function useTalentApplicationAction() {
 
   return {
     addApplication,
-    toggleStatus,
   }
 }

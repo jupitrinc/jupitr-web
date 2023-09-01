@@ -16,7 +16,6 @@ export const TalentApplicationContextProvider: React.FC<any> = ({
     loading: false,
     error: "",
     success: false,
-    status: "inactive",
   }
   const [state, dispatch] = useReducer(talentApplicationReducer, initialState)
 

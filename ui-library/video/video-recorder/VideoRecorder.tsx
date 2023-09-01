@@ -75,13 +75,14 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         <div className={styles.toolbar}>
           <Button
             icon={<Video className="h-6 w-6" />}
-            onClick={() =>
+            onClick={() => {
               status === "recording"
                 ? stop()
                 : record(
                     recorder.duration ? recorder.duration : default_duration
                   )
-            }
+              if (recorder.toggleIsRecording) recorder.toggleIsRecording()
+            }}
             label={recordButtonLabel(status)}
             size="base"
             variant="outlined"

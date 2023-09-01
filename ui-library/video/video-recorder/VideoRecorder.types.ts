@@ -3,4 +3,5 @@ export interface VideoRecorderProps {
   recordLabel?: string
   disabled?: boolean
   onChange: (videoFile: File | null) => void
+  toggleIsRecording?: () => void
 }
