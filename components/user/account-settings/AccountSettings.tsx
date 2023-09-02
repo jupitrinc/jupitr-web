@@ -12,22 +12,37 @@ import { useUserState } from "state/user/useUserState"
 import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
+import { emailHelper } from "helper/emailHelper"
 
 const AccountSettings = () => {
   const { user, error, loading } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
-  const { notification, hideNotification } = useNotification(
+  const { notification, showNotification, hideNotification } = useNotification(
     !stringHelper.isEmpty(error)
   )
   const [toggleEmailModal, setToggleEmailModal] = useState(false)
+  const [emailValidationError, setEmailValidationError] = useState("")
 
   const onEmailChange = () => {
-    if (!email.trim()) return
+    if (emailHasErrors()) {
+      showNotification()
+    } else {
+      settingModal[activeSetting].onConfirm(email)
+      setToggleEmailModal(true)
+      setEmail("")
+    }
+  }
 
-    settingModal[activeSetting].onConfirm(email)
-    setToggleEmailModal(true)
-    setEmail("")
+  const emailHasErrors = () => {
+    if (!email.trim() || !emailHelper.isEmailValid(email)) {
+      setEmailValidationError(
+        "Email is not valid. Please, provide a valid email."
+      )
+      return true
+    } else {
+      return false
+    }
   }
 
   const onClose = () => {
@@ -138,7 +153,7 @@ const AccountSettings = () => {
             <Toast
               show={notification}
               onHide={hideNotification}
-              label={error}
+              label={emailValidationError ? emailValidationError : error}
             />
           </Modal>
         </div>
