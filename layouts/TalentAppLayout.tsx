@@ -1,10 +1,12 @@
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
-import { usePersistedUser } from "helper/hooks/usePersistedUser"
+import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
+import Loading from "./components/Loading"
 
 export const TalentAppLayout = ({
   children,
@@ -14,7 +16,10 @@ export const TalentAppLayout = ({
   const { user } = useUserState()
   usePersistedUser()
 
-  if (user.account_type === AccountTypeEnum.talent) {
+  const router = useRouter()
+  const { jobId } = router.query
+
+  if (user.account_type === AccountTypeEnum.talent || jobId) {
     return (
       <>
         <Head>
@@ -53,9 +58,7 @@ export const TalentAppLayout = ({
     )
   } else {
     return (
-      <main className="my-10">
-        <PageNotFound />
-      </main>
+      <main className="my-10">{!user.id ? <Loading /> : <PageNotFound />}</main>
     )
   }
 }

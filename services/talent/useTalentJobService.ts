@@ -19,6 +19,7 @@ const useTalentJobService = () => {
         "*, company(name, logo, website), company_videos(*, company_member_profile(job_title, users(name)))"
       )
       .eq("status", "open")
+      .not("company_id", "is", null)
 
     if (error) {
       console.error("get talent jobs: ", error)
@@ -44,7 +45,25 @@ const useTalentJobService = () => {
     }
   }
 
-  return { getJobs }
+  const getJob = async (jobId: string) => {
+    const { data, error } = await supabaseClientComponent
+      .from(JOBS_TABLE)
+      .select(
+        "*, company(name, logo, website), company_videos(*, company_member_profile(job_title, users(name)))"
+      )
+      .eq("id", jobId)
+      .eq("status", "open")
+      .not("company_id", "is", null)
+      .single()
+
+    if (error) {
+      console.error("get job: ", error)
+    }
+
+    return { data, error }
+  }
+
+  return { getJobs, getJob }
 }
 
 export default useTalentJobService

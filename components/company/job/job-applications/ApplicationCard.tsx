@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { IApplication } from "state/company_job_application/companyJobApplication.types"
 import { Card } from "ui-library/content/card/Card"
@@ -9,10 +9,6 @@ import { urlHelper } from "helper/urlHelper"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
 
 const ApplicationCard = ({ application }: { application: IApplication }) => {
-  const socialLink = useCallback((link: string) => {
-    return !link.includes("http") ? `https://${link.trim()}` : link.trim()
-  }, [])
-
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
@@ -35,7 +31,7 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
               {application.users.talent_profile.socials?.map((link) => (
                 <a
                   key={link}
-                  href={socialLink(link)}
+                  href={urlHelper.websiteUrl(link)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

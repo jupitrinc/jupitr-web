@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
-import { WebsiteLayout } from "layouts/WebsiteLayout"
-import Loading from "layouts/components/Loader"
+import Loading from "layouts/components/Loading"
 import { IUser, AccountTypeEnum } from "state/user/user.types"
 import { useUserAction } from "state/user/useUserAction"
 import { useRouter } from "next/router"
