@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react"
-import { useTalentApplicationAction } from "state/talent_application/useTalentApplicationAction"
 
 export type RecordingStatus = "recording" | "inactive" | "paused"
 

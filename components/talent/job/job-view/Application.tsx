@@ -16,7 +16,7 @@ import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
 import { Toast } from "ui-library/toast/Toast"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
-import { useVideoRecorder } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
+import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
 
 const Application = () => {
   const { user } = useUserState()
@@ -33,10 +33,8 @@ const Application = () => {
     setVideoFile,
   } = useApplication(talent_job.skills)
 
-  const [isRecording, setIsRecording] = useState(false)
-  const toggleIsRecording = () => {
-    setIsRecording((prev) => !prev)
-  }
+  const [recordingStatus, setRecordingStatus] =
+    useState<RecordingStatus>("inactive")
 
   const { addApplication } = useTalentApplicationAction()
   const { success, error, loading } = useTalentApplicationState()
@@ -129,7 +127,9 @@ const Application = () => {
                       onChange={(video) => setVideoFile(video)}
                       recordLabel={videoFile ? "Record again" : "Start"}
                       disabled={loading}
-                      toggleIsRecording={toggleIsRecording}
+                      getRecordingStatus={(status) =>
+                        setRecordingStatus(status)
+                      }
                     />
                   </div>
                 </div>
@@ -158,7 +158,7 @@ const Application = () => {
                   size="base"
                   variant="text"
                   onClick={prevStep}
-                  disabled={loading || isRecording}
+                  disabled={loading || recordingStatus === "recording"}
                 />
               )}
               <Button
