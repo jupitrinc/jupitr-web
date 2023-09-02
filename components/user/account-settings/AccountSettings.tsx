@@ -112,6 +112,7 @@ const AccountSettings = () => {
                       label={settingModal[activeSetting].confirm_button_label}
                       color={settingModal[activeSetting].confirm_button_variant}
                       onClick={settingModal[activeSetting].onConfirm}
+                      loading={loading}
                     />
                   </div>
                 )}
