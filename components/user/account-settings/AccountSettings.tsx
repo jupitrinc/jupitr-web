@@ -25,15 +25,23 @@ const AccountSettings = () => {
   const [emailValidationError, setEmailValidationError] = useState("")
 
   const onEmailChange = () => {
-    if (!email.trim() || !emailHelper.isEmailValid(email)) {
-      setEmailValidationError(
-        "Email is not valid. Please, provide a valid email."
-      )
+    if (emailHasErrors()) {
       showNotification()
     } else {
       settingModal[activeSetting].onConfirm(email)
       setToggleEmailModal(true)
       setEmail("")
+    }
+  }
+
+  const emailHasErrors = () => {
+    if (!email.trim() || !emailHelper.isEmailValid(email)) {
+      setEmailValidationError(
+        "Email is not valid. Please, provide a valid email."
+      )
+      return true
+    } else {
+      return false
     }
   }
 
