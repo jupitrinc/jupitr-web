@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
@@ -16,6 +16,7 @@ import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
 import { Toast } from "ui-library/toast/Toast"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
+import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
 
 const Application = () => {
   const { user } = useUserState()
@@ -31,6 +32,9 @@ const Application = () => {
     videoFile,
     setVideoFile,
   } = useApplication(talent_job.skills)
+
+  const [recordingStatus, setRecordingStatus] =
+    useState<RecordingStatus>("inactive")
 
   const { addApplication } = useTalentApplicationAction()
   const { success, error, loading } = useTalentApplicationState()
@@ -123,6 +127,9 @@ const Application = () => {
                       onChange={(video) => setVideoFile(video)}
                       recordLabel={videoFile ? "Record again" : "Start"}
                       disabled={loading}
+                      getRecordingStatus={(status) =>
+                        setRecordingStatus(status)
+                      }
                     />
                   </div>
                 </div>
@@ -151,7 +158,7 @@ const Application = () => {
                   size="base"
                   variant="text"
                   onClick={prevStep}
-                  disabled={loading}
+                  disabled={loading || recordingStatus === "recording"}
                 />
               )}
               <Button
