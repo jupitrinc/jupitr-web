@@ -1,17 +1,34 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
-import { Loader } from "lucide-react"
+import { useRouter } from "next/router"
+import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import SkillList from "./job-view/SkillList"
 import Videos from "./job-view/Videos"
 import TitleBar from "./job-view/TitleBar"
 import Details from "./job-view/Details"
 import CoverVideo from "./job-view/videos/CoverVideo"
+import Loading from "layouts/components/Loading"
+import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
 
 const JobView = () => {
-  const { talent_job, loading } = useTalentJobState()
+  const router = useRouter()
+  const { jobId } = router.query
+
+  const { talent_job, loading, error } = useTalentJobState()
+  const { getJob, clearJob } = useTalentJobAction()
+
+  useEffect(() => {
+    if (jobId && !talent_job.id) {
+      getJob(String(jobId))
+    }
+
+    return () => {
+      clearJob()
+    }
+  }, [jobId])
 
   if (loading) {
-    return <Loader />
+    return <Loading />
   } else if (talent_job.id) {
     return (
       <div className="flex flex-col gap-10 flex-wrap">
@@ -25,8 +42,14 @@ const JobView = () => {
         <Videos />
       </div>
     )
-  } else {
-    return null
+  } else if (error) {
+    return (
+      <NoMatchFound
+        message="Job no longer available"
+        link="/jobs"
+        label="Find similar jobs"
+      />
+    )
   }
 }
 

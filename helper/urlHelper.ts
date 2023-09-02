@@ -20,4 +20,7 @@ export const urlHelper = {
 
     return `${VIDEO_CDN_DOMAIN}/${video_name}`
   },
+  websiteUrl: (url: string) => {
+    return !url.includes("http") ? `https://${url.trim()}` : url.trim()
+  },
 }

@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
-import { usePersistedUser } from "helper/hooks/usePersistedUser"
+import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 
 export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
   usePersistedUser()

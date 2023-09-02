@@ -5,11 +5,11 @@ import { ITalentJob } from "state/talent_job/talentJob.types"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import { Divider } from "ui-library/content/divider/Divider"
 import ListCard from "./job-list/ListCard"
-import NoMatches from "./job-list/NoMatches"
 import { Loader } from "ui-library/loader/Loader"
 import { useTalentJobsAction } from "state/talent_jobs/useTalentJobsAction"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { useUserState } from "../../../state/user/useUserState"
+import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
 
 const JobList = () => {
   const { user } = useUserState()
@@ -29,14 +29,14 @@ const JobList = () => {
   }, [])
 
   useEffect(() => {
-    if (talent_jobs.length && !talent_job.id) {
+    if (talent_jobs.length && !talent_job.id && user.name) {
       setJob(talent_jobs[0])
     }
-  }, [talent_jobs])
+  }, [talent_jobs, user])
 
   if (loading) {
     return <Loader />
-  } else if (talent_jobs.length) {
+  } else if (talent_jobs.length && user.name) {
     return (
       <div className="flex flex-col bg-white rounded-lg h-screen">
         <div className="grid grid-cols-3 gap-5 items-center p-5">
@@ -54,7 +54,15 @@ const JobList = () => {
       </div>
     )
   } else {
-    return <NoMatches />
+    return (
+      <div className="flex flex-col gap-10 items-center fixed top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
+        <NoMatchFound
+          message="0 jobs found matching your profile"
+          label="Update profile"
+          link="/profile"
+        />
+      </div>
+    )
   }
 }
 

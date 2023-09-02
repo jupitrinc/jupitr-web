@@ -24,6 +24,7 @@ const UserName = () => {
       onBlur={update}
       light={true}
       maxLength={50}
+      invalid={!value}
     />
   )
 }

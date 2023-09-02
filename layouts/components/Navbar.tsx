@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useUserState } from "state/user/useUserState"
@@ -109,11 +109,20 @@ const CompanyMenu = () => {
 }
 
 const PublicMenu = () => {
+  const router = useRouter()
+  const { jobId } = router.query
+
   return (
     <div className="flex gap-5">
-      <Link href="/c/signup">
-        <Button label="Post a job" variant="contained" />
-      </Link>
+      {jobId ? (
+        <Link href="/">
+          <Button label="Sign in" variant="contained" />
+        </Link>
+      ) : (
+        <Link href="/c/signup">
+          <Button label="Post a job" variant="contained" />
+        </Link>
+      )}
     </div>
   )
 }

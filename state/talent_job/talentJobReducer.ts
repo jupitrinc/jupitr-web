@@ -18,6 +18,38 @@ export const talentJobReducer = (
         data: action.payload as ITalentJob,
       }
 
+    case TalentJobActionEnum.GET_JOB_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: "",
+        data: {} as ITalentJob,
+        success: false,
+      }
+
+    case TalentJobActionEnum.GET_JOB_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload as string,
+      }
+
+    case TalentJobActionEnum.GET_JOB_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: "",
+        data: action.payload as ITalentJob,
+      }
+
+    case TalentJobActionEnum.CLEAR_JOB:
+      return {
+        ...state,
+        loading: false,
+        error: "",
+        data: {} as ITalentJob,
+      }
+
     default:
       return state
   }
