@@ -55,6 +55,10 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
     recorder.onChange(videoFile)
   }, [videoFile])
 
+  useEffect(() => {
+    if (recorder.getRecordingStatus) recorder.getRecordingStatus(status)
+  }, [status])
+
   const recordButtonLabel = (status: RecordingStatus) => {
     return status === "recording"
       ? "Stop"
