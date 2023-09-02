@@ -55,11 +55,13 @@ const JobList = () => {
     )
   } else {
     return (
-      <NoMatchFound
-        message="0 jobs found matching your profile"
-        label="Update profile"
-        link="/profile"
-      />
+      <div className="flex flex-col gap-10 items-center fixed top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
+        <NoMatchFound
+          message="0 jobs found matching your profile"
+          label="Update profile"
+          link="/profile"
+        />
+      </div>
     )
   }
 }

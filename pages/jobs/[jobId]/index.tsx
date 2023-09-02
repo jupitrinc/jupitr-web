@@ -6,7 +6,7 @@ export default function TalentPublicJob() {
   return (
     <TalentAppLayout>
       <TalentJobContextProvider>
-        <div className="flex flex-col gap-5 max-w-md">
+        <div className="flex flex-col gap-5 max-w-2xl mx-auto">
           <div className="w-full">
             <JobView />
           </div>

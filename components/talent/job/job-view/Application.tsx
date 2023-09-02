@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from "react"
+import { useRouter } from "next/router"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
@@ -16,8 +17,10 @@ import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
 import { Toast } from "ui-library/toast/Toast"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
+import UserName from "components/user/profile/UserName"
 
 const Application = () => {
+  const router = useRouter()
   const { user } = useUserState()
   const { talent_job } = useTalentJobState()
   const { notification, showNotification, hideNotification } = useNotification()
@@ -55,6 +58,11 @@ const Application = () => {
     success && nextStep()
   }, [success])
 
+  const startApplication = () => {
+    if (user.id) showNotification()
+    else router.push("/")
+  }
+
   return (
     <>
       <Button
@@ -63,7 +71,7 @@ const Application = () => {
         variant="contained"
         label="Apply"
         full_width
-        onClick={showNotification}
+        onClick={startApplication}
       />
 
       <Modal open={notification} onClose={hideNotification}>
@@ -90,6 +98,12 @@ const Application = () => {
 
               {step === 1 && (
                 <div className="flex flex-col gap-5 mt-10">
+                  {!user.name && (
+                    <div className="mb-10">
+                      <UserName />
+                    </div>
+                  )}
+
                   <Text as="span" size="base" align="left">
                     Rate your skills
                   </Text>
@@ -159,7 +173,10 @@ const Application = () => {
                 size="base"
                 variant="outlined"
                 onClick={step === 2 ? submitApplication : nextStep}
-                disabled={step === 2 && (!videoFile || skills.length < 1)}
+                disabled={
+                  (step === 2 && (!videoFile || skills.length < 1)) ||
+                  !user.name
+                }
                 loading={loading}
               />
             </div>

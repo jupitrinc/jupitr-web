@@ -1,14 +1,13 @@
 import React, { useEffect } from "react"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
+import { useRouter } from "next/router"
+import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import SkillList from "./job-view/SkillList"
 import Videos from "./job-view/Videos"
 import TitleBar from "./job-view/TitleBar"
 import Details from "./job-view/Details"
 import CoverVideo from "./job-view/videos/CoverVideo"
 import Loading from "layouts/components/Loading"
-import { useRouter } from "next/router"
-import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
-import { error } from "console"
 import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
 
 const JobView = () => {
@@ -28,8 +27,6 @@ const JobView = () => {
     }
   }, [jobId])
 
-  console.log(talent_job)
-
   if (loading) {
     return <Loading />
   } else if (talent_job.id) {
@@ -46,7 +43,13 @@ const JobView = () => {
       </div>
     )
   } else if (error) {
-    return <NoMatchFound message="Job not found" link="/" label="Sign in" />
+    return (
+      <NoMatchFound
+        message="Job no longer available"
+        link="/jobs"
+        label="Find similar jobs"
+      />
+    )
   }
 }
 
