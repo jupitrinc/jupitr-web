@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import { Check } from "lucide-react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import { Check } from "lucide-react"
+import { Toast } from "ui-library/toast/Toast"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
 import { useNotification } from "helper/hooks/useNotification"
@@ -15,10 +16,10 @@ import { useApplication } from "./application/useApplication"
 import { useTalentApplicationAction } from "state/talent_application/useTalentApplicationAction"
 import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
-import { Toast } from "ui-library/toast/Toast"
+import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
+import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
-import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
 
 const Application = () => {
   const router = useRouter()
@@ -63,20 +64,23 @@ const Application = () => {
   }, [success])
 
   const startApplication = () => {
-    if (user.id) showNotification()
+    if (user.id && user.account_type === AccountTypeEnum.talent)
+      showNotification()
     else router.push("/")
   }
 
   return (
     <>
-      <Button
-        size="lg"
-        color="special"
-        variant="contained"
-        label="Apply"
-        full_width
-        onClick={startApplication}
-      />
+      {user.account_type !== AccountTypeEnum.company && (
+        <Button
+          size="lg"
+          color="special"
+          variant="contained"
+          label="Apply"
+          full_width
+          onClick={startApplication}
+        />
+      )}
 
       <Modal open={notification} onClose={hideNotification}>
         <div className="h-[40rem]">
