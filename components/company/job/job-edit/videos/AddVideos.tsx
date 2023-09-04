@@ -16,7 +16,7 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 
 const AddVideos = () => {
   const { user } = useUserState()
-  const { company_job } = useCompanyJobState()
+  const { company_job, videos } = useCompanyJobState()
 
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const { loading, error, success } = useCompanyJobVideosState()
@@ -43,14 +43,16 @@ const AddVideos = () => {
 
   return (
     <div className="grid grid-cols-2 gap-5 justify-center">
-      <Card type="linked" onClick={showNotification} justifyContent="center">
-        <div className="flex flex-col gap-1 justify-center items-center self-center">
-          <Plus className="h-5 w-5 text-gray-600" />
-          <Text as="span" size="base">
-            Add video
-          </Text>
-        </div>
-      </Card>
+      {videos && videos.length < 10 && (
+        <Card type="linked" onClick={showNotification} justifyContent="center">
+          <div className="flex flex-col gap-1 justify-center items-center self-center">
+            <Plus className="h-5 w-5 text-gray-600" />
+            <Text as="span" size="base">
+              Add video
+            </Text>
+          </div>
+        </Card>
+      )}
 
       <Modal open={notification} onClose={hideNotification}>
         <div className="flex flex-col gap-5">
