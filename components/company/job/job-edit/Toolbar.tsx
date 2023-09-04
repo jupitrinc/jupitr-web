@@ -5,6 +5,7 @@ import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { Button } from "ui-library/button/Button"
 import { MenuBar } from "ui-library/menu/menu-bar/MenuBar"
 import { JobStatusEnum } from "state/company_job/companyJob.types"
+import { Eye } from "lucide-react"
 
 const Toolbar = () => {
   const router = useRouter()
@@ -14,8 +15,6 @@ const Toolbar = () => {
 
   const options = useMemo(
     () => [
-      // { name: "Preview", onClick: () => alert("") },
-      // { name: "Share", onClick: () => alert("") },
       {
         name: "Close",
         onClick: () => {
@@ -44,12 +43,22 @@ const Toolbar = () => {
     })
   }, [company_job])
 
+  const previewJob = useCallback(() => {
+    router.push(`/jobs/${company_job.id}`)
+  }, [company_job.id])
+
   return (
     <div className="basis-2/3 flex flex-row gap-2 items-center justify-end">
       <Button
         label={company_job.status === "open" ? "Pause" : "Publish"}
         variant={company_job.status === "open" ? "text" : "contained"}
         onClick={toggleStatus}
+      />
+      <Button
+        label="Preview"
+        variant="text"
+        icon={<Eye className="h-4 w-4" />}
+        onClick={previewJob}
       />
       <MenuBar options={options} max_number={0} variant="text" size="xs" />
     </div>
