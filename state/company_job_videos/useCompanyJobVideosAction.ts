@@ -43,7 +43,7 @@ export function useCompanyJobVideosAction() {
     const { data: upload_data, error: upload_error } = await uploadVideo({
       file: payload.file,
       folderPath: folderPath,
-      fileName: fileName,
+      fileName: `${fileName + "-" + Date.now()}`,
     })
 
     if (upload_error) {
