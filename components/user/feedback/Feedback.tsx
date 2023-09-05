@@ -37,7 +37,7 @@ const Feedback = () => {
 
   return (
     <>
-      <Button onClick={showNotification} label="Give feedback" size="xs" />
+      <Button onClick={showNotification} label="Feedback" size="xs" />
       <Modal open={notification} onClose={hideNotification}>
         <div className="flex flex-row gap-5">
           <Sticker className="w-10 h-10 text-gray-500" />

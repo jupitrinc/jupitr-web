@@ -25,7 +25,7 @@ const Details = () => {
           <Laptop className="h-5 w-5" />
 
           <div className="flex flex-row flex-wrap gap-2">
-            {talent_job.work_model.map((model) => (
+            {talent_job.work_model?.map((model) => (
               <Text key={model} as="span" size="lg">
                 <span className="flex flex-row flex-wrap">
                   <Pill label={model} size="base" />
