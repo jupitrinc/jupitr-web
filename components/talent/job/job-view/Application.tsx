@@ -169,7 +169,7 @@ const Application = () => {
           </div>
 
           {step < 3 && (
-            <div className="flex flex-row gap-5 justify-center  bg-gray-100 absolute bottom-0 left-0 w-full p-3">
+            <div className="flex flex-row gap-5 justify-center bg-gray-100 absolute bottom-0 left-0 w-full p-3">
               {step !== 1 && (
                 <Button
                   label="Back"
