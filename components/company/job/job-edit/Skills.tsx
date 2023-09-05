@@ -4,7 +4,7 @@ import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { static_data_job } from "data/job"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
 import { useNotification } from "helper/hooks/useNotification"
@@ -18,18 +18,12 @@ export const Skills = () => {
   const { company_job } = useCompanyJobState()
   const { addSkill, removeSkill, updateSkill } = useCompanyJobAction()
 
-  const { getSkills, clearSkills, addSkill: addSkillAction } = useSkillAction()
+  const { addSkill: addSkillAction, searchSkill: searchSkillAction } =
+    useSkillAction()
+
   const { skills, error } = useSkillState()
 
   const { notification, hideNotification } = useNotification(!isEmpty(error))
-
-  useEffect(() => {
-    getSkills()
-
-    return () => {
-      clearSkills()
-    }
-  }, [])
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -42,6 +36,12 @@ export const Skills = () => {
     },
     [company_job]
   )
+
+  const searchSkill = (skillName: string) => {
+    if (skillName !== "") {
+      searchSkillAction(skillName)
+    }
+  }
 
   return (
     <>
@@ -60,6 +60,7 @@ export const Skills = () => {
                 company_job.skills
               )
             }}
+            onSearch={(skill) => searchSkill(skill)}
           />
         </div>
 

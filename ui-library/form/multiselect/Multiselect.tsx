@@ -1,11 +1,4 @@
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import { Combobox, Transition } from "@headlessui/react"
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { MultiselectProps } from "./Multiselect.types"
@@ -14,7 +7,6 @@ import { Label } from "../label/Label"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { useTimeout } from "helper/hooks/useTimeout"
-import { useSkillAction } from "state/skill/useSkillAction"
 
 export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const styles = multiselectStyles
@@ -22,13 +14,12 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const [loadingSearch, setLoadingSerach] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { setRef, clearRef } = useTimeout()
-  const { searchSkill: searchSkillAction } = useSkillAction()
 
   useEffect(() => {
     if (query !== "") {
       setLoadingSerach(true)
       const timeout = setTimeout(() => {
-        searchSkill(query)
+        multiselect.onSearch?.(query)
         setLoadingSerach(false)
       }, 1000)
       setRef(timeout)
@@ -47,12 +38,6 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
 
     if (buttonRef.current) {
       buttonRef.current.click()
-    }
-  }
-
-  const searchSkill = (skillName: string) => {
-    if (skillName !== "") {
-      searchSkillAction(skillName)
     }
   }
 

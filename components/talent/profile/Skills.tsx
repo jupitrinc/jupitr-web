@@ -16,17 +16,10 @@ const Skills = () => {
   const { isEmpty } = stringHelper
   const { user } = useUserState()
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
-  const { getSkills, clearSkills, addSkill: addSkillAction } = useSkillAction()
+  const { addSkill: addSkillAction, searchSkill: searchSkillAction } =
+    useSkillAction()
   const { skills, error } = useSkillState()
   const { notification, hideNotification } = useNotification(!isEmpty(error))
-
-  // useEffect(() => {
-  //   getSkills()
-
-  //   return () => {
-  //     clearSkills()
-  //   }
-  // }, [])
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -39,6 +32,12 @@ const Skills = () => {
     },
     [user]
   )
+
+  const searchSkill = (skillName: string) => {
+    if (skillName !== "") {
+      searchSkillAction(skillName)
+    }
+  }
 
   return (
     <>
@@ -53,6 +52,7 @@ const Skills = () => {
             onChange={(skill) =>
               addSkill(user.id, { ...skill, level: 2 }, user.skills)
             }
+            onSearch={(skill) => searchSkill(skill)}
           />
         </div>
 
