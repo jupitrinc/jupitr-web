@@ -14,6 +14,7 @@ export const companyProfileReducer = (
   switch (action.type) {
     case SkillActionEnum.GET_SKILLS_BEGIN:
     case SkillActionEnum.ADD_SKILL_BEGIN:
+    case SkillActionEnum.SEARCH_SKILL_BEGIN:
       return {
         ...state,
         loading: true,
@@ -22,6 +23,7 @@ export const companyProfileReducer = (
 
     case SkillActionEnum.GET_SKILLS_FAILURE:
     case SkillActionEnum.ADD_SKILL_FAILURE:
+    case SkillActionEnum.SEARCH_SKILL_FAILURE:
       return {
         ...state,
         loading: false,
@@ -29,7 +31,7 @@ export const companyProfileReducer = (
       }
 
     case SkillActionEnum.GET_SKILLS_SUCCESS:
-      setItem(LocalStorageItemEnum.skills, action.payload)
+    case SkillActionEnum.SEARCH_SKILL_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -46,7 +48,6 @@ export const companyProfileReducer = (
         error: "",
         data: [...state.data, add_skill_payload],
       }
-      setItem(LocalStorageItemEnum.skills, add_skill_state.data)
       return add_skill_state
 
     case SkillActionEnum.CLEAR_SKILLS:

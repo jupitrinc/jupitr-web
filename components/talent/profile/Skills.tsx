@@ -20,13 +20,13 @@ const Skills = () => {
   const { skills, error } = useSkillState()
   const { notification, hideNotification } = useNotification(!isEmpty(error))
 
-  useEffect(() => {
-    getSkills()
+  // useEffect(() => {
+  //   getSkills()
 
-    return () => {
-      clearSkills()
-    }
-  }, [])
+  //   return () => {
+  //     clearSkills()
+  //   }
+  // }, [])
 
   const addNewSkill = useCallback(
     async (name: string) => {

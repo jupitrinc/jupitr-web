@@ -11,7 +11,11 @@ import { stringHelper } from "helper/stringHelper"
 
 export function useSkillAction() {
   const { dispatch } = useContext(SkillContext)
-  const { getAllSkills, addSkill: addSkillService } = useSkillsService()
+  const {
+    getAllSkills,
+    addSkill: addSkillService,
+    searchSkills: searchSkillService,
+  } = useSkillsService()
 
   const { getItem } = localStorageHelper
   const { sentenceCase } = stringHelper
@@ -43,6 +47,28 @@ export function useSkillAction() {
           payload: data as ISkill[],
         })
       }
+    }
+  }
+
+  const searchSkill = async (skillName: string) => {
+    dispatch({
+      type: SkillActionEnum.SEARCH_SKILL_BEGIN,
+    })
+
+    const { data, error } = await searchSkillService(skillName)
+
+    if (error) {
+      dispatch({
+        type: SkillActionEnum.SEARCH_SKILL_FAILURE,
+        payload: error.message,
+      })
+      return error
+    } else {
+      dispatch({
+        type: SkillActionEnum.SEARCH_SKILL_SUCCESS,
+        payload: data as ISkill[],
+      })
+      return data
     }
   }
 
@@ -80,6 +106,7 @@ export function useSkillAction() {
 
   return {
     getSkills,
+    searchSkill,
     addSkill,
     clearSkills,
   }
