@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useCallback, useMemo, useRef, useState } from "react"
 import { Combobox, Transition } from "@headlessui/react"
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { MultiselectProps } from "./Multiselect.types"
@@ -6,30 +6,30 @@ import { multiselectStyles } from "./Multiselect.styles"
 import { Label } from "../label/Label"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import { useTimeout } from "helper/hooks/useTimeout"
 
 export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const styles = multiselectStyles
   const [query, setQuery] = useState<string>("")
-  const [loadingSearch, setLoadingSerach] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const { setRef, clearRef } = useTimeout()
 
-  useEffect(() => {
-    if (query !== "") {
-      setLoadingSerach(true)
-      const timeout = setTimeout(() => {
-        multiselect.onSearch?.(query)
-        setLoadingSerach(false)
-      }, 1000)
-      setRef(timeout)
-    }
-
-    return clearRef
-  }, [query])
+  const filteredOptions = useMemo(
+    () =>
+      query === ""
+        ? multiselect.options
+        : multiselect.options.filter((value) =>
+            value.name
+              .toLowerCase()
+              .replace(/\s+/g, "")
+              .includes(query.toLowerCase().replace(/\s+/g, ""))
+          ),
+    [query, multiselect.options]
+  )
 
   const handleInputChange = (e) => {
-    if (e.target.value.length < 30) setQuery(e.target.value)
+    if (e.target.value.length < 30) {
+      setQuery(e.target.value)
+      multiselect.onSearch?.(e.target.value)
+    }
   }
 
   const addOption = (option: string) => {
@@ -63,7 +63,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
           </Combobox.Button>
         </div>
 
-        {multiselect.options && query !== "" && !loadingSearch && (
+        {multiselect.options && multiselect.options.length >= 0 && (
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -72,11 +72,11 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options className={styles.options}>
-              {multiselect.options.length === 0 && query !== "" ? (
+              {filteredOptions.length === 0 && query !== "" ? (
                 <div className={styles.option.noResult}>
                   <div className="flex flex-row gap-5 items-center justify-between flex-wrap">
                     <Text as="span">
-                      No results found for &quot;{query}&quot;{" "}
+                      No results found for &quot;{query}&quot;
                     </Text>
 
                     {multiselect.allowAddOption && query.trim().length > 1 && (
@@ -90,7 +90,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
                   </div>
                 </div>
               ) : (
-                multiselect.options.map((option) => (
+                filteredOptions.map((option) => (
                   <Combobox.Option
                     key={option.id}
                     className={({ active }) =>

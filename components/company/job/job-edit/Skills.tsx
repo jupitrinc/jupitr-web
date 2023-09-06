@@ -4,26 +4,44 @@ import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { static_data_job } from "data/job"
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
 import { Toast } from "ui-library/toast/Toast"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
+import { useTimeout } from "helper/hooks/useTimeout"
 
 export const Skills = () => {
+  const [searchQuery, setSearchQuery] = useState("")
   const { isEmpty } = stringHelper
 
   const { company_job } = useCompanyJobState()
   const { addSkill, removeSkill, updateSkill } = useCompanyJobAction()
 
-  const { addSkill: addSkillAction, searchSkill: searchSkillAction } =
-    useSkillAction()
+  const {
+    addSkill: addSkillAction,
+    searchSkill: searchSkillAction,
+    clearSkills,
+  } = useSkillAction()
 
   const { skills, error } = useSkillState()
 
   const { notification, hideNotification } = useNotification(!isEmpty(error))
+  const { setRef, clearRef } = useTimeout()
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      searchSkill(searchQuery)
+    }, 300)
+    setRef(timeout)
+
+    return () => {
+      clearRef
+      clearSkills()
+    }
+  }, [searchQuery])
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -60,7 +78,7 @@ export const Skills = () => {
                 company_job.skills
               )
             }}
-            onSearch={(skill) => searchSkill(skill)}
+            onSearch={(skill) => setSearchQuery(skill)}
           />
         </div>
 
