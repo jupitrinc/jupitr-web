@@ -46,8 +46,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (video) => {
         ref={videoRef}
         onTimeUpdate={onTimeUpdate}
         onPause={onPause}
+        key={video.src}
       >
-        <source src={video.src} type="video/mp4" />
+        <source src={video.src} />
       </video>
       <PlayButton playing={player.playing} />
       <ProgressBar progress={player.progress} type="sticky" />
