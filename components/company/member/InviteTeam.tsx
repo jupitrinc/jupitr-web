@@ -76,9 +76,9 @@ const InviteTeam = ({ title }: { title: string }) => {
               )}
           </div>
         </div>
-      </Modal>
 
-      <Toast onHide={hideError} show={errorMessage} label={error} />
+        <Toast onHide={hideError} show={errorMessage} label={error} />
+      </Modal>
     </>
   )
 }
