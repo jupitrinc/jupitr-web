@@ -35,10 +35,8 @@ const AccountSettings = () => {
   }
 
   const emailHasErrors = () => {
-    if (!email.trim() || !emailHelper.isEmailValid(email)) {
-      setEmailValidationError(
-        "Email is not valid. Please, provide a valid email."
-      )
+    if (!email.trim() || emailHelper.isEmailValid(email) === false) {
+      setEmailValidationError("Please provide a valid email")
       return true
     } else {
       return false
