@@ -38,7 +38,7 @@ const Industry = () => {
       <Multiselect
         options={industries}
         placeholder="AI, Fintech ..."
-        onChange={(option) => addIndustry(option)}
+        onSelect={(option) => addIndustry(option)}
         label="Industry/Sector"
       />
 

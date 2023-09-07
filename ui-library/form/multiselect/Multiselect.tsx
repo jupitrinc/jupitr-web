@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo, useRef, useState } from "react"
+import { Fragment, useMemo, useRef, useState } from "react"
 import { Combobox, Transition } from "@headlessui/react"
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { MultiselectProps } from "./Multiselect.types"
@@ -26,7 +26,10 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   )
 
   const handleInputChange = (e) => {
-    if (e.target.value.length < 30) setQuery(e.target.value)
+    if (e.target.value.length < 30) {
+      setQuery(e.target.value)
+      multiselect.onChange?.(e.target.value)
+    }
   }
 
   const addOption = (option: string) => {
@@ -39,7 +42,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   }
 
   return (
-    <Combobox onChange={multiselect.onChange}>
+    <Combobox onChange={multiselect.onSelect}>
       <div className={styles.container}>
         {multiselect.label && (
           <Label
@@ -72,7 +75,9 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
               {filteredOptions.length === 0 && query !== "" ? (
                 <div className={styles.option.noResult}>
                   <div className="flex flex-row gap-5 items-center justify-between flex-wrap">
-                    <Text as="span">No results found for "{query}" </Text>
+                    <Text as="span">
+                      No results found for &quot;{query}&quot;
+                    </Text>
 
                     {multiselect.allowAddOption && query.trim().length > 1 && (
                       <Button

@@ -8,6 +8,7 @@ import { useCallback, useEffect } from "react"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
 import { useNotification } from "helper/hooks/useNotification"
+import { useDebounce } from "helper/hooks/useDebounce"
 import { stringHelper } from "helper/stringHelper"
 import { Toast } from "ui-library/toast/Toast"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
@@ -15,21 +16,30 @@ import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 export const Skills = () => {
   const { isEmpty } = stringHelper
 
+  const { debouncedValue: searchQuery, setDebouncedValue: setSearchQuery } =
+    useDebounce()
+
   const { company_job } = useCompanyJobState()
   const { addSkill, removeSkill, updateSkill } = useCompanyJobAction()
 
-  const { getSkills, clearSkills, addSkill: addSkillAction } = useSkillAction()
-  const { skills, error } = useSkillState()
+  const {
+    addSkill: addSkillAction,
+    searchSkill: searchSkillAction,
+    clearSkills,
+  } = useSkillAction()
 
+  const { skills, error } = useSkillState()
   const { notification, hideNotification } = useNotification(!isEmpty(error))
 
   useEffect(() => {
-    getSkills()
+    if (searchQuery !== "") {
+      searchSkillAction(searchQuery)
+    }
 
     return () => {
       clearSkills()
     }
-  }, [])
+  }, [searchQuery])
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -53,13 +63,14 @@ export const Skills = () => {
             options={skills}
             allowAddOption={true}
             addOption={(name) => addNewSkill(name)}
-            onChange={(skill) => {
+            onSelect={(skill) => {
               addSkill(
                 company_job.id,
                 { ...skill, level: 2 },
                 company_job.skills
               )
             }}
+            onChange={(skill) => setSearchQuery(skill)}
           />
         </div>
 
