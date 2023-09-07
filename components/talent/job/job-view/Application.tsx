@@ -73,7 +73,7 @@ const Application = () => {
     <>
       {user.account_type !== AccountTypeEnum.company && (
         <Button
-          size="lg"
+          size="base"
           color="special"
           variant="contained"
           label="Apply"

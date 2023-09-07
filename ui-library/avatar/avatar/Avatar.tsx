@@ -19,13 +19,11 @@ export const Avatar: React.FC<AvatarProps> = (avatar) => {
 }
 
 const Photo = ({ avatar, styles }) => (
-  <div className={clsx(styles.container, styles.size(avatar.size))}>
-    <Image
-      className={clsx(styles.image, styles.size(avatar.size))}
-      src={avatar.image_url}
-      alt={avatar.alt || avatar.name_initials || "avatar"}
-    />
-  </div>
+  <Image
+    className={clsx(styles.image, styles.size(avatar.size))}
+    src={avatar.image_url}
+    alt={avatar.alt || avatar.name_initials || "avatar"}
+  />
 )
 
 const NameInitials = ({ avatar, styles }) => {
