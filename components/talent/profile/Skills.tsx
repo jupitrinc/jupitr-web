@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect } from "react"
 import { Card } from "ui-library/content/card/Card"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
@@ -9,14 +9,17 @@ import { useSkillState } from "state/skill/useSkillState"
 import { static_data_job } from "data/job"
 import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
+import { useDebounce } from "helper/hooks/useDebounce"
 import { stringHelper } from "helper/stringHelper"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
-import { useTimeout } from "helper/hooks/useTimeout"
 
 const Skills = () => {
-  const [searchQuery, setSearchQuery] = useState("")
   const { isEmpty } = stringHelper
   const { user } = useUserState()
+
+  const { debouncedValue: searchQuery, setDebouncedValue: setSearchQuery } =
+    useDebounce()
+
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
   const {
     addSkill: addSkillAction,
@@ -25,19 +28,6 @@ const Skills = () => {
   } = useSkillAction()
   const { skills, error } = useSkillState()
   const { notification, hideNotification } = useNotification(!isEmpty(error))
-  const { setRef, clearRef } = useTimeout()
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      searchSkill(searchQuery)
-    }, 300)
-    setRef(timeout)
-
-    return () => {
-      clearRef
-      clearSkills()
-    }
-  }, [searchQuery])
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -51,11 +41,15 @@ const Skills = () => {
     [user]
   )
 
-  const searchSkill = (skillName: string) => {
-    if (skillName !== "") {
-      searchSkillAction(skillName)
+  useEffect(() => {
+    if (searchQuery !== "") {
+      searchSkillAction(searchQuery)
     }
-  }
+
+    return () => {
+      clearSkills()
+    }
+  }, [searchQuery])
 
   return (
     <>
@@ -67,10 +61,10 @@ const Skills = () => {
             options={skills}
             allowAddOption={true}
             addOption={(name) => addNewSkill(name)}
-            onChange={(skill) =>
+            onSelect={(skill) =>
               addSkill(user.id, { ...skill, level: 2 }, user.skills)
             }
-            onSearch={(skill) => setSearchQuery(skill)}
+            onChange={(skill) => setSearchQuery(skill)}
           />
         </div>
 

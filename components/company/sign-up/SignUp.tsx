@@ -107,7 +107,7 @@ export const SignUp = () => {
                 label="Industry/Sector"
                 options={industries}
                 placeholder="AI, Fintech ..."
-                onChange={(option) => addIndustry(option)}
+                onSelect={(option) => addIndustry(option)}
                 invalid={invalid.industry}
               />
 

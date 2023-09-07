@@ -51,6 +51,8 @@ export function useSkillAction() {
   }
 
   const searchSkill = async (skillName: string) => {
+    if (!skillName || skillName.length < 2) return
+
     dispatch({
       type: SkillActionEnum.SEARCH_SKILL_BEGIN,
     })
@@ -62,13 +64,11 @@ export function useSkillAction() {
         type: SkillActionEnum.SEARCH_SKILL_FAILURE,
         payload: error.message,
       })
-      return error
     } else {
       dispatch({
         type: SkillActionEnum.SEARCH_SKILL_SUCCESS,
         payload: data as ISkill[],
       })
-      return data
     }
   }
 

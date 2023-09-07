@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo, useRef, useState } from "react"
+import { Fragment, useMemo, useRef, useState } from "react"
 import { Combobox, Transition } from "@headlessui/react"
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { MultiselectProps } from "./Multiselect.types"
@@ -28,7 +28,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const handleInputChange = (e) => {
     if (e.target.value.length < 30) {
       setQuery(e.target.value)
-      multiselect.onSearch?.(e.target.value)
+      multiselect.onChange?.(e.target.value)
     }
   }
 
@@ -42,7 +42,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   }
 
   return (
-    <Combobox onChange={multiselect.onChange}>
+    <Combobox onChange={multiselect.onSelect}>
       <div className={styles.container}>
         {multiselect.label && (
           <Label
@@ -63,7 +63,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
           </Combobox.Button>
         </div>
 
-        {multiselect.options && multiselect.options.length >= 0 && (
+        {multiselect.options && multiselect.options.length > 0 && (
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
