@@ -14,6 +14,7 @@ export const stringHelper = {
     }
   },
   isEmpty: (str: string) => {
+    if (!str || str === undefined) return false
     return str.trim() === ""
   },
 

@@ -22,6 +22,7 @@ const Title = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={update}
+        autoFocus={!company_job.title}
         light
       />
     </div>
