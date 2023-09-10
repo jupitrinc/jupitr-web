@@ -20,6 +20,7 @@ import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/
 import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
+import { stringHelper } from "helper/stringHelper"
 
 const Application = () => {
   const router = useRouter()
@@ -43,7 +44,7 @@ const Application = () => {
   const { addApplication } = useTalentApplicationAction()
   const { success, error, loading } = useTalentApplicationState()
   const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(Boolean(error))
+    useNotification(!stringHelper.isEmpty(error))
 
   const submitApplication = useCallback(() => {
     if (!videoFile) return
@@ -77,21 +78,20 @@ const Application = () => {
           color="special"
           variant="contained"
           label="Apply"
-          full_width
           onClick={startApplication}
         />
       )}
 
       <Modal open={notification} onClose={hideNotification}>
-        <div className="h-[40rem]">
-          <div className="overflow-y-scroll h-full flex flex-col pb-28">
+        <div className="h-[30rem] md:h-[40rem]">
+          <div className="overflow-y-scroll h-full flex flex-col pb-28 px-1">
             <div className="flex flex-row gap-5 items-center">
               <Avatar
                 image_url={urlHelper.imageUrl(talent_job.company.logo)}
                 size={10}
                 alt={`${talent_job.company.name} logo`}
               />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col">
                 <Text as="h1" size="lg">
                   {talent_job.title}
                 </Text>
@@ -101,7 +101,7 @@ const Application = () => {
                 </Text>
               </div>
             </div>
-            <div className="flex flex-col gap-5 mb-5 w-4/5 mx-auto">
+            <div className="flex flex-col gap-5 mb-5 w-full mx-auto">
               <ProgressBar progress={progress(step)} type="sticky" />
 
               {step === 1 && (

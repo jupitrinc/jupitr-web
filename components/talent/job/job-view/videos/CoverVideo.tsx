@@ -11,6 +11,9 @@ const CoverVideo = () => {
         src={
           urlHelper.videoUrl(talent_job.company_videos[0].video_url) as string
         }
+        poster={urlHelper.videoPosterUrl(
+          talent_job.company_videos[0].video_url
+        )}
       />
     )
   } else {
