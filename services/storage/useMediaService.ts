@@ -53,7 +53,10 @@ const useMediaService = () => {
   const uploadVideo = async (payload: UploadVideoPayload) => {
     const formData = new FormData()
     formData.append("file", payload.file)
-    formData.append("public_id", `${payload.folderPath}/${payload.fileName}`)
+    formData.append(
+      "public_id",
+      `${process.env.NODE_ENV}/${payload.folderPath}/${payload.fileName}`
+    )
     const { data, error } = await fetch("/api/jobs-video-upload", {
       method: "POST",
       body: formData,

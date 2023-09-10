@@ -14,6 +14,7 @@ const Videos = () => {
               <div key={video.id}>
                 <VideoPlayer
                   src={urlHelper.videoUrl(video.video_url) as string}
+                  poster={urlHelper.videoPosterUrl(video.video_url)}
                 />
               </div>
             )
