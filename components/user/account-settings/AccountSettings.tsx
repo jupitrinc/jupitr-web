@@ -13,6 +13,7 @@ import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import { stringHelper } from "helper/stringHelper"
 import { emailHelper } from "helper/emailHelper"
+import Setting from "./Setting"
 
 const AccountSettings = () => {
   const { user, error, loading } = useUserState()
@@ -21,7 +22,6 @@ const AccountSettings = () => {
   const { notification, showNotification, hideNotification } = useNotification(
     !stringHelper.isEmpty(error)
   )
-  const [toggleEmailModal, setToggleEmailModal] = useState(false)
   const [emailValidationError, setEmailValidationError] = useState("")
 
   const onEmailChange = () => {
@@ -29,7 +29,6 @@ const AccountSettings = () => {
       showNotification()
     } else {
       settingModal[activeSetting].onConfirm(email)
-      setToggleEmailModal(true)
       setEmail("")
     }
   }
@@ -45,7 +44,6 @@ const AccountSettings = () => {
 
   const onClose = () => {
     settingModal.onClose()
-    setToggleEmailModal(false)
     setEmail("")
   }
 
@@ -72,37 +70,14 @@ const AccountSettings = () => {
 
               <form className="w-full" onSubmit={onEmailChange}>
                 {activeSetting === "change_email" && (
-                  <>
-                    {!toggleEmailModal && (
-                      <>
-                        <TextInput
-                          placeholder="New email address"
-                          value={email}
-                          name="new_email"
-                          onChange={(e) => setEmail(e.target.value)}
-                          type="email"
-                          required
-                        />
-                      </>
-                    )}
-
-                    {toggleEmailModal && loading && !error && (
-                      <div className="flex flex-col gap-5">
-                        <Text as="span" size="base">
-                          Updating your email.
-                        </Text>
-                      </div>
-                    )}
-
-                    {toggleEmailModal && !loading && !error && (
-                      <div className="flex flex-col gap-5">
-                        <Text as="span" size="base">
-                          Check your inbox and confirm your email update
-                          request.
-                        </Text>
-                      </div>
-                    )}
-                  </>
+                  <TextInput
+                    placeholder="New email address"
+                    value={email}
+                    name="new_email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    required
+                  />
                 )}
               </form>
 
@@ -132,15 +107,9 @@ const AccountSettings = () => {
                 {activeSetting === "change_email" && (
                   <div className="inline-flex gap-4">
                     <Button
-                      label={
-                        !toggleEmailModal
-                          ? settingModal[activeSetting].confirm_button_label
-                          : "Close"
-                      }
+                      label={settingModal[activeSetting].confirm_button_label}
                       color={settingModal[activeSetting].confirm_button_variant}
-                      onClick={() => {
-                        !toggleEmailModal ? onEmailChange() : onClose()
-                      }}
+                      onClick={onEmailChange}
                       loading={loading}
                     />
                   </div>
@@ -162,23 +131,3 @@ const AccountSettings = () => {
 }
 
 export default AccountSettings
-
-interface SettingProps {
-  name: string
-  onClick: () => void
-  button_label: string
-}
-
-const Setting = (setting: SettingProps) => {
-  return (
-    <div className="flex flex-row justify-between items-center">
-      <Text as="span">{setting.name}</Text>
-      <Button
-        label={setting.button_label}
-        onClick={setting.onClick}
-        size="xs"
-        variant="text"
-      />
-    </div>
-  )
-}

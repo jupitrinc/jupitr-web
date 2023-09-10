@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react"
+import { SizeType } from "ui-library/_theme/Theme.types"
 
 export interface SelectProps {
   options: option[]
@@ -10,6 +11,7 @@ export interface SelectProps {
   name?: string
   magic_word?: string
   invalid?: boolean
+  size?: SizeType
 }
 
 type option = { id: string; name: string } | string

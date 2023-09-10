@@ -59,7 +59,7 @@ const InviteTeam = ({ title }: { title: string }) => {
       </Card>
 
       <Modal open={notification} onClose={hideNotification}>
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 max-h-[30rem] md:max-h-[40rem]">
           <Text as="span" size="xl">
             {title}
           </Text>
@@ -68,12 +68,9 @@ const InviteTeam = ({ title }: { title: string }) => {
 
           <div className="flex flex-col gap-3">
             {company_members &&
-              company_members.map(
-                (member) =>
-                  member.name && (
-                    <MemberCard key={member.user_id} member={member} />
-                  )
-              )}
+              company_members.map((member) => (
+                <MemberCard key={member.user_id} member={member} />
+              ))}
           </div>
         </div>
 

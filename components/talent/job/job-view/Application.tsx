@@ -84,7 +84,7 @@ const Application = () => {
 
       <Modal open={notification} onClose={hideNotification}>
         <div className="h-[30rem] md:h-[40rem]">
-          <div className="overflow-y-scroll h-full flex flex-col pb-28 px-1">
+          <div className="overflow-y-scroll h-full flex flex-col px-1">
             <div className="flex flex-row gap-5 items-center">
               <Avatar
                 image_url={urlHelper.imageUrl(talent_job.company.logo)}

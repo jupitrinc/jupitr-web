@@ -2,6 +2,8 @@ import React from "react"
 import { SelectProps } from "./Select.types"
 import { selectStyles } from "./Select.styles"
 import { Label } from "../label/Label"
+import clsx from "clsx"
+import { ThemeSizeEnum } from "ui-library/_theme/Theme.types"
 
 export const Select: React.FC<SelectProps> = (select) => {
   const styles = selectStyles
@@ -33,7 +35,10 @@ export const Select: React.FC<SelectProps> = (select) => {
       )}
       <select
         name={select.name}
-        className={styles.select}
+        className={clsx(
+          styles.select,
+          styles.size[select.size ? select.size : ThemeSizeEnum.base]
+        )}
         value={select.value ? JSON.stringify(select.value) : select.placeholder}
         onChange={select.onChange}
         disabled={select.disabled}
