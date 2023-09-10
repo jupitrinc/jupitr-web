@@ -25,7 +25,7 @@ const InviteMember = () => {
       return
 
     await addMember({
-      companyId: user.company_id,
+      company_id: user.company_id,
       email: email.trim(),
       permission: CompanyMemberPermissionEnum.read,
     })

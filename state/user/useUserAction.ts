@@ -140,8 +140,10 @@ export function useUserAction() {
     } else {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
-        payload: email,
+        payload: "Check your inbox and confirm your email update request.",
       })
+
+      signOut()
     }
   }
 

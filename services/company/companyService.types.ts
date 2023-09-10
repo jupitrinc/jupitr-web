@@ -21,8 +21,9 @@ export type UpdateCompanyProfilePayload =
   Database["public"]["Tables"]["company"]["Update"]
 export interface InviteCompanyMemberPayload {
   email: string
-  companyId: string
+  company_id: string
   permission: PermissionTypes
+  redirectTo?: string
 }
 export type UpdateCompanyMemberProfile =
   Database["public"]["Tables"]["company_member_profile"]["Insert"]

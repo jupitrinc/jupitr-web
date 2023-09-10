@@ -54,11 +54,17 @@ export const userReducer = (
 
     case UserActionEnum.SIGN_IN_SUCCESS:
     case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
-    case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
         error: "",
+      }
+
+    case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload as string,
       }
 
     case UserActionEnum.GET_USER_SUCCESS:

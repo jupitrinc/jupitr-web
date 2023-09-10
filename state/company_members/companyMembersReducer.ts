@@ -13,6 +13,7 @@ export const companyMembersReducer = (
     case CompanyMembersActionEnum.GET_MEMBERS_BEGIN:
     case CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_BEGIN:
     case CompanyMembersActionEnum.ADD_MEMBER_BEGIN:
+    case CompanyMembersActionEnum.DELETE_MEMBER_BEGIN:
       return {
         ...state,
         loading: true,
@@ -22,6 +23,7 @@ export const companyMembersReducer = (
     case CompanyMembersActionEnum.GET_MEMBERS_FAILURE:
     case CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_FAILURE:
     case CompanyMembersActionEnum.ADD_MEMBER_FAILURE:
+    case CompanyMembersActionEnum.DELETE_MEMBER_FAILURE:
       return {
         ...state,
         loading: false,
@@ -58,7 +60,15 @@ export const companyMembersReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
+        error: action.payload as string,
+      }
+
+    case CompanyMembersActionEnum.DELETE_MEMBER_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data.filter((user) => user.user_id !== action.payload)],
+        loading: false,
+        error: "Member removed",
       }
 
     case CompanyMembersActionEnum.CLEAR_MEMBERS:

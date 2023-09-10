@@ -1,3 +1,4 @@
+import { emailRedirectTo } from "services/auth/useAuthService"
 import { supabaseClientComponent } from "../_supabase/client"
 import {
   InviteCompanyMemberPayload,
@@ -82,7 +83,7 @@ const useCompanyMemberService = () => {
     const { data, error } = await supabaseClientComponent.functions.invoke(
       "invite-company-member",
       {
-        body: payload,
+        body: { ...payload, redirectTo: emailRedirectTo() },
       }
     )
 
