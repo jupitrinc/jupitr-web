@@ -3,7 +3,7 @@ import {
   CreateCompanyPayload,
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
-import { FunctionsHttpError } from "@supabase/supabase-js"
+import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
@@ -15,14 +15,7 @@ const useCompanyService = () => {
     )
 
     if (error) {
-      if (error instanceof FunctionsHttpError) {
-        const errorMessage = await error.context.json()
-        console.error("create company - FunctionsHttpError: ", errorMessage)
-        return errorMessage
-      } else {
-        console.error("create company: ", error)
-        return error.message
-      }
+      return await errorHandlingEdgeFunctions(error, "addCompany")
     }
 
     return { data, error }
@@ -37,17 +30,7 @@ const useCompanyService = () => {
     )
 
     if (error) {
-      if (error instanceof FunctionsHttpError) {
-        const errorMessage = await error.context.json()
-        console.error(
-          "update company profile - FunctionsHttpError: ",
-          errorMessage
-        )
-        return errorMessage
-      } else {
-        console.error("update company profile: ", error)
-        return error.message
-      }
+      return await errorHandlingEdgeFunctions(error, "updateCompanyProfile")
     }
 
     return { data, error }
