@@ -5,6 +5,7 @@ import {
   PermissionTypes,
   UpdateCompanyMemberProfile,
 } from "./companyService.types"
+import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
 
 const useCompanyMemberService = () => {
   const updateProfile = async (
@@ -38,7 +39,7 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to update members: ", error)
+      return await errorHandlingEdgeFunctions(error, "updateMembersPermission")
     }
 
     return { data, error }
@@ -56,7 +57,7 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to delete member: ", error)
+      return await errorHandlingEdgeFunctions(error, "deleteMembers")
     }
 
     return { data, error }
@@ -73,7 +74,7 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to get company members: ", error)
+      return await errorHandlingEdgeFunctions(error, "getMembers")
     }
 
     return { data, error }
@@ -88,7 +89,7 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("add company member: ", error)
+      return await errorHandlingEdgeFunctions(error, "addMember")
     }
 
     return { data, error }

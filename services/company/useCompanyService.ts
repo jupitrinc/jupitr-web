@@ -3,6 +3,7 @@ import {
   CreateCompanyPayload,
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
+import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
@@ -14,7 +15,7 @@ const useCompanyService = () => {
     )
 
     if (error) {
-      console.error("create company: ", error)
+      return await errorHandlingEdgeFunctions(error, "addCompany")
     }
 
     return { data, error }
@@ -29,7 +30,7 @@ const useCompanyService = () => {
     )
 
     if (error) {
-      console.error("update company profile: ", error)
+      return await errorHandlingEdgeFunctions(error, "updateCompanyProfile")
     }
 
     return { data, error }

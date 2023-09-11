@@ -1,5 +1,6 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { Database } from "../_supabase/database"
+import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
 
 const useUserService = () => {
   const getUser = async (access_token: string) => {
@@ -29,7 +30,7 @@ const useUserService = () => {
     )
 
     if (error) {
-      console.error("failed to delete user: ", error)
+      return await errorHandlingEdgeFunctions(error, "deleteUser")
     }
 
     return { data, error }
