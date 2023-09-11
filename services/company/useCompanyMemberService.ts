@@ -5,6 +5,7 @@ import {
   PermissionTypes,
   UpdateCompanyMemberProfile,
 } from "./companyService.types"
+import { FunctionsHttpError } from "@supabase/supabase-js"
 
 const useCompanyMemberService = () => {
   const updateProfile = async (
@@ -38,7 +39,17 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to update members: ", error)
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error(
+          "failed to update company members - FunctionsHttpError: ",
+          errorMessage
+        )
+        return errorMessage
+      } else {
+        console.error("failed to update company members: ", error)
+        return error.message
+      }
     }
 
     return { data, error }
@@ -56,7 +67,17 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to delete member: ", error)
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error(
+          "failed to get delete members - FunctionsHttpError: ",
+          errorMessage
+        )
+        return errorMessage
+      } else {
+        console.error("failed to delete company members: ", error)
+        return error.message
+      }
     }
 
     return { data, error }
@@ -73,7 +94,17 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("failed to get company members: ", error)
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error(
+          "failed to get company members - FunctionsHttpError: ",
+          errorMessage
+        )
+        return errorMessage
+      } else {
+        console.error("failed to get company members: ", error)
+        return error.message
+      }
     }
 
     return { data, error }
@@ -88,7 +119,13 @@ const useCompanyMemberService = () => {
     )
 
     if (error) {
-      console.error("add company member: ", error)
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error("failed to add member", errorMessage)
+        return errorMessage
+      } else {
+        return error.message
+      }
     }
 
     return { data, error }

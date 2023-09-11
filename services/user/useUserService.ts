@@ -1,5 +1,6 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { Database } from "../_supabase/database"
+import { FunctionsHttpError } from "@supabase/supabase-js"
 
 const useUserService = () => {
   const getUser = async (access_token: string) => {
@@ -29,7 +30,14 @@ const useUserService = () => {
     )
 
     if (error) {
-      console.error("failed to delete user: ", error)
+      if (error instanceof FunctionsHttpError) {
+        const errorMessage = await error.context.json()
+        console.error("deleteUser user - FunctionsHttpError: ", errorMessage)
+        return errorMessage
+      } else {
+        console.error("deleteUser user: ", error)
+        return error.message
+      }
     }
 
     return { data, error }
