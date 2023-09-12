@@ -67,7 +67,7 @@ const Application = () => {
   const startApplication = () => {
     if (user.id && user.account_type === AccountTypeEnum.talent)
       showNotification()
-    else router.push("/")
+    else router.push(`/?jobId=${talent_job.id}`)
   }
 
   return (

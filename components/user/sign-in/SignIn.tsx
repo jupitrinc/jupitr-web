@@ -10,15 +10,20 @@ import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { stringHelper } from "helper/stringHelper"
+import { useRouter } from "next/router"
+import { localStorageHelper } from "../../../helper/localStorageHelper"
 
 export const SignIn = () => {
   const { isEmpty } = stringHelper
   const [email, setEmail] = useState("")
+  const [jobId, setJobId] = useState("")
   const { loading, error } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { notification, showNotification, hideNotification } = useNotification(
     !isEmpty(error)
   )
+  const router = useRouter()
+
   const {
     notification: otpError,
     showNotification: showOtpError,
@@ -30,6 +35,11 @@ export const SignIn = () => {
       showOtpError()
     }
   }, [])
+  useEffect(() => {
+    if (router?.query?.jobId) {
+      setJobId(router?.query?.jobId as string)
+    }
+  }, [router.query.jobId])
 
   const onHide = () => {
     hideNotification()
@@ -38,12 +48,21 @@ export const SignIn = () => {
   const loginWithEmail = useCallback(
     async (e) => {
       e.preventDefault()
+      if (jobId) {
+        localStorageHelper.setItem("jobId", jobId)
+      }
       await signInWithEmail(email)
       showNotification()
     },
     [email]
   )
-
+  const loginWithGoogle = async (e) => {
+    e.preventDefault()
+    if (jobId) {
+      localStorageHelper.setItem("jobId", jobId)
+    }
+    await signInWithGoogle()
+  }
   const errorMessage = useMemo(() => {
     if (!isEmpty(error)) {
       return error
@@ -83,7 +102,7 @@ export const SignIn = () => {
         color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
-        onClick={signInWithGoogle}
+        onClick={loginWithGoogle}
         variant="contained"
         disabled={loading}
       />
