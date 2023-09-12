@@ -39,11 +39,10 @@ export const Verify = () => {
     const basePath =
       userData.account_type === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
     const path = jobId ? `${basePath}/${jobId}` : basePath
-
-    router.push(path)
     setTimeout(() => {
       localStorageHelper.removeItem("jobId")
-    }, 100)
+    }, 3000)
+    return router.push(path)
   }
 
   const changeEmailIfRequested = (custoDB: IUser, supabase: Session) => {

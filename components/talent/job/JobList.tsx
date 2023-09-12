@@ -30,14 +30,14 @@ const JobList = () => {
   }, [])
 
   useEffect(() => {
-    if (talent_jobs.length && !talent_job.id && user.name) {
+    if (talent_jobs.length && !talent_job.id && user.id) {
       setJob(talent_jobs[0])
     }
   }, [talent_jobs, user])
 
   if (loading) {
     return <Loader />
-  } else if (talent_jobs.length && user.name) {
+  } else if (talent_jobs.length && user.id) {
     return (
       <>
         <ListSwiper jobs={talent_jobs} />
