@@ -11,6 +11,7 @@ import Details from "./job-view/Details"
 import CoverVideo from "./job-view/videos/CoverVideo"
 import Loading from "layouts/components/Loading"
 import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
+import MetaTags from "./job-view/MetaTags"
 
 const JobView = () => {
   const router = useRouter()
@@ -35,6 +36,8 @@ const JobView = () => {
   } else if (talent_job.id) {
     return (
       <div className="flex flex-col gap-10 flex-wrap">
+        <MetaTags job={talent_job} />
+
         <CoverVideo />
         <TitleBar />
 

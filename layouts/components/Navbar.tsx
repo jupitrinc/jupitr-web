@@ -119,8 +119,11 @@ const PublicMenu = () => {
           <Button label="Sign in" variant="contained" />
         </Link>
       ) : (
-        <Link href="/c/signup">
+        <Link href="/c/signup" className="flex flex-row gap-2 items-center">
           <Button label="Post a job" variant="contained" />
+          <Text as="span" size="xs">
+            for free
+          </Text>
         </Link>
       )}
     </div>

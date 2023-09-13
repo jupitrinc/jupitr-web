@@ -32,4 +32,8 @@ export const urlHelper = {
   websiteUrl: (url: string) => {
     return !url.includes("http") ? `https://${url.trim()}` : url.trim()
   },
+
+  pageUrl: () => {
+    return window.location.href
+  },
 }
