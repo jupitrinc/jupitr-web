@@ -11,7 +11,6 @@ import {
 import { useTimeout } from "helper/hooks/useTimeout"
 import Preview from "./video-recorder/Preview"
 import Countdown from "./video-recorder/Countdown"
-import { useNotification } from "helper/hooks/useNotification"
 import { Toast } from "ui-library/toast/Toast"
 import { stringHelper } from "helper/stringHelper"
 
@@ -22,6 +21,7 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   const {
     cameraPermission,
     error,
+    setError,
     status,
     streamRef,
     videoRef,
@@ -32,9 +32,6 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   } = useVideoRecorder()
 
   const { setRef, clearRef } = useTimeout()
-  const { notification, hideNotification } = useNotification(
-    !stringHelper.isEmpty(error)
-  )
 
   const record = (duration: VideoRecorderProps["duration"]) => {
     startRecording()
@@ -103,7 +100,11 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         </div>
       )}
 
-      <Toast show={notification} onHide={hideNotification} label={error} />
+      <Toast
+        show={!stringHelper.isEmpty(error)}
+        onHide={() => setError("")}
+        label={error}
+      />
     </div>
   )
 }

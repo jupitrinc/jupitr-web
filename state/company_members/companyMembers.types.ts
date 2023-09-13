@@ -9,7 +9,6 @@ export interface ICompanyMembersContext {
 export type CompanyMembersState = {
   data: ICompanyMember[]
   loading: boolean
-  error: string
 }
 
 export interface ICompanyMember {

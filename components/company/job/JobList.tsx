@@ -14,7 +14,6 @@ const JobList = () => {
     company_jobs_draft,
     company_jobs,
     loading,
-    error,
   } = useCompanyJobsState()
   const { user } = useUserState()
 

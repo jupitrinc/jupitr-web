@@ -9,7 +9,6 @@ export const IndustryContextProvider: React.FC<any> = ({ children }) => {
   const initialState: IndustryState = {
     data: [] as IIndustry[],
     loading: false,
-    error: false,
   }
   const [state, dispatch] = useReducer(companyProfileReducer, initialState)
 

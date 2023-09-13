@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -13,22 +13,17 @@ import { Uploader } from "ui-library/uploader/Uploader"
 import { Pill } from "ui-library/pill/Pill"
 import { useUserState } from "state/user/useUserState"
 import { useSignUp } from "./useSignUp"
-import { useNotification } from "helper/hooks/useNotification"
-import { Toast } from "ui-library/toast/Toast"
-import { stringHelper } from "helper/stringHelper"
 import Confirmation from "./sign-up/Confirmation"
 import Header from "./sign-up/Header"
 import Navbar from "./sign-up/Navbar"
 
 export const SignUp = () => {
-  const { isEmpty } = stringHelper
-  const { loading, error } = useUserState()
+  const { loading } = useUserState()
   const {
     addCompany,
     company,
     setCompany,
     invalid,
-    validationFailed,
     signUpSuccess,
     industries,
     addIndustry,
@@ -36,16 +31,6 @@ export const SignUp = () => {
     selectLogo,
     logoPreview,
   } = useSignUp()
-
-  const { notification, hideNotification } = useNotification(
-    !isEmpty(error) || validationFailed
-  )
-
-  const errorMessage = useMemo(() => {
-    if (error) return error
-    else if (validationFailed) return "Please provide the required information"
-    else return "Oops, something went wrong. Refresh the page and try again"
-  }, [error, validationFailed])
 
   return (
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full relative">
@@ -174,14 +159,8 @@ export const SignUp = () => {
           </form>
         </>
       ) : (
-        !error && <Confirmation />
+        <Confirmation />
       )}
-
-      <Toast
-        show={notification}
-        onHide={hideNotification}
-        label={errorMessage}
-      />
     </div>
   )
 }

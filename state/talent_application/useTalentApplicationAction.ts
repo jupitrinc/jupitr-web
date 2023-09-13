@@ -7,8 +7,11 @@ import {
   TalentApplicationActionEnum,
 } from "./talentApplication.types"
 import useTalentJobApplicationService from "services/talent/useTalentApplicationService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useTalentApplicationAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(TalentApplicationContext)
   const { uploadVideo } = useMediaService()
   const { addApplication: addApplicationService } =
@@ -28,7 +31,11 @@ export function useTalentApplicationAction() {
     ) {
       dispatch({
         type: TalentApplicationActionEnum.ADD_APPLICATION_FAILURE,
-        payload: "Something went wrong, try again",
+      })
+
+      notify({
+        message: "Something went wrong, try again",
+        type: "warning",
       })
 
       return
@@ -61,9 +68,13 @@ export function useTalentApplicationAction() {
       if (error) {
         dispatch({
           type: TalentApplicationActionEnum.ADD_APPLICATION_FAILURE,
-          payload: error.message.includes("applications_video_url")
+        })
+
+        notify({
+          message: error.message.includes("applications_video_url")
             ? "Already applied"
             : error.message,
+          type: "warning",
         })
       } else {
         dispatch({

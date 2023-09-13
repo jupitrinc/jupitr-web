@@ -105,5 +105,6 @@ export const useVideoRecorder = () => {
     recording,
     videoFile,
     error,
+    setError,
   }
 }

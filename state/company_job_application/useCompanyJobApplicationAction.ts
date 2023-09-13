@@ -5,8 +5,11 @@ import {
 } from "./companyJobApplication.types"
 import { CompanyJobApplicationContext } from "./CompanyJobApplicationContext"
 import useCompanyJobApplicationService from "services/company/useCompanyJobApplicationService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobApplicationAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobApplicationContext)
   const { getAllApplications: getApplicationsService } =
     useCompanyJobApplicationService()
@@ -22,7 +25,11 @@ export function useCompanyJobApplicationAction() {
     if (error) {
       dispatch({
         type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: "Oops, something went wrong. Try refreshing the page.",
+        type: "warning",
       })
     } else {
       dispatch({

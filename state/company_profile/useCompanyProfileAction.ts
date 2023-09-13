@@ -9,8 +9,11 @@ import { MediaPayload, StorageBucketsEnum } from "services/storage/media.types"
 import useMediaService from "services/storage/useMediaService"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyProfileAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyProfileContext)
   const { getCompanyProfile, updateCompanyProfile } = useCompanyService()
   const { uploadImage } = useMediaService()
@@ -28,6 +31,11 @@ export function useCompanyProfileAction() {
     if (error) {
       dispatch({
         type: CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({

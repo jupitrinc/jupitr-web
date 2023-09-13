@@ -14,21 +14,21 @@ export const companyJobsReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
+        success: false,
       }
 
     case CompanyJobsActionEnum.GET_COMPANY_JOBS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
+        success: false,
       }
 
     case CompanyJobsActionEnum.GET_COMPANY_JOBS_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
+        success: true,
         data: action.payload as ICompanyJobs,
       }
 

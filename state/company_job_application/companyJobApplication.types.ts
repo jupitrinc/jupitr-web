@@ -9,7 +9,6 @@ export interface ICompanyJobApplicationContext {
 export type CompanyJobApplicationState = {
   data: ICompanyJobApplication
   loading: boolean
-  error: string
   success: boolean
 }
 

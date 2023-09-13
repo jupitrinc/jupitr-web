@@ -18,7 +18,7 @@ const JobView = () => {
   const { jobId } = router.query
   const { user } = useUserState()
 
-  const { talent_job, loading, error } = useTalentJobState()
+  const { talent_job, loading } = useTalentJobState()
   const { getJob, clearJob } = useTalentJobAction()
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const JobView = () => {
         <Videos />
       </div>
     )
-  } else if (error) {
+  } else {
     return (
       <NoMatchFound
         message="Job no longer available"
