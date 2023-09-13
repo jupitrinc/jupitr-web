@@ -214,6 +214,11 @@ export function useUserAction() {
       })
       if (!data.active) {
         signOut()
+
+        notify({
+          message: "Account paused",
+          type: "info",
+        })
       }
     }
   }

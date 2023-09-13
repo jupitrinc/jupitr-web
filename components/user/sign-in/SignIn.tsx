@@ -5,25 +5,22 @@ import { Divider } from "ui-library/content/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
-import { Toast } from "ui-library/toast/Toast"
-import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const SignIn = () => {
   const [email, setEmail] = useState("")
   const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
-
-  const {
-    notification: otpError,
-    showNotification: showOtpError,
-    hideNotification: hideOtpError,
-  } = useNotification()
+  const { notify } = useNotificationAction()
 
   useEffect(() => {
     if (window.location.href.includes("error_code")) {
-      showOtpError()
+      notify({
+        message: "Email link is invalid or has expired. Sign in again.",
+        type: "warning",
+      })
     }
   }, [])
 
@@ -69,12 +66,6 @@ export const SignIn = () => {
         onClick={signInWithGoogle}
         variant="contained"
         disabled={loading}
-      />
-
-      <Toast
-        show={otpError}
-        onHide={hideOtpError}
-        label={"Email link is invalid or has expired. Sign in again."}
       />
     </div>
   )

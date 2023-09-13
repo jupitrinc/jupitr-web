@@ -2,12 +2,11 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { Check } from "lucide-react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Modal } from "ui-library/modal/Modal"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
-import { useNotification } from "helper/hooks/useNotification"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { urlHelper } from "helper/urlHelper"
@@ -24,7 +23,7 @@ const Application = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { talent_job } = useTalentJobState()
-  const { notification, showNotification, hideNotification } = useNotification()
+  const { modal, showModal, hideModal } = useModal()
   const {
     progress,
     step,
@@ -61,8 +60,7 @@ const Application = () => {
   }, [success])
 
   const startApplication = () => {
-    if (user.id && user.account_type === AccountTypeEnum.talent)
-      showNotification()
+    if (user.id && user.account_type === AccountTypeEnum.talent) showModal()
     else router.push("/")
   }
 
@@ -78,7 +76,7 @@ const Application = () => {
         />
       )}
 
-      <Modal open={notification} onClose={hideNotification}>
+      <Modal open={modal} onClose={hideModal}>
         <div className="h-[30rem] md:h-[40rem]">
           <div className="overflow-y-scroll h-full flex flex-col px-1">
             <div className="flex flex-row gap-5 items-center">
