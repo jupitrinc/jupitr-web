@@ -6,7 +6,6 @@ export interface IIndustryContext {
 export type IndustryState = {
   data: IIndustry[]
   loading: boolean
-  error: boolean
 }
 
 export type IIndustry = { id: string; name: string }

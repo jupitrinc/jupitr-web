@@ -8,8 +8,6 @@ import { AvatarGroup } from "ui-library/avatar/avatar-group/AvatarGroup"
 import { urlHelper } from "helper/urlHelper"
 import { Modal } from "ui-library/modal/Modal"
 import { useNotification } from "helper/hooks/useNotification"
-import { Toast } from "ui-library/toast/Toast"
-import { stringHelper } from "helper/stringHelper"
 import MemberCard from "./invite-team/MemberCard"
 import InviteMember from "./invite-team/InviteMember"
 
@@ -17,9 +15,7 @@ const InviteTeam = ({ title }: { title: string }) => {
   const { user } = useUserState()
   const { notification, hideNotification, showNotification } = useNotification()
   const { getMembers, clearMembers } = useCompanyMembersAction()
-  const { company_members, error } = useCompanyMembersState()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(!stringHelper.isEmpty(error))
+  const { company_members } = useCompanyMembersState()
 
   useEffect(() => {
     if (user.company_id && company_members.length < 1) {
@@ -73,8 +69,6 @@ const InviteTeam = ({ title }: { title: string }) => {
               ))}
           </div>
         </div>
-
-        <Toast onHide={hideError} show={errorMessage} label={error} />
       </Modal>
     </>
   )

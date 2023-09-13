@@ -6,8 +6,11 @@ import {
   LocalStorageItemEnum,
   localStorageHelper,
 } from "helper/localStorageHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useIndustryAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(IndustryContext)
   const { getAllIndustries } = useIndustryService()
 
@@ -32,6 +35,11 @@ export function useIndustryAction() {
       if (error) {
         dispatch({
           type: IndustryActionEnum.GET_INDUSTRIES_FAILURE,
+        })
+
+        notify({
+          message: "Failed to fetch industries",
+          type: "warning",
         })
       } else {
         dispatch({

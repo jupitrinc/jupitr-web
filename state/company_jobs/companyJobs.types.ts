@@ -8,7 +8,7 @@ export interface ICompanyJobsContext {
 export type CompanyJobsState = {
   data: ICompanyJobs
   loading: boolean
-  error: string
+  success: boolean
 }
 
 export type ICompanyJobs = ICompanyJob[]

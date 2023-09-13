@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -9,16 +9,12 @@ import { Toast } from "ui-library/toast/Toast"
 import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
-import { stringHelper } from "helper/stringHelper"
 
 export const SignIn = () => {
-  const { isEmpty } = stringHelper
   const [email, setEmail] = useState("")
-  const { loading, error } = useUserState()
+  const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
-  const { notification, showNotification, hideNotification } = useNotification(
-    !isEmpty(error)
-  )
+
   const {
     notification: otpError,
     showNotification: showOtpError,
@@ -31,26 +27,13 @@ export const SignIn = () => {
     }
   }, [])
 
-  const onHide = () => {
-    hideNotification()
-  }
-
   const loginWithEmail = useCallback(
     async (e) => {
       e.preventDefault()
       await signInWithEmail(email)
-      showNotification()
     },
     [email]
   )
-
-  const errorMessage = useMemo(() => {
-    if (!isEmpty(error)) {
-      return error
-    } else {
-      return "Sign in using the link sent to your inbox"
-    }
-  }, [error])
 
   return (
     <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
@@ -88,7 +71,6 @@ export const SignIn = () => {
         disabled={loading}
       />
 
-      <Toast show={notification} onHide={onHide} label={errorMessage} />
       <Toast
         show={otpError}
         onHide={hideOtpError}

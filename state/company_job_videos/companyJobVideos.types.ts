@@ -5,7 +5,6 @@ export interface ICompanyJobVideosContext {
 
 export type CompanyJobVideosState = {
   loading: boolean
-  error: string
   success: boolean
 }
 

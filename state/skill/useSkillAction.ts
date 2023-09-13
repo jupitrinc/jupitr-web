@@ -8,8 +8,11 @@ import {
 } from "helper/localStorageHelper"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 import { stringHelper } from "helper/stringHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useSkillAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(SkillContext)
   const {
     getAllSkills,
@@ -39,7 +42,11 @@ export function useSkillAction() {
       if (error) {
         dispatch({
           type: SkillActionEnum.GET_SKILLS_FAILURE,
-          payload: error.message,
+        })
+
+        notify({
+          message: "Failed to fetch skills",
+          type: "warning",
         })
       } else {
         dispatch({
@@ -62,7 +69,11 @@ export function useSkillAction() {
     if (error) {
       dispatch({
         type: SkillActionEnum.SEARCH_SKILL_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: "Failed to fetch skills",
+        type: "warning",
       })
     } else {
       dispatch({
@@ -85,6 +96,11 @@ export function useSkillAction() {
       dispatch({
         type: SkillActionEnum.ADD_SKILL_FAILURE,
         payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
 
       return null

@@ -7,7 +7,6 @@ export interface ITalentApplicationContext {
 
 export type TalentApplicationState = {
   loading: boolean
-  error: string
   success: boolean
 }
 

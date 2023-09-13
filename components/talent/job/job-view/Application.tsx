@@ -5,7 +5,6 @@ import { Avatar } from "ui-library/avatar/avatar/Avatar"
 import { Modal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import { Toast } from "ui-library/toast/Toast"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
 import { useNotification } from "helper/hooks/useNotification"
@@ -20,7 +19,6 @@ import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/
 import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
-import { stringHelper } from "helper/stringHelper"
 
 const Application = () => {
   const router = useRouter()
@@ -42,9 +40,7 @@ const Application = () => {
     useState<RecordingStatus>("inactive")
 
   const { addApplication } = useTalentApplicationAction()
-  const { success, error, loading } = useTalentApplicationState()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(!stringHelper.isEmpty(error))
+  const { success, loading } = useTalentApplicationState()
 
   const submitApplication = useCallback(() => {
     if (!videoFile) return
@@ -193,7 +189,6 @@ const Application = () => {
             </div>
           )}
         </div>
-        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
     </>
   )

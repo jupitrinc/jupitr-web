@@ -6,7 +6,6 @@ export interface ISkillContext {
 export type SkillState = {
   data: skill[]
   loading: boolean
-  error: string
 }
 
 type skill = { id: string; name: string }

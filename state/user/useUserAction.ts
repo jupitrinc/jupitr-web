@@ -15,8 +15,11 @@ import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useUserAction() {
+  const { notify } = useNotificationAction()
+
   const { clear } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
   const { toBase64 } = imageHelper
@@ -38,10 +41,20 @@ export function useUserAction() {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithOtp(email)
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+
+      notify({
+        message: error.message,
+        type: "warning",
+      })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
+
+      notify({
+        message: "Sign in using the link sent to your inbox",
+        type: "info",
       })
     }
   }
@@ -50,7 +63,12 @@ export function useUserAction() {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithGoogleService()
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+
+      notify({
+        message: error.message,
+        type: "warning",
+      })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
@@ -64,7 +82,11 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.GET_USER_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -91,9 +113,13 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
-        payload: error.message.includes("non-2xx status")
+      })
+
+      notify({
+        message: error.message.includes("non-2xx status")
           ? "You already have an account. Sign in"
           : error.message,
+        type: "warning",
       })
 
       return null
@@ -117,7 +143,7 @@ export function useUserAction() {
   }
 
   const updateName = async (id: string, name: string) => {
-    const { data, error } = await updateUser(id, { name: name })
+    const { data } = await updateUser(id, { name: name })
 
     if (data) {
       dispatch({
@@ -135,12 +161,20 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
-        payload: "Check your inbox and confirm your email update request.",
+      })
+
+      notify({
+        message: "Check your inbox and confirm your email update request.",
+        type: "info",
       })
 
       signOut()
@@ -156,7 +190,11 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.UPDATE_EMAIL_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -224,6 +262,11 @@ export function useUserAction() {
       })
       clear()
       router.replace("/")
+
+      notify({
+        message: "Account deleted",
+        type: "info",
+      })
     }
   }
 

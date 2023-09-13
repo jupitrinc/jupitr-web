@@ -8,7 +8,6 @@ import { useNotification } from "helper/hooks/useNotification"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
 import { Button } from "ui-library/button/Button"
-import { Toast } from "ui-library/toast/Toast"
 import { useCompanyJobVideosState } from "state/company_job_videos/useCompanyJobVideosState"
 import { useCompanyJobVideosAction } from "state/company_job_videos/useCompanyJobVideosAction"
 import { useUserState } from "state/user/useUserState"
@@ -19,12 +18,10 @@ const AddVideos = () => {
   const { company_job, videos } = useCompanyJobState()
 
   const [videoFile, setVideoFile] = useState<File | null>(null)
-  const { loading, error, success } = useCompanyJobVideosState()
+  const { loading, success } = useCompanyJobVideosState()
   const { addVideo } = useCompanyJobVideosAction()
 
   const { notification, showNotification, hideNotification } = useNotification()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(Boolean(error))
 
   const handleAddVideo = useCallback(() => {
     if (!videoFile) return
@@ -79,8 +76,6 @@ const AddVideos = () => {
             </div>
           )}
         </div>
-
-        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
 
       <InviteTeam title="Add team" />

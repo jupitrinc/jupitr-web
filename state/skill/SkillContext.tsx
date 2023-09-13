@@ -9,7 +9,6 @@ export const SkillContextProvider: React.FC<any> = ({ children }) => {
   const initialState: SkillState = {
     data: [] as ISkill[],
     loading: false,
-    error: "",
   }
   const [state, dispatch] = useReducer(companyProfileReducer, initialState)
 

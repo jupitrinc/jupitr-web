@@ -4,20 +4,14 @@ import { useCompanyJobApplicationAction } from "state/company_job_application/us
 import { useCompanyJobApplicationState } from "state/company_job_application/useCompanyJobApplicationState"
 import ApplicationCard from "./job-applications/ApplicationCard"
 import { Loader } from "ui-library/loader/Loader"
-import { useNotification } from "helper/hooks/useNotification"
-import { stringHelper } from "helper/stringHelper"
-import { Toast } from "ui-library/toast/Toast"
 import Header from "./job-applications/Header"
 
 export const JobApplications = () => {
   const router = useRouter()
-  const { isEmpty } = stringHelper
   const { jobId } = router.query
-  const { company_job_applications, loading, error } =
-    useCompanyJobApplicationState()
+  const { company_job_applications, loading } = useCompanyJobApplicationState()
   const { getAllApplications, clearApplications } =
     useCompanyJobApplicationAction()
-  const { notification, hideNotification } = useNotification(!isEmpty(error))
 
   useEffect(() => {
     if (jobId && !company_job_applications.id) {
@@ -41,12 +35,6 @@ export const JobApplications = () => {
             <ApplicationCard key={application.id} application={application} />
           ))}
       </div>
-
-      <Toast
-        onHide={hideNotification}
-        show={notification}
-        label={"Oops, something went wrong. Try refreshing the page."}
-      />
     </div>
   )
 }

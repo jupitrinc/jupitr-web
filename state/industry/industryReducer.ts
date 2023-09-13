@@ -20,14 +20,12 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: true,
-        error: false,
       }
 
     case IndustryActionEnum.GET_INDUSTRIES_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
         data: [],
       }
 
@@ -37,7 +35,6 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: false,
-        error: false,
         data: action.payload as IIndustry[],
       }
 

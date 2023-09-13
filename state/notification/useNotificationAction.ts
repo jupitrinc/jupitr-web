@@ -6,10 +6,8 @@ import { stringHelper } from "helper/stringHelper"
 export function useNotificationAction() {
   const { dispatch } = useContext(NotificationContext)
 
-  const showNotification = async (payload: Omit<INotification, "id">) => {
+  const notify = async (payload: Omit<INotification, "id">) => {
     if (!payload.message || !payload.type) return
-
-    console.log("show notification")
 
     dispatch({
       type: NotificationActionEnum.SHOW_NOTIFICATION,
@@ -27,7 +25,7 @@ export function useNotificationAction() {
   }
 
   return {
-    showNotification,
+    notify,
     hideNotification,
   }
 }

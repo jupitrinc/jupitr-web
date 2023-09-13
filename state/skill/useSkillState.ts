@@ -7,6 +7,5 @@ export const useSkillState = () => {
   return {
     skills: useMemo(() => state.data, [state.data]),
     loading: state.loading,
-    error: state.error,
   }
 }

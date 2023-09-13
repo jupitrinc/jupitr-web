@@ -5,8 +5,11 @@ import {
 } from "./companyMemberProfile.types"
 import { UserContext } from "state/user/UserContextProvider"
 import useCompanyMemberService from "services/company/useCompanyMemberService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyMemberProfileAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(UserContext)
   const { updateProfile } = useCompanyMemberService()
 
@@ -26,6 +29,13 @@ export function useCompanyMemberProfileAction() {
       dispatch({
         type: CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE,
         payload: data.job_title,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: "Failed to update name",
+        type: "warning",
       })
     }
   }

@@ -7,6 +7,5 @@ export const useIndustryState = () => {
   return {
     industries: useMemo(() => state.data, [state.data]),
     loading: state.loading,
-    error: state.error,
   }
 }

@@ -2,8 +2,11 @@ import { useContext } from "react"
 import { CompanyJobsActionEnum, ICompanyJobs } from "./companyJobs.types"
 import { CompanyJobsContext } from "./CompanyJobsContext"
 import useCompanyJobService from "services/company/useCompanyJobService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobsAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobsContext)
 
   const { getAllJobs: getJobsService } = useCompanyJobService()
@@ -20,7 +23,11 @@ export function useCompanyJobsAction() {
     if (error) {
       dispatch({
         type: CompanyJobsActionEnum.GET_COMPANY_JOBS_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else if (data) {
       dispatch({

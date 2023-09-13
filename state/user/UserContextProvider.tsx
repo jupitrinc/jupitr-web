@@ -8,7 +8,6 @@ export const UserContextProvider: React.FC<any> = ({ children }) => {
   const initialState: UserState = {
     data: {} as ISuperUser,
     loading: false,
-    error: "",
   }
 
   const [state, dispatch] = useReducer(userReducer, initialState)

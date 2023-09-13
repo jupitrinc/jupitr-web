@@ -7,7 +7,7 @@ export const useCompanyJobsState = () => {
   return {
     company_jobs: state.data,
     loading: state.loading,
-    error: state.error,
+    success: state.success,
 
     company_jobs_open: useMemo(
       () => state.data.filter((job) => job.status === "open"),

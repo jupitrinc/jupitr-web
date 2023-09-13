@@ -14,7 +14,6 @@ export const CompanyJobVideosContextProvider: React.FC<any> = ({
 }) => {
   const initialState: CompanyJobVideosState = {
     loading: false,
-    error: "",
     success: false,
   }
   const [state, dispatch] = useReducer(companyJobVideosReducer, initialState)
