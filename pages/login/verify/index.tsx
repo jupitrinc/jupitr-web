@@ -5,6 +5,7 @@ import { useUserAction } from "state/user/useUserAction"
 import { useRouter } from "next/router"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { Session } from "@supabase/supabase-js"
+import { localStorageHelper } from "../../../helper/localStorageHelper"
 
 export const Verify = () => {
   const { setUser, updateEmail } = useUserAction()
@@ -34,11 +35,14 @@ export const Verify = () => {
   }, [supabaseClientComponent])
 
   const redirectUser = (userData: IUser) => {
-    if (userData.account_type === AccountTypeEnum.talent) {
-      router.push("/jobs")
-    } else if (userData.account_type === AccountTypeEnum.company) {
-      router.push("/c/jobs")
-    }
+    const jobId = localStorageHelper.getItem("jobId")
+    const basePath =
+      userData.account_type === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
+    const path = jobId ? `${basePath}/${jobId}` : basePath
+    setTimeout(() => {
+      localStorageHelper.removeItem("jobId")
+    }, 1000)
+    return router.push(path)
   }
 
   const changeEmailIfRequested = (custoDB: IUser, supabase: Session) => {
