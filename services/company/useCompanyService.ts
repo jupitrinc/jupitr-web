@@ -3,37 +3,39 @@ import {
   CreateCompanyPayload,
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
-import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
+import { getError } from "../_supabase/edgeFunctions"
 
 const useCompanyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "create-company",
       {
         body: payload,
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "addCompany")
+    if (err) {
+      const error = await getError(err, "addCompany")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
 
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "update-company",
       {
         body: payload,
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "updateCompanyProfile")
+    if (err) {
+      const error = await getError(err, "updateCompanyProfile")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
 
   const getCompanyProfile = async (id: string) => {

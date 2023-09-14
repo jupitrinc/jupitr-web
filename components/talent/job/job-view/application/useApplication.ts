@@ -8,7 +8,7 @@ export const useApplication = (data: ISkill[]) => {
 
   useEffect(() => {
     if (skills.length < 1) {
-      const prepareSkills = data.map((item) => {
+      const prepareSkills = data?.map((item) => {
         return { ...item, level: 1 }
       })
 

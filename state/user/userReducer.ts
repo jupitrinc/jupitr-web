@@ -30,7 +30,6 @@ export const userReducer = (
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
     case UserActionEnum.GET_USER_BEGIN:
-    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
     case UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN:
     case UserActionEnum.UPDATE_EMAIL_BEGIN:
     case UserActionEnum.DELETE_USER_BEGIN:
@@ -50,13 +49,21 @@ export const userReducer = (
         loading: false,
       }
 
-    case UserActionEnum.SIGN_IN_SUCCESS:
+    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        success: false,
+      }
+
     case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
       return {
         ...state,
         loading: false,
+        success: true,
       }
 
+    case UserActionEnum.SIGN_IN_SUCCESS:
     case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
       return {
         ...state,
@@ -129,7 +136,7 @@ export const userReducer = (
           active: toggle_user_payload,
         },
       }
-      setItem(LocalStorageItemEnum.user, toggle_user_state)
+      setItem(LocalStorageItemEnum.user, toggle_user_state.data)
       return toggle_user_state
 
     case UserActionEnum.DELETE_USER_SUCCESS:

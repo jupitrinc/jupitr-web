@@ -1,11 +1,11 @@
 import { useRouter } from "next/router"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
+import { Loading } from "ui-library/content/loading/Loading"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
-import Loading from "./components/Loading"
 import PageHead from "./components/PageHead"
 
 export const TalentAppLayout = ({

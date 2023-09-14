@@ -6,12 +6,12 @@ import { Text } from "ui-library/text/Text"
 import { Divider } from "ui-library/content/divider/Divider"
 import { useAccountSettings } from "./useAccountSettings"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
-import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
 import { emailHelper } from "helper/emailHelper"
-import Setting from "./Setting"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import Setting from "./Setting"
+import AccountResume from "../account-deactivation/AccountResume"
 
 const AccountSettings = () => {
   const { loading } = useUserState()
@@ -105,7 +105,7 @@ const AccountSettings = () => {
           </Modal>
         </div>
       </Card>
-      <AccountDeactivation />
+      <AccountResume />
     </>
   )
 }

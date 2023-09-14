@@ -97,6 +97,8 @@ export function useUserAction() {
   }
 
   const setUser = (user: IUser) => {
+    dispatch({ type: UserActionEnum.GET_USER_BEGIN })
+
     dispatch({
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
@@ -116,19 +118,15 @@ export function useUserAction() {
       })
 
       notify({
-        message: error.message.includes("non-2xx status")
-          ? "You already have an account. Sign in"
-          : error.message,
+        message: error.message,
         type: "warning",
       })
-
-      return null
     } else {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
 
-      return company.email
+      await signInWithEmail(company.email)
     }
   }
 
@@ -205,6 +203,8 @@ export function useUserAction() {
   }
 
   const toggleActive = async (id: string, active: boolean) => {
+    if (!id) return
+
     const { data, error } = await updateUser(id, { active: !active })
 
     if (data) {
@@ -265,8 +265,8 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.DELETE_USER_SUCCESS,
       })
-      clear()
-      router.replace("/")
+
+      signOut()
 
       notify({
         message: "Account deleted",

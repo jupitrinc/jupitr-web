@@ -45,7 +45,6 @@ const useAuthService = () => {
 
   const deleteAccount = async () => {
     const userSession = await supabaseClientComponent.auth.getSession()
-    signOut()
     return await deleteUser(userSession.data.session!.access_token)
   }
 

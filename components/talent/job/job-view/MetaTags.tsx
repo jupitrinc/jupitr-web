@@ -14,7 +14,7 @@ const MetaTags = ({ job }: props) => {
       return skill.name
     })
 
-    return skills.join(", ")
+    return skills?.join(", ")
   }, [job.skills])
 
   return (
@@ -24,7 +24,7 @@ const MetaTags = ({ job }: props) => {
       keywords={`${description}, tech, job`}
       robots="index, nofollow"
       image={urlHelper.imageUrl(job.company.logo)}
-      video={urlHelper.videoUrl(job.company_videos[0].video_url)}
+      video={urlHelper.videoUrl(job.company_videos[0]?.video_url)}
     />
   )
 }

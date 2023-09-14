@@ -1,6 +1,6 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { Database } from "../_supabase/database"
-import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
+import { getError } from "../_supabase/edgeFunctions"
 
 const useUserService = () => {
   const getUser = async (access_token: string) => {
@@ -20,7 +20,7 @@ const useUserService = () => {
     return { data, error }
   }
   const deleteUser = async (access_token: string) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "user-deletion",
       {
         headers: {
@@ -29,11 +29,12 @@ const useUserService = () => {
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "deleteUser")
+    if (err) {
+      const error = await getError(err, "deleteUser")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
   const updateUser = async (
     id: string,
