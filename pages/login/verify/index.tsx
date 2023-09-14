@@ -41,7 +41,7 @@ export const Verify = () => {
     const path = jobId ? `${basePath}/${jobId}` : basePath
     setTimeout(() => {
       localStorageHelper.removeItem("jobId")
-    }, 3000)
+    }, 1000)
     return router.push(path)
   }
 

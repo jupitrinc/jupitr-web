@@ -11,6 +11,7 @@ import Details from "./job-view/Details"
 import CoverVideo from "./job-view/videos/CoverVideo"
 import Loading from "layouts/components/Loading"
 import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
+import { localStorageHelper } from "../../../helper/localStorageHelper"
 
 const JobView = () => {
   const router = useRouter()
@@ -21,10 +22,12 @@ const JobView = () => {
   const { getJob, clearJob } = useTalentJobAction()
 
   useEffect(() => {
+    if (localStorageHelper.getItem("jobId")) {
+      localStorageHelper.removeItem("jobId")
+    }
     if (jobId && !talent_job.id) {
       getJob(String(jobId))
     }
-
     return () => {
       clearJob()
     }
