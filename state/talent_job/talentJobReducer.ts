@@ -14,7 +14,6 @@ export const talentJobReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ITalentJob,
       }
 
@@ -22,7 +21,6 @@ export const talentJobReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
         data: {} as ITalentJob,
         success: false,
       }
@@ -31,14 +29,12 @@ export const talentJobReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case TalentJobActionEnum.GET_JOB_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ITalentJob,
       }
 
@@ -46,7 +42,6 @@ export const talentJobReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: {} as ITalentJob,
       }
 

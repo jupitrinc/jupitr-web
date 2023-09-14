@@ -6,20 +6,15 @@ import { useCompanyMembersAction } from "state/company_members/useCompanyMembers
 import { useUserState } from "state/user/useUserState"
 import { AvatarGroup } from "ui-library/avatar/avatar-group/AvatarGroup"
 import { urlHelper } from "helper/urlHelper"
-import { Modal } from "ui-library/modal/Modal"
-import { useNotification } from "helper/hooks/useNotification"
-import { Toast } from "ui-library/toast/Toast"
-import { stringHelper } from "helper/stringHelper"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import MemberCard from "./invite-team/MemberCard"
 import InviteMember from "./invite-team/InviteMember"
 
 const InviteTeam = ({ title }: { title: string }) => {
   const { user } = useUserState()
-  const { notification, hideNotification, showNotification } = useNotification()
+  const { modal, showModal, hideModal } = useModal()
   const { getMembers, clearMembers } = useCompanyMembersAction()
-  const { company_members, error } = useCompanyMembersState()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(!stringHelper.isEmpty(error))
+  const { company_members } = useCompanyMembersState()
 
   useEffect(() => {
     if (user.company_id && company_members.length < 1) {
@@ -46,7 +41,7 @@ const InviteTeam = ({ title }: { title: string }) => {
 
   return (
     <>
-      <Card type="linked" onClick={showNotification}>
+      <Card type="linked" onClick={showModal}>
         <div className="flex flex-col gap-1 justify-center items-center">
           <div className="h-10">
             <AvatarGroup max_number={3} avatars={avatars} />
@@ -58,7 +53,7 @@ const InviteTeam = ({ title }: { title: string }) => {
         </div>
       </Card>
 
-      <Modal open={notification} onClose={hideNotification}>
+      <Modal open={modal} onClose={hideModal}>
         <div className="flex flex-col gap-10 max-h-[30rem] md:max-h-[40rem]">
           <Text as="span" size="xl">
             {title}
@@ -73,8 +68,6 @@ const InviteTeam = ({ title }: { title: string }) => {
               ))}
           </div>
         </div>
-
-        <Toast onHide={hideError} show={errorMessage} label={error} />
       </Modal>
     </>
   )

@@ -7,6 +7,5 @@ export const useCompanyMembersState = () => {
   return {
     company_members: useMemo(() => state.data, [state.data]),
     loading: state.loading,
-    error: state.error,
   }
 }

@@ -10,8 +10,11 @@ import useCompanyJobVideoService from "services/company/useCompanyJobVideoServic
 import { CompanyJobContext } from "state/company_job/CompanyJobContext"
 import { CompanyJobActionEnum } from "state/company_job/companyJob.types"
 import { storageFolderHelper } from "helper/storageFolderHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobVideosAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobVideosContext)
   const { dispatch: companyJobDispatch } = useContext(CompanyJobContext)
   const { uploadVideo } = useMediaService()
@@ -31,7 +34,11 @@ export function useCompanyJobVideosAction() {
     ) {
       dispatch({
         type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-        payload: "Something went wrong, try again",
+      })
+
+      notify({
+        message: "Something went wrong, try again",
+        type: "warning",
       })
 
       return
@@ -47,9 +54,9 @@ export function useCompanyJobVideosAction() {
     })
 
     if (upload_error) {
-      dispatch({
-        type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-        payload: upload_error,
+      notify({
+        message: upload_error,
+        type: "warning",
       })
     } else {
       const cdn_video = upload_data.public_id
@@ -63,9 +70,13 @@ export function useCompanyJobVideosAction() {
       if (error) {
         dispatch({
           type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-          payload: error.message.includes("company_videos_video_url")
+        })
+
+        notify({
+          message: error.message.includes("company_videos_video_url")
             ? "You have already added a video for this job"
             : error.message,
+          type: "warning",
         })
       } else {
         companyJobDispatch({
@@ -89,6 +100,11 @@ export function useCompanyJobVideosAction() {
       companyJobDispatch({
         type: CompanyJobActionEnum.DELETE_JOB_VIDEO,
         payload: video_id,
+      })
+    } else {
+      notify({
+        message: "Couldn't delete the video at this moment. Try again later",
+        type: "warning",
       })
     }
   }

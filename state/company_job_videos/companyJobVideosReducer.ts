@@ -13,7 +13,6 @@ export const companyJobVideosReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
         success: false,
       }
 
@@ -21,14 +20,12 @@ export const companyJobVideosReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case CompanyJobVideosActionEnum.ADD_VIDEO_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
         success: true,
       }
 

@@ -59,6 +59,7 @@ const Toolbar = () => {
         variant="text"
         icon={<Eye className="h-4 w-4" />}
         onClick={previewJob}
+        disabled={company_job.status !== "open"}
       />
       <MenuBar options={options} max_number={0} variant="text" size="xs" />
     </div>

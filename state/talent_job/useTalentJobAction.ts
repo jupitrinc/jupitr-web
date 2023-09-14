@@ -29,7 +29,6 @@ export function useTalentJobAction() {
     if (error) {
       dispatch({
         type: TalentJobActionEnum.GET_JOB_FAILURE,
-        payload: error.message,
       })
     } else {
       dispatch({

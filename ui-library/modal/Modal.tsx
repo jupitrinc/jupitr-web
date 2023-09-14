@@ -4,8 +4,9 @@ import { ModalProps } from "./Modal.types"
 import { Button } from "ui-library/button/Button"
 import { modalStyles } from "./Modal.styles"
 import { X } from "lucide-react"
+import { useModal } from "./useModal"
 
-export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
   const styles = modalStyles
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -52,3 +53,5 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
     </Transition.Root>
   )
 }
+
+export { Modal, useModal }

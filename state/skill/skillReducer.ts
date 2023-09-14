@@ -12,7 +12,6 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
       }
 
     case SkillActionEnum.GET_SKILLS_FAILURE:
@@ -21,7 +20,6 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case SkillActionEnum.GET_SKILLS_SUCCESS:
@@ -29,7 +27,6 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ISkill[],
       }
 
@@ -39,7 +36,6 @@ export const companyProfileReducer = (
       const add_skill_state = {
         ...state,
         loading: false,
-        error: "",
         data: [...state.data, add_skill_payload],
       }
       return add_skill_state

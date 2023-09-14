@@ -9,8 +9,11 @@ import {
   UpdateRolePayload,
 } from "./companyMembers.types"
 import { ISuperUser } from "state/user/user.types"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyMembersAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyMembersContext)
   const {
     getMembers: getMembersService,
@@ -31,7 +34,11 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.GET_MEMBERS_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -53,12 +60,20 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.ADD_MEMBER_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
         type: CompanyMembersActionEnum.ADD_MEMBER_SUCCESS,
-        payload: "Member invited",
+      })
+
+      notify({
+        message: "Member invited",
+        type: "success",
       })
     }
   }
@@ -75,7 +90,11 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -97,12 +116,21 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.DELETE_MEMBER_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
         type: CompanyMembersActionEnum.DELETE_MEMBER_SUCCESS,
         payload: payload.user_id as ICompanyMember["user_id"],
+      })
+
+      notify({
+        message: "Member removed",
+        type: "success",
       })
     }
   }

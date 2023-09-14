@@ -12,13 +12,14 @@ import CoverVideo from "./job-view/videos/CoverVideo"
 import Loading from "layouts/components/Loading"
 import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
+import MetaTags from "./job-view/MetaTags"
 
 const JobView = () => {
   const router = useRouter()
   const { jobId } = router.query
   const { user } = useUserState()
 
-  const { talent_job, loading, error } = useTalentJobState()
+  const { talent_job, loading } = useTalentJobState()
   const { getJob, clearJob } = useTalentJobAction()
 
   useEffect(() => {
@@ -38,6 +39,8 @@ const JobView = () => {
   } else if (talent_job.id) {
     return (
       <div className="flex flex-col gap-10 flex-wrap">
+        <MetaTags job={talent_job} />
+
         <CoverVideo />
         <TitleBar />
 
@@ -48,7 +51,7 @@ const JobView = () => {
         <Videos />
       </div>
     )
-  } else if (error) {
+  } else {
     return (
       <NoMatchFound
         message="Job no longer available"

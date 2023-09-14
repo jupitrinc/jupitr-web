@@ -37,7 +37,6 @@ export const userReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
       }
 
     case UserActionEnum.SIGN_IN_FAILURE:
@@ -49,7 +48,6 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case UserActionEnum.SIGN_IN_SUCCESS:
@@ -57,14 +55,12 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
       }
 
     case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case UserActionEnum.GET_USER_SUCCESS:
@@ -73,7 +69,6 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ISuperUser,
       }
 
@@ -103,7 +98,6 @@ export const userReducer = (
       const update_email_state = {
         ...state,
         loading: false,
-        error: "",
         data: {
           ...state.data,
           email: update_email_payload,
@@ -142,7 +136,6 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: "Account deleted",
         data: {} as ISuperUser,
       }
 

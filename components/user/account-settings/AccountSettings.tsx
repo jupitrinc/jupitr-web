@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
@@ -9,38 +9,24 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import AccountDeactivation from "../account-deactivation/AccountDeactivation"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
-import { Toast } from "ui-library/toast/Toast"
-import { useNotification } from "helper/hooks/useNotification"
-import { stringHelper } from "helper/stringHelper"
 import { emailHelper } from "helper/emailHelper"
 import Setting from "./Setting"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 const AccountSettings = () => {
-  const { user, error, loading } = useUserState()
+  const { loading } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
-  const { notification, showNotification, hideNotification } = useNotification(
-    !stringHelper.isEmpty(error)
-  )
-  const [emailValidationError, setEmailValidationError] = useState("")
+  const { notify } = useNotificationAction()
 
-  const onEmailChange = () => {
-    if (emailHasErrors()) {
-      showNotification()
+  const onEmailChange = useCallback(() => {
+    if (!email.trim() || emailHelper.isEmailValid(email) === false) {
+      notify({ message: "Please provide a valid email", type: "warning" })
     } else {
       settingModal[activeSetting].onConfirm(email)
       setEmail("")
     }
-  }
-
-  const emailHasErrors = () => {
-    if (!email.trim() || emailHelper.isEmailValid(email) === false) {
-      setEmailValidationError("Please provide a valid email")
-      return true
-    } else {
-      return false
-    }
-  }
+  }, [email])
 
   const onClose = () => {
     settingModal.onClose()
@@ -116,12 +102,6 @@ const AccountSettings = () => {
                 )}
               </div>
             </div>
-
-            <Toast
-              show={notification}
-              onHide={hideNotification}
-              label={emailValidationError ? emailValidationError : error}
-            />
           </Modal>
         </div>
       </Card>

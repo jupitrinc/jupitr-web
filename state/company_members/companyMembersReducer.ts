@@ -17,7 +17,6 @@ export const companyMembersReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
       }
 
     case CompanyMembersActionEnum.GET_MEMBERS_FAILURE:
@@ -27,14 +26,12 @@ export const companyMembersReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case CompanyMembersActionEnum.GET_MEMBERS_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ICompanyMember[],
       }
 
@@ -52,7 +49,6 @@ export const companyMembersReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: data,
       }
 
@@ -60,7 +56,6 @@ export const companyMembersReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case CompanyMembersActionEnum.DELETE_MEMBER_SUCCESS:
@@ -68,7 +63,6 @@ export const companyMembersReducer = (
         ...state,
         data: [...state.data.filter((user) => user.user_id !== action.payload)],
         loading: false,
-        error: "Member removed",
       }
 
     case CompanyMembersActionEnum.CLEAR_MEMBERS:

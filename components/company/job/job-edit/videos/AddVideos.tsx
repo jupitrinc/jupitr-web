@@ -3,12 +3,10 @@ import { Plus } from "lucide-react"
 import { Text } from "ui-library/text/Text"
 import { Card } from "ui-library/content/card/Card"
 import InviteTeam from "components/company/member/InviteTeam"
-import { Modal } from "ui-library/modal/Modal"
-import { useNotification } from "helper/hooks/useNotification"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
 import { Button } from "ui-library/button/Button"
-import { Toast } from "ui-library/toast/Toast"
 import { useCompanyJobVideosState } from "state/company_job_videos/useCompanyJobVideosState"
 import { useCompanyJobVideosAction } from "state/company_job_videos/useCompanyJobVideosAction"
 import { useUserState } from "state/user/useUserState"
@@ -18,13 +16,11 @@ const AddVideos = () => {
   const { user } = useUserState()
   const { company_job, videos } = useCompanyJobState()
 
-  const [videoFile, setVideoFile] = useState<File | null>(null)
-  const { loading, error, success } = useCompanyJobVideosState()
-  const { addVideo } = useCompanyJobVideosAction()
+  const { modal, showModal, hideModal } = useModal()
 
-  const { notification, showNotification, hideNotification } = useNotification()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(Boolean(error))
+  const [videoFile, setVideoFile] = useState<File | null>(null)
+  const { loading, success } = useCompanyJobVideosState()
+  const { addVideo } = useCompanyJobVideosAction()
 
   const handleAddVideo = useCallback(() => {
     if (!videoFile) return
@@ -38,13 +34,13 @@ const AddVideos = () => {
   }, [videoFile, user, company_job])
 
   useEffect(() => {
-    success && hideNotification()
+    success && hideModal()
   }, [success])
 
   return (
     <div className="grid grid-cols-2 gap-5 justify-center">
       {videos && videos.length < 10 && (
-        <Card type="linked" onClick={showNotification} justifyContent="center">
+        <Card type="linked" onClick={showModal} justifyContent="center">
           <div className="flex flex-col gap-1 justify-center items-center self-center">
             <Plus className="h-5 w-5 text-gray-600" />
             <Text as="span" size="base">
@@ -54,7 +50,7 @@ const AddVideos = () => {
         </Card>
       )}
 
-      <Modal open={notification} onClose={hideNotification}>
+      <Modal open={modal} onClose={hideModal}>
         <div className="flex flex-col gap-5">
           <Text as="span" size="xl">
             Add video
@@ -79,8 +75,6 @@ const AddVideos = () => {
             </div>
           )}
         </div>
-
-        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
 
       <InviteTeam title="Add team" />

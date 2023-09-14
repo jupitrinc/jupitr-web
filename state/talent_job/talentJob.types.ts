@@ -14,7 +14,6 @@ export interface ITalentJobContext {
 export type TalentJobState = {
   data: ITalentJob
   loading: boolean
-  error: string
   success: boolean
 }
 

@@ -2,13 +2,11 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { Check } from "lucide-react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Modal } from "ui-library/modal/Modal"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import { Toast } from "ui-library/toast/Toast"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
-import { useNotification } from "helper/hooks/useNotification"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { urlHelper } from "helper/urlHelper"
@@ -20,13 +18,12 @@ import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/
 import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
-import { stringHelper } from "helper/stringHelper"
 
 const Application = () => {
   const router = useRouter()
   const { user } = useUserState()
   const { talent_job } = useTalentJobState()
-  const { notification, showNotification, hideNotification } = useNotification()
+  const { modal, showModal, hideModal } = useModal()
   const {
     progress,
     step,
@@ -42,9 +39,7 @@ const Application = () => {
     useState<RecordingStatus>("inactive")
 
   const { addApplication } = useTalentApplicationAction()
-  const { success, error, loading } = useTalentApplicationState()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(!stringHelper.isEmpty(error))
+  const { success, loading } = useTalentApplicationState()
 
   const submitApplication = useCallback(() => {
     if (!videoFile) return
@@ -65,8 +60,7 @@ const Application = () => {
   }, [success])
 
   const startApplication = () => {
-    if (user.id && user.account_type === AccountTypeEnum.talent)
-      showNotification()
+    if (user.id && user.account_type === AccountTypeEnum.talent) showModal()
     else router.push(`/?jobId=${talent_job.id}`)
   }
 
@@ -82,7 +76,7 @@ const Application = () => {
         />
       )}
 
-      <Modal open={notification} onClose={hideNotification}>
+      <Modal open={modal} onClose={hideModal}>
         <div className="h-[30rem] md:h-[40rem]">
           <div className="overflow-y-scroll h-full flex flex-col px-1">
             <div className="flex flex-row gap-5 items-center">
@@ -193,7 +187,6 @@ const Application = () => {
             </div>
           )}
         </div>
-        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
     </>
   )

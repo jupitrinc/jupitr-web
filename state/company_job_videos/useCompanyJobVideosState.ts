@@ -6,7 +6,6 @@ export const useCompanyJobVideosState = () => {
 
   return {
     loading: state.loading,
-    error: state.error,
     success: state.success,
   }
 }

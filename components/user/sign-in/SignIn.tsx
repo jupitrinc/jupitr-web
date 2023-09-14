@@ -1,72 +1,49 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
 import { LightForm } from "ui-library/form/light-form/LightForm"
 import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
-import { Toast } from "ui-library/toast/Toast"
-import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
-import { stringHelper } from "helper/stringHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 import { useRouter } from "next/router"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
 
 export const SignIn = () => {
-  const { isEmpty } = stringHelper
   const [email, setEmail] = useState("")
-  const { loading, error } = useUserState()
+  const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
-  const { notification, showNotification, hideNotification } = useNotification(
-    !isEmpty(error)
-  )
+  const { notify } = useNotificationAction()
   const router = useRouter()
   const { jobId } = router.query
-  const {
-    notification: otpError,
-    showNotification: showOtpError,
-    hideNotification: hideOtpError,
-  } = useNotification()
-
   useEffect(() => {
     if (window.location.href.includes("error_code")) {
-      showOtpError()
+      notify({
+        message: "Email link is invalid or has expired. Sign in again.",
+        type: "warning",
+      })
     }
   }, [])
-
-  const onHide = () => {
-    hideNotification()
-  }
-
-  const saveJobId = useCallback(() => {
+ const saveJobId = useCallback(() => {
     if (jobId) {
       localStorageHelper.setItem("jobId", jobId)
     }
   }, [jobId])
-
   const loginWithEmail = useCallback(
     async (e) => {
       e.preventDefault()
       saveJobId()
       await signInWithEmail(email)
-      showNotification()
     },
     [email]
   )
-  const loginWithGoogle = async (e) => {
+const loginWithGoogle = async (e) => {
     e.preventDefault()
     saveJobId()
     await signInWithGoogle()
   }
-  const errorMessage = useMemo(() => {
-    if (!isEmpty(error)) {
-      return error
-    } else {
-      return "Sign in using the link sent to your inbox"
-    }
-  }, [error])
-
   return (
     <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
       <Text as="h1" size="xl2">
@@ -101,13 +78,6 @@ export const SignIn = () => {
         onClick={loginWithGoogle}
         variant="contained"
         disabled={loading}
-      />
-
-      <Toast show={notification} onHide={onHide} label={errorMessage} />
-      <Toast
-        show={otpError}
-        onHide={hideOtpError}
-        label={"Email link is invalid or has expired. Sign in again."}
       />
     </div>
   )
