@@ -8,13 +8,16 @@ import { Text } from "ui-library/text/Text"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import { useRouter } from "next/router"
+import { localStorageHelper } from "../../../helper/localStorageHelper"
 
 export const SignIn = () => {
   const [email, setEmail] = useState("")
   const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
   const { notify } = useNotificationAction()
-
+  const router = useRouter()
+  const { jobId } = router.query
   useEffect(() => {
     if (window.location.href.includes("error_code")) {
       notify({
@@ -23,15 +26,24 @@ export const SignIn = () => {
       })
     }
   }, [])
-
+ const saveJobId = useCallback(() => {
+    if (jobId) {
+      localStorageHelper.setItem("jobId", jobId)
+    }
+  }, [jobId])
   const loginWithEmail = useCallback(
     async (e) => {
       e.preventDefault()
+      saveJobId()
       await signInWithEmail(email)
     },
     [email]
   )
-
+const loginWithGoogle = async (e) => {
+    e.preventDefault()
+    saveJobId()
+    await signInWithGoogle()
+  }
   return (
     <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
       <Text as="h1" size="xl2">
@@ -63,7 +75,7 @@ export const SignIn = () => {
         color="standard"
         icon={<GoogleIcon className="inline w-6 h-6" />}
         label="with Google"
-        onClick={signInWithGoogle}
+        onClick={loginWithGoogle}
         variant="contained"
         disabled={loading}
       />
