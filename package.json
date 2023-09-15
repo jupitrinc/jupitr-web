@@ -17,12 +17,6 @@
     "build-storybook": "storybook build",
     "update-db-types": "npx supabase gen types typescript --project-id cgbrcxjbovzwarqujqoq --schema public > services/_supabase/database.ts"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm lint:fix && pnpm format",
-      "pre-push": "pnpm build"
-    }
-  },
   "dependencies": {
     "@cloudinary/url-gen": "^1.11.2",
     "@headlessui/react": "^1.7.15",
