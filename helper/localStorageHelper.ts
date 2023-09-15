@@ -23,13 +23,10 @@ export const localStorageHelper = {
 
       if (item === "null") return null
 
-      // Check for numbers and floats
       if (/^'-?\d{1,}?\.?\d{1,}'$/.test(item)) return Number(item)
 
-      // Check for numbers in scientific notation
       if (/^'-?\d{1}\.\d+e\+\d{2}'$/.test(item)) return Number(item)
 
-      // Check for serialized objects and arrays
       if (item[0] === "{" || item[0] === "[") return JSON.parse(item)
 
       return item

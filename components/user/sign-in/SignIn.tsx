@@ -26,7 +26,7 @@ export const SignIn = () => {
       })
     }
   }, [])
- const saveJobId = useCallback(() => {
+  const saveJobId = useCallback(() => {
     if (jobId) {
       localStorageHelper.setItem("jobId", jobId)
     }
@@ -39,7 +39,7 @@ export const SignIn = () => {
     },
     [email]
   )
-const loginWithGoogle = async (e) => {
+  const loginWithGoogle = async (e) => {
     e.preventDefault()
     saveJobId()
     await signInWithGoogle()

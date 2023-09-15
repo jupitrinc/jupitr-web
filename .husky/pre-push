@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Check ESLint Standards
+pnpm pnpm build ||
+(
+        echo 'Build failed'
+        false; 
+)
+
+# All good to push
+echo 'Happy days 🚀🎉'
+

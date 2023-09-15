@@ -13,7 +13,6 @@ const JobList = () => {
     company_jobs_closed,
     company_jobs_draft,
     company_jobs,
-    loading,
   } = useCompanyJobsState()
   const { user } = useUserState()
 

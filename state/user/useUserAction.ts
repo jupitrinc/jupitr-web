@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import useAuthService from "services/auth/useAuthService"
-import useUserService from "services/user/useUserService"
+import userService from "services/user/userService"
 import {
   MediaPayload,
   StorageBucketsEnum,
@@ -34,7 +34,7 @@ export function useUserAction() {
     deleteAccount: deleteAccountService,
     changeEmail: changeEmailService,
   } = useAuthService()
-  const { getUser: getUserService, updateUser } = useUserService()
+  const { getUser: getUserService, updateUser } = userService()
   const { addCompany } = useCompanyService()
 
   const signInWithEmail = async (email: string) => {

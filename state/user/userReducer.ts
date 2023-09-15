@@ -146,7 +146,7 @@ export const userReducer = (
         data: {} as ISuperUser,
       }
 
-    // talent_profile
+    // FIXME talent_profile
     case TalentProfileActionEnum.UPDATE_SOCIALS:
       const update_socials_payload = action.payload as ITalentProfile["socials"]
 
@@ -205,7 +205,7 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_skills_state.data)
       return update_skills_state
 
-    // company_member_profile
+    // FIXME company_member_profile
     case CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE:
       const update_job_title_payload =
         action.payload as ICompanyMemberProfile["job_title"]

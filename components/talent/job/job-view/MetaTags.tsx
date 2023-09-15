@@ -1,5 +1,4 @@
 import { urlHelper } from "helper/urlHelper"
-import { url } from "inspector"
 import PageMetaTags from "layouts/components/PageMetaTags"
 import { useMemo } from "react"
 import { ITalentJob } from "state/talent_job/talentJob.types"

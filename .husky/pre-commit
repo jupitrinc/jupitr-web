@@ -1,0 +1,26 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Check Prettier standards
+pnpm check-format ||
+(
+    echo 'Prettier format check failed';
+    false;
+)
+
+# Check ESLint Standards
+pnpm lint ||
+(
+        echo 'Linting failed'
+        false; 
+)
+
+# Run Tests 
+pnpm test ||
+(
+        echo 'Tests failed'
+        false; 
+)
+
+# If everything passes... Now we can commit
+echo '✅ Tests, ESlint, Formatting checks passed'

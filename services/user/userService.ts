@@ -2,7 +2,7 @@ import { supabaseClientComponent } from "../_supabase/client"
 import { Database } from "../_supabase/database"
 import { getError } from "../_supabase/edgeFunctions"
 
-const useUserService = () => {
+const userService = () => {
   const getUser = async (access_token: string) => {
     const { data, error } = await supabaseClientComponent.functions.invoke(
       "users",
@@ -60,4 +60,4 @@ const useUserService = () => {
   }
 }
 
-export default useUserService
+export default userService

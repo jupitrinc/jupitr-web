@@ -24,8 +24,7 @@ export const useCountDown: (total: number, ms?: number) => returning = (
   }
 
   useEffect(() => {
-    // @ts-ignore
-    intervalId.current = setInterval(() => {
+    intervalId.current = window.setInterval(() => {
       startCountDown && counter > 0 && setCountDown((counter) => counter - 1)
     }, ms)
 

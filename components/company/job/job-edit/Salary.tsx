@@ -20,7 +20,7 @@ export const Salary = () => {
 
   const onChange = useCallback((e) => {
     const { value } = e.target
-    const max_salary_length = 7 // £m
+    const max_salary_length = 7
     value.length <= max_salary_length && setValue(String(value))
   }, [])
 

@@ -11,7 +11,7 @@ export const CompanyAppLayout = ({ children }) => {
   const { user, loading } = useUserState()
   usePersistedUser()
 
-  if (loading) return <Loading />
+  if (loading) return <Loading showLabel />
   else if (user.id && user.account_type === AccountTypeEnum.company)
     return (
       <>

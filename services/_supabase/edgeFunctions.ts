@@ -1,7 +1,7 @@
 import { FunctionsHttpError } from "@supabase/supabase-js"
 
 export const getError = async (
-  error: unknown,
+  error: any,
   functionName: string
 ): Promise<{ message: string }> => {
   if (error instanceof FunctionsHttpError) {
@@ -12,8 +12,7 @@ export const getError = async (
     else return error
   } else {
     console.error(`${functionName}: `, error)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+
     return error
   }
 }

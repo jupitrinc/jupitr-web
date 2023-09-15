@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { ITalentJob, TalentJobActionEnum } from "./talentJob.types"
 import { TalentJobContext } from "./TalentJobContext"
-import useTalentJobService from "services/talent/useTalentJobService"
+import talentJobService from "services/talent/talentJobService"
 
 export function useTalentJobAction() {
   const { dispatch } = useContext(TalentJobContext)
 
-  const { getJob: getJobService } = useTalentJobService()
+  const { getJob: getJobService } = talentJobService()
 
   const setJob = async (job: ITalentJob) => {
     if (!job.id) return

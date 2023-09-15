@@ -8,7 +8,7 @@ import { Text } from "ui-library/text/Text"
 
 const AccountResume = () => {
   const { user } = useUserState()
-  const { modal, showModal, hideModal } = useModal(user && !user.active)
+  const { modal, hideModal } = useModal(user && !user.active)
   const { toggleActive } = useUserAction()
 
   const activateAccount = () => {
