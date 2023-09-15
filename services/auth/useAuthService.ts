@@ -1,11 +1,11 @@
 import { supabaseClientComponent } from "services/_supabase/client"
-import useUserService from "services/user/useUserService"
+import userService from "services/user/userService"
 
 export const emailRedirectTo = () => `${location.origin}/auth/callback`
 export const socialRedirectTo = () => `${location.origin}/login/verify`
 
 const useAuthService = () => {
-  const { deleteUser } = useUserService()
+  const { deleteUser } = userService()
 
   const signInWithOtp = async (email: string) => {
     return await supabaseClientComponent.auth.signInWithOtp({

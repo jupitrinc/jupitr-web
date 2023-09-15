@@ -51,7 +51,7 @@ const JobView = () => {
         <Videos />
       </div>
     )
-  } else {
+  } else if (jobId) {
     return (
       <NoMatchFound
         message="Job no longer available"

@@ -23,7 +23,6 @@ export const useVideoRecorder = () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
-          // video: true,
           video: { width: 720, height: 405 },
         })
         streamRef.current = stream

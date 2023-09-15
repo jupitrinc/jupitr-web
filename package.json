@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm lint:fix",
+      "pre-commit": "pnpm lint:fix && pnpm format",
       "pre-push": "pnpm build"
     }
   },

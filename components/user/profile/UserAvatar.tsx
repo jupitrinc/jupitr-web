@@ -4,8 +4,6 @@ import { Uploader } from "ui-library/uploader/Uploader"
 import { useUserAction } from "state/user/useUserAction"
 import { urlHelper } from "helper/urlHelper"
 import { useUserState } from "state/user/useUserState"
-import { imageHelper } from "helper/imageHelper"
-import { storageFolderHelper } from "helper/storageFolderHelper"
 
 const UserAvatar = () => {
   const { user } = useUserState()

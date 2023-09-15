@@ -11,9 +11,11 @@ export const usePersistedUser = () => {
   const { setUser } = useUserAction()
   const persistedUser = localStorageHelper.getItem(LocalStorageItemEnum.user)
 
+  const persistUser = () => {
+    if (!isLoggedIn && persistedUser) setUser(persistedUser)
+  }
+
   useEffect(() => {
-    if (!isLoggedIn && persistedUser) {
-      setUser(persistedUser)
-    }
+    persistUser()
   }, [])
 }

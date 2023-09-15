@@ -9,7 +9,7 @@ interface GetJobsPayload {
   skills: { id: string; name: string; level: number }[]
 }
 
-const useTalentJobService = () => {
+const talentJobService = () => {
   const { getApplications } = useTalentApplicationService()
 
   const getJobs = async (payload: GetJobsPayload) => {
@@ -26,23 +26,28 @@ const useTalentJobService = () => {
 
       return { data, error }
     } else {
-      // job matching algorithm v1
-      const skillIds = payload.skills.map((skill) => skill.id)
+      const matchedJobs = await matchJobs(payload, data)
 
-      const { data: jobsApplied, error: getApplicationsError } =
-        await getApplications(payload.user_id)
-
-      const filteredJobsByUserSkills = data?.filter((job: ITalentJob) =>
-        job.skills.some((field) => skillIds.includes(field.id))
-      )
-
-      const removeJobsUserApplied = filteredJobsByUserSkills?.filter(
-        (job: ITalentJob) =>
-          !jobsApplied?.some((jApplied) => jApplied.job_id === job.id)
-      )
-
-      return { data: removeJobsUserApplied, error }
+      return { data: matchedJobs, error }
     }
+  }
+
+  const matchJobs = async (payload: GetJobsPayload, allJobs: any) => {
+    const skillIds = payload.skills.map((skill) => skill.id)
+
+    const { data: jobsApplied, error: getApplicationsError } =
+      await getApplications(payload.user_id)
+
+    const filteredJobsByUserSkills = allJobs?.filter((job: ITalentJob) =>
+      job.skills.some((field) => skillIds.includes(field.id))
+    )
+
+    const removeJobsUserApplied = filteredJobsByUserSkills?.filter(
+      (job: ITalentJob) =>
+        !jobsApplied?.some((jApplied) => jApplied.job_id === job.id)
+    )
+
+    return removeJobsUserApplied
   }
 
   const getJob = async (jobId: string) => {
@@ -66,4 +71,4 @@ const useTalentJobService = () => {
   return { getJobs, getJob }
 }
 
-export default useTalentJobService
+export default talentJobService

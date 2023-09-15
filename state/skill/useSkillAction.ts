@@ -28,14 +28,11 @@ export function useSkillAction() {
       type: SkillActionEnum.GET_SKILLS_BEGIN,
     })
 
-    // 1. get the data from localStorage
     if (getItem(LocalStorageItemEnum.skills)) {
       dispatch({
         type: SkillActionEnum.GET_SKILLS_SUCCESS,
         payload: getItem(LocalStorageItemEnum.skills) as ISkill[],
       })
-
-      // 2. get the data from db
     } else {
       const { data, error } = await getAllSkills()
 
