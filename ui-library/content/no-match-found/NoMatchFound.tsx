@@ -9,7 +9,7 @@ interface props {
   label?: string
 }
 
-const NoMatchFound: React.FC<props> = (props) => {
+export const NoMatchFound: React.FC<props> = (props) => {
   return (
     <div className="flex flex-col gap-10 items-center justify-center">
       <Text as="span">{props.message}</Text>
@@ -22,5 +22,3 @@ const NoMatchFound: React.FC<props> = (props) => {
     </div>
   )
 }
-
-export default NoMatchFound

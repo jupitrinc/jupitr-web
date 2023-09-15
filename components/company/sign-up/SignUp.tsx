@@ -18,13 +18,12 @@ import Header from "./sign-up/Header"
 import Navbar from "./sign-up/Navbar"
 
 export const SignUp = () => {
-  const { loading } = useUserState()
+  const { loading, success } = useUserState()
   const {
     addCompany,
     company,
     setCompany,
     invalid,
-    signUpSuccess,
     industries,
     addIndustry,
     removeIndustry,
@@ -36,7 +35,7 @@ export const SignUp = () => {
     <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full relative">
       <Navbar />
 
-      {!signUpSuccess ? (
+      {!success ? (
         <>
           <Header />
 

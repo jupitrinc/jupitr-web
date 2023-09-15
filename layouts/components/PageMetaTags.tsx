@@ -15,8 +15,6 @@ interface props {
 }
 
 const PageMetaTags = (props: props) => {
-  console.log(props)
-
   return (
     <Head>
       {props.title && (

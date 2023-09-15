@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import NoMatchFound from "./NoMatchFound"
+import { NoMatchFound } from "./NoMatchFound"
 
 const meta: Meta<typeof NoMatchFound> = {
   title: "Content/NoMatchFound",

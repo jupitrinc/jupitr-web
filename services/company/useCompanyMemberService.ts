@@ -5,7 +5,7 @@ import {
   PermissionTypes,
   UpdateCompanyMemberProfile,
 } from "./companyService.types"
-import { errorHandlingEdgeFunctions } from "../../helper/errorHandlingEdgeFunctions"
+import { getError } from "../_supabase/edgeFunctions"
 
 const useCompanyMemberService = () => {
   const updateProfile = async (
@@ -30,7 +30,7 @@ const useCompanyMemberService = () => {
     user_id: string
     permission: PermissionTypes
   }) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "members-company",
       {
         body: payload,
@@ -38,17 +38,18 @@ const useCompanyMemberService = () => {
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "updateMembersPermission")
+    if (err) {
+      const error = await getError(err, "updateMembersPermission")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
   const deleteMember = async (payload: {
     company_id: string
     user_id: string
   }) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "members-company",
       {
         body: payload,
@@ -56,14 +57,15 @@ const useCompanyMemberService = () => {
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "deleteMembers")
+    if (err) {
+      const error = await getError(err, "deleteMembers")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
   const getMembers = async (company_id: string) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "members-company",
       {
         headers: {
@@ -73,26 +75,28 @@ const useCompanyMemberService = () => {
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "getMembers")
+    if (err) {
+      const error = await getError(err, "getMembers")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
 
   const addMember = async (payload: InviteCompanyMemberPayload) => {
-    const { data, error } = await supabaseClientComponent.functions.invoke(
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "invite-company-member",
       {
         body: { ...payload, redirectTo: emailRedirectTo() },
       }
     )
 
-    if (error) {
-      return await errorHandlingEdgeFunctions(error, "addMember")
+    if (err) {
+      const error = await getError(err, "addMember")
+      return { error }
     }
 
-    return { data, error }
+    return { data }
   }
 
   return {

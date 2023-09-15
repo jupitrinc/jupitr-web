@@ -45,13 +45,19 @@ const MemberCard = ({ member }: { member: ICompanyMember }) => {
     [member, user.id]
   )
 
+  const memberName = useMemo(() => {
+    if (member.name) return member.name
+    else if (member.user_id === user.id) return "Me"
+    else return "Invited"
+  }, [member, user.id])
+
   return (
     <>
       <div className="flex flex-row gap-3 justify-between items-center">
         <div className="flex flex-row gap-2 items-center">
           <Avatar image_url={urlHelper.imageUrl(member.avatar_url)} size={10} />
           <div className="flex flex-col">
-            <Text as="span">{member.name ? member.name : "Invited"}</Text>
+            <Text as="span">{memberName}</Text>
             <Text as="span" size="sm">
               {`${member.email}`}
             </Text>

@@ -5,7 +5,7 @@ import { urlHelper } from "helper/urlHelper"
 const Videos = () => {
   const { talent_job } = useTalentJobState()
 
-  if (talent_job.company_videos.length > 1) {
+  if (talent_job.company_videos.length) {
     return (
       <div className="flex flex-col gap-5">
         {talent_job.company_videos.map(

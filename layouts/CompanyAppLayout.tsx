@@ -5,12 +5,14 @@ import { AccountTypeEnum } from "state/user/user.types"
 import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
+import { Loading } from "ui-library/content/loading/Loading"
 
 export const CompanyAppLayout = ({ children }) => {
-  const { user } = useUserState()
+  const { user, loading } = useUserState()
   usePersistedUser()
 
-  if (user.account_type === AccountTypeEnum.company) {
+  if (loading) return <Loading />
+  else if (user.id && user.account_type === AccountTypeEnum.company)
     return (
       <>
         <PageHead />
@@ -23,11 +25,10 @@ export const CompanyAppLayout = ({ children }) => {
         </div>
       </>
     )
-  } else {
+  else
     return (
       <main className="my-10">
         <PageNotFound />
       </main>
     )
-  }
 }

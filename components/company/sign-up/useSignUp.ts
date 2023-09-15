@@ -8,7 +8,7 @@ import { IIndustry } from "state/industry/industry.types"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const useSignUp = () => {
-  const { signUpCompany, signInWithEmail } = useUserAction()
+  const { signUpCompany } = useUserAction()
   const { notify } = useNotificationAction()
 
   const [company, setCompany] = useState<AddCompany>({
@@ -68,8 +68,6 @@ export const useSignUp = () => {
     size: false,
   })
 
-  const [signUpSuccess, setSignUpSuccess] = useState<boolean>(false)
-
   const validateCompany = useCallback(
     async (company: AddCompany) => {
       const fields = { ...invalid }
@@ -97,12 +95,7 @@ export const useSignUp = () => {
       const failed = await validateCompany(company)
 
       if (!failed) {
-        const success = await signUpCompany(company)
-
-        if (success) {
-          setSignUpSuccess(true)
-          await signInWithEmail(success)
-        }
+        await signUpCompany(company)
       } else {
         notify({
           message: "Please provide the required information",
@@ -117,7 +110,6 @@ export const useSignUp = () => {
     company,
     setCompany,
     invalid,
-    signUpSuccess,
     logoPreview,
     industries,
     addIndustry,

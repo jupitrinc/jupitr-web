@@ -6,7 +6,7 @@ import { Divider } from "ui-library/content/divider/Divider"
 import { Modal, useModal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 
-const AccountDeactivation = () => {
+const AccountResume = () => {
   const { user } = useUserState()
   const { modal, showModal, hideModal } = useModal(user && !user.active)
   const { toggleActive } = useUserAction()
@@ -36,4 +36,4 @@ const AccountDeactivation = () => {
   )
 }
 
-export default AccountDeactivation
+export default AccountResume

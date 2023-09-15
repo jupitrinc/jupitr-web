@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
+import { Loading } from "ui-library/content/loading/Loading"
 import { useRouter } from "next/router"
 import { useCompanyJobApplicationAction } from "state/company_job_application/useCompanyJobApplicationAction"
 import { useCompanyJobApplicationState } from "state/company_job_application/useCompanyJobApplicationState"
 import ApplicationCard from "./job-applications/ApplicationCard"
-import { Loader } from "ui-library/loader/Loader"
 import Header from "./job-applications/Header"
 
 export const JobApplications = () => {
@@ -23,7 +23,7 @@ export const JobApplications = () => {
     }
   }, [jobId])
 
-  if (loading) return <Loader />
+  if (loading) return <Loading />
 
   return (
     <div className="grid grid-cols-1 gap-5">

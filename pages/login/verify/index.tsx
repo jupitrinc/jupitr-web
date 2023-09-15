@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import Loading from "layouts/components/Loading"
+import { Loading } from "ui-library/content/loading/Loading"
 import { IUser, AccountTypeEnum } from "state/user/user.types"
 import { useUserAction } from "state/user/useUserAction"
 import { useRouter } from "next/router"

@@ -10,7 +10,7 @@ export const Loader: React.FC<LoaderProps> = (loader) => {
       role="status"
       className={clsx(
         loader.type === "custom" ? loader.className : "h-6 w-6 mx-auto",
-        styles.color[loader.color ? loader.color : styles.color.default],
+        styles.color[loader.color ? loader.color : styles.color.standard],
         "animate-spin"
       )}
       viewBox="0 0 100 101"

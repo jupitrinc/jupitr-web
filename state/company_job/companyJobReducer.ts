@@ -15,7 +15,7 @@ export const companyJobReducer = (
     case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
       return {
         ...state,
-        loading: false,
+        loading: true,
         success: false,
       }
 

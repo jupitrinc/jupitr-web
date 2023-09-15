@@ -4,13 +4,13 @@ import { useTalentJobsState } from "state/talent_jobs/useTalentJobsState"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import { Divider } from "ui-library/content/divider/Divider"
-import ListCard from "./job-list/ListCard"
-import { Loader } from "ui-library/loader/Loader"
+import { Loading } from "ui-library/content/loading/Loading"
+import { NoMatchFound } from "ui-library/content/no-match-found/NoMatchFound"
 import { useTalentJobsAction } from "state/talent_jobs/useTalentJobsAction"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { useUserState } from "../../../state/user/useUserState"
+import ListCard from "./job-list/ListCard"
 import ListSwiper from "./job-list/ListSwiper"
-import NoMatchFound from "ui-library/content/no-match-found/NoMatchFound"
 
 const JobList = () => {
   const { user } = useUserState()
@@ -35,9 +35,8 @@ const JobList = () => {
     }
   }, [talent_jobs, user])
 
-  if (loading) {
-    return <Loader />
-  } else if (talent_jobs.length && user.id) {
+  if (loading) return <Loading />
+  else if (talent_jobs.length && user.name)
     return (
       <>
         <ListSwiper jobs={talent_jobs} />
@@ -58,7 +57,7 @@ const JobList = () => {
         </div>
       </>
     )
-  } else {
+  else
     return (
       <div className="flex flex-col gap-10 items-center fixed top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
         <NoMatchFound
@@ -68,7 +67,6 @@ const JobList = () => {
         />
       </div>
     )
-  }
 }
 
 export default JobList
