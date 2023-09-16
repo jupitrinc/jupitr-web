@@ -13,8 +13,11 @@ import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 const Skills = () => {
   const { user } = useUserState()
 
-  const { debouncedValue: searchQuery, setDebouncedValue: setSearchQuery } =
-    useDebounce()
+  const {
+    debouncedValue: searchQuery,
+    setDebouncedValue: setSearchQuery,
+    loading: searchQueryLoading,
+  } = useDebounce()
 
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
   const {
@@ -22,7 +25,7 @@ const Skills = () => {
     searchSkill: searchSkillAction,
     clearSkills,
   } = useSkillAction()
-  const { skills } = useSkillState()
+  const { skills, loading } = useSkillState()
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -59,6 +62,7 @@ const Skills = () => {
             addSkill(user.id, { ...skill, level: 2 }, user.skills)
           }
           onChange={(skill) => setSearchQuery(skill)}
+          loading={loading || searchQueryLoading}
         />
       </div>
 
