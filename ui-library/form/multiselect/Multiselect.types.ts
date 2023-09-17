@@ -12,4 +12,5 @@ export interface MultiselectProps {
   addOption?: (option: string) => void
   invalid?: boolean
   onChange?: (query: string) => void
+  loading?: boolean
 }

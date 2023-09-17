@@ -11,8 +11,11 @@ import { useDebounce } from "helper/hooks/useDebounce"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 
 export const Skills = () => {
-  const { debouncedValue: searchQuery, setDebouncedValue: setSearchQuery } =
-    useDebounce()
+  const {
+    debouncedValue: searchQuery,
+    setDebouncedValue: setSearchQuery,
+    loading: searchQueryLoading,
+  } = useDebounce()
 
   const { company_job } = useCompanyJobState()
   const { addSkill, removeSkill, updateSkill } = useCompanyJobAction()
@@ -23,7 +26,7 @@ export const Skills = () => {
     clearSkills,
   } = useSkillAction()
 
-  const { skills } = useSkillState()
+  const { skills, loading } = useSkillState()
 
   useEffect(() => {
     if (searchQuery !== "") {
@@ -60,6 +63,7 @@ export const Skills = () => {
             addSkill(company_job.id, { ...skill, level: 2 }, company_job.skills)
           }}
           onChange={(skill) => setSearchQuery(skill)}
+          loading={loading || searchQueryLoading}
         />
       </div>
 
