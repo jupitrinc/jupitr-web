@@ -1,6 +1,17 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+
+# Run Tests
+pnpm test ||
+(
+        echo 'Tests failed'
+        false;
+)
+
+# If everything passes... Now we can commit
+echo '✅ Tests passed'
+
 # Check ESLint Standards
 pnpm pnpm build ||
 (
