@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
-import useAuthService, { emailRedirectTo } from "services/auth/useAuthService"
+import useAuthService from "services/auth/useAuthService"
 import userService from "services/user/userService"
 import {
   MediaPayload,
@@ -113,7 +113,6 @@ export function useUserAction() {
     const { error } = await addCompany({
       ...company,
       logo: base64File,
-      redirectTo: emailRedirectTo(),
     })
 
     if (error) {

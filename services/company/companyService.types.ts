@@ -15,7 +15,6 @@ interface CompanyProfile {
 }
 export interface CreateCompanyPayload extends CompanyProfile {
   email: string
-  redirectTo: string
 }
 
 export type UpdateCompanyProfilePayload =
