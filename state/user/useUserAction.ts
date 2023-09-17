@@ -110,7 +110,10 @@ export function useUserAction() {
 
     const resizedFile = await imageHelper.resize(company.logo as File)
     const base64File = await toBase64(resizedFile)
-    const { data, error } = await addCompany({ ...company, logo: base64File })
+    const { error } = await addCompany({
+      ...company,
+      logo: base64File,
+    })
 
     if (error) {
       dispatch({
@@ -125,8 +128,6 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
-
-      await signInWithEmail(company.email)
     }
   }
 
