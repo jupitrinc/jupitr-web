@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
-import useAuthService from "services/auth/useAuthService"
+import useAuthService, { emailRedirectTo } from "services/auth/useAuthService"
 import userService from "services/user/userService"
 import {
   MediaPayload,
@@ -110,7 +110,11 @@ export function useUserAction() {
 
     const resizedFile = await imageHelper.resize(company.logo as File)
     const base64File = await toBase64(resizedFile)
-    const { data, error } = await addCompany({ ...company, logo: base64File })
+    const { error } = await addCompany({
+      ...company,
+      logo: base64File,
+      redirectTo: emailRedirectTo(),
+    })
 
     if (error) {
       dispatch({
@@ -125,8 +129,6 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
-
-      await signInWithEmail(company.email)
     }
   }
 
