@@ -16,7 +16,7 @@ const talentJobService = () => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
       .select(
-        "*, company(name, logo, website), company_videos(*, company_member_profile(job_title, users(name)))"
+        "*, company(name, logo, website), company_videos(*, users(company_member_profile(job_title, users(name))))"
       )
       .eq("status", "open")
       .not("company_id", "is", null)
@@ -54,7 +54,7 @@ const talentJobService = () => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
       .select(
-        "*, company(name, logo, website), company_videos(*, company_member_profile(job_title, users(name)))"
+        "*, company(name, logo, website), company_videos(*, users(company_member_profile(job_title, users(name))))"
       )
       .eq("id", jobId)
       .eq("status", "open")

@@ -36,7 +36,7 @@ const JobList = () => {
   }, [talent_jobs, user])
 
   if (loading) return <Loading />
-  else if (talent_jobs.length && user.name)
+  else if (talent_jobs.length)
     return (
       <>
         <ListSwiper jobs={talent_jobs} />

@@ -35,7 +35,7 @@ const useCompanyJobService = () => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
       .select(
-        "*,  applications(count), company_videos(*, company_member_profile(job_title, users(name)))"
+        "*,  applications(count), company_videos(*, users(company_member_profile(job_title, users(name))))"
       )
       .eq("id", id)
       .single()
