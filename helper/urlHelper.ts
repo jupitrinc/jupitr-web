@@ -36,4 +36,9 @@ export const urlHelper = {
   pageUrl: () => {
     return window.location.href
   },
+  hostName: () => {
+    return !window.location.hostname.includes("localhost")
+      ? window.location.hostname
+      : `${window.location.hostname}:${window.location.port}`
+  },
 }
