@@ -71,7 +71,7 @@ const Toolbar = () => {
       />
 
       <CopyClipboard
-        value={`${urlHelper.hostName()}/jobs/${company_job.id}`}
+        value={`${urlHelper.domain()}/jobs/${company_job.id}`}
         icon={<Share2 className="h-4 w-4" />}
         label="Share"
         confirmLabel="Job link copied"
