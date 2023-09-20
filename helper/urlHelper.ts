@@ -45,6 +45,6 @@ export const urlHelper = {
     return window.location.protocol
   },
   domain: () => {
-    return `${urlHelper.protocol() + urlHelper.hostName()}`
+    return `${urlHelper.protocol()}//${urlHelper.hostName()}`
   },
 }
