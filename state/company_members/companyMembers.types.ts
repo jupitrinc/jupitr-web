@@ -17,6 +17,7 @@ export interface ICompanyMember {
   email: string
   avatar_url: string
   job_title: string
+  member_id: string
   permission: CompanyMemberPermission
 }
 
@@ -74,4 +75,5 @@ export interface AddCompanyMemberPayload {
 export interface DeleteCompanyMemberPayload {
   user_id: string
   company_id: string
+  member_id: string
 }

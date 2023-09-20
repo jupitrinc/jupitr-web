@@ -54,6 +54,7 @@ const companyMemberService = () => {
   const deleteMember = async (payload: {
     company_id: string
     user_id: string
+    member_id: string
   }) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "members-company",

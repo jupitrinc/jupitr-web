@@ -26,7 +26,11 @@ const MemberCard = ({ member }: { member: ICompanyMember }) => {
       {
         name: "Remove",
         onClick: () => {
-          deleteMember({ company_id: user.company_id, user_id: member.user_id })
+          deleteMember({
+            company_id: user.company_id,
+            user_id: member.user_id,
+            member_id: member.member_id,
+          })
         },
       },
     ],
