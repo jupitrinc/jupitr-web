@@ -41,4 +41,10 @@ export const urlHelper = {
       ? window.location.hostname
       : `${window.location.hostname}:${window.location.port}`
   },
+  protocol: () => {
+    return window.location.protocol
+  },
+  domain: () => {
+    return `${urlHelper.protocol() + urlHelper.hostName()}`
+  },
 }
