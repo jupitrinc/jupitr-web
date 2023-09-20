@@ -14,21 +14,21 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
       <div className="flex flex-col gap-5">
         <div>
           <Text as="span" size="lg">
-            {application.users.name}
+            {application.users?.name}
           </Text>
 
           <div className="flex flex-row gap-1 items-center justify-between">
             <div className="flex flex-col">
               <div className="flex flex-row gap-2 items-center">
                 <Text as="span" size="sm">
-                  {application.users.email}
+                  {application.users?.email}
                 </Text>
-                <CopyClipboard value={application.users.email} />
+                <CopyClipboard value={application.users?.email} />
               </div>
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users.talent_profile.socials?.map((link) => (
+              {application.users.talent_profile?.socials?.map((link) => (
                 <a
                   key={link}
                   href={urlHelper.websiteUrl(link)}
@@ -47,10 +47,9 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {application.skills &&
-            application.skills.map((skill) => (
-              <SkillCard key={skill.id} skill={skill} />
-            ))}
+          {application.skills?.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
         </div>
       </div>
     </Card>

@@ -38,6 +38,7 @@ const companyJobService = () => {
         "*,  applications(count), company_videos(*, users(company_member_profile(job_title, users(name))))"
       )
       .eq("id", id)
+      .not("applications.user_id", "is", null)
       .single()
 
     if (error) {
