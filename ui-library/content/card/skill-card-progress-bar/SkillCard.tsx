@@ -11,13 +11,13 @@ export interface props {
 const SkillCard: React.FC<props> = ({ skill }) => {
   const skillLevel = (level: number) => {
     switch (level) {
-      case 1:
+      case 0:
         return 10
 
-      case 2:
+      case 1:
         return 50
 
-      case 3:
+      case 2:
         return 90
 
       default:
