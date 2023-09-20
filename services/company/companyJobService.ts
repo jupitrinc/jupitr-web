@@ -1,4 +1,5 @@
 import { supabaseClientComponent } from "services/_supabase/client"
+import { getError } from "../_supabase/edgeFunctions"
 
 const JOBS_TABLE = "jobs"
 
@@ -31,23 +32,25 @@ const companyJobService = () => {
     return { data, error }
   }
 
-  const getJob = async (id: string) => {
-    const { data, error } = await supabaseClientComponent
-      .from(JOBS_TABLE)
-      .select(
-        "*,  applications(count), company_videos(*, users(company_member_profile(job_title, users(name))))"
-      )
-      .eq("id", id)
-      .not("applications.user_id", "is", null)
-      .single()
+  const getJob = async (id: string, company_id) => {
+    const { data, error: err } = await supabaseClientComponent.functions.invoke(
+      `jobs-apps?job_id=${id}&apps=false`,
+      {
+        method: "GET",
+        headers: {
+          "company_id": company_id,
+        },
+      }
+    )
+    if (err) {
+      const error = await getError(err, "getAllApplications")
 
-    if (error) {
       console.error("companyJobService -> getJob:", error.message)
+      return error
     }
 
     return {
       data,
-      error,
     }
   }
 

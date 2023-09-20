@@ -26,7 +26,7 @@ export const JobEdit = () => {
 
   useEffect(() => {
     if (jobId && user.id) {
-      getJob(jobId.toString())
+      getJob(jobId.toString(), user.company_id)
     }
 
     return () => {

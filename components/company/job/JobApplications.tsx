@@ -5,17 +5,19 @@ import { useCompanyJobApplicationAction } from "state/company_job_application/us
 import { useCompanyJobApplicationState } from "state/company_job_application/useCompanyJobApplicationState"
 import ApplicationCard from "./job-applications/ApplicationCard"
 import Header from "./job-applications/Header"
+import { useUserState } from "../../../state/user/useUserState"
 
 export const JobApplications = () => {
   const router = useRouter()
   const { jobId } = router.query
+  const { user } = useUserState()
   const { company_job_applications, loading } = useCompanyJobApplicationState()
   const { getAllApplications, clearApplications } =
     useCompanyJobApplicationAction()
 
   useEffect(() => {
     if (jobId && !company_job_applications.id) {
-      getAllApplications(String(jobId))
+      getAllApplications(String(jobId), user.company_id)
     }
 
     return () => {

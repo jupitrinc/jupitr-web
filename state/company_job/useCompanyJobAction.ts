@@ -54,14 +54,14 @@ export function useCompanyJobAction() {
     }
   }
 
-  const getJob = async (job_id: ICompanyJob["id"]) => {
+  const getJob = async (job_id: ICompanyJob["id"], company_id: string) => {
     if (!job_id) return
 
     dispatch({
       type: CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN,
     })
 
-    const { data, error } = await getJobService(job_id)
+    const { data, error } = await getJobService(job_id, company_id)
 
     if (error) {
       dispatch({

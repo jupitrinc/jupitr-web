@@ -14,14 +14,14 @@ export function useCompanyJobApplicationAction() {
   const { getAllApplications: getApplicationsService } =
     companyJobApplicationService()
 
-  const getAllApplications = async (job_id: string) => {
-    if (!job_id) return
+  const getAllApplications = async (job_id: string, company_id: string) => {
+    if (!job_id && !company_id) return
 
     dispatch({
       type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_BEGIN,
     })
 
-    const { data, error } = await getApplicationsService(job_id)
+    const { data, error } = await getApplicationsService(job_id, company_id)
     if (error) {
       dispatch({
         type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE,
