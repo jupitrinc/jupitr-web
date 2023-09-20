@@ -6,7 +6,7 @@ import {
   JobStatusEnum,
 } from "./companyJob.types"
 import { CompanyJobContext } from "./CompanyJobContext"
-import useCompanyJobService from "services/company/useCompanyJobService"
+import companyJobService from "services/company/companyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 
@@ -19,7 +19,7 @@ export function useCompanyJobAction() {
     addJob: addJobService,
     getJob: getJobService,
     updateJob: updateJobService,
-  } = useCompanyJobService()
+  } = companyJobService()
 
   const addJob = async (
     status: ICompanyJob["status"],

@@ -3,6 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs"
+import { CaptureConsole } from "@sentry/integrations"
 
 Sentry.init({
   dsn: "https://12b966a16871192eed1c69728f6bc2c3@o4505777483022336.ingest.sentry.io/4505777522606080",
@@ -26,5 +27,8 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
+    new CaptureConsole({
+      levels: ["error"],
+    }) as any,
   ],
 })

@@ -5,8 +5,8 @@ import {
   CompanyJobVideosActionEnum,
   ICompanyJobVideo,
 } from "./companyJobVideos.types"
-import useMediaService from "services/storage/useMediaService"
-import useCompanyJobVideoService from "services/company/useCompanyJobVideoService"
+import mediaService from "services/storage/mediaService"
+import companyJobVideoService from "services/company/companyJobVideoService"
 import { CompanyJobContext } from "state/company_job/CompanyJobContext"
 import { CompanyJobActionEnum } from "state/company_job/companyJob.types"
 import { storageFolderHelper } from "helper/storageFolderHelper"
@@ -17,9 +17,9 @@ export function useCompanyJobVideosAction() {
 
   const { dispatch } = useContext(CompanyJobVideosContext)
   const { dispatch: companyJobDispatch } = useContext(CompanyJobContext)
-  const { uploadVideo } = useMediaService()
+  const { uploadVideo } = mediaService()
   const { deleteVideo: deleteVideoService, addVideo: addVideoService } =
-    useCompanyJobVideoService()
+    companyJobVideoService()
 
   const addVideo = async (payload: AddVideoPayload) => {
     dispatch({

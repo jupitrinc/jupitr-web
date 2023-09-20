@@ -5,7 +5,7 @@ import {
   UploadVideoPayload,
 } from "./media.types"
 
-const useMediaService = () => {
+const mediaService = () => {
   const uploadImage = async ({ bucketName, file, filePath }: MediaPayload) => {
     const { data, error } = await supabaseClientComponent.storage
       .from(bucketName)
@@ -15,7 +15,7 @@ const useMediaService = () => {
       })
 
     if (error) {
-      console.error("uploadImage: ", error)
+      console.error("mediaService -> uploadImage:", error.message)
     }
 
     return {
@@ -30,7 +30,7 @@ const useMediaService = () => {
       .update(filePath, file, { upsert: true })
 
     if (error) {
-      console.error("updateImage: ", error)
+      console.error("mediaService -> updateImage:", error.message)
     }
 
     return {
@@ -62,6 +62,10 @@ const useMediaService = () => {
       body: formData,
     }).then((r) => r.json())
 
+    if (error) {
+      console.error("mediaService -> uploadVideo:", error.message)
+    }
+
     return {
       data,
       error,
@@ -70,4 +74,4 @@ const useMediaService = () => {
 
   return { uploadImage, updateImage, downloadImage, uploadVideo }
 }
-export default useMediaService
+export default mediaService

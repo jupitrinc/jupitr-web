@@ -4,7 +4,7 @@ import { Database } from "services/_supabase/database"
 type TalentProfilePayload =
   Database["public"]["Tables"]["talent_profile"]["Update"]
 
-export const useTalentProfileService = () => {
+export const talentProfileService = () => {
   const updateProfile = async (
     user_id: string,
     payload: TalentProfilePayload
@@ -21,7 +21,7 @@ export const useTalentProfileService = () => {
       .single()
 
     if (error) {
-      console.error("update talent profile: ", error)
+      console.error("talentProfileService -> updateProfile:", error.message)
     }
 
     return { data, error }

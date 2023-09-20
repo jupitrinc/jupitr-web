@@ -4,7 +4,7 @@ import {
   CompanyJobApplicationActionEnum,
 } from "./companyJobApplication.types"
 import { CompanyJobApplicationContext } from "./CompanyJobApplicationContext"
-import useCompanyJobApplicationService from "services/company/useCompanyJobApplicationService"
+import companyJobApplicationService from "services/company/companyJobApplicationService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobApplicationAction() {
@@ -12,7 +12,7 @@ export function useCompanyJobApplicationAction() {
 
   const { dispatch } = useContext(CompanyJobApplicationContext)
   const { getAllApplications: getApplicationsService } =
-    useCompanyJobApplicationService()
+    companyJobApplicationService()
 
   const getAllApplications = async (job_id: string) => {
     if (!job_id) return

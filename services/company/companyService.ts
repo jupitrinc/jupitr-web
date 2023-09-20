@@ -6,7 +6,7 @@ import {
 import { getError } from "../_supabase/edgeFunctions"
 import { emailRedirectTo } from "../auth/useAuthService"
 
-const useCompanyService = () => {
+const companyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "create-company",
@@ -17,6 +17,8 @@ const useCompanyService = () => {
 
     if (err) {
       const error = await getError(err, "addCompany")
+
+      console.error("companyService -> addCompany:", error.message)
       return { error }
     }
 
@@ -33,6 +35,8 @@ const useCompanyService = () => {
 
     if (err) {
       const error = await getError(err, "updateCompanyProfile")
+
+      console.error("companyService -> updateCompanyProfile:", error.message)
       return { error }
     }
 
@@ -47,7 +51,7 @@ const useCompanyService = () => {
       .single()
 
     if (error) {
-      console.error("get company profile: ", error)
+      console.error("companyService -> getCompanyProfile:", error.message)
     }
 
     return { data, error }
@@ -60,4 +64,4 @@ const useCompanyService = () => {
   }
 }
 
-export default useCompanyService
+export default companyService

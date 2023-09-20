@@ -2,7 +2,7 @@ import { supabaseClientComponent } from "services/_supabase/client"
 
 const SKILLS_TABLE = "skills"
 
-const useSkillsService = () => {
+const skillsService = () => {
   const getAllSkills = async () => {
     const { data, error } = await supabaseClientComponent
       .from(SKILLS_TABLE)
@@ -10,7 +10,7 @@ const useSkillsService = () => {
       .order("name", { ascending: true })
 
     if (error) {
-      console.error("failed to get skills: ", error)
+      console.error("skillsService -> getAllSKills:", error.message)
     }
 
     return { data, error }
@@ -23,7 +23,7 @@ const useSkillsService = () => {
       .ilike("name", `%${name}%`)
 
     if (error) {
-      console.error("search skills: ", error)
+      console.error("skillsService -> searchSkill:", error.message)
     }
 
     return { data, error }
@@ -36,7 +36,7 @@ const useSkillsService = () => {
       .single()
 
     if (error) {
-      console.error("failed to add skill: ", error)
+      console.error("skillsService -> addSKill:", error.message)
     }
 
     return { data, error }
@@ -44,4 +44,4 @@ const useSkillsService = () => {
   return { getAllSkills, searchSkills, addSkill }
 }
 
-export default useSkillsService
+export default skillsService

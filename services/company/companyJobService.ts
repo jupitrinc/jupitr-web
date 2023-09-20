@@ -18,14 +18,14 @@ interface UpdateJobPayload {
   application_video?: {}
 }
 
-const useCompanyJobService = () => {
+const companyJobService = () => {
   const addJob = async (payload: AddJobPayload) => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
       .insert(payload)
       .select()
     if (error) {
-      console.error("add job: ", error)
+      console.error("companyJobService -> addJob:", error.message)
     }
 
     return { data, error }
@@ -41,7 +41,7 @@ const useCompanyJobService = () => {
       .single()
 
     if (error) {
-      console.error("get job: ", error)
+      console.error("companyJobService -> getJob:", error.message)
     }
 
     return {
@@ -58,7 +58,7 @@ const useCompanyJobService = () => {
       .neq("status", "archived")
 
     if (error) {
-      console.error("get all job: ", error)
+      console.error("companyJobService -> getAllJobs:", error.message)
     }
 
     return { data, error }
@@ -76,7 +76,7 @@ const useCompanyJobService = () => {
       .single()
 
     if (error) {
-      console.error("update job:", error)
+      console.error("companyJobService -> updateJob:", error.message)
     }
 
     return { data, error }
@@ -90,4 +90,4 @@ const useCompanyJobService = () => {
   }
 }
 
-export default useCompanyJobService
+export default companyJobService

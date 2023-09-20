@@ -14,7 +14,7 @@ const userService = () => {
     )
 
     if (error) {
-      console.error("failed to getUser: ", error)
+      console.error("userService -> getUser:", error.message)
     }
 
     return { data, error }
@@ -31,6 +31,8 @@ const userService = () => {
 
     if (err) {
       const error = await getError(err, "deleteUser")
+
+      console.error("userService -> deleteUser:", error.message)
       return { error }
     }
 
@@ -48,7 +50,7 @@ const userService = () => {
       .single()
 
     if (error) {
-      console.error("failed to updateUser: ", error)
+      console.error("userService -> updateUser:", error.message)
     }
 
     return { data, error }

@@ -9,13 +9,16 @@ interface AddApplicationPayload {
 
 const APPLICATIONS_TABLE = "applications"
 
-const useTalentApplicationService = () => {
+const talentApplicationService = () => {
   const addApplication = async (payload: AddApplicationPayload) => {
     const { data, error } = await supabaseClientComponent
       .from(APPLICATIONS_TABLE)
       .insert(payload)
     if (error) {
-      console.error("talent add application: ", error)
+      console.error(
+        "talentApplicationService -> addApplication:",
+        error.message
+      )
     }
 
     return { data, error }
@@ -26,7 +29,10 @@ const useTalentApplicationService = () => {
       .select("*")
       .eq("user_id", user_id)
     if (error) {
-      console.error("talent add application: ", error)
+      console.error(
+        "talentApplicationService -> getApplications:",
+        error.message
+      )
     }
 
     return { data, error }
@@ -36,4 +42,4 @@ const useTalentApplicationService = () => {
     getApplications,
   }
 }
-export default useTalentApplicationService
+export default talentApplicationService
