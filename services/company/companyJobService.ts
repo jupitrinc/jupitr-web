@@ -46,7 +46,7 @@ const companyJobService = () => {
       const error = await getError(err, "getAllApplications")
 
       console.error("companyJobService -> getJob:", error.message)
-      return error
+      return { error }
     }
 
     return {

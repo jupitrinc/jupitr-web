@@ -20,7 +20,7 @@ const companyJobApplicationService = () => {
         "companyJobApplicationService -> getAllApplications:",
         error.message
       )
-      return error
+      return { error }
     }
 
     return { data }
