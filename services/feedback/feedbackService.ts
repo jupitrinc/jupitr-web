@@ -1,13 +1,13 @@
 import { supabaseClientComponent } from "../_supabase/client"
 import { FeedbackServicePayloadType } from "./feedbackService.type"
 
-const useFeedbackService = () => {
+const feedbackService = () => {
   const addFeedback = async (payload: FeedbackServicePayloadType) => {
     const { data, error } = await supabaseClientComponent
       .from("feedback")
       .insert(payload)
     if (error) {
-      console.error("feedback error: ", error)
+      console.error("feedbackService -> addFeedback:", error.message)
     }
 
     return { data, error }
@@ -17,4 +17,4 @@ const useFeedbackService = () => {
     addFeedback,
   }
 }
-export default useFeedbackService
+export default feedbackService

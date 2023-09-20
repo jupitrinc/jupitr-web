@@ -7,7 +7,7 @@ import {
 } from "./companyService.types"
 import { getError } from "../_supabase/edgeFunctions"
 
-const useCompanyMemberService = () => {
+const companyMemberService = () => {
   const updateProfile = async (
     payload: UpdateCompanyMemberProfile,
     user_id: string
@@ -20,12 +20,12 @@ const useCompanyMemberService = () => {
       .single()
 
     if (error) {
-      console.error("update company member profile: ", error)
+      console.error("companyMemberService -> updateProfile:", error.message)
     }
 
     return { data, error }
   }
-  const updateMembersPermission = async (payload: {
+  const updateMemberPermission = async (payload: {
     company_id: string
     user_id: string
     permission: PermissionTypes
@@ -40,6 +40,12 @@ const useCompanyMemberService = () => {
 
     if (err) {
       const error = await getError(err, "updateMembersPermission")
+
+      console.error(
+        "companyMemberService -> updateMemberPermission:",
+        error.message
+      )
+
       return { error }
     }
 
@@ -59,6 +65,8 @@ const useCompanyMemberService = () => {
 
     if (err) {
       const error = await getError(err, "deleteMembers")
+
+      console.error("companyMemberService -> deleteMember:", error.message)
       return { error }
     }
 
@@ -77,6 +85,8 @@ const useCompanyMemberService = () => {
 
     if (err) {
       const error = await getError(err, "getMembers")
+
+      console.error("companyMemberService -> getMembers:", error.message)
       return { error }
     }
 
@@ -93,6 +103,8 @@ const useCompanyMemberService = () => {
 
     if (err) {
       const error = await getError(err, "addMember")
+
+      console.error("companyMemberService -> addMember:", error.message)
       return { error }
     }
 
@@ -102,10 +114,10 @@ const useCompanyMemberService = () => {
   return {
     updateProfile,
     getMembers,
-    updateMembersPermission,
+    updateMemberPermission,
     deleteMember,
     addMember,
   }
 }
 
-export default useCompanyMemberService
+export default companyMemberService

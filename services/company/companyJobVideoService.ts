@@ -2,7 +2,7 @@ import { supabaseClientComponent } from "services/_supabase/client"
 
 const COMPANY_VIDEOS_TABLE = "company_videos"
 
-const useCompanyJobVideoService = () => {
+const companyJobVideoService = () => {
   const addVideo = async (payload: {
     job_id: string
     user_id: string
@@ -15,7 +15,7 @@ const useCompanyJobVideoService = () => {
       .single()
 
     if (error) {
-      console.error("add video: ", error)
+      console.error("companyJobVideoService -> addVideo:", error.message)
     }
 
     return { data, error }
@@ -28,7 +28,7 @@ const useCompanyJobVideoService = () => {
       .eq("id", video_id)
 
     if (error) {
-      console.error("delete company job video: ", error)
+      console.error("companyJobVideoService -> deleteVideo:", error.message)
     }
 
     return { data, error }
@@ -40,4 +40,4 @@ const useCompanyJobVideoService = () => {
   }
 }
 
-export default useCompanyJobVideoService
+export default companyJobVideoService

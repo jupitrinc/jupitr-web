@@ -8,9 +8,9 @@ import {
   MediaPayload,
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
-import useMediaService from "../../services/storage/useMediaService"
+import mediaService from "../../services/storage/mediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
-import useCompanyService from "services/company/useCompanyService"
+import companyService from "services/company/companyService"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
@@ -26,7 +26,7 @@ export function useUserAction() {
 
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-  const { uploadImage } = useMediaService()
+  const { uploadImage } = mediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -35,7 +35,7 @@ export function useUserAction() {
     changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = userService()
-  const { addCompany } = useCompanyService()
+  const { addCompany } = companyService()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { CompanyJobsActionEnum, ICompanyJobs } from "./companyJobs.types"
 import { CompanyJobsContext } from "./CompanyJobsContext"
-import useCompanyJobService from "services/company/useCompanyJobService"
+import companyJobService from "services/company/companyJobService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobsAction() {
@@ -9,7 +9,7 @@ export function useCompanyJobsAction() {
 
   const { dispatch } = useContext(CompanyJobsContext)
 
-  const { getAllJobs: getJobsService } = useCompanyJobService()
+  const { getAllJobs: getJobsService } = companyJobService()
 
   const getJobs = async (company_id: string) => {
     if (!company_id) return

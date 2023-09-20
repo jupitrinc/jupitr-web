@@ -1,6 +1,6 @@
 import { supabaseClientComponent } from "services/_supabase/client"
 
-const useIndustryService = () => {
+const industryService = () => {
   const getAllIndustries = async () => {
     const { data, error } = await supabaseClientComponent
       .from("industry")
@@ -8,7 +8,7 @@ const useIndustryService = () => {
       .order("name", { ascending: true })
 
     if (error) {
-      console.error("get all industries: ", error)
+      console.error("industryService -> getAllIndustries:", error.message)
     }
 
     return { data, error }
@@ -21,7 +21,7 @@ const useIndustryService = () => {
       .ilike("name", `%${name}%`)
 
     if (error) {
-      console.error("search industry: ", error)
+      console.error("industryService -> searchIndustry:", error.message)
     }
 
     return { data, error }
@@ -29,4 +29,4 @@ const useIndustryService = () => {
   return { getAllIndustries, searchIndustry }
 }
 
-export default useIndustryService
+export default industryService

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { IIndustry, IndustryActionEnum } from "./industry.types"
 import { IndustryContext } from "./IndustryContext"
-import useIndustryService from "../../services/industry/useIndustryService"
+import industryService from "../../services/industry/industryService"
 import {
   LocalStorageItemEnum,
   localStorageHelper,
@@ -12,7 +12,7 @@ export function useIndustryAction() {
   const { notify } = useNotificationAction()
 
   const { dispatch } = useContext(IndustryContext)
-  const { getAllIndustries } = useIndustryService()
+  const { getAllIndustries } = industryService()
 
   const { getItem } = localStorageHelper
 

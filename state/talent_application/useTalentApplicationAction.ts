@@ -1,19 +1,19 @@
 import { useContext } from "react"
 import { TalentApplicationContext } from "./TalentApplicationContext"
-import useMediaService from "services/storage/useMediaService"
+import mediaService from "services/storage/mediaService"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import {
   AddApplicationPayload,
   TalentApplicationActionEnum,
 } from "./talentApplication.types"
-import useTalentJobApplicationService from "services/talent/useTalentApplicationService"
+import useTalentJobApplicationService from "services/talent/talentApplicationService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useTalentApplicationAction() {
   const { notify } = useNotificationAction()
 
   const { dispatch } = useContext(TalentApplicationContext)
-  const { uploadVideo } = useMediaService()
+  const { uploadVideo } = mediaService()
   const { addApplication: addApplicationService } =
     useTalentJobApplicationService()
 

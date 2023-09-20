@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { SkillActionEnum } from "./skill.types"
 import { SkillContext } from "./SkillContext"
-import useSkillsService from "services/skills/useSkillsService"
+import skillsService from "services/skills/skillsService"
 import {
   LocalStorageItemEnum,
   localStorageHelper,
@@ -18,7 +18,7 @@ export function useSkillAction() {
     getAllSkills,
     addSkill: addSkillService,
     searchSkills: searchSkillService,
-  } = useSkillsService()
+  } = skillsService()
 
   const { getItem } = localStorageHelper
   const { sentenceCase } = stringHelper

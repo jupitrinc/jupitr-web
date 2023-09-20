@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { CompanyMembersContext } from "./CompanyMembersContext"
-import useCompanyMemberService from "services/company/useCompanyMemberService"
+import companyMemberService from "services/company/companyMemberService"
 import {
   AddCompanyMemberPayload,
   CompanyMembersActionEnum,
@@ -17,10 +17,10 @@ export function useCompanyMembersAction() {
   const { dispatch } = useContext(CompanyMembersContext)
   const {
     getMembers: getMembersService,
-    updateMembersPermission: updateRoleService,
+    updateMemberPermission: updateRoleService,
     addMember: addMemberService,
     deleteMember: deleteMemberService,
-  } = useCompanyMemberService()
+  } = companyMemberService()
 
   const getMembers = async (company_id: ISuperUser["company_id"]) => {
     if (!company_id) return

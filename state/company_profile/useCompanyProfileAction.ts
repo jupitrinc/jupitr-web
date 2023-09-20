@@ -4,9 +4,9 @@ import {
   ICompanyProfile,
 } from "./companyProfile.types"
 import { CompanyProfileContext } from "./CompanyProfileContext"
-import useCompanyService from "services/company/useCompanyService"
+import companyService from "services/company/companyService"
 import { MediaPayload, StorageBucketsEnum } from "services/storage/media.types"
-import useMediaService from "services/storage/useMediaService"
+import mediaService from "services/storage/mediaService"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
@@ -15,8 +15,8 @@ export function useCompanyProfileAction() {
   const { notify } = useNotificationAction()
 
   const { dispatch } = useContext(CompanyProfileContext)
-  const { getCompanyProfile, updateCompanyProfile } = useCompanyService()
-  const { uploadImage } = useMediaService()
+  const { getCompanyProfile, updateCompanyProfile } = companyService()
+  const { uploadImage } = mediaService()
   const { companyLogoFolder } = storageFolderHelper
 
   const getProfile = async (company_id: string) => {

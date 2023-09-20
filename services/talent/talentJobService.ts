@@ -1,5 +1,5 @@
 import { supabaseClientComponent } from "services/_supabase/client"
-import useTalentApplicationService from "./useTalentApplicationService"
+import talentApplicationService from "./talentApplicationService"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 
 const JOBS_TABLE = "jobs"
@@ -10,7 +10,7 @@ interface GetJobsPayload {
 }
 
 const talentJobService = () => {
-  const { getApplications } = useTalentApplicationService()
+  const { getApplications } = talentApplicationService()
 
   const getJobs = async (payload: GetJobsPayload) => {
     const { data, error } = await supabaseClientComponent
@@ -22,7 +22,7 @@ const talentJobService = () => {
       .not("company_id", "is", null)
 
     if (error) {
-      console.error("get talent jobs: ", error)
+      console.error("talentJobService -> getJobs:", error.message)
 
       return { data, error }
     } else {
@@ -37,6 +37,13 @@ const talentJobService = () => {
 
     const { data: jobsApplied, error: getApplicationsError } =
       await getApplications(payload.user_id)
+
+    if (getApplicationsError) {
+      console.error(
+        "talentJobService -> matchJobs:",
+        getApplicationsError.message
+      )
+    }
 
     const filteredJobsByUserSkills = allJobs?.filter((job: ITalentJob) =>
       job.skills.some((field) => skillIds.includes(field.id))
@@ -62,7 +69,7 @@ const talentJobService = () => {
       .single()
 
     if (error) {
-      console.error("get job: ", error)
+      console.error("talentJobService -> getJob:", error.message)
     }
 
     return { data, error }
