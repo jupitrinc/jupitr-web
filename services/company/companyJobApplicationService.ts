@@ -6,6 +6,7 @@ const companyJobApplicationService = () => {
       .from("jobs")
       .select("*, applications(*, users(name, email, talent_profile(socials)))")
       .eq("id", job_id)
+      .not("applications.user_id", "is", null)
       .single()
     if (error) {
       console.error(

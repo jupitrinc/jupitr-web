@@ -9,7 +9,7 @@ import { urlHelper } from "helper/urlHelper"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
 
 const ApplicationCard = ({ application }: { application: IApplication }) => {
-  return !application.user_id || !application.users.email ? null : (
+  return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <div>
@@ -28,7 +28,7 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users?.talent_profile.socials?.map((link) => (
+              {application.users.talent_profile?.socials?.map((link) => (
                 <a
                   key={link}
                   href={urlHelper.websiteUrl(link)}
@@ -47,10 +47,9 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {application.skills &&
-            application.skills.map((skill) => (
-              <SkillCard key={skill.id} skill={skill} />
-            ))}
+          {application.skills?.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
         </div>
       </div>
     </Card>
