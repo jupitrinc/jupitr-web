@@ -72,7 +72,7 @@ export function useTalentApplicationAction() {
 
         notify({
           message: error.message.includes("applications_video_url")
-            ? "Already applied"
+            ? "Already applied for this job"
             : error.message,
           type: "warning",
         })

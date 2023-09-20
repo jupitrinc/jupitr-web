@@ -20,7 +20,7 @@ export interface ICompanyJobApplication
 export interface IApplication {
   id: string
   job_id: string
-  user_id: string
+  user_id?: string
   video_url: string
   status: string
   skills: ISkill[]
@@ -30,7 +30,7 @@ export interface IApplication {
 }
 
 interface IApplicant {
-  name: string
+  name?: string
   email: string
   talent_profile: {
     socials: string[]
