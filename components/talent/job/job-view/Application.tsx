@@ -147,7 +147,7 @@ const Application = () => {
                 </div>
               )}
 
-              {step === 3 && (
+              {step === 3 && success && (
                 <div className="flex flex-col gap-5 mt-32">
                   <div className="flex justify-center align-middle">
                     <Text as="span" size="base" align="center">
