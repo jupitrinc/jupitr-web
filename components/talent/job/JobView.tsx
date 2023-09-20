@@ -11,7 +11,6 @@ import Videos from "./job-view/Videos"
 import TitleBar from "./job-view/TitleBar"
 import Details from "./job-view/Details"
 import CoverVideo from "./job-view/videos/CoverVideo"
-import { localStorageHelper } from "../../../helper/localStorageHelper"
 import MetaTags from "./job-view/MetaTags"
 
 const JobView = () => {
@@ -23,9 +22,6 @@ const JobView = () => {
   const { getJob, clearJob } = useTalentJobAction()
 
   useEffect(() => {
-    if (localStorageHelper.getItem("jobId")) {
-      localStorageHelper.removeItem("jobId")
-    }
     if (jobId && !talent_job.id) {
       getJob(String(jobId))
     }
