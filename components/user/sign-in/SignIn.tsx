@@ -18,6 +18,7 @@ export const SignIn = () => {
   const { notify } = useNotificationAction()
   const router = useRouter()
   const { jobId } = router.query
+
   useEffect(() => {
     if (window.location.href.includes("error_code")) {
       notify({

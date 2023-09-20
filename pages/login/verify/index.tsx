@@ -6,9 +6,11 @@ import { useRouter } from "next/router"
 import { supabaseClientComponent } from "services/_supabase/client"
 import { Session } from "@supabase/supabase-js"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
+import { useUserState } from "state/user/useUserState"
 
 export const Verify = () => {
   const { setUser, updateEmail } = useUserAction()
+  const { user: stateUser } = useUserState()
   const router = useRouter()
 
   useEffect(() => {
@@ -16,7 +18,10 @@ export const Verify = () => {
       data: { subscription },
     } = supabaseClientComponent.auth.onAuthStateChange(
       async (event, session) => {
-        if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
+        if (
+          (event === "SIGNED_IN" || event === "INITIAL_SESSION") &&
+          !stateUser.id
+        ) {
           if (session) {
             const res = await fetch("/api/login/verifyUser")
             const { user, session: userSession } = await res.json()
@@ -32,16 +37,17 @@ export const Verify = () => {
       }
     )
     return () => subscription.unsubscribe()
-  }, [supabaseClientComponent])
+  }, [])
 
   const redirectUser = (userData: IUser) => {
     const jobId = localStorageHelper.getItem("jobId")
     const basePath =
       userData.account_type === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
     const path = jobId ? `${basePath}/${jobId}` : basePath
+
     setTimeout(() => {
       localStorageHelper.removeItem("jobId")
-    }, 1000)
+    }, 5000)
     return router.push(path)
   }
 
