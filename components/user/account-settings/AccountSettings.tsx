@@ -12,7 +12,6 @@ import { emailHelper } from "helper/emailHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 import Setting from "./Setting"
 import AccountResume from "../account-deactivation/AccountResume"
-import NotificationsContent from "./NotificationsContent"
 
 const AccountSettings = () => {
   const { loading } = useUserState()
@@ -68,9 +67,9 @@ const AccountSettings = () => {
                 </form>
               )}
 
-              {activeSetting === "change_notifications" && (
-                <NotificationsContent />
-              )}
+              {/* {activeSetting === "change_notifications" && (
+                <AccountNotifications />
+              )} */}
 
               <Divider />
 

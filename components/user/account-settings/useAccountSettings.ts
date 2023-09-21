@@ -21,7 +21,6 @@ export const useAccountSettings = () => {
     {
       name: user.email,
       button_label: "Change",
-      icon: "email",
       onClick: () => {
         setActiveSetting("change_email")
         setModal(true)
@@ -30,7 +29,6 @@ export const useAccountSettings = () => {
     {
       name: "Notifications",
       button_label: "Change",
-      icon: "notifications",
       onClick: () => {
         setActiveSetting("change_notifications")
         setModal(true)
@@ -39,7 +37,6 @@ export const useAccountSettings = () => {
     {
       name: "Account",
       button_label: "Delete",
-      icon: "account",
       onClick: () => {
         setActiveSetting("delete_account")
         setModal(true)
@@ -60,8 +57,7 @@ export const useAccountSettings = () => {
     },
     [SettingsEnum.change_notifications]: {
       title: "Change notifications",
-      description:
-        "We will send you notifications based on the below settings.",
+      description: "",
       onConfirm: () => {},
       confirm_button_label: "Save",
       confirm_button_variant: "standard" as ColorType,
