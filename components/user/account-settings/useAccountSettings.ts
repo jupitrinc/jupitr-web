@@ -3,10 +3,11 @@ import { useUserAction } from "state/user/useUserAction"
 import { useUserState } from "state/user/useUserState"
 import { ColorType } from "ui-library/_theme/Theme.types"
 
-type SettingsType = "delete_account" | "change_email"
+type SettingsType = "delete_account" | "change_email" | "change_notifications"
 enum SettingsEnum {
   delete_account = "delete_account",
   change_email = "change_email",
+  change_notifications = "change_notifications",
 }
 
 export const useAccountSettings = () => {
@@ -20,14 +21,25 @@ export const useAccountSettings = () => {
     {
       name: user.email,
       button_label: "Change",
+      icon: "email",
       onClick: () => {
         setActiveSetting("change_email")
         setModal(true)
       },
     },
     {
+      name: "Notifications",
+      button_label: "Change",
+      icon: "notifications",
+      onClick: () => {
+        setActiveSetting("change_notifications")
+        setModal(true)
+      },
+    },
+    {
       name: "Account",
       button_label: "Delete",
+      icon: "account",
       onClick: () => {
         setActiveSetting("delete_account")
         setModal(true)
@@ -44,6 +56,14 @@ export const useAccountSettings = () => {
       description: "",
       onConfirm: (email) => requestEmailUpdate(email),
       confirm_button_label: "Change",
+      confirm_button_variant: "standard" as ColorType,
+    },
+    [SettingsEnum.change_notifications]: {
+      title: "Change notifications",
+      description:
+        "We will send you notifications based on the below settings.",
+      onConfirm: () => {},
+      confirm_button_label: "Save",
       confirm_button_variant: "standard" as ColorType,
     },
     [SettingsEnum.delete_account]: {

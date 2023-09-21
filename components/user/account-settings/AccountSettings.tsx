@@ -12,6 +12,7 @@ import { emailHelper } from "helper/emailHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 import Setting from "./Setting"
 import AccountResume from "../account-deactivation/AccountResume"
+import NotificationsContent from "./NotificationsContent"
 
 const AccountSettings = () => {
   const { loading } = useUserState()
@@ -54,8 +55,8 @@ const AccountSettings = () => {
 
               <Text as="p">{settingModal[activeSetting].description}</Text>
 
-              <form className="w-full" onSubmit={onEmailChange}>
-                {activeSetting === "change_email" && (
+              {activeSetting === "change_email" && (
+                <form className="w-full" onSubmit={onEmailChange}>
                   <TextInput
                     placeholder="New email address"
                     value={email}
@@ -64,8 +65,12 @@ const AccountSettings = () => {
                     type="email"
                     required
                   />
-                )}
-              </form>
+                </form>
+              )}
+
+              {activeSetting === "change_notifications" && (
+                <NotificationsContent />
+              )}
 
               <Divider />
 
@@ -96,6 +101,16 @@ const AccountSettings = () => {
                       label={settingModal[activeSetting].confirm_button_label}
                       color={settingModal[activeSetting].confirm_button_variant}
                       onClick={onEmailChange}
+                      loading={loading}
+                    />
+                  </div>
+                )}
+                {activeSetting === "change_notifications" && (
+                  <div className="inline-flex gap-4">
+                    <Button
+                      label={settingModal[activeSetting].confirm_button_label}
+                      color={settingModal[activeSetting].confirm_button_variant}
+                      onClick={settingModal[activeSetting].onConfirm}
                       loading={loading}
                     />
                   </div>
