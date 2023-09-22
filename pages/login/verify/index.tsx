@@ -14,31 +14,51 @@ export const Verify = () => {
   const router = useRouter()
 
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabaseClientComponent.auth.onAuthStateChange(
-      async (event, session) => {
-        if (
-          (event === "SIGNED_IN" || event === "INITIAL_SESSION") &&
-          !stateUser.id
-        ) {
-          if (session) {
-            const res = await fetch("/api/login/verifyUser")
-            const { user, session: userSession } = await res.json()
-            if (user && userSession) {
-              changeEmailIfRequested(user, userSession)
-              setUser(user)
-              redirectUser(user)
+    const params = new URLSearchParams(window.location.hash.replace("#", ""))
+    const access_token = params.get("access_token") as string
+    const refresh_token = params.get("refresh_token") as string
+
+    const setNewSession = async () => {
+      const { data } = await supabaseClientComponent.auth.setSession({
+        access_token,
+        refresh_token,
+      })
+      if (data.session) {
+        await handleSession()
+      }
+    }
+    if (access_token && refresh_token) {
+      setNewSession()
+    } else {
+      const {
+        data: { subscription },
+      } = supabaseClientComponent.auth.onAuthStateChange(
+        async (event, session) => {
+          if (
+            (event === "SIGNED_IN" || event === "INITIAL_SESSION") &&
+            !stateUser.id
+          ) {
+            if (session) {
+              await handleSession()
+            } else {
+              router.push("/")
             }
-          } else {
-            router.push("/")
           }
         }
-      }
-    )
-    return () => subscription.unsubscribe()
+      )
+      return () => subscription.unsubscribe()
+    }
   }, [])
 
+  const handleSession = async () => {
+    const res = await fetch("/api/login/verifyUser")
+    const { user, session: userSession } = await res.json()
+    if (user && userSession) {
+      changeEmailIfRequested(user, userSession)
+      setUser(user)
+      redirectUser(user)
+    }
+  }
   const redirectUser = (userData: IUser) => {
     const jobId = localStorageHelper.getItem("jobId")
     const basePath =
