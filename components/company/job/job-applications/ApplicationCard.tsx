@@ -28,14 +28,14 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users.talent_profile?.socials?.map((link) => (
+              {application.users.talent_profile?.socials?.map((social) => (
                 <a
-                  key={link}
-                  href={urlHelper.websiteUrl(link)}
+                  key={social.url}
+                  href={urlHelper.websiteUrl(social.url)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <SocialIcon link={link} />
+                  <SocialIcon name={social.name} />
                 </a>
               ))}
             </div>
