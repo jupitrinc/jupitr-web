@@ -4,14 +4,14 @@ import {
   UpdateCompanyProfilePayload,
 } from "./companyService.types"
 import { getError } from "../_supabase/edgeFunctions"
-import { emailRedirectTo } from "../auth/useAuthService"
+import { socialRedirectTo } from "../auth/useAuthService"
 
 const companyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
       "create-company",
       {
-        body: { ...payload, redirectTo: emailRedirectTo() },
+        body: { ...payload, redirectTo: socialRedirectTo() },
       }
     )
 

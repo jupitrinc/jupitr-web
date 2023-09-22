@@ -106,7 +106,10 @@ const SocialLinks = () => {
 
 export default SocialLinks
 
+
 export const SocialIcon = ({ name }) => {
+  if (typeof name !== "string") return null
+  
   const styles = "w-5 h-5 align-middle text-gray-600"
   if (name.includes("github")) {
     return <Github className={styles} />

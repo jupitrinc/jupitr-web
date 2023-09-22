@@ -30,6 +30,7 @@ export const urlHelper = {
   },
 
   websiteUrl: (url: string) => {
+    if (typeof url !== "string") return ""
     return !url.includes("http") ? `https://${url.trim()}` : url.trim()
   },
 
