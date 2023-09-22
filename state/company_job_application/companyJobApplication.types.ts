@@ -33,7 +33,7 @@ interface IApplicant {
   name?: string
   email: string
   talent_profile?: {
-    socials?: string[]
+    socials?: { name: string; url: string }[]
   }
 }
 
