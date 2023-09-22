@@ -14,7 +14,7 @@ export type CompanyJobApplicationState = {
 
 export interface ICompanyJobApplication
   extends Omit<ICompanyJob, "applications"> {
-  applications: IApplication[]
+  applications?: IApplication[]
 }
 
 export interface IApplication {

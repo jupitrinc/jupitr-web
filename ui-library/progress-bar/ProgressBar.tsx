@@ -26,6 +26,15 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           style={{ width: `${progressBar.progress}%` }}
           ref={innerRef}
         ></div>
+
+        {progressBar.threshold && (
+          <div
+            className={styles.default.threshold_container}
+            style={{ width: `${progressBar.threshold}%` }}
+          >
+            <div className={styles.default.threshold}></div>
+          </div>
+        )}
       </div>
     )
   }
