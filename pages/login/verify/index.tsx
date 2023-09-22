@@ -7,9 +7,12 @@ import { supabaseClientComponent } from "services/_supabase/client"
 import { Session } from "@supabase/supabase-js"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
 import { useUserState } from "state/user/useUserState"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const Verify = () => {
   const { setUser, updateEmail } = useUserAction()
+  const { notify } = useNotificationAction()
+
   const { user: stateUser } = useUserState()
   const router = useRouter()
 
@@ -18,17 +21,8 @@ export const Verify = () => {
     const access_token = params.get("access_token") as string
     const refresh_token = params.get("refresh_token") as string
 
-    const setNewSession = async () => {
-      const { data } = await supabaseClientComponent.auth.setSession({
-        access_token,
-        refresh_token,
-      })
-      if (data.session) {
-        await handleSession()
-      }
-    }
     if (access_token && refresh_token) {
-      setNewSession()
+      setNewSession(access_token, refresh_token)
     } else {
       const {
         data: { subscription },
@@ -41,6 +35,7 @@ export const Verify = () => {
             if (session) {
               await handleSession()
             } else {
+              handleError()
               router.push("/")
             }
           }
@@ -49,6 +44,16 @@ export const Verify = () => {
       return () => subscription.unsubscribe()
     }
   }, [])
+
+  const setNewSession = async (accessToken: string, refreshToken: string) => {
+    const { data } = await supabaseClientComponent.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    })
+    if (data.session) {
+      await handleSession()
+    }
+  }
 
   const handleSession = async () => {
     const res = await fetch("/api/login/verifyUser")
@@ -76,6 +81,18 @@ export const Verify = () => {
 
     if (custoDB.email !== supabase.user.email) {
       updateEmail(supabase.user.id, supabase.user.email)
+    }
+  }
+
+  const handleError = () => {
+    if (
+      typeof window !== "undefined" &&
+      window.location.href.includes("error_code")
+    ) {
+      notify({
+        message: "Email link is invalid or has expired. Sign in again",
+        type: "warning",
+      })
     }
   }
 

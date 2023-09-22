@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -7,7 +7,6 @@ import { GoogleIcon } from "ui-library/icon/Icon"
 import { Text } from "ui-library/text/Text"
 import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
-import { useNotificationAction } from "state/notification/useNotificationAction"
 import { useRouter } from "next/router"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
 
@@ -15,18 +14,9 @@ export const SignIn = () => {
   const [email, setEmail] = useState("")
   const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
-  const { notify } = useNotificationAction()
   const router = useRouter()
   const { jobId } = router.query
 
-  useEffect(() => {
-    if (window.location.href.includes("error_code")) {
-      notify({
-        message: "Email link is invalid or has expired. Sign in again.",
-        type: "warning",
-      })
-    }
-  }, [])
   const saveJobId = useCallback(() => {
     if (jobId) {
       localStorageHelper.setItem("jobId", jobId)

@@ -78,7 +78,10 @@ const SocialLinks = () => {
 export default SocialLinks
 
 export const SocialIcon = ({ link }) => {
+  if (typeof link !== "string") return null
+
   const styles = "w-5 h-5 align-middle text-gray-600"
+
   if (link.includes("github")) {
     return <Github className={styles} />
   } else if (link.includes("linkedin")) {
