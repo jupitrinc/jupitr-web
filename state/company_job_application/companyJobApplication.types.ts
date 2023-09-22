@@ -14,7 +14,7 @@ export type CompanyJobApplicationState = {
 
 export interface ICompanyJobApplication
   extends Omit<ICompanyJob, "applications"> {
-  applications: IApplication[]
+  applications?: IApplication[]
 }
 
 export interface IApplication {
@@ -33,7 +33,7 @@ interface IApplicant {
   name?: string
   email: string
   talent_profile?: {
-    socials?: string[]
+    socials?: { name: string; url: string }[]
   }
 }
 

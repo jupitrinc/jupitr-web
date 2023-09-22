@@ -6,9 +6,16 @@ import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
+import { ICompanyJob } from "state/company_job/companyJob.types"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
 
-const ApplicationCard = ({ application }: { application: IApplication }) => {
+const ApplicationCard = ({
+  application,
+  jobSkills,
+}: {
+  application: IApplication
+  jobSkills?: ICompanyJob["skills"]
+}) => {
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
@@ -28,14 +35,14 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users.talent_profile?.socials?.map((link) => (
+              {application.users.talent_profile?.socials?.map((social) => (
                 <a
-                  key={link}
-                  href={urlHelper.websiteUrl(link)}
+                  key={social.url}
+                  href={urlHelper.websiteUrl(social.url)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <SocialIcon link={link} />
+                  <SocialIcon name={social.name} />
                 </a>
               ))}
             </div>
@@ -48,7 +55,13 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {application.skills?.map((skill) => (
-            <SkillCard key={skill.id} skill={skill} />
+            <SkillCard
+              key={skill.id}
+              skill={{
+                ...skill,
+                threshold: jobSkills?.find((j) => j.id === skill.id)?.level,
+              }}
+            />
           ))}
         </div>
       </div>

@@ -32,10 +32,13 @@ export const JobApplications = () => {
       <Header />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {company_job_applications.applications &&
-          company_job_applications.applications.map((application) => (
-            <ApplicationCard key={application.id} application={application} />
-          ))}
+        {company_job_applications.applications?.map((application) => (
+          <ApplicationCard
+            key={application.id}
+            application={application}
+            jobSkills={company_job_applications.skills}
+          />
+        ))}
       </div>
     </div>
   )
