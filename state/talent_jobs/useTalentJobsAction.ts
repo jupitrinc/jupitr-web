@@ -10,7 +10,7 @@ export function useTalentJobsAction() {
   const { getJobs: getJobsService } = talentJobService()
 
   const getJobs = async (payload: { user_id: string; skills: ISkill[] }) => {
-    if (!payload.user_id || !payload.skills.length) return
+    if (!payload?.user_id || !payload?.skills?.length) return
 
     dispatch({
       type: TalentJobsActionEnum.GET_JOBS_BEGIN,
