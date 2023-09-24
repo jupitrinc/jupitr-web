@@ -5,7 +5,7 @@ export const useAccountNotificationState = () => {
   const { state } = useContext(AccountNotificationsContext)
 
   return {
-    accountSettings: useMemo(() => state.data, [state.data]),
+    notifications: useMemo(() => state.data, [state.data]),
     loading: state.loading,
     success: state.success,
   }

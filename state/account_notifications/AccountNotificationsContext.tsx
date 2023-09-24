@@ -1,10 +1,10 @@
 import { createContext, useMemo, useReducer } from "react"
 import {
   AccountNotificationsState,
-  IAccountNotifications,
+  IAccountNotification,
   IAccountNotificationsContext,
-} from "./accountSettings.types"
-import { notificationReducer } from "./accountSettingsReducer"
+} from "./accountNotifications.types"
+import { accountNotificationsReducer } from "./accountNotificationsReducer"
 
 export const AccountNotificationsContext = createContext(
   {} as IAccountNotificationsContext
@@ -14,11 +14,14 @@ export const AccountNotificationContextProvider: React.FC<any> = ({
   children,
 }) => {
   const initialState: AccountNotificationsState = {
-    data: [] as IAccountNotifications[],
+    data: [] as IAccountNotification[],
     loading: false,
     success: false,
   }
-  const [state, dispatch] = useReducer(notificationReducer, initialState)
+  const [state, dispatch] = useReducer(
+    accountNotificationsReducer,
+    initialState
+  )
 
   const value = useMemo(() => {
     return { state, dispatch }
