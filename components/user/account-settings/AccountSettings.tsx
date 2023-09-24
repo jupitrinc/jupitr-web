@@ -12,9 +12,11 @@ import { emailHelper } from "helper/emailHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 import Setting from "./Setting"
 import AccountResume from "../account-deactivation/AccountResume"
+import AccountNotifications from "./AccountNotifications"
+import { AccountTypeEnum } from "state/user/user.types"
 
 const AccountSettings = () => {
-  const { loading } = useUserState()
+  const { accountType, loading } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
   const { notify } = useNotificationAction()
@@ -41,9 +43,13 @@ const AccountSettings = () => {
           <Divider />
 
           <div className="flex flex-col gap-5">
-            {settings.map((setting) => (
-              <Setting key={setting.name} {...setting} />
-            ))}
+            {settings.map(
+              (setting) =>
+                !(
+                  accountType === AccountTypeEnum.talent &&
+                  setting.name === "Notifications"
+                ) && <Setting key={setting.name} {...setting} />
+            )}
           </div>
 
           <Modal open={modal} onClose={onClose}>
@@ -67,9 +73,9 @@ const AccountSettings = () => {
                 </form>
               )}
 
-              {/* {activeSetting === "change_notifications" && (
+              {activeSetting === "change_notifications" && (
                 <AccountNotifications />
-              )} */}
+              )}
 
               <Divider />
 
@@ -110,7 +116,6 @@ const AccountSettings = () => {
                       label={settingModal[activeSetting].confirm_button_label}
                       color={settingModal[activeSetting].confirm_button_variant}
                       onClick={settingModal[activeSetting].onConfirm}
-                      loading={loading}
                     />
                   </div>
                 )}
