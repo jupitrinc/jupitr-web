@@ -1,29 +1,37 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Text } from "ui-library/text/Text"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Card } from "ui-library/content/card/Card"
 import { static_data_job } from "data/job"
+import { ProgressBarProps } from "ui-library/progress-bar/ProgressBar.types"
 
 export interface props {
-  skill: { id: string; name: string; level: number }
+  skill: { id: string; name: string; level: number; threshold?: number }
+  threshold?: ProgressBarProps["threshold"]
 }
 
 const SkillCard: React.FC<props> = ({ skill }) => {
   const skillLevel = (level: number) => {
     switch (level) {
-      case 1:
+      case 0:
         return 10
 
-      case 2:
+      case 1:
         return 50
 
-      case 3:
+      case 2:
         return 90
 
       default:
         return 10
     }
   }
+
+  const threshold = useMemo(() => {
+    return typeof skill.threshold === "number"
+      ? skillLevel(skill.threshold)
+      : undefined
+  }, [skill])
 
   return (
     <Card type="static">
@@ -33,7 +41,8 @@ const SkillCard: React.FC<props> = ({ skill }) => {
         </Text>
       </div>
 
-      <ProgressBar progress={skillLevel(skill.level)} />
+      <ProgressBar progress={skillLevel(skill.level)} threshold={threshold} />
+
       <div className="flex justify-between mt-2">
         <Text as="span" size="sm">
           {static_data_job.skill_levels[0]}

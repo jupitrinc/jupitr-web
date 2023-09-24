@@ -8,7 +8,6 @@ export interface ITalentJobsContext {
 export type TalentJobsState = {
   data: TalentJobs
   loading: boolean
-  error: string
   success: boolean
 }
 

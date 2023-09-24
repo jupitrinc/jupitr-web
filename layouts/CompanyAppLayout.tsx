@@ -1,43 +1,21 @@
-import Head from "next/head"
 import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
-import { usePersistedUser } from "helper/hooks/usePersistedUser"
+import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
+import PageHead from "./components/PageHead"
+import { Loading } from "ui-library/content/loading/Loading"
 
 export const CompanyAppLayout = ({ children }) => {
-  const { user } = useUserState()
+  const { user, loading } = useUserState()
   usePersistedUser()
 
-  if (user.account_type === AccountTypeEnum.company) {
+  if (loading) return <Loading showLabel />
+  else if (user.id && user.account_type === AccountTypeEnum.company)
     return (
       <>
-        <Head>
-          <title>jupitr</title>
-          <meta name="description" content="" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
-        </Head>
+        <PageHead />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
           <header className="space-y-2">
             <Navbar />
@@ -47,11 +25,10 @@ export const CompanyAppLayout = ({ children }) => {
         </div>
       </>
     )
-  } else {
+  else
     return (
       <main className="my-10">
         <PageNotFound />
       </main>
     )
-  }
 }

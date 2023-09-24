@@ -6,7 +6,6 @@ export interface ISkillContext {
 export type SkillState = {
   data: skill[]
   loading: boolean
-  error: string
 }
 
 type skill = { id: string; name: string }
@@ -20,6 +19,9 @@ export type SkillAction = {
     | SkillActionEnum.ADD_SKILL_BEGIN
     | SkillActionEnum.ADD_SKILL_FAILURE
     | SkillActionEnum.ADD_SKILL_SUCCESS
+    | SkillActionEnum.SEARCH_SKILL_BEGIN
+    | SkillActionEnum.SEARCH_SKILL_FAILURE
+    | SkillActionEnum.SEARCH_SKILL_SUCCESS
   payload?: skill[] | skill | string
 }
 
@@ -31,6 +33,10 @@ export enum SkillActionEnum {
   ADD_SKILL_BEGIN = "ADD_SKILL_BEGIN",
   ADD_SKILL_FAILURE = "ADD_SKILL_FAILURE",
   ADD_SKILL_SUCCESS = "ADD_SKILL_SUCCESS",
+
+  SEARCH_SKILL_BEGIN = "SEARCH_SKILL_BEGIN",
+  SEARCH_SKILL_FAILURE = "SEARCH_SKILL_FAILURE",
+  SEARCH_SKILL_SUCCESS = "SEARCH_SKILL_SUCCESS",
 
   CLEAR_SKILLS = "CLEAR_SKILLS",
 }

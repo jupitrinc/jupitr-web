@@ -1,16 +1,16 @@
 import { useContext } from "react"
 import { TalentJobsActionEnum } from "./talentJobs.types"
 import { TalentJobsContext } from "./TalentJobsContext"
-import useTalentJobService from "services/talent/useTalentJobService"
+import talentJobService from "services/talent/talentJobService"
 import { ITalentJob } from "state/talent_job/talentJob.types"
 import { ISkill } from "../talent_profile/talentProfile.types"
 
 export function useTalentJobsAction() {
   const { dispatch } = useContext(TalentJobsContext)
-  const { getJobs: getJobsService } = useTalentJobService()
+  const { getJobs: getJobsService } = talentJobService()
 
   const getJobs = async (payload: { user_id: string; skills: ISkill[] }) => {
-    if (!payload.user_id || !payload.skills) return
+    if (!payload?.user_id || !payload?.skills?.length) return
 
     dispatch({
       type: TalentJobsActionEnum.GET_JOBS_BEGIN,

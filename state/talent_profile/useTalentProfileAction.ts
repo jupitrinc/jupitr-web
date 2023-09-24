@@ -4,11 +4,11 @@ import {
   ITalentProfile,
   TalentProfileActionEnum,
 } from "./talentProfile.types"
-import { useTalentProfileService } from "services/talent/useTalentProfileService"
+import { talentProfileService } from "services/talent/talentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
 
 export function useTalentProfileAction() {
-  const { updateProfile } = useTalentProfileService()
+  const { updateProfile } = talentProfileService()
   const { dispatch } = useContext(UserContext)
 
   const updateSocials = async (

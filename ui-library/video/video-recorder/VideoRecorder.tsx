@@ -11,12 +11,17 @@ import {
 import { useTimeout } from "helper/hooks/useTimeout"
 import Preview from "./video-recorder/Preview"
 import Countdown from "./video-recorder/Countdown"
+import { Toast } from "ui-library/toast/Toast"
+import { stringHelper } from "helper/stringHelper"
 
 const styles = videoRecorderStyles
 const default_duration = 30
 
 export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
   const {
+    cameraPermission,
+    error,
+    setError,
     status,
     streamRef,
     videoRef,
@@ -47,6 +52,10 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
     recorder.onChange(videoFile)
   }, [videoFile])
 
+  useEffect(() => {
+    if (recorder.getRecordingStatus) recorder.getRecordingStatus(status)
+  }, [status])
+
   const recordButtonLabel = (status: RecordingStatus) => {
     return status === "recording"
       ? "Stop"
@@ -63,27 +72,39 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
         <Preview stream={streamRef.current} videoRef={videoRef} />
       )}
 
-      <div className={styles.toolbar}>
-        <Button
-          icon={<Video className="h-6 w-6" />}
-          onClick={() =>
-            status === "recording"
-              ? stop()
-              : record(recorder.duration ? recorder.duration : default_duration)
-          }
-          label={recordButtonLabel(status)}
-          size="base"
-          variant="outlined"
-          disabled={recorder.disabled}
-        />
-
-        {status === "recording" && (
-          <Countdown
-            duration={recorder.duration ? recorder.duration : default_duration}
-            status={status}
+      {cameraPermission && (
+        <div className={styles.toolbar}>
+          <Button
+            icon={<Video className="h-6 w-6" />}
+            onClick={() =>
+              status === "recording"
+                ? stop()
+                : record(
+                    recorder.duration ? recorder.duration : default_duration
+                  )
+            }
+            label={recordButtonLabel(status)}
+            size="base"
+            variant="outlined"
+            disabled={recorder.disabled || !cameraPermission}
           />
-        )}
-      </div>
+
+          {status === "recording" && (
+            <Countdown
+              duration={
+                recorder.duration ? recorder.duration : default_duration
+              }
+              status={status}
+            />
+          )}
+        </div>
+      )}
+
+      <Toast
+        show={!stringHelper.isEmpty(error)}
+        onHide={() => setError("")}
+        label={error}
+      />
     </div>
   )
 }

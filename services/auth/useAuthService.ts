@@ -1,14 +1,17 @@
 import { supabaseClientComponent } from "services/_supabase/client"
-import useUserService from "services/user/useUserService"
+import userService from "services/user/userService"
+
+export const emailRedirectTo = () => `${location.origin}/auth/callback`
+export const socialRedirectTo = () => `${location.origin}/login/verify`
 
 const useAuthService = () => {
-  const { deleteUser } = useUserService()
+  const { deleteUser } = userService()
 
   const signInWithOtp = async (email: string) => {
     return await supabaseClientComponent.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
+        emailRedirectTo: emailRedirectTo(),
       },
     })
   }
@@ -20,7 +23,7 @@ const useAuthService = () => {
     return await supabaseClientComponent.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${location.origin}/login/verify`,
+        redirectTo: socialRedirectTo(),
         queryParams: {
           access_type: "offline",
           prompt: "consent",
@@ -32,7 +35,7 @@ const useAuthService = () => {
   const changeEmail = async (email: string) => {
     return await supabaseClientComponent.auth.updateUser(
       { email },
-      { emailRedirectTo: `${location.origin}/` }
+      { emailRedirectTo: socialRedirectTo() }
     )
   }
 
@@ -42,7 +45,6 @@ const useAuthService = () => {
 
   const deleteAccount = async () => {
     const userSession = await supabaseClientComponent.auth.getSession()
-    signOut()
     return await deleteUser(userSession.data.session!.access_token)
   }
 

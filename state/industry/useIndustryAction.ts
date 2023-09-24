@@ -1,15 +1,18 @@
 import { useContext } from "react"
 import { IIndustry, IndustryActionEnum } from "./industry.types"
 import { IndustryContext } from "./IndustryContext"
-import useIndustryService from "../../services/industry/useIndustryService"
+import industryService from "../../services/industry/industryService"
 import {
   LocalStorageItemEnum,
   localStorageHelper,
 } from "helper/localStorageHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useIndustryAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(IndustryContext)
-  const { getAllIndustries } = useIndustryService()
+  const { getAllIndustries } = industryService()
 
   const { getItem } = localStorageHelper
 
@@ -18,20 +21,22 @@ export function useIndustryAction() {
       type: IndustryActionEnum.GET_INDUSTRIES_BEGIN,
     })
 
-    // 1. get the data from localStorage
     if (getItem(LocalStorageItemEnum.industries)) {
       dispatch({
         type: IndustryActionEnum.GET_INDUSTRIES_SUCCESS,
         payload: getItem(LocalStorageItemEnum.industries) as IIndustry[],
       })
-
-      // 2. get the data from db
     } else {
       const { data, error } = await getAllIndustries()
 
       if (error) {
         dispatch({
           type: IndustryActionEnum.GET_INDUSTRIES_FAILURE,
+        })
+
+        notify({
+          message: "Failed to fetch industries",
+          type: "warning",
         })
       } else {
         dispatch({

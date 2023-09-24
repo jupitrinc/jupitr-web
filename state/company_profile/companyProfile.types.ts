@@ -8,7 +8,6 @@ export interface ICompanyProfileContext {
 export type CompanyProfileState = {
   data: ICompanyProfile
   loading: boolean
-  error: boolean
 }
 
 export interface ICompanyProfile {

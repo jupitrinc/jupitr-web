@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React from "react"
 import { SocialIcon } from "components/talent/profile/SocialLinks"
 import { IApplication } from "state/company_job_application/companyJobApplication.types"
 import { Card } from "ui-library/content/card/Card"
@@ -6,40 +6,43 @@ import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
+import { ICompanyJob } from "state/company_job/companyJob.types"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
 
-const ApplicationCard = ({ application }: { application: IApplication }) => {
-  const socialLink = useCallback((link: string) => {
-    return !link.includes("http") ? `https://${link.trim()}` : link.trim()
-  }, [])
-
+const ApplicationCard = ({
+  application,
+  jobSkills,
+}: {
+  application: IApplication
+  jobSkills?: ICompanyJob["skills"]
+}) => {
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <div>
           <Text as="span" size="lg">
-            {application.users.name}
+            {application.users?.name}
           </Text>
 
           <div className="flex flex-row gap-1 items-center justify-between">
             <div className="flex flex-col">
               <div className="flex flex-row gap-2 items-center">
                 <Text as="span" size="sm">
-                  {application.users.email}
+                  {application.users?.email}
                 </Text>
-                <CopyClipboard value={application.users.email} />
+                <CopyClipboard value={application.users?.email} />
               </div>
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users.talent_profile.socials?.map((link) => (
+              {application.users.talent_profile?.socials?.map((social) => (
                 <a
-                  key={link}
-                  href={socialLink(link)}
+                  key={social.url}
+                  href={urlHelper.websiteUrl(social.url)}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <SocialIcon link={link} />
+                  <SocialIcon name={social.name} />
                 </a>
               ))}
             </div>
@@ -51,10 +54,15 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {application.skills &&
-            application.skills.map((skill) => (
-              <SkillCard key={skill.id} skill={skill} />
-            ))}
+          {application.skills?.map((skill) => (
+            <SkillCard
+              key={skill.id}
+              skill={{
+                ...skill,
+                threshold: jobSkills?.find((j) => j.id === skill.id)?.level,
+              }}
+            />
+          ))}
         </div>
       </div>
     </Card>

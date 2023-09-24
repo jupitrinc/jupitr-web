@@ -14,9 +14,9 @@ async function uploadToCloudinary(buffer, public_id) {
         public_id,
         invalidate: true,
         eager: {
-          quality: "auto:good", // handle video compression
+          quality: "auto:good",
         },
-        eager_async: true, // this will handle the video compression on background in cloudinary servers
+        eager_async: true,
       },
       (error, result) => {
         if (error) {
@@ -51,8 +51,6 @@ export async function POST(request: NextRequest) {
       }
     )
   } catch (error) {
-    console.error("Error uploading to Cloudinary:", error)
-
     return new NextResponse(JSON.stringify({ error, data: null }), {
       headers: { "Content-Type": "application/json" },
       status: 500,

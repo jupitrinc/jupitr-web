@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { TextInput } from "ui-library/form/text-input/TextInput"
 import { Text } from "ui-library/text/Text"
 import { Github, Globe, Linkedin } from "lucide-react"
 import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useUserState } from "state/user/useUserState"
+
+enum SocialsEnum {
+  linkedin = "linkedin",
+  github = "github",
+  website = "website",
+}
 
 const SocialLinks = () => {
   const { user } = useUserState()
@@ -15,10 +21,23 @@ const SocialLinks = () => {
     user.socials
   )
 
-  const onChange = (e: { target: { value: string } }, index: number) => {
-    const updateSocials = [...socials]
-    updateSocials[index] = e.target.value
-    setSocials(updateSocials)
+  const onChange = useCallback(
+    (e: { target: { value: string } }, name: string) => {
+      const copySocials = [...socials]
+
+      if (socials.find((s) => s.name === name)) {
+        copySocials.map((s) => s.name === name && (s.url = e.target.value))
+      } else {
+        copySocials.push({ name: name, url: e.target.value })
+      }
+
+      setSocials(copySocials)
+    },
+    [socials]
+  )
+
+  const socialUrl = (name: string) => {
+    return socials.find((s) => s.name === name)?.url
   }
 
   const save = () => {
@@ -29,14 +48,16 @@ const SocialLinks = () => {
     <div className="flex flex-col gap-5">
       <div className="flex flex-row space-x-3 items-center">
         <Text as="span">
-          <SocialIcon link={"github"} />
+          <SocialIcon name={SocialsEnum.github} />
         </Text>
 
         <div className="w-full">
           <TextInput
             placeholder="GitHub profile"
-            value={socials[0] ? socials[0] : ""}
-            onChange={(e) => onChange(e, 0)}
+            value={
+              socialUrl(SocialsEnum.github) ? socialUrl(SocialsEnum.github) : ""
+            }
+            onChange={(e) => onChange(e, SocialsEnum.github)}
             onBlur={save}
           />
         </div>
@@ -44,14 +65,18 @@ const SocialLinks = () => {
 
       <div className="flex flex-row space-x-3 items-center">
         <Text as="span">
-          <SocialIcon link={"linkedin"} />
+          <SocialIcon name={SocialsEnum.linkedin} />
         </Text>
 
         <div className="w-full">
           <TextInput
             placeholder="LinkedIn profile"
-            value={socials[1] ? socials[1] : ""}
-            onChange={(e) => onChange(e, 1)}
+            value={
+              socialUrl(SocialsEnum.linkedin)
+                ? socialUrl(SocialsEnum.linkedin)
+                : ""
+            }
+            onChange={(e) => onChange(e, SocialsEnum.linkedin)}
             onBlur={save}
           />
         </div>
@@ -59,14 +84,18 @@ const SocialLinks = () => {
 
       <div className="flex flex-row space-x-3 items-center">
         <Text as="span">
-          <SocialIcon link={"portfolio"} />
+          <SocialIcon name={SocialsEnum.website} />
         </Text>
 
         <div className="w-full">
           <TextInput
             placeholder="Website"
-            value={socials[2] ? socials[2] : ""}
-            onChange={(e) => onChange(e, 2)}
+            value={
+              socialUrl(SocialsEnum.website)
+                ? socialUrl(SocialsEnum.website)
+                : ""
+            }
+            onChange={(e) => onChange(e, SocialsEnum.website)}
             onBlur={save}
           />
         </div>
@@ -77,11 +106,13 @@ const SocialLinks = () => {
 
 export default SocialLinks
 
-export const SocialIcon = ({ link }) => {
+export const SocialIcon = ({ name }) => {
+  if (typeof name !== "string") return null
+
   const styles = "w-5 h-5 align-middle text-gray-600"
-  if (link.includes("github")) {
+  if (name.includes("github")) {
     return <Github className={styles} />
-  } else if (link.includes("linkedin")) {
+  } else if (name.includes("linkedin")) {
     return <Linkedin className={styles} />
   } else {
     return <Globe className={styles} />

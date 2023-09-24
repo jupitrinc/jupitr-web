@@ -1,18 +1,16 @@
 import React, { useCallback, useState } from "react"
 import { Sticker } from "lucide-react"
-import { Modal } from "ui-library/modal/Modal"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Text } from "ui-library/text/Text"
 import { Textarea } from "ui-library/form/textarea/Textarea"
-import { useNotification } from "helper/hooks/useNotification"
 import { useUserState } from "state/user/useUserState"
 import { useFeedbackAction } from "state/feedback/useFeedbackAction"
 import SentMessage from "./SentMessage"
 
 const Feedback = () => {
   const { user } = useUserState()
-  const { notification, showNotification, hideNotification } =
-    useNotification(false)
+  const { modal, showModal, hideModal } = useModal()
   const { addFeedback } = useFeedbackAction()
 
   const [message, setMessage] = useState<string>("")
@@ -37,8 +35,8 @@ const Feedback = () => {
 
   return (
     <>
-      <Button onClick={showNotification} label="Give feedback" size="xs" />
-      <Modal open={notification} onClose={hideNotification}>
+      <Button onClick={showModal} label="Feedback" size="xs" />
+      <Modal open={modal} onClose={hideModal}>
         <div className="flex flex-row gap-5">
           <Sticker className="w-10 h-10 text-gray-500" />
 

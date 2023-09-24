@@ -36,7 +36,7 @@ export type ISuperUser = ITalentProfile & ICompanyMemberProfile
 export type UserState = {
   data: ISuperUser
   loading: boolean
-  error: string
+  success: boolean
 }
 
 export type UserAction = {

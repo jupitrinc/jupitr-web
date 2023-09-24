@@ -7,6 +7,5 @@ export const useCompanyProfileState = () => {
   return {
     company_profile: state.data,
     loading: state.loading,
-    error: state.error,
   }
 }

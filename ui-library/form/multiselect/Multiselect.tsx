@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo, useRef, useState } from "react"
+import { Fragment, useMemo, useRef, useState } from "react"
 import { Combobox, Transition } from "@headlessui/react"
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { MultiselectProps } from "./Multiselect.types"
@@ -6,10 +6,12 @@ import { multiselectStyles } from "./Multiselect.styles"
 import { Label } from "../label/Label"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
+import { Loader } from "ui-library/loader/Loader"
 
 export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   const styles = multiselectStyles
   const [query, setQuery] = useState<string>("")
+
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const filteredOptions = useMemo(
@@ -26,7 +28,10 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   )
 
   const handleInputChange = (e) => {
-    if (e.target.value.length < 30) setQuery(e.target.value)
+    if (e.target.value.length < 30) {
+      setQuery(e.target.value)
+      multiselect.onChange?.(e.target.value)
+    }
   }
 
   const addOption = (option: string) => {
@@ -39,7 +44,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
   }
 
   return (
-    <Combobox onChange={multiselect.onChange}>
+    <Combobox onChange={multiselect.onSelect}>
       <div className={styles.container}>
         {multiselect.label && (
           <Label
@@ -60,7 +65,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
           </Combobox.Button>
         </div>
 
-        {multiselect.options && multiselect.options.length > 0 && (
+        {query.trim() !== "" && (
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -69,18 +74,26 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options className={styles.options}>
-              {filteredOptions.length === 0 && query !== "" ? (
+              {filteredOptions.length === 0 || multiselect.loading ? (
                 <div className={styles.option.noResult}>
                   <div className="flex flex-row gap-5 items-center justify-between flex-wrap">
-                    <Text as="span">No results found for "{query}" </Text>
+                    {multiselect.loading ? (
+                      <Loader className="h-4 w-4" type="custom" />
+                    ) : (
+                      <>
+                        <Text as="span">
+                          No results found for &quot;{query}&quot;
+                        </Text>
 
-                    {multiselect.allowAddOption && query.trim().length > 1 && (
-                      <Button
-                        label="Add"
-                        size="xs"
-                        icon={<Plus className="h-4 w-4" />}
-                        onClick={() => addOption(query.trim())}
-                      />
+                        {multiselect.allowAddOption && query.length > 1 && (
+                          <Button
+                            label="Add"
+                            size="xs"
+                            icon={<Plus className="h-4 w-4" />}
+                            onClick={() => addOption(query.trim())}
+                          />
+                        )}
+                      </>
                     )}
                   </div>
                 </div>

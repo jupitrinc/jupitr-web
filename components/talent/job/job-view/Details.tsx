@@ -3,6 +3,7 @@ import { Text } from "ui-library/text/Text"
 import { Pill } from "ui-library/pill/Pill"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { numberHelper } from "helper/numberHelper"
+import { urlHelper } from "helper/urlHelper"
 
 const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -24,7 +25,7 @@ const Details = () => {
           <Laptop className="h-5 w-5" />
 
           <div className="flex flex-row flex-wrap gap-2">
-            {talent_job.work_model.map((model) => (
+            {talent_job.work_model?.map((model) => (
               <Text key={model} as="span" size="lg">
                 <span className="flex flex-row flex-wrap">
                   <Pill label={model} size="base" />
@@ -45,7 +46,7 @@ const Details = () => {
           <span className="flex flex-row flex-wrap gap-1 items-center">
             <Globe className="h-5 w-5" />
             <a
-              href={talent_job.company.website.trim()}
+              href={urlHelper.websiteUrl(talent_job.company.website)}
               rel="noopener noreferrer"
               target="_blank"
             >

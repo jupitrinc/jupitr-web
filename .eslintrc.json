@@ -7,14 +7,10 @@
      ],
      "plugins": ["prettier"],
      "rules": {
-       "@typescript-eslint/no-unused-vars": "off",
+       "@typescript-eslint/no-unused-vars": ["error",  { "argsIgnorePattern": "^_" }],
        "@typescript-eslint/no-explicit-any": "error",
        "prettier/prettier": "warn",
-       "no-console": ["error", { "allow": ["warn", "error"] }],
-       "react-hooks/exhaustive-deps": [
-         "warn", {
-           "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
-         }
-       ]
+       "no-console": ["error", { "allow": ["warn", "error","info"] }],
+       "react-hooks/exhaustive-deps": ["off"]
      }
    }

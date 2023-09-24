@@ -16,10 +16,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     useImperativeHandle(ref, () => innerRef.current as HTMLTextAreaElement)
 
     useEffect(() => {
-      if (innerRef.current && textarea.autoFocus) {
-        innerRef.current.focus()
-      }
-    }, [])
+      if (innerRef.current && textarea.autoFocus) innerRef.current.focus()
+      if (innerRef.current && !textarea.autoFocus) innerRef.current.blur()
+    }, [textarea.autoFocus])
 
     return (
       <div className={styles.container}>
@@ -37,7 +36,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           name={textarea.name}
           placeholder={textarea.placeholder}
           disabled={textarea.disabled}
-          autoFocus={textarea.autoFocus}
           maxLength={textarea.maxLength}
           onChange={textarea.onChange}
           cols={30}

@@ -1,16 +1,19 @@
 import { useContext } from "react"
 import { TalentApplicationContext } from "./TalentApplicationContext"
-import useMediaService from "services/storage/useMediaService"
+import mediaService from "services/storage/mediaService"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import {
   AddApplicationPayload,
   TalentApplicationActionEnum,
 } from "./talentApplication.types"
-import useTalentJobApplicationService from "services/talent/useTalentApplicationService"
+import useTalentJobApplicationService from "services/talent/talentApplicationService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useTalentApplicationAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(TalentApplicationContext)
-  const { uploadVideo } = useMediaService()
+  const { uploadVideo } = mediaService()
   const { addApplication: addApplicationService } =
     useTalentJobApplicationService()
 
@@ -28,7 +31,11 @@ export function useTalentApplicationAction() {
     ) {
       dispatch({
         type: TalentApplicationActionEnum.ADD_APPLICATION_FAILURE,
-        payload: "Something went wrong, try again",
+      })
+
+      notify({
+        message: "Something went wrong, try again",
+        type: "warning",
       })
 
       return
@@ -61,9 +68,13 @@ export function useTalentApplicationAction() {
       if (error) {
         dispatch({
           type: TalentApplicationActionEnum.ADD_APPLICATION_FAILURE,
-          payload: error.message.includes("applications_video_url")
-            ? "Already applied"
+        })
+
+        notify({
+          message: error.message.includes("applications_video_url")
+            ? "Already applied for this job"
             : error.message,
+          type: "warning",
         })
       } else {
         dispatch({

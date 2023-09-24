@@ -13,7 +13,6 @@ export const talentApplicationReducer = (
       return {
         ...state,
         loading: true,
-        error: "",
         success: false,
       }
 
@@ -21,14 +20,12 @@ export const talentApplicationReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
       }
 
     case TalentApplicationActionEnum.ADD_APPLICATION_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
         success: true,
       }
 

@@ -5,9 +5,11 @@ import { useImagePreview } from "helper/hooks/useImagePreview"
 import { useIndustryAction } from "state/industry/useIndustryAction"
 import { useIndustryState } from "state/industry/useIndustryState"
 import { IIndustry } from "state/industry/industry.types"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const useSignUp = () => {
-  const { signUpCompany, signInWithEmail } = useUserAction()
+  const { signUpCompany } = useUserAction()
+  const { notify } = useNotificationAction()
 
   const [company, setCompany] = useState<AddCompany>({
     name: "",
@@ -66,9 +68,6 @@ export const useSignUp = () => {
     size: false,
   })
 
-  const [validationFailed, setValidationFailed] = useState<boolean>(false)
-  const [signUpSuccess, setSignUpSuccess] = useState<boolean>(false)
-
   const validateCompany = useCallback(
     async (company: AddCompany) => {
       const fields = { ...invalid }
@@ -84,7 +83,6 @@ export const useSignUp = () => {
       setInvalid(fields)
       const isFailed = Object.values(fields).includes(true)
 
-      setValidationFailed(isFailed)
       return isFailed
     },
     [company]
@@ -97,12 +95,12 @@ export const useSignUp = () => {
       const failed = await validateCompany(company)
 
       if (!failed) {
-        const success = await signUpCompany(company)
-
-        if (success) {
-          setSignUpSuccess(true)
-          await signInWithEmail(success)
-        }
+        await signUpCompany(company)
+      } else {
+        notify({
+          message: "Please provide the required information",
+          type: "warning",
+        })
       }
     },
     [company]
@@ -112,8 +110,6 @@ export const useSignUp = () => {
     company,
     setCompany,
     invalid,
-    validationFailed,
-    signUpSuccess,
     logoPreview,
     industries,
     addIndustry,

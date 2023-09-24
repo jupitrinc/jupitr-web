@@ -14,21 +14,18 @@ export const companyProfileReducer = (
       return {
         ...state,
         loading: true,
-        error: false,
       }
 
     case CompanyProfileActionEnum.GET_COMPANY_PROFILE_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true,
       }
 
     case CompanyProfileActionEnum.GET_COMPANY_PROFILE_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false,
         data: action.payload as ICompanyProfile,
       }
 
@@ -41,8 +38,6 @@ export const companyProfileReducer = (
           logo: update_logo_payload,
         },
       }
-
-      console.log(update_logo_state.data)
 
       return update_logo_state
 

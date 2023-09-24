@@ -1,21 +1,26 @@
 import { useContext } from "react"
 import { CompanyMembersContext } from "./CompanyMembersContext"
-import useCompanyMemberService from "services/company/useCompanyMemberService"
+import companyMemberService from "services/company/companyMemberService"
 import {
   AddCompanyMemberPayload,
   CompanyMembersActionEnum,
+  DeleteCompanyMemberPayload,
   ICompanyMember,
   UpdateRolePayload,
 } from "./companyMembers.types"
 import { ISuperUser } from "state/user/user.types"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyMembersAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyMembersContext)
   const {
     getMembers: getMembersService,
-    updateMembersPermission: updateRoleService,
+    updateMemberPermission: updateRoleService,
     addMember: addMemberService,
-  } = useCompanyMemberService()
+    deleteMember: deleteMemberService,
+  } = companyMemberService()
 
   const getMembers = async (company_id: ISuperUser["company_id"]) => {
     if (!company_id) return
@@ -29,12 +34,46 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.GET_MEMBERS_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
         type: CompanyMembersActionEnum.GET_MEMBERS_SUCCESS,
         payload: data as ICompanyMember,
+      })
+    }
+  }
+
+  const addMember = async (payload: AddCompanyMemberPayload) => {
+    if (!payload.company_id || !payload.email || !payload.permission) return
+
+    dispatch({
+      type: CompanyMembersActionEnum.ADD_MEMBER_BEGIN,
+    })
+
+    const { data, error } = await addMemberService(payload)
+
+    if (error) {
+      dispatch({
+        type: CompanyMembersActionEnum.ADD_MEMBER_FAILURE,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    } else {
+      dispatch({
+        type: CompanyMembersActionEnum.ADD_MEMBER_SUCCESS,
+      })
+
+      notify({
+        message: "Member invited",
+        type: "success",
       })
     }
   }
@@ -51,7 +90,11 @@ export function useCompanyMembersAction() {
     if (error) {
       dispatch({
         type: CompanyMembersActionEnum.UPDATE_MEMBER_ROLE_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -61,23 +104,33 @@ export function useCompanyMembersAction() {
     }
   }
 
-  const addMember = async (payload: AddCompanyMemberPayload) => {
-    if (!payload.companyId || !payload.email || !payload.permission) return
+  const deleteMember = async (payload: DeleteCompanyMemberPayload) => {
+    if (!payload.company_id || !payload.user_id) return
 
     dispatch({
-      type: CompanyMembersActionEnum.ADD_MEMBER_BEGIN,
+      type: CompanyMembersActionEnum.DELETE_MEMBER_BEGIN,
     })
 
-    const { data, error } = await addMemberService(payload)
+    const { data, error } = await deleteMemberService(payload)
 
     if (error) {
       dispatch({
-        type: CompanyMembersActionEnum.ADD_MEMBER_FAILURE,
-        payload: error.message,
+        type: CompanyMembersActionEnum.DELETE_MEMBER_FAILURE,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
-        type: CompanyMembersActionEnum.ADD_MEMBER_SUCCESS,
+        type: CompanyMembersActionEnum.DELETE_MEMBER_SUCCESS,
+        payload: payload.user_id as ICompanyMember["user_id"],
+      })
+
+      notify({
+        message: "Member removed",
+        type: "success",
       })
     }
   }
@@ -91,6 +144,7 @@ export function useCompanyMembersAction() {
   return {
     getMembers,
     updateRole,
+    deleteMember,
     addMember,
     clearMembers,
   }

@@ -27,19 +27,15 @@ export const userReducer = (
 ): UserState => {
   const { setItem, removeItem } = localStorageHelper
 
-  console.log(action.type)
-
   switch (action.type) {
     case UserActionEnum.SIGN_IN_BEGIN:
     case UserActionEnum.GET_USER_BEGIN:
-    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
     case UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN:
     case UserActionEnum.UPDATE_EMAIL_BEGIN:
     case UserActionEnum.DELETE_USER_BEGIN:
       return {
         ...state,
         loading: true,
-        error: "",
       }
 
     case UserActionEnum.SIGN_IN_FAILURE:
@@ -51,16 +47,27 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: action.payload as string,
+      }
+
+    case UserActionEnum.COMPANY_SIGN_UP_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        success: false,
+      }
+
+    case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
       }
 
     case UserActionEnum.SIGN_IN_SUCCESS:
-    case UserActionEnum.COMPANY_SIGN_UP_SUCCESS:
     case UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
       }
 
     case UserActionEnum.GET_USER_SUCCESS:
@@ -69,7 +76,6 @@ export const userReducer = (
       return {
         ...state,
         loading: false,
-        error: "",
         data: action.payload as ISuperUser,
       }
 
@@ -99,7 +105,6 @@ export const userReducer = (
       const update_email_state = {
         ...state,
         loading: false,
-        error: "",
         data: {
           ...state.data,
           email: update_email_payload,
@@ -131,18 +136,17 @@ export const userReducer = (
           active: toggle_user_payload,
         },
       }
-      setItem(LocalStorageItemEnum.user, toggle_user_state)
+      setItem(LocalStorageItemEnum.user, toggle_user_state.data)
       return toggle_user_state
 
     case UserActionEnum.DELETE_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: "",
         data: {} as ISuperUser,
       }
 
-    // talent_profile
+    // FIXME talent_profile
     case TalentProfileActionEnum.UPDATE_SOCIALS:
       const update_socials_payload = action.payload as ITalentProfile["socials"]
 
@@ -201,7 +205,7 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_skills_state.data)
       return update_skills_state
 
-    // company_member_profile
+    // FIXME company_member_profile
     case CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE:
       const update_job_title_payload =
         action.payload as ICompanyMemberProfile["job_title"]

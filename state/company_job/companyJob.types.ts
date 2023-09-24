@@ -8,7 +8,7 @@ export interface ICompanyJobContext {
 export type CompanyJobState = {
   data: ICompanyJob
   loading: boolean
-  error: string
+  success: boolean
 }
 
 export interface ICompanyJob {

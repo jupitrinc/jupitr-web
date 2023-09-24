@@ -14,7 +14,6 @@ export interface ITalentJobContext {
 export type TalentJobState = {
   data: ITalentJob
   loading: boolean
-  error: string
   success: boolean
 }
 
@@ -36,11 +35,22 @@ export interface ITalentJob {
 }
 
 export type TalentJobAction = {
-  type: TalentJobActionEnum.SET_JOB
+  type:
+    | TalentJobActionEnum.SET_JOB
+    | TalentJobActionEnum.GET_JOB_BEGIN
+    | TalentJobActionEnum.GET_JOB_FAILURE
+    | TalentJobActionEnum.GET_JOB_SUCCESS
+    | TalentJobActionEnum.CLEAR_JOB
 
-  payload?: ITalentJob
+  payload?: ITalentJob | string
 }
 
 export enum TalentJobActionEnum {
   SET_JOB = "SET_JOB",
+
+  GET_JOB_BEGIN = "GET_JOB_BEGIN",
+  GET_JOB_FAILURE = "GET_JOB_FAILURE",
+  GET_JOB_SUCCESS = "GET_JOB_SUCCESS",
+
+  CLEAR_JOB = "CLEAR_JOB",
 }

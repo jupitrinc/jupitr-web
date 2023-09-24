@@ -4,25 +4,32 @@ import {
   CompanyJobApplicationActionEnum,
 } from "./companyJobApplication.types"
 import { CompanyJobApplicationContext } from "./CompanyJobApplicationContext"
-import useCompanyJobApplicationService from "services/company/useCompanyJobApplicationService"
+import companyJobApplicationService from "services/company/companyJobApplicationService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobApplicationAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobApplicationContext)
   const { getAllApplications: getApplicationsService } =
-    useCompanyJobApplicationService()
+    companyJobApplicationService()
 
-  const getAllApplications = async (job_id: string) => {
-    if (!job_id) return
+  const getAllApplications = async (job_id: string, company_id: string) => {
+    if (!job_id && !company_id) return
 
     dispatch({
       type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_BEGIN,
     })
 
-    const { data, error } = await getApplicationsService(job_id)
+    const { data, error } = await getApplicationsService(job_id, company_id)
     if (error) {
       dispatch({
         type: CompanyJobApplicationActionEnum.GET_APPLICATIONS_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: "Oops, something went wrong. Try refreshing the page.",
+        type: "warning",
       })
     } else {
       dispatch({

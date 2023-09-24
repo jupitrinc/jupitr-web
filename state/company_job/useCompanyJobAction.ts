@@ -1,22 +1,25 @@
 import { useContext } from "react"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 import {
   ICompanyJob,
   CompanyJobActionEnum,
   JobStatusEnum,
 } from "./companyJob.types"
 import { CompanyJobContext } from "./CompanyJobContext"
-import useCompanyJobService from "services/company/useCompanyJobService"
+import companyJobService from "services/company/companyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export function useCompanyJobAction() {
   const router = useRouter()
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobContext)
   const {
     addJob: addJobService,
     getJob: getJobService,
     updateJob: updateJobService,
-  } = useCompanyJobService()
+  } = companyJobService()
 
   const addJob = async (
     status: ICompanyJob["status"],
@@ -36,7 +39,11 @@ export function useCompanyJobAction() {
     if (error) {
       dispatch({
         type: CompanyJobActionEnum.ADD_COMPANY_JOB_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else if (data) {
       dispatch({
@@ -47,19 +54,22 @@ export function useCompanyJobAction() {
     }
   }
 
-  const getJob = async (job_id: ICompanyJob["id"]) => {
+  const getJob = async (job_id: ICompanyJob["id"], company_id: string) => {
     if (!job_id) return
 
     dispatch({
       type: CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN,
     })
 
-    const { data, error } = await getJobService(job_id)
+    const { data, error } = await getJobService(job_id, company_id)
 
     if (error) {
       dispatch({
         type: CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE,
-        payload: error.message,
+      })
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else if (data) {
       dispatch({
@@ -87,6 +97,13 @@ export function useCompanyJobAction() {
       dispatch({
         type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_TITLE,
         payload: data.title,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
       })
     }
   }
@@ -123,6 +140,13 @@ export function useCompanyJobAction() {
         payload: data.work_model,
       })
     }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    }
   }
 
   const updateLocation = async (
@@ -139,6 +163,13 @@ export function useCompanyJobAction() {
       dispatch({
         type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_LOCATION,
         payload: data.location,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
       })
     }
   }
@@ -165,6 +196,13 @@ export function useCompanyJobAction() {
         payload: data.skills,
       })
     }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    }
   }
 
   const removeSkill = async (
@@ -182,6 +220,13 @@ export function useCompanyJobAction() {
       dispatch({
         type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_SKILLS,
         payload: data.skills,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
       })
     }
   }
@@ -211,6 +256,13 @@ export function useCompanyJobAction() {
         payload: data.skills,
       })
     }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    }
   }
 
   const updateApplicationVideo = async (
@@ -227,6 +279,13 @@ export function useCompanyJobAction() {
       dispatch({
         type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO,
         payload: data.application_video,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
       })
     }
   }
@@ -250,6 +309,13 @@ export function useCompanyJobAction() {
         payload: data.status,
       })
     }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    }
   }
 
   const deleteJob = async (job_id: ICompanyJob["id"]) => {
@@ -262,6 +328,13 @@ export function useCompanyJobAction() {
     if (data) {
       dispatch({
         type: CompanyJobActionEnum.CLEAR_COMPANY_JOB,
+      })
+    }
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
       })
     }
   }

@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { Check } from "lucide-react"
 import { Avatar } from "ui-library/avatar/avatar/Avatar"
-import { Modal } from "ui-library/modal/Modal"
+import { Modal, useModal } from "ui-library/modal/Modal"
 import { Text } from "ui-library/text/Text"
 import { Button } from "ui-library/button/Button"
-import { Check } from "lucide-react"
 import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { static_data_job } from "data/job"
-import { useNotification } from "helper/hooks/useNotification"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { urlHelper } from "helper/urlHelper"
@@ -14,13 +14,16 @@ import { useApplication } from "./application/useApplication"
 import { useTalentApplicationAction } from "state/talent_application/useTalentApplicationAction"
 import { useUserState } from "state/user/useUserState"
 import { useTalentApplicationState } from "state/talent_application/useTalentApplicationState"
-import { Toast } from "ui-library/toast/Toast"
+import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/useVideoRecorder"
+import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
+import UserName from "components/user/profile/UserName"
 
 const Application = () => {
+  const router = useRouter()
   const { user } = useUserState()
   const { talent_job } = useTalentJobState()
-  const { notification, showNotification, hideNotification } = useNotification()
+  const { modal, showModal, hideModal } = useModal()
   const {
     progress,
     step,
@@ -32,10 +35,11 @@ const Application = () => {
     setVideoFile,
   } = useApplication(talent_job.skills)
 
+  const [recordingStatus, setRecordingStatus] =
+    useState<RecordingStatus>("inactive")
+
   const { addApplication } = useTalentApplicationAction()
-  const { success, error, loading } = useTalentApplicationState()
-  const { notification: errorMessage, hideNotification: hideError } =
-    useNotification(Boolean(error))
+  const { success, loading } = useTalentApplicationState()
 
   const submitApplication = useCallback(() => {
     if (!videoFile) return
@@ -55,27 +59,33 @@ const Application = () => {
     success && nextStep()
   }, [success])
 
+  const startApplication = () => {
+    if (user.id && user.account_type === AccountTypeEnum.talent) showModal()
+    else router.push(`/?jobId=${talent_job.id}`)
+  }
+
   return (
     <>
-      <Button
-        size="lg"
-        color="special"
-        variant="contained"
-        label="Apply"
-        full_width
-        onClick={showNotification}
-      />
+      {user.account_type !== AccountTypeEnum.company && (
+        <Button
+          size="base"
+          color="special"
+          variant="contained"
+          label="Apply"
+          onClick={startApplication}
+        />
+      )}
 
-      <Modal open={notification} onClose={hideNotification}>
-        <div className="h-[40rem]">
-          <div className="overflow-y-scroll h-full flex flex-col pb-28">
+      <Modal open={modal} onClose={hideModal}>
+        <div className="h-[30rem] md:h-[40rem]">
+          <div className="overflow-y-scroll h-full flex flex-col px-1">
             <div className="flex flex-row gap-5 items-center">
               <Avatar
                 image_url={urlHelper.imageUrl(talent_job.company.logo)}
                 size={10}
                 alt={`${talent_job.company.name} logo`}
               />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col">
                 <Text as="h1" size="lg">
                   {talent_job.title}
                 </Text>
@@ -85,11 +95,17 @@ const Application = () => {
                 </Text>
               </div>
             </div>
-            <div className="flex flex-col gap-5 mb-5 w-4/5 mx-auto">
+            <div className="flex flex-col gap-5 mb-5 w-full mx-auto">
               <ProgressBar progress={progress(step)} type="sticky" />
 
               {step === 1 && (
                 <div className="flex flex-col gap-5 mt-10">
+                  {!user.name && (
+                    <div className="mb-10">
+                      <UserName />
+                    </div>
+                  )}
+
                   <Text as="span" size="base" align="left">
                     Rate your skills
                   </Text>
@@ -123,12 +139,15 @@ const Application = () => {
                       onChange={(video) => setVideoFile(video)}
                       recordLabel={videoFile ? "Record again" : "Start"}
                       disabled={loading}
+                      getRecordingStatus={(status) =>
+                        setRecordingStatus(status)
+                      }
                     />
                   </div>
                 </div>
               )}
 
-              {step === 3 && (
+              {step === 3 && success && (
                 <div className="flex flex-col gap-5 mt-32">
                   <div className="flex justify-center align-middle">
                     <Text as="span" size="base" align="center">
@@ -144,14 +163,14 @@ const Application = () => {
           </div>
 
           {step < 3 && (
-            <div className="flex flex-row gap-5 justify-center  bg-gray-100 absolute bottom-0 left-0 w-full p-3">
+            <div className="flex flex-row gap-5 justify-center bg-gray-100 absolute bottom-0 left-0 w-full p-3">
               {step !== 1 && (
                 <Button
                   label="Back"
                   size="base"
                   variant="text"
                   onClick={prevStep}
-                  disabled={loading}
+                  disabled={loading || recordingStatus === "recording"}
                 />
               )}
               <Button
@@ -159,13 +178,15 @@ const Application = () => {
                 size="base"
                 variant="outlined"
                 onClick={step === 2 ? submitApplication : nextStep}
-                disabled={step === 2 && (!videoFile || skills.length < 1)}
+                disabled={
+                  (step === 2 && (!videoFile || skills.length < 1)) ||
+                  !user.name
+                }
                 loading={loading}
               />
             </div>
           )}
         </div>
-        <Toast label={String(error)} show={errorMessage} onHide={hideError} />
       </Modal>
     </>
   )

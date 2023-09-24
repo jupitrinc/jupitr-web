@@ -3,27 +3,30 @@ import { useRouter } from "next/router"
 import { IUser, UserActionEnum } from "./user.types"
 import { UserContext } from "./UserContextProvider"
 import useAuthService from "services/auth/useAuthService"
-import useUserService from "services/user/useUserService"
+import userService from "services/user/userService"
 import {
   MediaPayload,
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
-import useMediaService from "../../services/storage/useMediaService"
+import mediaService from "../../services/storage/mediaService"
 import { AddCompany } from "state/company_profile/companyProfile.types"
-import useCompanyService from "services/company/useCompanyService"
+import companyService from "services/company/companyService"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useUserAction() {
+  const { notify } = useNotificationAction()
+
   const { clear } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
   const { toBase64 } = imageHelper
 
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
-  const { uploadImage } = useMediaService()
+  const { uploadImage } = mediaService()
   const {
     signInWithOtp,
     signInWithGoogle: signInWithGoogleService,
@@ -31,17 +34,27 @@ export function useUserAction() {
     deleteAccount: deleteAccountService,
     changeEmail: changeEmailService,
   } = useAuthService()
-  const { getUser: getUserService, updateUser } = useUserService()
-  const { addCompany } = useCompanyService()
+  const { getUser: getUserService, updateUser } = userService()
+  const { addCompany } = companyService()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithOtp(email)
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+
+      notify({
+        message: error.message,
+        type: "warning",
+      })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
+      })
+
+      notify({
+        message: "Sign in using the link sent to your inbox",
+        type: "info",
       })
     }
   }
@@ -50,7 +63,12 @@ export function useUserAction() {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
     const { error } = await signInWithGoogleService()
     if (error) {
-      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE, payload: error.message })
+      dispatch({ type: UserActionEnum.SIGN_IN_FAILURE })
+
+      notify({
+        message: error.message,
+        type: "warning",
+      })
     } else {
       dispatch({
         type: UserActionEnum.SIGN_IN_SUCCESS,
@@ -64,7 +82,11 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.GET_USER_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -75,6 +97,8 @@ export function useUserAction() {
   }
 
   const setUser = (user: IUser) => {
+    dispatch({ type: UserActionEnum.GET_USER_BEGIN })
+
     dispatch({
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
@@ -86,23 +110,24 @@ export function useUserAction() {
 
     const resizedFile = await imageHelper.resize(company.logo as File)
     const base64File = await toBase64(resizedFile)
-    const { data, error } = await addCompany({ ...company, logo: base64File })
+    const { error } = await addCompany({
+      ...company,
+      logo: base64File,
+    })
 
     if (error) {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
-        payload: error.message.includes("non-2xx status")
-          ? "You already have an account. Sign in"
-          : error.message,
       })
 
-      return null
+      notify({
+        message: error.message,
+        type: "warning",
+      })
     } else {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
-
-      return company.email
     }
   }
 
@@ -117,7 +142,7 @@ export function useUserAction() {
   }
 
   const updateName = async (id: string, name: string) => {
-    const { data, error } = await updateUser(id, { name: name })
+    const { data } = await updateUser(id, { name: name })
 
     if (data) {
       dispatch({
@@ -135,13 +160,23 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
         type: UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS,
-        payload: email,
       })
+
+      notify({
+        message: "Check your inbox and confirm your email update request.",
+        type: "info",
+      })
+
+      signOut()
     }
   }
 
@@ -154,7 +189,11 @@ export function useUserAction() {
     if (error) {
       dispatch({
         type: UserActionEnum.UPDATE_EMAIL_FAILURE,
-        payload: error.message,
+      })
+
+      notify({
+        message: error.message,
+        type: "warning",
       })
     } else {
       dispatch({
@@ -165,6 +204,8 @@ export function useUserAction() {
   }
 
   const toggleActive = async (id: string, active: boolean) => {
+    if (!id) return
+
     const { data, error } = await updateUser(id, { active: !active })
 
     if (data) {
@@ -174,6 +215,11 @@ export function useUserAction() {
       })
       if (!data.active) {
         signOut()
+
+        notify({
+          message: "Account paused",
+          type: "info",
+        })
       }
     }
   }
@@ -220,8 +266,13 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.DELETE_USER_SUCCESS,
       })
-      clear()
-      router.replace("/")
+
+      signOut()
+
+      notify({
+        message: "Account deleted",
+        type: "info",
+      })
     }
   }
 

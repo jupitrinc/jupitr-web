@@ -3,6 +3,7 @@ export interface CardProps {
   onClick?: (event: React.MouseEvent) => void
   active?: boolean
   type?: "static" | "linked" | "section"
+  justifyContent?: "center" | "start" | "end"
 }
 
 export enum CardTypeEnum {

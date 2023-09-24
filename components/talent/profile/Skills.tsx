@@ -7,26 +7,25 @@ import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
 import { static_data_job } from "data/job"
-import { Toast } from "ui-library/toast/Toast"
-import { useNotification } from "helper/hooks/useNotification"
-import { stringHelper } from "helper/stringHelper"
+import { useDebounce } from "helper/hooks/useDebounce"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 
 const Skills = () => {
-  const { isEmpty } = stringHelper
   const { user } = useUserState()
+
+  const {
+    debouncedValue: searchQuery,
+    setDebouncedValue: setSearchQuery,
+    loading: searchQueryLoading,
+  } = useDebounce()
+
   const { addSkill, removeSkill, updateSkill } = useTalentProfileAction()
-  const { getSkills, clearSkills, addSkill: addSkillAction } = useSkillAction()
-  const { skills, error } = useSkillState()
-  const { notification, hideNotification } = useNotification(!isEmpty(error))
-
-  useEffect(() => {
-    getSkills()
-
-    return () => {
-      clearSkills()
-    }
-  }, [])
+  const {
+    addSkill: addSkillAction,
+    searchSkill: searchSkillAction,
+    clearSkills,
+  } = useSkillAction()
+  const { skills, loading } = useSkillState()
 
   const addNewSkill = useCallback(
     async (name: string) => {
@@ -40,40 +39,48 @@ const Skills = () => {
     [user]
   )
 
+  useEffect(() => {
+    if (searchQuery !== "") {
+      searchSkillAction(searchQuery)
+    }
+
+    return () => {
+      clearSkills()
+    }
+  }, [searchQuery])
+
   return (
-    <>
-      <Card type="section">
-        <div className="flex flex-col gap-5">
-          <SectionHeader title="Skills" />
-          <Multiselect
-            placeholder="Search skills"
-            options={skills}
-            allowAddOption={true}
-            addOption={(name) => addNewSkill(name)}
-            onChange={(skill) =>
-              addSkill(user.id, { ...skill, level: 2 }, user.skills)
-            }
-          />
-        </div>
+    <Card type="section">
+      <div className="flex flex-col gap-5">
+        <SectionHeader title="Skills" />
+        <Multiselect
+          placeholder="Search skills"
+          options={skills}
+          allowAddOption={true}
+          addOption={(name) => addNewSkill(name)}
+          onSelect={(skill) =>
+            addSkill(user.id, { ...skill, level: 2 }, user.skills)
+          }
+          onChange={(skill) => setSearchQuery(skill)}
+          loading={loading || searchQueryLoading}
+        />
+      </div>
 
-        <div className="grid grid-cols-1 gap-5">
-          {user.skills &&
-            user.skills.map((skill) => (
-              <SkillCard
-                skill={skill}
-                key={skill.id}
-                levels={static_data_job.skill_levels}
-                removeSkill={() => removeSkill(user.id, skill, user.skills)}
-                updateSkill={(level: number) =>
-                  updateSkill(user.id, { ...skill, level: level }, user.skills)
-                }
-              />
-            ))}
-        </div>
-      </Card>
-
-      <Toast onHide={hideNotification} show={notification} label={error} />
-    </>
+      <div className="grid grid-cols-1 gap-5">
+        {user.skills &&
+          user.skills.map((skill) => (
+            <SkillCard
+              skill={skill}
+              key={skill.id}
+              levels={static_data_job.skill_levels}
+              removeSkill={() => removeSkill(user.id, skill, user.skills)}
+              updateSkill={(level: number) =>
+                updateSkill(user.id, { ...skill, level: level }, user.skills)
+              }
+            />
+          ))}
+      </div>
+    </Card>
   )
 }
 

@@ -20,7 +20,7 @@ export const Salary = () => {
 
   const onChange = useCallback((e) => {
     const { value } = e.target
-    const max_salary_length = 7 // £m
+    const max_salary_length = 7
     value.length <= max_salary_length && setValue(String(value))
   }, [])
 
@@ -37,7 +37,7 @@ export const Salary = () => {
       <Label value="Salary" htmlFor="" />
 
       {editing && (
-        <div className="relative">
+        <form className="relative" onSubmit={update}>
           <NumberInput
             value={Number(value)}
             onChange={onChange}
@@ -52,7 +52,7 @@ export const Salary = () => {
               onClick={update}
             />
           </div>
-        </div>
+        </form>
       )}
 
       {!editing && (

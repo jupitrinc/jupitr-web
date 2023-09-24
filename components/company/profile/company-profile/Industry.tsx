@@ -9,7 +9,7 @@ import { useIndustryAction } from "state/industry/useIndustryAction"
 
 const Industry = () => {
   const { company_profile } = useCompanyProfileState()
-  const { industries } = useIndustryState()
+  const { industries, loading } = useIndustryState()
   const { updateIndustry } = useCompanyProfileAction()
   const { getIndustries, clearIndustries } = useIndustryAction()
 
@@ -38,8 +38,9 @@ const Industry = () => {
       <Multiselect
         options={industries}
         placeholder="AI, Fintech ..."
-        onChange={(option) => addIndustry(option)}
+        onSelect={(option) => addIndustry(option)}
         label="Industry/Sector"
+        loading={loading}
       />
 
       <div className="flex flex-wrap gap-2">

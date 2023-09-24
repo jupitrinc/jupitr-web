@@ -7,7 +7,6 @@ export const useCompanyJobState = () => {
   return {
     company_job: state.data,
     loading: state.loading,
-    error: state.error,
 
     videos: useMemo(
       () => state.data.company_videos,

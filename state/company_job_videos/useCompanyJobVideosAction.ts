@@ -5,18 +5,21 @@ import {
   CompanyJobVideosActionEnum,
   ICompanyJobVideo,
 } from "./companyJobVideos.types"
-import useMediaService from "services/storage/useMediaService"
-import useCompanyJobVideoService from "services/company/useCompanyJobVideoService"
+import mediaService from "services/storage/mediaService"
+import companyJobVideoService from "services/company/companyJobVideoService"
 import { CompanyJobContext } from "state/company_job/CompanyJobContext"
 import { CompanyJobActionEnum } from "state/company_job/companyJob.types"
 import { storageFolderHelper } from "helper/storageFolderHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useCompanyJobVideosAction() {
+  const { notify } = useNotificationAction()
+
   const { dispatch } = useContext(CompanyJobVideosContext)
   const { dispatch: companyJobDispatch } = useContext(CompanyJobContext)
-  const { uploadVideo } = useMediaService()
+  const { uploadVideo } = mediaService()
   const { deleteVideo: deleteVideoService, addVideo: addVideoService } =
-    useCompanyJobVideoService()
+    companyJobVideoService()
 
   const addVideo = async (payload: AddVideoPayload) => {
     dispatch({
@@ -31,7 +34,11 @@ export function useCompanyJobVideosAction() {
     ) {
       dispatch({
         type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-        payload: "Something went wrong, try again",
+      })
+
+      notify({
+        message: "Something went wrong, try again",
+        type: "warning",
       })
 
       return
@@ -43,13 +50,13 @@ export function useCompanyJobVideosAction() {
     const { data: upload_data, error: upload_error } = await uploadVideo({
       file: payload.file,
       folderPath: folderPath,
-      fileName: fileName,
+      fileName: `${fileName + "-" + Date.now()}`,
     })
 
     if (upload_error) {
-      dispatch({
-        type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-        payload: upload_error,
+      notify({
+        message: upload_error,
+        type: "warning",
       })
     } else {
       const cdn_video = upload_data.public_id
@@ -63,9 +70,13 @@ export function useCompanyJobVideosAction() {
       if (error) {
         dispatch({
           type: CompanyJobVideosActionEnum.ADD_VIDEO_FAILURE,
-          payload: error.message.includes("company_videos_video_url")
+        })
+
+        notify({
+          message: error.message.includes("company_videos_video_url")
             ? "You have already added a video for this job"
             : error.message,
+          type: "warning",
         })
       } else {
         companyJobDispatch({
@@ -89,6 +100,11 @@ export function useCompanyJobVideosAction() {
       companyJobDispatch({
         type: CompanyJobActionEnum.DELETE_JOB_VIDEO,
         payload: video_id,
+      })
+    } else {
+      notify({
+        message: "Couldn't delete the video at this moment. Try again later",
+        type: "warning",
       })
     }
   }

@@ -12,7 +12,6 @@ export const TalentJobContextProvider: React.FC<any> = ({ children }) => {
   const initialState: TalentJobState = {
     data: {} as ITalentJob,
     loading: false,
-    error: "",
     success: false,
   }
   const [state, dispatch] = useReducer(talentJobReducer, initialState)
