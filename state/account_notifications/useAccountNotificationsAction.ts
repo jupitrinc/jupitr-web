@@ -51,7 +51,7 @@ export function useAccountNotificationsAction() {
     } else {
       dispatch({
         type: AccountNotificationsActionEnum.UPDATE_NOTIFICATION_SUCCESS,
-        payload: data as IAccountNotification[],
+        payload: data as IAccountNotification,
       })
     }
   }
