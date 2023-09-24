@@ -1,10 +1,16 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useAccountNotificationsAction } from "state/account_notifications/useAccountNotificationsActon"
 import { Tabs } from "ui-library/menu/tabs/Tabs"
 import { Text } from "ui-library/text/Text"
 
 const TalentNotifications = () => {
   const intervals = ["Daily", "Weekly", "Never"]
   const [interval, setInterval] = useState(0)
+  const { getNotifications } = useAccountNotificationsAction()
+
+  useEffect(() => {
+    getNotifications()
+  }, [])
 
   return (
     <div className="flex flex-col gap-2">
