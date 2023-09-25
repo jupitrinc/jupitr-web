@@ -1,50 +1,34 @@
 import { NextRequest, NextResponse } from "next/server"
 import { v2 as cloudinary } from "cloudinary"
 
-cloudinary.config({
+const config = cloudinary.config({
   cloud_name: "dyfg2jhz8",
   api_key: process.env.CLOUDINARY_API,
   api_secret: process.env.CLOUDINARY_SECRET,
+  secure: true,
 })
-async function uploadToCloudinary(buffer, public_id) {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { folder } = body
+    const timestamp = Math.round(new Date().getTime() / 1000)
+    const signature = cloudinary.utils.api_sign_request(
       {
-        resource_type: "video",
-        public_id,
-        invalidate: true,
-        eager: {
-          quality: "auto:good",
-        },
-        eager_async: true,
+        timestamp: timestamp,
+        eager: "q_auto",
+        folder,
       },
-      (error, result) => {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(result)
-        }
-      }
+      config.api_secret as string
     )
 
-    uploadStream.end(buffer)
-  })
-}
-export async function POST(request: NextRequest) {
-  const data = await request.formData()
-  const file: File | null = data.get("file") as unknown as File
-  const public_id: string = data.get("public_id") as string
-  if (!file) {
-    return NextResponse.json({ success: false })
-  }
-
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
-  try {
-    const cloudinaryResponse = await uploadToCloudinary(buffer, public_id)
-
     return new NextResponse(
-      JSON.stringify({ error: null, data: cloudinaryResponse }),
+      JSON.stringify({
+        timestamp,
+        signature,
+        cloud_name: config.cloud_name,
+        api_key: config.api_key,
+      }),
       {
         status: 201,
         headers: { "Content-Type": "application/json" },

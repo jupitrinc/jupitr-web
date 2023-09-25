@@ -59,7 +59,7 @@ export function useCompanyJobVideosAction() {
         type: "warning",
       })
     } else {
-      const cdn_video = upload_data.public_id
+      const cdn_video = upload_data?.public_id
 
       const { data, error } = await addVideoService({
         user_id: payload.user_id,
