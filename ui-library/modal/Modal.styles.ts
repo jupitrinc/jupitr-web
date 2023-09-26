@@ -8,10 +8,10 @@ export const modalStyles = {
     leaveFrom: "opacity-100",
     leaveTo: "opacity-0",
     fixed_container:
-      "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
+      "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-20",
   },
   dialog_child2: {
-    container1: "fixed inset-0 z-10 overflow-y-auto",
+    container1: "fixed inset-0 z-20 overflow-y-auto",
     container2: "flex min-h-full justify-center text-center items-center p-5",
     enter: "ease-out duration-300",
     enterFrom: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
