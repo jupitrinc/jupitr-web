@@ -54,6 +54,7 @@ export interface IJobVideo {
   user_id: string
   video_url: string
   created_at: string
+  primary: boolean
   company_member_profile: {
     job_title: string
     users: {
@@ -80,6 +81,12 @@ export type CompanyJobAction = {
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO
     | CompanyJobActionEnum.ADD_JOB_VIDEO
     | CompanyJobActionEnum.DELETE_JOB_VIDEO
+    | CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_BEGIN
+    | CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_FAILURE
+    | CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_SUCCESS
+    | CompanyJobActionEnum.SET_PRIMARY_VIDEO_BEGIN
+    | CompanyJobActionEnum.SET_PRIMARY_VIDEO_FAILURE
+    | CompanyJobActionEnum.SET_PRIMARY_VIDEO_SUCCESS
 
   payload?:
     | ICompanyJob
@@ -112,4 +119,12 @@ export enum CompanyJobActionEnum {
 
   ADD_JOB_VIDEO = "ADD_JOB_VIDEO",
   DELETE_JOB_VIDEO = "DELETE_JOB_VIDEO",
+
+  UNCHECK_PRIMAY_VIDEO_BEGIN = "UNCHECK_PRIMAY_VIDEO_BEGIN",
+  UNCHECK_PRIMAY_VIDEO_FAILURE = "UNCHECK_PRIMAY_VIDEO_FAILURE",
+  UNCHECK_PRIMAY_VIDEO_SUCCESS = "UNCHECK_PRIMAY_VIDEO_SUCCESS",
+
+  SET_PRIMARY_VIDEO_BEGIN = "SET_PRIMARY_VIDEO_BEGIN",
+  SET_PRIMARY_VIDEO_FAILURE = "SET_PRIMARY_VIDEO_FAILURE",
+  SET_PRIMARY_VIDEO_SUCCESS = "SET_PRIMARY_VIDEO_SUCCESS",
 }

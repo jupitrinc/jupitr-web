@@ -9,6 +9,7 @@ import { CompanyJobContext } from "./CompanyJobContext"
 import companyJobService from "services/company/companyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import companyJobVideoService from "services/company/companyJobVideoService"
 
 export function useCompanyJobAction() {
   const router = useRouter()
@@ -20,6 +21,11 @@ export function useCompanyJobAction() {
     getJob: getJobService,
     updateJob: updateJobService,
   } = companyJobService()
+
+  const {
+    uncheckPrimaryVideo: uncheckPrimaryVideoService,
+    setPrimaryVideo: setPrimaryVideoService,
+  } = companyJobVideoService()
 
   const addJob = async (
     status: ICompanyJob["status"],
@@ -114,7 +120,7 @@ export function useCompanyJobAction() {
   ) => {
     if (!job_id || !salary) return
 
-    const { data, error } = await updateJobService(job_id, { salary: salary })
+    const { data } = await updateJobService(job_id, { salary: salary })
 
     if (data) {
       dispatch({
@@ -339,6 +345,56 @@ export function useCompanyJobAction() {
     }
   }
 
+  const uncheckPrimaryVideo = async (job_id: string) => {
+    if (!job_id) return
+
+    dispatch({
+      type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_BEGIN,
+    })
+
+    const { data, error } = await uncheckPrimaryVideoService(job_id)
+
+    if (error) {
+      dispatch({
+        type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_FAILURE,
+      })
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    } else if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_SUCCESS,
+        payload: data,
+      })
+    }
+  }
+
+  const setPrimaryVideo = async (video_id: string, job_id: string) => {
+    if (!video_id || !job_id) return
+
+    dispatch({
+      type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_BEGIN,
+    })
+
+    const { data, error } = await setPrimaryVideoService(video_id, job_id)
+
+    if (error) {
+      dispatch({
+        type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_FAILURE,
+      })
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    } else if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_SUCCESS,
+        payload: data,
+      })
+    }
+  }
+
   return {
     addJob,
     getJob,
@@ -353,5 +409,7 @@ export function useCompanyJobAction() {
     updateSkill,
     updateApplicationVideo,
     deleteJob,
+    uncheckPrimaryVideo,
+    setPrimaryVideo,
   }
 }

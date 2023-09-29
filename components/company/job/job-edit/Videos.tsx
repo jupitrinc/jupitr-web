@@ -20,7 +20,9 @@ export const Videos = () => {
       </div>
 
       {videos &&
-        videos.map((video) => <VideoCard key={video.id} video={video} />)}
+        videos
+          .sort((a) => (a.primary ? -1 : 1))
+          .map((video) => <VideoCard key={video.id} video={video} />)}
     </Card>
   )
 }

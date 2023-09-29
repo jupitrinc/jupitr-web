@@ -13,6 +13,8 @@ export const companyJobReducer = (
   switch (action.type) {
     case CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN:
     case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
+    case CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_BEGIN:
+    case CompanyJobActionEnum.SET_PRIMARY_VIDEO_BEGIN:
       return {
         ...state,
         loading: true,
@@ -21,6 +23,8 @@ export const companyJobReducer = (
 
     case CompanyJobActionEnum.ADD_COMPANY_JOB_FAILURE:
     case CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE:
+    case CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_FAILURE:
+    case CompanyJobActionEnum.SET_PRIMARY_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,
@@ -132,6 +136,40 @@ export const companyJobReducer = (
               (video) => video.id !== delete_job_video_payload
             ),
           ],
+        },
+      }
+
+    case CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_SUCCESS:
+      const uncheck_job_video_payload = action.payload as IJobVideo
+
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        data: {
+          ...state.data,
+          company_videos: state.data.company_videos.map((video) =>
+            video.id === uncheck_job_video_payload.id
+              ? uncheck_job_video_payload
+              : video
+          ),
+        },
+      }
+
+    case CompanyJobActionEnum.SET_PRIMARY_VIDEO_SUCCESS:
+      const primary_job_video_payload = action.payload as IJobVideo
+
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        data: {
+          ...state.data,
+          company_videos: state.data.company_videos.map((video) =>
+            video.id === primary_job_video_payload.id
+              ? primary_job_video_payload
+              : video
+          ),
         },
       }
 
