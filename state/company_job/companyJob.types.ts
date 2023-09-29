@@ -50,6 +50,7 @@ export interface IApplicationVideo {
 
 export interface IJobVideo {
   primary: boolean
+  id: string
   video_url: string
   users: {
     company_member_profile: {
