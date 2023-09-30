@@ -1,7 +1,7 @@
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { urlHelper } from "helper/urlHelper"
-import { Text } from "../../../../../ui-library/text/Text"
+import VideoTitle from "./VideoTitle"
 
 const CoverVideo = () => {
   const { talent_job } = useTalentJobState()
@@ -22,13 +22,7 @@ const CoverVideo = () => {
             talent_job.company_videos[0].video_url
           )}
         />
-        {user?.name && user?.title ? (
-          <Text align="center" as="span" size="base">
-            {user?.name} - {user?.title}
-          </Text>
-        ) : (
-          ""
-        )}
+        <VideoTitle name={user.name} title={user.title} />
       </div>
     )
   } else {
