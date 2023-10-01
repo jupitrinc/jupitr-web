@@ -9,13 +9,17 @@ import Share from "./Share"
 const TitleBar = () => {
   const { talent_job } = useTalentJobState()
   return (
-    <div className="flex flex-col sm:flex-row justify-between gap-5 items-center">
+    <div className="flex flex-row justify-between gap-5 items-center">
       <div className="flex flex-row gap-5 items-center">
-        <Avatar
-          image_url={urlHelper.imageUrl(talent_job.company.logo)}
-          size={14}
-          alt={`${talent_job.company.name} logo`}
-        />
+        <div className="hidden sm:block">
+          <div className="hidden sm:block">
+            <Avatar
+              image_url={urlHelper.imageUrl(talent_job.company.logo)}
+              size={14}
+              alt={`${talent_job.company.name} logo`}
+            />
+          </div>
+        </div>
         <div className="flex flex-col gap-1">
           <Text as="h1" size="xl">
             {talent_job.title}
