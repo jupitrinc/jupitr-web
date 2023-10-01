@@ -10,11 +10,10 @@ import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 
 const VideoCard = ({ video }: { video: IJobVideo }) => {
   const { deleteVideo } = useCompanyJobVideosAction()
-  const { uncheckPrimaryVideo, setPrimaryVideo } = useCompanyJobAction()
+  const { togglePrimaryVideo } = useCompanyJobAction()
 
   const setNewPrimaryVideo = () => {
-    uncheckPrimaryVideo(video.job_id)
-    setPrimaryVideo(video.id, video.job_id)
+    togglePrimaryVideo(video.id, video.job_id)
   }
 
   const dropdown_options = video.primary

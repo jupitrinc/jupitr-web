@@ -45,7 +45,7 @@ const companyJobVideoService = () => {
 
     if (error) {
       console.error(
-        "companyJobVideoService -> uncheckPrimaryVideo:",
+        "companyJobVideoService -> uncheckPrimaryVideo: ",
         error.message
       )
     }
@@ -63,8 +63,33 @@ const companyJobVideoService = () => {
       .single()
 
     if (error) {
-      console.error("companyJobVideoService -> setPrimaryVideo:", error.message)
+      console.error(
+        "companyJobVideoService -> setPrimaryVideo: ",
+        error.message
+      )
     }
+
+    return { data, error }
+  }
+
+  const togglePrimaryVideo = async (video_id: string, job_id: string) => {
+    const { data: video, error: no_video } = await supabaseClientComponent
+      .from(COMPANY_VIDEOS_TABLE)
+      .select("id")
+      .eq("primary", "true")
+
+    if (no_video) {
+      console.error(
+        "companyJobVideoService -> togglePrimaryVideo: ",
+        no_video.message
+      )
+    }
+
+    if (video) {
+      await uncheckPrimaryVideo(job_id)
+    }
+
+    const { data, error } = await setPrimaryVideo(video_id, job_id)
 
     return { data, error }
   }
@@ -72,8 +97,7 @@ const companyJobVideoService = () => {
   return {
     addVideo,
     deleteVideo,
-    uncheckPrimaryVideo,
-    setPrimaryVideo,
+    togglePrimaryVideo,
   }
 }
 

@@ -22,10 +22,8 @@ export function useCompanyJobAction() {
     updateJob: updateJobService,
   } = companyJobService()
 
-  const {
-    uncheckPrimaryVideo: uncheckPrimaryVideoService,
-    setPrimaryVideo: setPrimaryVideoService,
-  } = companyJobVideoService()
+  const { togglePrimaryVideo: togglePrimaryVideoService } =
+    companyJobVideoService()
 
   const addJob = async (
     status: ICompanyJob["status"],
@@ -345,18 +343,18 @@ export function useCompanyJobAction() {
     }
   }
 
-  const uncheckPrimaryVideo = async (job_id: string) => {
+  const togglePrimaryVideo = async (video_id: string, job_id: string) => {
     if (!job_id) return
 
     dispatch({
-      type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_BEGIN,
+      type: CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_BEGIN,
     })
 
-    const { data, error } = await uncheckPrimaryVideoService(job_id)
+    const { data, error } = await togglePrimaryVideoService(video_id, job_id)
 
     if (error) {
       dispatch({
-        type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_FAILURE,
+        type: CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_FAILURE,
       })
       notify({
         message: error.message,
@@ -364,36 +362,36 @@ export function useCompanyJobAction() {
       })
     } else if (data) {
       dispatch({
-        type: CompanyJobActionEnum.UNCHECK_PRIMAY_VIDEO_SUCCESS,
+        type: CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_SUCCESS,
         payload: data,
       })
     }
   }
 
-  const setPrimaryVideo = async (video_id: string, job_id: string) => {
-    if (!video_id || !job_id) return
+  // const setPrimaryVideo = async (video_id: string, job_id: string) => {
+  //   if (!video_id || !job_id) return
 
-    dispatch({
-      type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_BEGIN,
-    })
+  //   dispatch({
+  //     type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_BEGIN,
+  //   })
 
-    const { data, error } = await setPrimaryVideoService(video_id, job_id)
+  //   const { data, error } = await setPrimaryVideoService(video_id, job_id)
 
-    if (error) {
-      dispatch({
-        type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_FAILURE,
-      })
-      notify({
-        message: error.message,
-        type: "warning",
-      })
-    } else if (data) {
-      dispatch({
-        type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_SUCCESS,
-        payload: data,
-      })
-    }
-  }
+  //   if (error) {
+  //     dispatch({
+  //       type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_FAILURE,
+  //     })
+  //     notify({
+  //       message: error.message,
+  //       type: "warning",
+  //     })
+  //   } else if (data) {
+  //     dispatch({
+  //       type: CompanyJobActionEnum.SET_PRIMARY_VIDEO_SUCCESS,
+  //       payload: data,
+  //     })
+  //   }
+  // }
 
   return {
     addJob,
@@ -409,7 +407,6 @@ export function useCompanyJobAction() {
     updateSkill,
     updateApplicationVideo,
     deleteJob,
-    uncheckPrimaryVideo,
-    setPrimaryVideo,
+    togglePrimaryVideo,
   }
 }
