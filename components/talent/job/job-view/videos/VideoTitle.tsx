@@ -7,12 +7,16 @@ const VideoTitle: React.FC<{ name: string; title: string }> = ({
   if (name && title) {
     return (
       <div className="flex flex-col mt-3">
-        <Text as="span" size="lg">
-          {name}
-        </Text>
-        <Text as="span" size="sm">
-          {title}
-        </Text>
+        {name && (
+          <Text as="span" size="lg">
+            {name}
+          </Text>
+        )}
+        {title && (
+          <Text as="span" size="sm">
+            {title}
+          </Text>
+        )}
       </div>
     )
   } else {
