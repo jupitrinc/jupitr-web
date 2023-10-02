@@ -13,7 +13,6 @@ export const companyJobReducer = (
   switch (action.type) {
     case CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN:
     case CompanyJobActionEnum.GET_COMPANY_JOB_BEGIN:
-    case CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_BEGIN:
       return {
         ...state,
         loading: true,
@@ -22,7 +21,6 @@ export const companyJobReducer = (
 
     case CompanyJobActionEnum.ADD_COMPANY_JOB_FAILURE:
     case CompanyJobActionEnum.GET_COMPANY_JOB_FAILURE:
-    case CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,
@@ -142,8 +140,6 @@ export const companyJobReducer = (
 
       return {
         ...state,
-        loading: false,
-        success: true,
         data: {
           ...state.data,
           company_videos: state.data.company_videos.map((video) =>

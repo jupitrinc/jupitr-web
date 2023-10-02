@@ -34,18 +34,16 @@ const companyJobVideoService = () => {
     return { data, error }
   }
 
-  const uncheckPrimaryVideo = async (job_id: string) => {
+  const unsetPrimaryVideo = async (job_id: string) => {
     const { data, error } = await supabaseClientComponent
       .from(COMPANY_VIDEOS_TABLE)
       .update({ primary: false })
       .eq("job_id", job_id)
       .eq("primary", "true")
-      .select()
-      .single()
 
     if (error) {
       console.error(
-        "companyJobVideoService -> uncheckPrimaryVideo: ",
+        "companyJobVideoService -> unsetPrimaryVideo: ",
         error.message
       )
     }
@@ -73,25 +71,17 @@ const companyJobVideoService = () => {
   }
 
   const togglePrimaryVideo = async (video_id: string, job_id: string) => {
-    const { data: video, error: no_video } = await supabaseClientComponent
-      .from(COMPANY_VIDEOS_TABLE)
-      .select("id")
-      .eq("primary", "true")
+    const { error: err } = await unsetPrimaryVideo(job_id)
 
-    if (no_video) {
-      console.error(
-        "companyJobVideoService -> togglePrimaryVideo: ",
-        no_video.message
-      )
+    if (!err) {
+      const { data, error } = await setPrimaryVideo(video_id, job_id)
+
+      return { data, error }
     }
 
-    if (video) {
-      await uncheckPrimaryVideo(job_id)
+    return {
+      error: { message: "Failed to update cover video. Try again later" },
     }
-
-    const { data, error } = await setPrimaryVideo(video_id, job_id)
-
-    return { data, error }
   }
 
   return {

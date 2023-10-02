@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { Text } from "ui-library/text/Text"
 import { Dropdown } from "ui-library/menu/dropdown/Dropdown"
@@ -12,21 +12,27 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
   const { deleteVideo } = useCompanyJobVideosAction()
   const { togglePrimaryVideo } = useCompanyJobAction()
 
-  const setNewPrimaryVideo = () => {
-    togglePrimaryVideo(video.id, video.job_id)
-  }
+  const dropdown_options = useMemo(
+    () =>
+      video.primary
+        ? [{ name: "Remove", onClick: () => video.id && deleteVideo(video.id) }]
+        : [
+            {
+              name: "Set as cover video",
+              onClick: () =>
+                togglePrimaryVideo({
+                  video_id: video.id,
+                  job_id: video.job_id,
+                }),
+            },
+            {
+              name: "Remove",
+              onClick: () => video.id && deleteVideo(video.id),
+            },
+          ],
 
-  const dropdown_options = video.primary
-    ? [{ name: "Remove", onClick: () => video.id && deleteVideo(video.id) }]
-    : [
-        {
-          name: "Set as primary video",
-          onClick: () => {
-            setNewPrimaryVideo()
-          },
-        },
-        { name: "Remove", onClick: () => video.id && deleteVideo(video.id) },
-      ]
+    [video]
+  )
 
   return (
     <div className="flex flex-col gap-5">
