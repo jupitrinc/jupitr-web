@@ -16,6 +16,7 @@ const TitleBar = () => {
           size={14}
           alt={`${talent_job.company.name} logo`}
         />
+
         <div className="flex flex-col gap-1">
           <Text as="h1" size="xl">
             {talent_job.title}

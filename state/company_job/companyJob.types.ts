@@ -49,16 +49,18 @@ export interface IApplicationVideo {
 }
 
 export interface IJobVideo {
-  id: string
+  id: string 
   job_id: string
-  user_id: string
+  user_id: string  
   video_url: string
   created_at: string
   primary: boolean
-  company_member_profile: {
-    job_title: string
-    users: {
-      name: string
+  users: {
+    company_member_profile: {
+      job_title: string
+      users: {
+        name: string
+      }
     }
   }
 }
