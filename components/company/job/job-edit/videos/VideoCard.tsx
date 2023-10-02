@@ -35,7 +35,7 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
   )
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-3">
       <VideoPlayer src={urlHelper.videoUrl(video.video_url) as string} />
 
       <div className="flex flex-row gap-5 justify-between">

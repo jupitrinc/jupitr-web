@@ -12,7 +12,7 @@ const Videos = () => {
         {talent_job.company_videos.map(
           (video, index) =>
             index !== 0 && (
-              <div key={video.id}>
+              <div key={video.id} className="flex flex-col gap-3">
                 <VideoPlayer
                   src={urlHelper.videoUrl(video.video_url) as string}
                   poster={urlHelper.videoPosterUrl(video.video_url)}
