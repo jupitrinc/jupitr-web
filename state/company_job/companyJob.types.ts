@@ -49,15 +49,18 @@ export interface IApplicationVideo {
 }
 
 export interface IJobVideo {
-  id: string
+  id: string 
   job_id: string
-  user_id: string
+  user_id: string  
   video_url: string
   created_at: string
-  company_member_profile: {
-    job_title: string
-    users: {
-      name: string
+  primary: boolean
+  users: {
+    company_member_profile: {
+      job_title: string
+      users: {
+        name: string
+      }
     }
   }
 }
@@ -80,6 +83,9 @@ export type CompanyJobAction = {
     | CompanyJobActionEnum.UPDATE_COMPANY_JOB_APPLICATION_VIDEO
     | CompanyJobActionEnum.ADD_JOB_VIDEO
     | CompanyJobActionEnum.DELETE_JOB_VIDEO
+    | CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_BEGIN
+    | CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_FAILURE
+    | CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_SUCCESS
 
   payload?:
     | ICompanyJob
@@ -112,4 +118,8 @@ export enum CompanyJobActionEnum {
 
   ADD_JOB_VIDEO = "ADD_JOB_VIDEO",
   DELETE_JOB_VIDEO = "DELETE_JOB_VIDEO",
+
+  TOGGLE_PRIMARY_VIDEO_BEGIN = "TOGGLE_PRIMARY_VIDEO_BEGIN",
+  TOGGLE_PRIMARY_VIDEO_FAILURE = "TOGGLE_PRIMARY_VIDEO_FAILURE",
+  TOGGLE_PRIMARY_VIDEO_SUCCESS = "TOGGLE_PRIMARY_VIDEO_SUCCESS",
 }

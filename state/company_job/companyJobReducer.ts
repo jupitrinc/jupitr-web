@@ -135,6 +135,21 @@ export const companyJobReducer = (
         },
       }
 
+    case CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_SUCCESS:
+      const toggle_job_video_payload = action.payload as IJobVideo
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          company_videos: state.data.company_videos.map((video) =>
+            video.id === toggle_job_video_payload.id
+              ? toggle_job_video_payload
+              : { ...video, primary: false }
+          ),
+        },
+      }
+
     default:
       return state
   }
