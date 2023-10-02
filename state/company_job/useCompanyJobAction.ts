@@ -9,6 +9,7 @@ import { CompanyJobContext } from "./CompanyJobContext"
 import companyJobService from "services/company/companyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import companyJobVideoService from "services/company/companyJobVideoService"
 
 export function useCompanyJobAction() {
   const router = useRouter()
@@ -20,6 +21,9 @@ export function useCompanyJobAction() {
     getJob: getJobService,
     updateJob: updateJobService,
   } = companyJobService()
+
+  const { togglePrimaryVideo: togglePrimaryVideoService } =
+    companyJobVideoService()
 
   const addJob = async (
     status: ICompanyJob["status"],
@@ -114,7 +118,7 @@ export function useCompanyJobAction() {
   ) => {
     if (!job_id || !salary) return
 
-    const { data, error } = await updateJobService(job_id, { salary: salary })
+    const { data } = await updateJobService(job_id, { salary: salary })
 
     if (data) {
       dispatch({
@@ -339,6 +343,30 @@ export function useCompanyJobAction() {
     }
   }
 
+  const togglePrimaryVideo = async ({
+    video_id,
+    job_id,
+  }: {
+    video_id: string
+    job_id: string
+  }) => {
+    if (!job_id || !video_id) return
+
+    const { data, error } = await togglePrimaryVideoService(video_id, job_id)
+
+    if (error) {
+      notify({
+        message: error.message,
+        type: "warning",
+      })
+    } else if (data) {
+      dispatch({
+        type: CompanyJobActionEnum.TOGGLE_PRIMARY_VIDEO_SUCCESS,
+        payload: data,
+      })
+    }
+  }
+
   return {
     addJob,
     getJob,
@@ -353,5 +381,6 @@ export function useCompanyJobAction() {
     updateSkill,
     updateApplicationVideo,
     deleteJob,
+    togglePrimaryVideo,
   }
 }
