@@ -4,9 +4,9 @@ import { Footer } from "./components/Footer"
 import { Loading } from "ui-library/content/loading/Loading"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
-import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
+import { usePersistedUser } from "./auth/usePersistedUser"
 
 export const TalentAppLayout = ({
   children,
