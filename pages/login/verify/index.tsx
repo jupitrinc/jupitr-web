@@ -58,7 +58,6 @@ export const Verify = () => {
   const handleSession = async () => {
     const res = await fetch("/api/login/verifyUser")
     const { user, session: userSession } = await res.json()
-    console.info(user)
     if (user && userSession) {
       changeEmailIfRequested(user, userSession)
       setUser(user)
