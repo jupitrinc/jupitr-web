@@ -5,16 +5,6 @@ import {
 } from "services/storage/media.types"
 
 export const urlHelper = {
-  isPublicUrl: (pathName: string) => {
-    const routes = ["/auth/callback", "/", "/c/signup", "/login/verify"]
-    return routes.includes(`${pathName}`)
-  },
-  isPublicJobRoute: (pathName: string) => {
-    if (pathName) {
-      const parts = pathName?.split("/")
-      return parts[1] === "jobs" && parts.length === 3
-    }
-  },
   imageUrl: (image: string) => {
     if (!image) return undefined
 
