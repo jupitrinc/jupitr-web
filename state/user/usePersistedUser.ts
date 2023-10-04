@@ -19,7 +19,6 @@ export const usePersistedUser = () => {
   const { isPublicJobRoute, isPublicUrl } = urlHelper
   const pathname = usePathname()
   const verifyToken = async () => {
-    // run only on protected routes
     if (
       !(isPublicJobRoute(pathname as string) || isPublicUrl(pathname as string))
     ) {
@@ -27,9 +26,6 @@ export const usePersistedUser = () => {
         error,
         data: { user },
       } = await supabaseClientComponent.auth.getUser()
-      // if no user is found or returns error redirect back to login
-
-      console.log("Persist user...")
 
       if (error || !user) {
         signOut()
