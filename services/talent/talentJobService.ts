@@ -46,7 +46,7 @@ const talentJobService = () => {
     }
 
     const filteredJobsByUserSkills = allJobs?.filter((job: ITalentJob) =>
-      job.skills.some((field) => skillIds.includes(field.id))
+      job?.skills?.some((field) => skillIds.includes(field.id))
     )
 
     const removeJobsUserApplied = filteredJobsByUserSkills?.filter(

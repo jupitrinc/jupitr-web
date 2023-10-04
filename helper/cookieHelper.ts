@@ -2,6 +2,11 @@ export enum CookieEnum {
   authError = "authError",
 }
 
+export const authTokenCookie =
+  process?.env?.NODE_ENV === "production"
+    ? "sb-api-auth-token"
+    : "sb-cgbrcxjbovzwarqujqoq-auth-token"
+
 export const cookieHelper = {
   deleteAllCookies: () => {
     const cookies = document.cookie.split(";")
@@ -17,7 +22,9 @@ export const cookieHelper = {
   deleteCookie: (name) => {
     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
   },
-
+  getAuthCookie: () => {
+    return cookieHelper.getCookie(authTokenCookie)
+  },
   getCookie: (name: string) => {
     if (typeof window === "object") {
       return document.cookie
