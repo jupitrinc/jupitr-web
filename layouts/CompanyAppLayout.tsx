@@ -5,7 +5,7 @@ import { AccountTypeEnum } from "state/user/user.types"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
 import { Loading } from "ui-library/content/loading/Loading"
-import { usePersistedUser } from "./auth/usePersistedUser"
+import { usePersistedUser } from "../state/user/usePersistedUser"
 
 export const CompanyAppLayout = ({ children }) => {
   const { user, loading } = useUserState()

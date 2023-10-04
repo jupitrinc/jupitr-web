@@ -6,7 +6,7 @@ import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
-import { usePersistedUser } from "./auth/usePersistedUser"
+import { usePersistedUser } from "../state/user/usePersistedUser"
 
 export const TalentAppLayout = ({
   children,

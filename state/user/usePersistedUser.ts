@@ -28,6 +28,9 @@ export const usePersistedUser = () => {
         data: { user },
       } = await supabaseClientComponent.auth.getUser()
       // if no user is found or returns error redirect back to login
+
+      console.log("Persist user...")
+
       if (error || !user) {
         signOut()
       }
