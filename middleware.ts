@@ -1,5 +1,6 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
 import { NextRequest, NextResponse } from "next/server"
+import { authTokenCookie } from "./services/auth/useAuthService"
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
@@ -17,14 +18,15 @@ export async function middleware(req: NextRequest) {
     return res
   }
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if ((!session?.user && !publicRoute) || (session?.user && authRoute)) {
-    return NextResponse.redirect(`${new URL(req.url).origin}/`)
-  } else {
-    return res
+  if (req.cookies.get(authTokenCookie)) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+    if ((!session?.user && !publicRoute) || (session?.user && authRoute)) {
+      return NextResponse.redirect(`${new URL(req.url).origin}/`)
+    } else {
+      return res
+    }
   }
 }
 
