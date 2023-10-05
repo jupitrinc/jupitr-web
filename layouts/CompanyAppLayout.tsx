@@ -2,10 +2,10 @@ import { Navbar } from "./components/Navbar"
 import { Footer } from "./components/Footer"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
-import { usePersistedUser } from "components/user/sign-in/usePersistedUser"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
 import { Loading } from "ui-library/content/loading/Loading"
+import { usePersistedUser } from "../state/user/usePersistedUser"
 
 export const CompanyAppLayout = ({ children }) => {
   const { user, loading } = useUserState()

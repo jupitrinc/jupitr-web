@@ -135,9 +135,9 @@ export function useUserAction() {
     dispatch({
       type: UserActionEnum.SIGN_OUT,
     })
-    await signOutService()
     clear()
     deleteAllCookies()
+    await signOutService()
     router.push("/")
   }
 

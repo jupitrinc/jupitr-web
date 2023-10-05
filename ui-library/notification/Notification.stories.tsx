@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Notification } from "./Notification"
 
 const meta: Meta<typeof Notification> = {
-  title: "Toast",
+  title: "Notification",
   component: Notification,
   tags: ["autodocs"],
 }
