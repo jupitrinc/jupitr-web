@@ -77,7 +77,7 @@ const Application = () => {
       )}
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="h-[30rem] md:h-[40rem]">
+        <div className="h-[30rem] md:h-[40rem] overflow-auto pb-10">
           <div className="overflow-y-scroll h-full flex flex-col px-1">
             <div className="flex flex-row gap-5 items-center">
               <Avatar
