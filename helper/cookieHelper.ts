@@ -1,7 +1,3 @@
-export enum CookieEnum {
-  authError = "authError",
-}
-
 export const cookieHelper = {
   deleteAllCookies: () => {
     const cookies = document.cookie.split(";")
