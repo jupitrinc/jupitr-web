@@ -51,7 +51,7 @@ const AddVideos = () => {
       )}
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="flex flex-col gap-5 min-h-[18rem]">
+        <div className="flex flex-col gap-5 min-h-[18rem] overflow-auto">
           <Text as="span" size="xl">
             Add video
           </Text>
