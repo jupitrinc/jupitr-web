@@ -24,7 +24,13 @@ export const urlHelper = {
       return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${image}`
     }
   },
-
+  ogImageUrl: (title: string, image: string, company_name: string) => {
+    if (image && title) {
+      return `${urlHelper.domain()}/api/og?title=${encodeURIComponent(
+        title
+      )}&image=${image}&company_name=${encodeURIComponent(company_name)}`
+    }
+  },
   videoUrl: (video_name: string) => {
     if (!video_name) return undefined
 

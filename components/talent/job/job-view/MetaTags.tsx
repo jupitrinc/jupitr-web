@@ -18,7 +18,8 @@ const MetaTags = ({ job }: props) => {
 
   return (
     <PageMetaTags
-      title={`${job.title} | ${job.company.name}`}
+      title={job.title}
+      company_name={job.company.name}
       description={description}
       keywords={`${description}, tech, job`}
       robots="index, nofollow"
