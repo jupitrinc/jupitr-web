@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { memo } from "react"
+import { urlHelper } from "../../helper/urlHelper"
 
 interface props {
   title?: string
@@ -12,16 +13,30 @@ interface props {
     | "index, follow"
   image?: string
   video?: string
+  company_name?: string
 }
 
 const PageMetaTags = (props: props) => {
+  const ogUrl = urlHelper.ogImageUrl(
+    props.title as string,
+    props.image as string,
+    props.company_name as string
+  )
   return (
     <Head>
       {props.title && (
         <>
-          <title key="title">{props.title}</title>
-          <meta property="og:title" content={props.title} />
-          <meta name="twitter:title" content={props.title} />
+          <title key="title">
+            {props.title} | {props.company_name}
+          </title>
+          <meta
+            property="og:title"
+            content={`${props.title} | ${props.company_name}`}
+          />
+          <meta
+            name="twitter:title"
+            content={`${props.title} | ${props.company_name}`}
+          />
         </>
       )}
 
@@ -42,8 +57,8 @@ const PageMetaTags = (props: props) => {
 
       {props.image && (
         <>
-          <meta property="og:image" content={props.image} />
-          <meta name="twitter:image" content={props.image} />
+          <meta property="og:image" content={ogUrl} />
+          <meta name="twitter:image" content={ogUrl} />
         </>
       )}
 
