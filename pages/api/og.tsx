@@ -17,7 +17,7 @@ export default async function (request: NextRequest) {
       ? searchParams.get("title")?.slice(0, 100)
       : "My default title"
     const fontData = await fetch(
-      new URL("../../public/fonts/Merriweather-Regular.ttf", import.meta.url)
+      new URL("../../public/fonts/Roboto-Regular.ttf", import.meta.url)
     ).then((res) => res.arrayBuffer())
 
     return new ImageResponse(
@@ -47,17 +47,17 @@ export default async function (request: NextRequest) {
               style={{
                 backgroundImage: "linear-gradient(to right, #FB923C, #FB7185)",
               }}
-              tw="left-[723px] top-[450px] text-[20px] font-medium flex focus:outline-none justify-center items-center text-white px-5 py-2  rounded-lg"
+              tw="left-[700px] top-[435px] text-[30px] font-medium flex focus:outline-none justify-center items-center text-white px-7 pt-3 pb-4 rounded-lg"
             >
               Apply now
             </div>
-            <div tw=" flex w-[209px] h-[83px] left-[295px] top-[420px] absolute">
+            <div tw=" flex w-[209px] h-[83px] left-[295px] top-[420px] items-center absolute">
               <div tw="left-[103px] top-[17px] absolute text-gray-600 text-[40px] font-normal ">
                 {company_name ? company_name : null}
               </div>
               {image && (
                 <img
-                  tw="w-[83px] h-[83px] left-0 top-0 absolute"
+                  tw="w-[100px] h-[100px] left-0 top-0 absolute"
                   alt="company-logo"
                   src={image}
                 />
@@ -71,7 +71,7 @@ export default async function (request: NextRequest) {
         height: 630,
         fonts: [
           {
-            name: "MerriWeather",
+            name: "Roboto",
             data: fontData,
             style: "normal",
           },
