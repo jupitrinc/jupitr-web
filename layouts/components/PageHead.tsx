@@ -1,10 +1,51 @@
 import Head from "next/head"
 
-const PageHead = () => {
+interface props {
+  title?: string
+  description?: string
+  keywords?: string
+  robots?:
+    | "index, nofollow"
+    | "noindex, follow"
+    | "noindex, nofollow"
+    | "index, follow"
+  image?: string
+}
+
+const PageHead = (props: props) => {
   return (
     <Head>
-      <title>jupitr</title>
-      <meta name="description" content="" />
+      <title>{props.title ?? "jupitr"}</title>
+
+      {props.title && (
+        <>
+          <meta property="og:title" content={props.title} />
+          <meta name="twitter:title" content={props.title} />
+        </>
+      )}
+
+      <meta name="description" content={props.description ?? ""} />
+
+      {props.description && (
+        <>
+          <meta property="og:description" content={props.description} />
+          <meta name="twitter:description" content={props.description} />
+        </>
+      )}
+
+      {props.keywords && <meta name="keywords" content={props.keywords} />}
+      {props.robots && <meta name="robots" content={props.robots} />}
+
+      {props.image && (
+        <>
+          <meta property="og:image" content={props.image} />
+          <meta name="twitter:image" content={props.image} />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="og:type" content="article" />
+        </>
+      )}
+
       <link
         rel="apple-touch-icon"
         sizes="180x180"

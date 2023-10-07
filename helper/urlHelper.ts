@@ -4,6 +4,11 @@ import {
   VIDEO_CDN_DOMAIN,
 } from "services/storage/media.types"
 
+interface OGImageUrl {
+  domain: string
+  company_logo: string
+}
+
 export const urlHelper = {
   isPublicUrl: (pathName: string) => {
     const routes = ["/auth/callback", "/", "/c/signup", "/login/verify"]
@@ -24,11 +29,9 @@ export const urlHelper = {
       return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${image}`
     }
   },
-  ogImageUrl: (title: string, image: string, company_name: string) => {
-    if (image && title) {
-      return `${urlHelper.domain()}/api/og?title=${encodeURIComponent(
-        title
-      )}&image=${image}&company_name=${encodeURIComponent(company_name)}`
+  ogImageUrl: ({ domain, company_logo }: OGImageUrl) => {
+    if (company_logo) {
+      return `${domain}/api/og?image=${company_logo}`
     }
   },
   videoUrl: (video_name: string) => {

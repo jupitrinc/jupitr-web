@@ -57,12 +57,13 @@ const talentJobService = () => {
     return removeJobsUserApplied
   }
 
+  const getJobQuery =
+    "*, company(name, logo, website), company_videos(*, users(company_member_profile(job_title, users(name))))"
+
   const getJob = async (jobId: string) => {
     const { data, error } = await supabaseClientComponent
       .from(JOBS_TABLE)
-      .select(
-        "*, company(name, logo, website), company_videos(*, users(company_member_profile(job_title, users(name))))"
-      )
+      .select(getJobQuery)
       .eq("id", jobId)
       .eq("status", "open")
       .not("company_id", "is", null)
@@ -75,7 +76,7 @@ const talentJobService = () => {
     return { data, error }
   }
 
-  return { getJobs, getJob }
+  return { getJobs, getJob, getJobQuery }
 }
 
 export default talentJobService
