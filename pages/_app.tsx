@@ -5,6 +5,7 @@ import { IndustryContextProvider } from "state/industry/IndustryContext"
 import { NotificationContextProvider } from "state/notification/NotificationContext"
 import { SkillContextProvider } from "state/skill/SkillContext"
 import Notifications from "components/user/notifications/Notifications"
+import { TalentJobContextProvider } from "state/talent_job/TalentJobContext"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <UserContextProvider>
         <IndustryContextProvider>
           <SkillContextProvider>
-            <Component {...pageProps} />
+            <TalentJobContextProvider>
+              <Component {...pageProps} />
+            </TalentJobContextProvider>
 
             <Notifications />
           </SkillContextProvider>
