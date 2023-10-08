@@ -8,6 +8,7 @@ export const config = {
 export default async function (request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
+    const title = searchParams.get("title")
     const image = searchParams.get("image")
     const fontData = await fetch(
       new URL("../../public/fonts/Roboto-Regular.ttf", import.meta.url)
@@ -31,7 +32,9 @@ export default async function (request: NextRequest) {
               }}
               tw="w-[1200px] h-[30px] left-0 top-0 absolute "
             ></div>
-
+            <div tw="flex w-[850px] left-[309px] top-[200px] absolute text-gray-600 text-[65px] font-bold ">
+              {title}
+            </div>
             <div tw="flex w-[300x] left-0 top-[300px] absolute">
               {image && (
                 <img

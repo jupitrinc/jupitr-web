@@ -20,6 +20,7 @@ export default function TalentPublicJob({ job, domain }) {
       urlHelper.ogImageUrl({
         domain: domain,
         company_logo: urlHelper.imageUrl(job.company.logo) as string,
+        title: job.title,
       }),
     [job.id]
   )

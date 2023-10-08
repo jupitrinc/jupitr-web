@@ -7,6 +7,7 @@ import {
 interface OGImageUrl {
   domain: string
   company_logo: string
+  title: string
 }
 
 export const urlHelper = {
@@ -29,9 +30,12 @@ export const urlHelper = {
       return `${STORAGE_DOMAIN}/${StorageBucketsEnum.images}/${image}`
     }
   },
-  ogImageUrl: ({ domain, company_logo }: OGImageUrl) => {
-    if (company_logo) {
-      return `${domain}/api/og?image=${company_logo}`
+  ogImageUrl: ({ domain, company_logo, title }: OGImageUrl) => {
+    console.log("-> title", title)
+    if (company_logo && title) {
+      return `${domain}/api/og?image=${company_logo}&title=${encodeURIComponent(
+        title
+      )}`
     }
   },
   videoUrl: (video_name: string) => {
