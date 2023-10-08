@@ -48,7 +48,6 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { jobId } = context.query
-
   const protocol =
     context.req.headers.host && context.req.headers.host.includes("localhost")
       ? "http"
