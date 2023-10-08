@@ -22,7 +22,7 @@ export const TalentAppLayout = ({
   if (user.account_type === AccountTypeEnum.talent || jobId) {
     return (
       <>
-        <PageHead />
+        {!jobId && <PageHead />}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
           <header className="space-y-2">
             <Navbar />

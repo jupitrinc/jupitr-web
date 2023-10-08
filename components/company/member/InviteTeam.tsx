@@ -54,7 +54,7 @@ const InviteTeam = ({ title }: { title: string }) => {
       </Card>
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="flex flex-col gap-10 max-h-[30rem] md:max-h-[40rem]">
+        <div className="flex flex-col gap-10 max-h-[30rem] md:max-h-[40rem] overflow-auto">
           <Text as="span" size="xl">
             {title}
           </Text>
