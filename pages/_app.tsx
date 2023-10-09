@@ -6,21 +6,30 @@ import { NotificationContextProvider } from "state/notification/NotificationCont
 import { SkillContextProvider } from "state/skill/SkillContext"
 import Notifications from "components/user/notifications/Notifications"
 import { TalentJobContextProvider } from "state/talent_job/TalentJobContext"
+import { GoogleAnalytics } from "helper/libs/google-analytics/GoogleAnalytics"
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <NotificationContextProvider>
-      <UserContextProvider>
-        <IndustryContextProvider>
-          <SkillContextProvider>
-            <TalentJobContextProvider>
-              <Component {...pageProps} />
-            </TalentJobContextProvider>
+  const env = process.env.NODE_ENV
 
-            <Notifications />
-          </SkillContextProvider>
-        </IndustryContextProvider>
-      </UserContextProvider>
-    </NotificationContextProvider>
+  return (
+    <>
+      <NotificationContextProvider>
+        <UserContextProvider>
+          <IndustryContextProvider>
+            <SkillContextProvider>
+              <TalentJobContextProvider>
+                <Component {...pageProps} />
+              </TalentJobContextProvider>
+
+              <Notifications />
+            </SkillContextProvider>
+          </IndustryContextProvider>
+        </UserContextProvider>
+      </NotificationContextProvider>
+
+      <GoogleAnalytics
+        measurementId={env === "production" ? "G-5FRYJV82ZY" : undefined}
+      />
+    </>
   )
 }

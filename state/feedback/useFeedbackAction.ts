@@ -1,5 +1,6 @@
 import feedbackService from "services/feedback/feedbackService"
 import { IFeedback } from "./feedback.types"
+import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
 
 export function useFeedbackAction() {
   const { addFeedback: addFeedbackService } = feedbackService()
@@ -13,6 +14,10 @@ export function useFeedbackAction() {
     if (error) {
       return false
     } else {
+      gaEvent("feedback", {
+        label: feedback.message,
+      })
+
       return true
     }
   }
