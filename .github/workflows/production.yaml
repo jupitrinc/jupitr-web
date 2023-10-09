@@ -7,7 +7,7 @@ on:
   release:
     types: [published]
   push:
-     # this will deploy data files only when no release is created
+    # this will deploy data files only when no release is created
     branches:
       - main
 jobs:

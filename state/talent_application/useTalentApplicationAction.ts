@@ -8,6 +8,7 @@ import {
 } from "./talentApplication.types"
 import useTalentJobApplicationService from "services/talent/talentApplicationService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
 
 export function useTalentApplicationAction() {
   const { notify } = useNotificationAction()
@@ -79,6 +80,10 @@ export function useTalentApplicationAction() {
       } else {
         dispatch({
           type: TalentApplicationActionEnum.ADD_APPLICATION_SUCCESS,
+        })
+
+        gaEvent("talent_application", {
+          label: "added",
         })
       }
     }

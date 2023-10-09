@@ -16,6 +16,7 @@ import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
 
 export function useUserAction() {
   const { notify } = useNotificationAction()
@@ -128,6 +129,10 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
       })
+
+      gaEvent("company_signup", {
+        label: `${company.name} - ${company.website}`,
+      })
     }
   }
 
@@ -220,6 +225,10 @@ export function useUserAction() {
           message: "Account paused",
           type: "info",
         })
+
+        gaEvent("account_paused", {
+          label: "paused",
+        })
       }
     }
   }
@@ -272,6 +281,10 @@ export function useUserAction() {
       notify({
         message: "Account deleted",
         type: "info",
+      })
+
+      gaEvent("account_deleted", {
+        label: "deleted",
       })
     }
   }

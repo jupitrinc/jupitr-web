@@ -10,6 +10,7 @@ import companyJobService from "services/company/companyJobService"
 import { useRouter } from "next/router"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 import companyJobVideoService from "services/company/companyJobVideoService"
+import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
 
 export function useCompanyJobAction() {
   const router = useRouter()
@@ -55,6 +56,10 @@ export function useCompanyJobAction() {
       })
 
       router.push(`/c/jobs/${data[0].id}`)
+
+      gaEvent("company_job", {
+        label: "added",
+      })
     }
   }
 
@@ -312,6 +317,10 @@ export function useCompanyJobAction() {
         type: CompanyJobActionEnum.UPDATE_COMPANY_JOB_STATUS,
         payload: data.status,
       })
+
+      gaEvent("company_job", {
+        label: status,
+      })
     }
 
     if (error) {
@@ -332,6 +341,10 @@ export function useCompanyJobAction() {
     if (data) {
       dispatch({
         type: CompanyJobActionEnum.CLEAR_COMPANY_JOB,
+      })
+
+      gaEvent("company_job", {
+        label: "archived",
       })
     }
 
