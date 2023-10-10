@@ -9,8 +9,9 @@ import { socialRedirectTo } from "../auth/useAuthService"
 const companyService = () => {
   const addCompany = async (payload: CreateCompanyPayload) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
-      "create-company",
+      "company",
       {
+        method: "POST",
         body: { ...payload, redirectTo: socialRedirectTo() },
       }
     )
@@ -27,8 +28,9 @@ const companyService = () => {
 
   const updateCompanyProfile = async (payload: UpdateCompanyProfilePayload) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
-      "update-company",
+      "company",
       {
+        method: "PUT",
         body: payload,
       }
     )
