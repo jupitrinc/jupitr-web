@@ -96,8 +96,9 @@ const companyMemberService = () => {
 
   const addMember = async (payload: InviteCompanyMemberPayload) => {
     const { data, error: err } = await supabaseClientComponent.functions.invoke(
-      "invite-company-member",
+      "members-company",
       {
+        method: "POST",
         body: { ...payload, redirectTo: socialRedirectTo() },
       }
     )
