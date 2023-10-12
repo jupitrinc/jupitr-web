@@ -28,7 +28,6 @@ export const TalentAppLayout = ({
             <Navbar />
           </header>
           <main className="my-10">{children}</main>
-          <Footer />
         </div>
       </>
     )

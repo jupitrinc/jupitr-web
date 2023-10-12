@@ -6,10 +6,10 @@ const Navbar = () => {
   return (
     <div className="mb-10 flex justify-between">
       <Link href="/">
-        <Button variant="text" icon={<ChevronLeft />} label="Back" />
+        <Button variant="text" icon={<ChevronLeft />} label="Home" />
       </Link>
 
-      <Link href="/">
+      <Link href="/login">
         <Button label="Sign in" />
       </Link>
     </div>

@@ -110,15 +110,6 @@ const AccountSettings = () => {
                     />
                   </div>
                 )}
-                {activeSetting === "change_notifications" && (
-                  <div className="inline-flex gap-4">
-                    <Button
-                      label={settingModal[activeSetting].confirm_button_label}
-                      color={settingModal[activeSetting].confirm_button_variant}
-                      onClick={settingModal[activeSetting].onConfirm}
-                    />
-                  </div>
-                )}
               </div>
             </div>
           </Modal>

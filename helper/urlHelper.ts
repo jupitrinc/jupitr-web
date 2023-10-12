@@ -12,7 +12,13 @@ interface OGImageUrl {
 
 export const urlHelper = {
   isPublicUrl: (pathName: string) => {
-    const routes = ["/auth/callback", "/", "/c/signup", "/login/verify"]
+    const routes = [
+      "/login",
+      "/auth/callback",
+      "/",
+      "/c/signup",
+      "/login/verify",
+    ]
     return routes.includes(`${pathName}`)
   },
   isPublicJobRoute: (pathName: string) => {
@@ -31,7 +37,6 @@ export const urlHelper = {
     }
   },
   ogImageUrl: ({ domain, company_logo, title }: OGImageUrl) => {
-    console.log("-> title", title)
     if (company_logo && title) {
       return `${domain}/api/og?image=${company_logo}&title=${encodeURIComponent(
         title

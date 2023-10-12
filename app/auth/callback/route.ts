@@ -9,13 +9,13 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get("code")
 
   if (!code) {
-    const res = NextResponse.redirect(`${requestUrl.origin}/`)
+    const res = NextResponse.redirect(`${requestUrl.origin}/login`)
     return res
   }
 
   const { error } = await supabase.auth.exchangeCodeForSession(code)
   if (error) {
-    const res = NextResponse.redirect(`${requestUrl.origin}/`)
+    const res = NextResponse.redirect(`${requestUrl.origin}/login`)
     return res
   }
 

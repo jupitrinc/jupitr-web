@@ -21,7 +21,6 @@ export const CompanyAppLayout = ({ children }) => {
             <Navbar />
           </header>
           <main className="my-10">{children}</main>
-          <Footer />
         </div>
       </>
     )

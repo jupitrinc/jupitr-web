@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const { isPublicUrl, isPublicJobRoute } = urlHelper
   const publicRoute = isPublicUrl(pathname)
-  const authRoute = ["/c/signup"].includes(`${pathname}`)
+  const authRoute = ["/c/signup", "/login"].includes(`${pathname}`)
   const publicJobRoute = isPublicJobRoute(pathname)
   const res = NextResponse.next()
   const supabase = createMiddlewareClient({ req, res })
