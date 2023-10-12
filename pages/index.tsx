@@ -6,12 +6,11 @@ import { Button } from "ui-library/button/Button"
 import { useRouter } from "next/router"
 import { AccountTypeEnum } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
-import PageHead from "layouts/components/PageHead"
-import { Footer } from "layouts/components/Footer"
-
-import Intro from "components/_content/home/Intro"
 import { Card } from "ui-library/content/card/Card"
 import { GetServerSidePropsContext } from "next"
+import { Footer } from "layouts/components/Footer"
+import PageHead from "layouts/components/PageHead"
+import Intro from "components/_content/home/Intro"
 
 export default function Home({ domain }) {
   const router = useRouter()
