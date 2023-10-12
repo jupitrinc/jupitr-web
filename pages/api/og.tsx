@@ -35,10 +35,10 @@ export default async function (request: NextRequest) {
             <div tw="flex w-[850px] left-[309px] top-[200px] absolute text-gray-600 text-[65px] font-bold ">
               {title}
             </div>
-            <div tw="flex w-[300x] left-0 top-[300px] absolute">
+            <div tw="flex h-[220x] left-0 top-[390px] absolute">
               {image && (
                 <img
-                  tw="h-[300px] max-w-[600px] left-0 top-0 absolute"
+                  tw="h-[220px] max-w-[600px] left-6 top-0 absolute"
                   alt="company-logo"
                   src={image}
                 />

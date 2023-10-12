@@ -36,7 +36,7 @@ export const SignIn = () => {
     await signInWithGoogle()
   }
   return (
-    <div className="max-w-sm mx-auto w-full flex flex-col space-y-6 text-center">
+    <div className="flex flex-col space-y-6 text-center">
       <Text as="h1" size="xl2">
         Sign in
       </Text>

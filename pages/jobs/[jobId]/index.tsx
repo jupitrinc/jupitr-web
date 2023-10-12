@@ -1,14 +1,22 @@
 import { GetServerSidePropsContext } from "next"
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
 import { TalentAppLayout } from "layouts/TalentAppLayout"
-import PageHead from "layouts/components/PageHead"
-import JobView from "components/talent/job/JobView"
 import { urlHelper } from "helper/urlHelper"
 import talentJobService from "services/talent/talentJobService"
 import { useEffect, useMemo } from "react"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
+import { NoMatchFound } from "ui-library/content/no-match-found/NoMatchFound"
+import { ITalentJob } from "state/talent_job/talentJob.types"
+import PageHead from "layouts/components/PageHead"
+import JobView from "components/talent/job/JobView"
 
-export default function TalentPublicJob({ job, domain }) {
+export default function TalentPublicJob({
+  job,
+  domain,
+}: {
+  job: ITalentJob
+  domain: string
+}) {
   const { setJob } = useTalentJobAction()
 
   useEffect(() => {
@@ -17,31 +25,46 @@ export default function TalentPublicJob({ job, domain }) {
 
   const ogUrl = useMemo(
     () =>
-      urlHelper.ogImageUrl({
-        domain: domain,
-        company_logo: urlHelper.imageUrl(job.company.logo) as string,
-        title: job.title,
-      }),
+      job.id
+        ? urlHelper.ogImageUrl({
+            domain: domain,
+            company_logo: urlHelper.imageUrl(job.company.logo) as string,
+            title: job.title,
+          })
+        : undefined,
+
     [job.id]
   )
 
-  return (
-    <>
-      <PageHead
-        title={`${job.title} - ${job.company.name}`}
-        description="Apply now"
-        image={ogUrl}
-        robots="index, follow"
-      />
-      <TalentAppLayout>
-        <div className="flex flex-col gap-5 max-w-2xl mx-auto">
-          <div className="w-full">
-            <JobView />
+  if (job.id) {
+    return (
+      <>
+        <PageHead
+          title={`${job.title} - ${job.company.name}`}
+          description="Apply now"
+          image={ogUrl}
+          robots="index, follow"
+        />
+        <TalentAppLayout>
+          <div className="flex flex-col gap-5 max-w-2xl mx-auto">
+            <div className="w-full">
+              <JobView />
+            </div>
           </div>
-        </div>
-      </TalentAppLayout>
-    </>
-  )
+        </TalentAppLayout>
+      </>
+    )
+  } else {
+    return (
+      <div className="flex justify-center mt-20">
+        <NoMatchFound
+          message="Job no longer available"
+          link="/jobs"
+          label="Find similar jobs"
+        />
+      </div>
+    )
+  }
 }
 
 export const getServerSideProps = async (

@@ -31,7 +31,6 @@ export const urlHelper = {
     }
   },
   ogImageUrl: ({ domain, company_logo, title }: OGImageUrl) => {
-    console.log("-> title", title)
     if (company_logo && title) {
       return `${domain}/api/og?image=${company_logo}&title=${encodeURIComponent(
         title
@@ -61,12 +60,13 @@ export const urlHelper = {
     return window.location.href
   },
   hostName: () => {
-    return !window.location.hostname.includes("localhost")
-      ? window.location.hostname
-      : `${window.location.hostname}:${window.location.port}`
+    if (typeof window !== "undefined")
+      return !window.location.hostname.includes("localhost")
+        ? window.location.hostname
+        : `${window.location.hostname}:${window.location.port}`
   },
   protocol: () => {
-    return window.location.protocol
+    if (typeof window !== "undefined") return window.location.protocol
   },
   domain: () => {
     return `${urlHelper.protocol()}//${urlHelper.hostName()}`
