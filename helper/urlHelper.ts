@@ -60,13 +60,12 @@ export const urlHelper = {
     return window.location.href
   },
   hostName: () => {
-    if (typeof window !== "undefined")
-      return !window.location.hostname.includes("localhost")
-        ? window.location.hostname
-        : `${window.location.hostname}:${window.location.port}`
+    return !window.location.hostname.includes("localhost")
+      ? window.location.hostname
+      : `${window.location.hostname}:${window.location.port}`
   },
   protocol: () => {
-    if (typeof window !== "undefined") return window.location.protocol
+    return window.location.protocol
   },
   domain: () => {
     return `${urlHelper.protocol()}//${urlHelper.hostName()}`

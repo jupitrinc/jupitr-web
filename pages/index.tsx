@@ -11,8 +11,9 @@ import { Footer } from "layouts/components/Footer"
 
 import Intro from "components/_content/home/Intro"
 import { Card } from "ui-library/content/card/Card"
+import { GetServerSidePropsContext } from "next"
 
-export default function Home() {
+export default function Home({ domain }) {
   const router = useRouter()
   const { user } = useUserState()
 
@@ -25,7 +26,7 @@ export default function Home() {
   const dynamicImage = useMemo(
     () =>
       urlHelper.ogImageUrl({
-        domain: urlHelper.domain(),
+        domain: domain,
         company_logo: "https://jupitr.tech/logo.png",
         title: "Join A-player tech teams",
       }),
@@ -73,4 +74,21 @@ export default function Home() {
       </WebsiteLayout>
     </>
   )
+}
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const protocol =
+    context.req.headers.host && context.req.headers.host.includes("localhost")
+      ? "http"
+      : "https"
+
+  const domain = `${protocol}://${context.req.headers.host}`
+
+  return {
+    props: {
+      domain: domain,
+    },
+  }
 }
