@@ -20,7 +20,7 @@ export default function CompanySignUp({ domain }) {
   return (
     <>
       <PageHead
-        title="Post a FREE job - jupitr"
+        title="Post a job - jupitr"
         description="Looking for A-player tech talent?"
         keywords="tech jobs london, AI jobs, devops jobs, frontend developer jobs, backend developer jobs, software engineering jobs, javascript developer, typescript developer, python developer, java developer, machine learning jobs, java developer"
         robots="index, follow"

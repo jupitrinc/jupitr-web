@@ -14,8 +14,8 @@ export const textStyles = {
     xl: "text-xl",
     xl2: "text-2xl",
   },
-  heading: {
-    fontFamily: "font-mw",
+  fontFamily: {
+    brand: "font-mw",
   },
   align: {
     left: "text-left",

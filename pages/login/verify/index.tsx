@@ -7,14 +7,11 @@ import { supabaseClientComponent } from "services/_supabase/client"
 import { Session } from "@supabase/supabase-js"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
 import { useUserState } from "state/user/useUserState"
-import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const Verify = () => {
-  const { setUser, updateEmail } = useUserAction()
-  const { notify } = useNotificationAction()
-
-  const { user: stateUser } = useUserState()
   const router = useRouter()
+  const { setUser, updateEmail } = useUserAction()
+  const { user: stateUser } = useUserState()
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash.replace("#", ""))
@@ -35,8 +32,7 @@ export const Verify = () => {
             if (session) {
               await handleSession()
             } else {
-              handleError()
-              router.push("/")
+              router.push("/login")
             }
           }
         }
@@ -81,18 +77,6 @@ export const Verify = () => {
 
     if (custoDB.email !== supabase.user.email) {
       updateEmail(supabase.user.id, supabase.user.email)
-    }
-  }
-
-  const handleError = () => {
-    if (
-      typeof window !== "undefined" &&
-      window.location.href.includes("error_code")
-    ) {
-      notify({
-        message: "Email link is invalid or has expired. Sign in again",
-        type: "warning",
-      })
     }
   }
 

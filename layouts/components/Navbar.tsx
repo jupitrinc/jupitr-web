@@ -14,7 +14,10 @@ export const Navbar = () => {
   const router = useRouter()
   const { isLoggedIn, accountType } = useUserState()
 
-  if (router.pathname.includes("/c/signup")) {
+  if (
+    router.pathname.includes("/c/signup") ||
+    router.pathname.includes("/login")
+  ) {
     return null
   } else {
     if (isLoggedIn) {
@@ -50,7 +53,7 @@ export const Navbar = () => {
 const Brand = ({ link }: { link: string }) => {
   return (
     <Link href={link}>
-      <Text as="h1" size="lg" bold>
+      <Text as="span" size="lg" bold brand>
         jupitr
       </Text>
     </Link>
@@ -115,16 +118,22 @@ const PublicMenu = () => {
   return (
     <div className="flex gap-5">
       {jobId ? (
-        <Link href="/">
+        <Link href="/login">
           <Button label="Sign in" variant="contained" />
         </Link>
       ) : (
-        <Link href="/c/signup" className="flex flex-row gap-2 items-center">
-          <Button label="Post a job" variant="contained" />
-          <Text as="span" size="xs">
-            for free
-          </Text>
-        </Link>
+        <div className="flex flex-row gap-5 items-center">
+          <Link href="/login">
+            <Button label="Sign in" variant="contained" />
+          </Link>
+
+          <Link href="/c/signup" className="flex flex-row gap-2 items-center">
+            <Button label="Post a job" variant="contained" />
+            <Text as="span" size="xs">
+              for free
+            </Text>
+          </Link>
+        </div>
       )}
     </div>
   )

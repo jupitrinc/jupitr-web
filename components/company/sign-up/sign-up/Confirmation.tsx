@@ -20,7 +20,7 @@ const Confirmation = () => {
           {"haven't received the link?"}
         </Text>
 
-        <Link href="/">
+        <Link href="/login">
           <Button label="Sign in" size="xs" variant="text" />
         </Link>
       </div>

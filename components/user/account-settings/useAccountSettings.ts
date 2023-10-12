@@ -65,7 +65,7 @@ export const useAccountSettings = () => {
     [SettingsEnum.delete_account]: {
       title: "Delete account",
       description:
-        "This action is irreversible. Alternatively, pause your account to stop receiving emails and hide your profile.",
+        "This action is irreversible. Alternatively, pause to hide your account.",
       onConfirm: () => deleteAccount(),
       confirm_button_label: "Delete",
       confirm_button_variant: "dangerous" as ColorType,

@@ -61,7 +61,7 @@ const Application = () => {
 
   const startApplication = () => {
     if (user.id && user.account_type === AccountTypeEnum.talent) showModal()
-    else router.push(`/?jobId=${talent_job.id}`)
+    else router.push(`/login?jobId=${talent_job.id}`)
   }
 
   return (

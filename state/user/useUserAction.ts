@@ -143,7 +143,7 @@ export function useUserAction() {
     clear()
     deleteAllCookies()
     await signOutService()
-    router.push("/")
+    router.push("/login")
   }
 
   const updateName = async (id: string, name: string) => {

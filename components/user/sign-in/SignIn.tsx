@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import { Button } from "ui-library/button/Button"
 import { Divider } from "ui-library/content/divider/Divider"
@@ -9,13 +9,16 @@ import { useUserState } from "state/user/useUserState"
 import { useUserAction } from "state/user/useUserAction"
 import { useRouter } from "next/router"
 import { localStorageHelper } from "../../../helper/localStorageHelper"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export const SignIn = () => {
+  const router = useRouter()
+  const { jobId } = router.query
+
   const [email, setEmail] = useState("")
   const { loading } = useUserState()
   const { signInWithEmail, signInWithGoogle } = useUserAction()
-  const router = useRouter()
-  const { jobId } = router.query
+  const { notify } = useNotificationAction()
 
   const saveJobId = useCallback(() => {
     if (jobId) {
@@ -35,6 +38,23 @@ export const SignIn = () => {
     saveJobId()
     await signInWithGoogle()
   }
+
+  useEffect(() => {
+    handleError()
+  }, [])
+
+  const handleError = () => {
+    if (
+      typeof window !== "undefined" &&
+      window.location.href.includes("error_code")
+    ) {
+      notify({
+        message: "Email link is invalid or has expired. Sign in again",
+        type: "warning",
+      })
+    }
+  }
+
   return (
     <div className="flex flex-col space-y-6 text-center">
       <Text as="h1" size="xl2">

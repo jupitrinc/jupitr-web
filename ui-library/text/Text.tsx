@@ -11,6 +11,7 @@ export const Text: React.FC<TextProps> = ({
   size,
   align,
   bold,
+  brand,
 }) => (
   <Typography
     tag={as}
@@ -19,7 +20,7 @@ export const Text: React.FC<TextProps> = ({
       styles.size[size ? size : ThemeSizeEnum.base],
       styles.align[align ? align : styles.align.left],
       bold && styles.weight.bold,
-      heading.includes(as) && styles.heading.fontFamily
+      brand && styles.fontFamily.brand
     )}
   >
     {children}
@@ -28,5 +29,3 @@ export const Text: React.FC<TextProps> = ({
 
 export const Typography = ({ tag, children, ...props }) =>
   createElement(tag, props, children)
-
-const heading = ["h1", "h2", "h3", "h4", "h5", "h6"]
