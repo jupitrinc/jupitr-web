@@ -2,7 +2,6 @@ import { GetServerSidePropsContext } from "next"
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs"
 import { TalentAppLayout } from "layouts/TalentAppLayout"
 import { urlHelper } from "helper/urlHelper"
-import talentJobService from "services/talent/talentJobService"
 import { useEffect, useMemo } from "react"
 import { useTalentJobAction } from "state/talent_job/useTalentJobAction"
 import { NoMatchFound } from "ui-library/content/no-match-found/NoMatchFound"
@@ -78,15 +77,10 @@ export const getServerSideProps = async (
 
   const domain = `${protocol}://${context.req.headers.host}`
   const supabase = createPagesServerClient(context)
-  const { getJobQuery } = talentJobService()
 
-  const { data } = await supabase
-    .from("jobs")
-    .select(getJobQuery)
-    .eq("id", jobId)
-    .eq("status", "open")
-    .not("company_id", "is", null)
-    .single()
+  const { data } = await supabase.functions.invoke(`jobs/${jobId}`, {
+    method: "GET",
+  })
 
   return {
     props: {

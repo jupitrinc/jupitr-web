@@ -7,7 +7,7 @@ export const socialRedirectTo = () => `${location.origin}/login/verify`
 export const authTokenCookie =
   process?.env?.NODE_ENV === "production"
     ? "sb-api-auth-token"
-    : "sb-cgbrcxjbovzwarqujqoq-auth-token"
+    : "sb-localhost-auth-token"
 
 const useAuthService = () => {
   const { deleteUser } = userService()

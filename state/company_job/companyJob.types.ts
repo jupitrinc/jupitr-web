@@ -55,13 +55,11 @@ export interface IJobVideo {
   video_url: string
   created_at: string
   primary: boolean
-  users: {
-    company_member_profile: {
-      job_title: string
-      users: {
-        name: string
-      }
-    }
+  user_name: string
+  user_job_title: string
+  user: {
+    job_title: string
+    name: string
   }
 }
 

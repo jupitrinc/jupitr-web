@@ -9,14 +9,12 @@ export function useTalentJobsAction() {
   const { dispatch } = useContext(TalentJobsContext)
   const { getJobs: getJobsService } = talentJobService()
 
-  const getJobs = async (payload: { user_id: string; skills: ISkill[] }) => {
-    if (!payload?.user_id || !payload?.skills?.length) return
-
+  const getJobs = async () => {
     dispatch({
       type: TalentJobsActionEnum.GET_JOBS_BEGIN,
     })
 
-    const { data, error } = await getJobsService(payload)
+    const { data, error } = await getJobsService()
 
     if (error) {
       dispatch({
@@ -26,7 +24,7 @@ export function useTalentJobsAction() {
     } else {
       dispatch({
         type: TalentJobsActionEnum.GET_JOBS_SUCCESS,
-        payload: data as ITalentJob[],
+        payload: data.data as ITalentJob[],
       })
     }
   }
