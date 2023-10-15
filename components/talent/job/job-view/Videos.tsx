@@ -18,8 +18,8 @@ const Videos = () => {
                   poster={urlHelper.videoPosterUrl(video.video_url)}
                 />
                 <VideoTitle
-                  name={video?.users?.company_member_profile?.users?.name}
-                  title={video?.users?.company_member_profile?.job_title}
+                  name={video?.user?.name}
+                  title={video?.user?.job_title}
                 />
               </div>
             )

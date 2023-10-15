@@ -21,7 +21,7 @@ const JobList = () => {
 
   useEffect(() => {
     if (talent_jobs.length < 1 && user.id) {
-      getJobs({ user_id: user.user_id, skills: user.skills })
+      getJobs()
     }
 
     return () => {

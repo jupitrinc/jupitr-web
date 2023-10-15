@@ -17,10 +17,8 @@ const CoverVideo = () => {
   }, [talent_job.company_videos])
 
   const user = {
-    title:
-      talent_job.company_videos[0]?.users?.company_member_profile?.job_title,
-    name: talent_job.company_videos[0]?.users?.company_member_profile?.users
-      ?.name,
+    title: talent_job.company_videos[0]?.user?.job_title,
+    name: talent_job.company_videos[0]?.user?.name,
   }
   if (talent_job.company_videos.length) {
     return (

@@ -41,10 +41,10 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
       <div className="flex flex-row gap-5 justify-between">
         <div className="flex flex-col gap-0">
           <Text as="span" size="lg">
-            {video?.users?.company_member_profile?.users.name}
+            {video?.user?.name}
           </Text>
           <Text as="span" size="sm">
-            {video?.users?.company_member_profile?.job_title}
+            {video?.user?.job_title}
           </Text>
         </div>
 
