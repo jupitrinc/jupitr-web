@@ -17,6 +17,27 @@ const Intro = () => {
 
   return (
     <div className="flex flex-col sm:flex-row gap-5">
+      <div className="basis-1/3">
+        <Card type="section">
+          <div className="flex flex-col gap-10">
+            <Header title="Find" subtitle="tech jobs matching your skills" />
+
+            <div className="grid grid-cols-1 gap-5">
+              <SkillCard
+                skill={{ id: "1", name: "Machine learning", level: 2 }}
+              />
+              <SkillCard skill={{ id: "2", name: "Typescript", level: 2 }} />
+              <SkillCard
+                skill={{ id: "3", name: "Cloud computing", level: 2 }}
+              />
+            </div>
+            <Text as="span" size="sm" align="center">
+              300+ trending skills
+            </Text>
+          </div>
+        </Card>
+      </div>
+
       <div className="basis-2/3">
         <Card type="section">
           <div className="flex flex-col gap-10">
@@ -35,27 +56,6 @@ const Intro = () => {
                 }
               />
             </div>
-          </div>
-        </Card>
-      </div>
-
-      <div className="basis-1/3">
-        <Card type="section">
-          <div className="flex flex-col gap-10">
-            <Header title="Find" subtitle="jobs matching your skills" />
-
-            <div className="grid grid-cols-1 gap-5">
-              <SkillCard
-                skill={{ id: "1", name: "Machine learning", level: 2 }}
-              />
-              <SkillCard skill={{ id: "2", name: "Typescript", level: 2 }} />
-              <SkillCard
-                skill={{ id: "3", name: "Cloud computing", level: 2 }}
-              />
-            </div>
-            <Text as="span" size="sm" align="center">
-              300+ trending skills
-            </Text>
           </div>
         </Card>
       </div>
