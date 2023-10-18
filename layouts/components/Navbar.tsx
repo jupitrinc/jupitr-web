@@ -119,19 +119,16 @@ const PublicMenu = () => {
     <div className="flex gap-5">
       {jobId ? (
         <Link href="/login">
-          <Button label="Sign in" variant="contained" />
+          <Button label="Sign in" />
         </Link>
       ) : (
-        <div className="flex flex-row gap-5 items-center">
+        <div className="flex flex-row gap-2 items-center">
           <Link href="/login">
-            <Button label="Sign in" variant="contained" />
+            <Button label="Sign in" color="special" />
           </Link>
 
-          <Link href="/c/signup" className="flex flex-row gap-2 items-center">
-            <Button label="Post a job" variant="contained" />
-            <Text as="span" size="xs">
-              for free
-            </Text>
+          <Link href="/c/signup">
+            <Button label="Post a job" variant="text" />
           </Link>
         </div>
       )}

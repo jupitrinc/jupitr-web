@@ -57,9 +57,14 @@ export const SignIn = () => {
 
   return (
     <div className="flex flex-col space-y-6 text-center">
-      <Text as="h1" size="xl2">
-        Sign in
-      </Text>
+      <div>
+        <Text as="h1" size="xl2">
+          Sign in
+        </Text>
+        <Text as="span" size="sm">
+          or sign up
+        </Text>
+      </div>
 
       <LightForm
         name="otp_sign_in"
