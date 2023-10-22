@@ -131,7 +131,7 @@ export function useUserAction() {
       })
 
       gaEvent("company_signup", {
-        label: `${company.name} - ${company.website}`,
+        category: "company",
       })
     }
   }
@@ -227,7 +227,7 @@ export function useUserAction() {
         })
 
         gaEvent("account_paused", {
-          label: "paused",
+          category: "user",
         })
       }
     }
@@ -284,7 +284,7 @@ export function useUserAction() {
       })
 
       gaEvent("account_deleted", {
-        label: "deleted",
+        category: "user",
       })
     }
   }

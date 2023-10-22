@@ -83,7 +83,7 @@ export function useTalentApplicationAction() {
         })
 
         gaEvent("talent_application", {
-          label: "added",
+          category: "talent",
         })
       }
     }

@@ -57,8 +57,8 @@ export function useCompanyJobAction() {
 
       router.push(`/c/jobs/${data[0].id}`)
 
-      gaEvent("company_job", {
-        label: "added",
+      gaEvent("company_job_added", {
+        category: "company",
       })
     }
   }
@@ -318,8 +318,8 @@ export function useCompanyJobAction() {
         payload: data.status,
       })
 
-      gaEvent("company_job", {
-        label: status,
+      gaEvent(`company_job_${status}`, {
+        category: "company",
       })
     }
 
@@ -343,8 +343,8 @@ export function useCompanyJobAction() {
         type: CompanyJobActionEnum.CLEAR_COMPANY_JOB,
       })
 
-      gaEvent("company_job", {
-        label: "archived",
+      gaEvent("company_job_archived", {
+        category: "company",
       })
     }
 
