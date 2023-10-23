@@ -49,9 +49,11 @@ const ApplicationCard = ({
           </div>
         </div>
 
-        <VideoPlayer
-          src={urlHelper.videoUrl(application.video_url) as string}
-        />
+        <div className="flex max-h-96">
+          <VideoPlayer
+            src={urlHelper.videoUrl(application.video_url) as string}
+          />
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {application.skills?.map((skill) => (
