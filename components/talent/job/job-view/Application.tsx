@@ -18,6 +18,7 @@ import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/
 import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
+import NoSocialsAlert from "./NoSocialsAlert"
 
 const Application = () => {
   const router = useRouter()
@@ -155,20 +156,7 @@ const Application = () => {
                         <Check className="h-6 w-6" />
                         <span>Application submitted</span>
                         {(user.socials === null ||
-                          user.socials.length === 0) && (
-                          <div className="text-left mt-2 rounded py-2 px-4 text-gray-600 ring-gray-900/10 bg-gray-200">
-                            <Text as="span">
-                              It looks like you have not added your socials to
-                              yourr profile. Please, go ahead and update your
-                              Profile.
-                            </Text>
-                            <Button
-                              size="base"
-                              variant="outlined"
-                              onClick={() => router.push("/profile")}
-                            />
-                          </div>
-                        )}
+                          user.socials.length === 0) && <NoSocialsAlert />}
                       </span>
                     </Text>
                   </div>
