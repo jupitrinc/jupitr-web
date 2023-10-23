@@ -18,7 +18,7 @@ import { RecordingStatus } from "ui-library/video/video-recorder/video-recorder/
 import { AccountTypeEnum } from "state/user/user.types"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import UserName from "components/user/profile/UserName"
-import NoSocialsAlert from "./NoSocialsAlert"
+import ProfileSocialCheck from "./application/ProfileSocialCheck"
 
 const Application = () => {
   const router = useRouter()
@@ -149,17 +149,16 @@ const Application = () => {
               )}
 
               {step === 3 && success && (
-                <div className="flex flex-col gap-5 mt-32">
+                <div className="flex flex-col gap-14 mt-32">
                   <div className="flex justify-center align-middle">
                     <Text as="span" size="base" align="center">
                       <span className="flex flex-col justify-center items-center gap-2">
                         <Check className="h-6 w-6" />
                         <span>Application submitted</span>
-                        {(user.socials === null ||
-                          user.socials.length === 0) && <NoSocialsAlert />}
                       </span>
                     </Text>
                   </div>
+                  <ProfileSocialCheck />
                 </div>
               )}
             </div>

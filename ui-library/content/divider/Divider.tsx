@@ -1,6 +1,11 @@
+import { Theme } from "ui-library/_theme/Theme.types"
 import { dividerStyles } from "./Divider.styles"
 
-export const Divider: React.FC = (divider) => {
+interface props {
+  theme?: Theme
+}
+
+export const Divider: React.FC<props> = ({ theme }) => {
   const styles = dividerStyles
-  return <hr className={styles.className} />
+  return <hr className={styles[theme ?? "light"]} />
 }
