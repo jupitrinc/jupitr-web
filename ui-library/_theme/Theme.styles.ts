@@ -30,6 +30,7 @@ export const themeStyles = {
       50: "bg-gray-50",
       100: "bg-gray-100",
       200: "bg-gray-200",
+      300: "bg-gray-300",
     },
     [`${ThemeColorEnum.important}`]: {
       50: "bg-blue-50",

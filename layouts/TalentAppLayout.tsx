@@ -1,6 +1,5 @@
 import { useRouter } from "next/router"
 import { Navbar } from "./components/Navbar"
-import { Footer } from "./components/Footer"
 import { Loading } from "ui-library/content/loading/Loading"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
