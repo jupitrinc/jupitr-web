@@ -1,12 +1,12 @@
 import { useRouter } from "next/router"
 import { Navbar } from "./components/Navbar"
-import { Footer } from "./components/Footer"
 import { Loading } from "ui-library/content/loading/Loading"
 import { useUserState } from "state/user/useUserState"
 import { AccountTypeEnum } from "state/user/user.types"
 import PageNotFound from "./components/PageNotFound"
 import PageHead from "./components/PageHead"
 import { usePersistedUser } from "../state/user/usePersistedUser"
+import RequiredTasks from "components/talent/required-tasks/RequiredTasks"
 
 export const TalentAppLayout = ({
   children,
@@ -27,7 +27,10 @@ export const TalentAppLayout = ({
           <header className="space-y-2">
             <Navbar />
           </header>
-          <main className="my-10">{children}</main>
+          <main className="my-10">
+            <RequiredTasks />
+            {children}
+          </main>
         </div>
       </>
     )
