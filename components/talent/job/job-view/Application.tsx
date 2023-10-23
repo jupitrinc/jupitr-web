@@ -154,6 +154,21 @@ const Application = () => {
                       <span className="flex flex-col justify-center items-center gap-2">
                         <Check className="h-6 w-6" />
                         <span>Application submitted</span>
+                        {(user.socials === null ||
+                          user.socials.length === 0) && (
+                          <div className="text-left mt-2 rounded py-2 px-4 text-gray-600 ring-gray-900/10 bg-gray-200">
+                            <Text as="span">
+                              It looks like you have not added your socials to
+                              yourr profile. Please, go ahead and update your
+                              Profile.
+                            </Text>
+                            <Button
+                              size="base"
+                              variant="outlined"
+                              onClick={() => router.push("/profile")}
+                            />
+                          </div>
+                        )}
                       </span>
                     </Text>
                   </div>
