@@ -3,10 +3,13 @@ import { Check, Circle } from "lucide-react"
 import { Text } from "ui-library/text/Text"
 import { useUserState } from "state/user/useUserState"
 import { Divider } from "ui-library/content/divider/Divider"
+import { AccountTypeEnum } from "state/user/user.types"
 
 const Checks = () => {
-  const { user } = useUserState()
+  const { user, accountType } = useUserState()
+  const isSocialsEmpty = user.socials === null
 
+  if (accountType === AccountTypeEnum.company) return
   return (
     <>
       <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
@@ -17,12 +20,7 @@ const Checks = () => {
           isCompleted={user.skills.length >= 3}
         />
         <Divider theme="dark" />
-        <ProfileCheck
-          label="Add your socials"
-          isCompleted={
-            user.socials.filter((social) => social.url !== "").length !== 0
-          }
-        />
+        <ProfileCheck label="Add your socials" isCompleted={isSocialsEmpty} />
       </div>
     </>
   )

@@ -7,9 +7,7 @@ import { Text } from "ui-library/text/Text"
 const ProfileSocialCheck = () => {
   const router = useRouter()
   const { user } = useUserState()
-  const isSocialsEmpty =
-    user.socials === null ||
-    user.socials.filter((social) => social.url === "").length > 0
+  const isSocialsEmpty = user.socials === null
 
   if (!isSocialsEmpty) return
 
