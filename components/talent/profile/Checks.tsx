@@ -7,12 +7,20 @@ import { AccountTypeEnum } from "state/user/user.types"
 
 const Checks = () => {
   const { user, accountType } = useUserState()
-  const isSocialsEmpty = user.socials === null
+  const isSocialsEmpty =
+    user.socials === null || user.socials.find((social) => social.url === "")
+
+  const isComponentHidden =
+    user.name && user.skills.length >= 3 && !isSocialsEmpty
 
   if (accountType === AccountTypeEnum.company) return
   return (
     <>
-      <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
+      <div
+        className={`mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2 ${
+          isComponentHidden && "hidden"
+        }`}
+      >
         <ProfileCheck label="Add your name" isCompleted={user.name} />
         <Divider theme="dark" />
         <ProfileCheck
@@ -40,7 +48,7 @@ export const ProfileCheck = ({ label, isCompleted }) => {
       >
         {isCompleted ? <Check /> : <Circle className="w-8 h-8" />}
       </figure>
-      <Text as="span" size="base" align="center">
+      <Text as="span" size="sm" align="center">
         {label}
       </Text>
     </div>
