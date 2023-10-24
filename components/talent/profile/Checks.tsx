@@ -10,17 +10,14 @@ const Checks = () => {
   const isSocialsEmpty =
     user.socials === null || user.socials.find((social) => social.url === "")
 
-  const isComponentHidden =
-    user.name && user.skills.length >= 3 && !isSocialsEmpty
+  const checksCompleted =
+    accountType === AccountTypeEnum.company && !isSocialsEmpty
 
-  if (accountType === AccountTypeEnum.company) return
+  if (checksCompleted) return
+
   return (
     <>
-      <div
-        className={`mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2 ${
-          isComponentHidden && "hidden"
-        }`}
-      >
+      <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
         <ProfileCheck label="Add your name" isCompleted={user.name} />
         <Divider theme="dark" />
         <ProfileCheck
