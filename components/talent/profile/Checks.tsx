@@ -20,7 +20,7 @@ const Checks = () => {
           isCompleted={user.skills.length >= 3}
         />
         <Divider theme="dark" />
-        <ProfileCheck label="Add your socials" isCompleted={isSocialsEmpty} />
+        <ProfileCheck label="Add your socials" isCompleted={!isSocialsEmpty} />
       </div>
     </>
   )
