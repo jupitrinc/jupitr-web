@@ -1,33 +1,22 @@
 import React from "react"
 import { Check, Circle } from "lucide-react"
 import { Text } from "ui-library/text/Text"
-import { useUserState } from "state/user/useUserState"
 import { Divider } from "ui-library/content/divider/Divider"
-import { AccountTypeEnum } from "state/user/user.types"
+import { useProfileChecks } from "./useProfileChecks"
 
 const Checks = () => {
-  const { user, accountType } = useUserState()
-  const isSocialsEmpty =
-    user.socials === null || user.socials.find((social) => social.url === "")
+  const { checksCompleted, name, socials, skills } = useProfileChecks()
 
-  const checksCompleted =
-    accountType === AccountTypeEnum.company && !isSocialsEmpty
-
-  if (checksCompleted) return
+  if (checksCompleted()) return
 
   return (
-    <>
-      <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
-        <ProfileCheck label="Add your name" isCompleted={user.name} />
-        <Divider theme="dark" />
-        <ProfileCheck
-          label="Add 3 skills"
-          isCompleted={user.skills.length >= 3}
-        />
-        <Divider theme="dark" />
-        <ProfileCheck label="Add your socials" isCompleted={!isSocialsEmpty} />
-      </div>
-    </>
+    <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
+      <ProfileCheck label="Add your name" isCompleted={name()} />
+      <Divider theme="dark" />
+      <ProfileCheck label="Add 3 skills" isCompleted={skills()} />
+      <Divider theme="dark" />
+      <ProfileCheck label="Add your socials" isCompleted={socials()} />
+    </div>
   )
 }
 

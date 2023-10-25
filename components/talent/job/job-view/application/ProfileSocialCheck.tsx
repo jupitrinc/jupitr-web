@@ -1,16 +1,14 @@
+import { useProfileChecks } from "components/talent/profile/checks/useProfileChecks"
 import { useRouter } from "next/router"
 import React from "react"
-import { useUserState } from "state/user/useUserState"
 import { Button } from "ui-library/button/Button"
 import { Text } from "ui-library/text/Text"
 
 const ProfileSocialCheck = () => {
   const router = useRouter()
-  const { user } = useUserState()
-  const isSocialsEmpty =
-    user.socials === null || user.socials.find((social) => social.url === "")
+  const { checksCompleted } = useProfileChecks()
 
-  if (!isSocialsEmpty) return
+  if (checksCompleted()) return
 
   return (
     <div className="text-center mt-4 rounded-md p-10 text-gray-600 ring-gray-900/10 bg-gray-100">
