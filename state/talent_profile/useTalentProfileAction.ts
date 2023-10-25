@@ -3,6 +3,7 @@ import {
   ISkill,
   ITalentProfile,
   TalentProfileActionEnum,
+  UpdateAllSkillsPayload,
 } from "./talentProfile.types"
 import { talentProfileService } from "services/talent/talentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
@@ -136,40 +137,38 @@ export function useTalentProfileAction() {
     }
   }
 
-  const updateAllSkills = async (
-    user_id: ITalentProfile["user_id"],
-    talent_skills: ISkill[],
-    application_skills: ISkill[]
-  ) => {
+  const updateAllSkills = async (payload: UpdateAllSkillsPayload) => {
     if (
-      !user_id ||
-      talent_skills.length === 0 ||
-      application_skills.length === 0
+      !payload.user_id ||
+      !payload.talent_skills ||
+      payload.talent_skills.length === 0 ||
+      !payload.application_skills ||
+      payload.application_skills.length === 0
     )
       return
 
     const new_skills: ISkill[] = []
-    for (let i = 0; i < application_skills.length; i++) {
-      for (let j = 0; j < talent_skills.length; j++) {
-        if (application_skills[i].id !== talent_skills[j].id) {
-          new_skills.push(application_skills[i])
+    for (let i = 0; i < payload.application_skills.length; i++) {
+      for (let j = 0; j < payload.talent_skills.length; j++) {
+        if (payload.application_skills[i].id !== payload.talent_skills[j].id) {
+          new_skills.push(payload.application_skills[i])
         }
       }
     }
 
-    const updated_skills = [...talent_skills, ...new_skills]
-    for (let i = 0; i < application_skills.length; i++) {
+    const updated_skills = [...payload.talent_skills, ...new_skills]
+    for (let i = 0; i < payload.application_skills.length; i++) {
       for (let j = 0; j < updated_skills.length; j++) {
         if (
-          application_skills[i].id === updated_skills[j].id &&
-          application_skills[i].level !== updated_skills[j].level
+          payload.application_skills[i].id === updated_skills[j].id &&
+          payload.application_skills[i].level !== updated_skills[j].level
         ) {
-          updated_skills[j].level = application_skills[i].level
+          updated_skills[j].level = payload.application_skills[i].level
         }
       }
     }
 
-    const { data } = await updateProfile(user_id, {
+    const { data } = await updateProfile(payload.user_id, {
       skills: [...updated_skills],
     })
 

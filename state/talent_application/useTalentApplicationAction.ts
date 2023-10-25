@@ -90,11 +90,11 @@ export function useTalentApplicationAction() {
 
         if (!payload.talent_skills) return
 
-        await updateAllSkills(
-          payload.user_id,
-          payload.talent_skills,
-          payload.skills
-        )
+        await updateAllSkills({
+          user_id: payload.user_id,
+          talent_skills: payload.talent_skills,
+          application_skills: payload.skills,
+        })
       }
     }
   }

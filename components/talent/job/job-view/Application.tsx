@@ -42,7 +42,7 @@ const Application = () => {
   const { addApplication } = useTalentApplicationAction()
   const { success, loading } = useTalentApplicationState()
 
-  const submitApplication = useCallback(async () => {
+  const submitApplication = useCallback(() => {
     if (!videoFile) return
 
     const data = {
@@ -54,7 +54,7 @@ const Application = () => {
       talent_skills: user.skills,
     }
 
-    await addApplication(data)
+    addApplication(data)
   }, [videoFile, user, talent_job])
 
   useEffect(() => {
