@@ -20,20 +20,30 @@ const Intro = () => {
       <div className="basis-1/3">
         <Card type="section">
           <div className="flex flex-col gap-10">
-            <Header title="Find" subtitle="tech jobs matching your skills" />
+            <Header title="Find" subtitle="Top tech jobs" />
 
             <div className="grid grid-cols-1 gap-5">
               <SkillCard
                 skill={{ id: "1", name: "Machine learning", level: 2 }}
               />
-              <SkillCard skill={{ id: "2", name: "Typescript", level: 2 }} />
+              <SkillCard skill={{ id: "2", name: "Typescript", level: 1 }} />
               <SkillCard
                 skill={{ id: "3", name: "Cloud computing", level: 2 }}
               />
             </div>
+
             <Text as="span" size="sm" align="center">
               300+ trending skills
             </Text>
+
+            <div className="flex justify-center -mt-3">
+              <Button
+                label="Get started"
+                variant="outlined"
+                arrow
+                onClick={() => router.push("/login")}
+              />
+            </div>
           </div>
         </Card>
       </div>
@@ -71,7 +81,7 @@ const Header = ({ title, subtitle }) => {
       <Text as="span" size="xl2" bold>
         {title}
       </Text>
-      <Text as="h1" size="lg">
+      <Text as="h1" size="base">
         <span className="text-gray-500">{subtitle}</span>
       </Text>
     </div>
