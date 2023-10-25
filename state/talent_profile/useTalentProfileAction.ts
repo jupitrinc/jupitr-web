@@ -17,7 +17,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       socials: socials,
     })
 
@@ -36,7 +36,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       preferences: { ...preferences, location: newLocation },
     })
 
@@ -54,7 +54,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       searching: searching,
     })
 
@@ -78,7 +78,7 @@ export function useTalentProfileAction() {
     )
       return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills ? [...skills, newSkill] : [newSkill],
     })
 
@@ -97,7 +97,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills.filter((s) => s.id !== skill.id),
     })
 
@@ -116,7 +116,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills.map((s) => {
         if (s.id === skill.id) {
           return {
@@ -136,6 +136,32 @@ export function useTalentProfileAction() {
     }
   }
 
+  const updateAllSkills = async (
+    user_id: ITalentProfile["user_id"],
+    skills: ISkill[],
+    application_skills: ISkill[]
+  ) => {
+    if (!user_id || skills.length === 0 || application_skills.length === 0)
+      return
+
+    const skillsToAdd = skills.map((skill) => {
+      const new_skill = application_skills.find(
+        (app_skill) => app_skill.id === skill.id
+      )
+      if (new_skill) return { ...new_skill }
+      return skill
+    })
+
+    const { data } = await updateProfile(user_id, { skills: skillsToAdd })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_SKILLS,
+        payload: data.skills,
+      })
+    }
+  }
+
   return {
     updateSocials,
     updateLocation,
@@ -143,5 +169,6 @@ export function useTalentProfileAction() {
     addSkill,
     removeSkill,
     updateSkill,
+    updateAllSkills,
   }
 }

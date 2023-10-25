@@ -36,6 +36,7 @@ export enum TalentApplicationActionEnum {
 export interface AddApplicationPayload {
   file: File
   skills: ISkill[]
+  talent_skills?: ISkill[] | null
   user_id: string
   job_id: string
   company_id: string
