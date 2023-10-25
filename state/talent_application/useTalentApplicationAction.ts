@@ -92,8 +92,8 @@ export function useTalentApplicationAction() {
 
         await updateAllSkills(
           payload.user_id,
-          payload.skills,
-          payload.talent_skills
+          payload.talent_skills,
+          payload.skills
         )
       }
     }

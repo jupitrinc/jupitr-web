@@ -138,21 +138,40 @@ export function useTalentProfileAction() {
 
   const updateAllSkills = async (
     user_id: ITalentProfile["user_id"],
-    skills: ISkill[],
+    talent_skills: ISkill[],
     application_skills: ISkill[]
   ) => {
-    if (!user_id || skills.length === 0 || application_skills.length === 0)
+    if (
+      !user_id ||
+      talent_skills.length === 0 ||
+      application_skills.length === 0
+    )
       return
 
-    const skillsToAdd = skills.map((skill) => {
-      const new_skill = application_skills.find(
-        (app_skill) => app_skill.id === skill.id
-      )
-      if (new_skill) return { ...new_skill }
-      return skill
-    })
+    const new_skills: ISkill[] = []
+    for (let i = 0; i < application_skills.length; i++) {
+      for (let j = 0; j < talent_skills.length; j++) {
+        if (application_skills[i].id !== talent_skills[j].id) {
+          new_skills.push(application_skills[i])
+        }
+      }
+    }
 
-    const { data } = await updateProfile(user_id, { skills: skillsToAdd })
+    const updated_skills = [...talent_skills, ...new_skills]
+    for (let i = 0; i < application_skills.length; i++) {
+      for (let j = 0; j < updated_skills.length; j++) {
+        if (
+          application_skills[i].id === updated_skills[j].id &&
+          application_skills[i].level !== updated_skills[j].level
+        ) {
+          updated_skills[j].level = application_skills[i].level
+        }
+      }
+    }
+
+    const { data } = await updateProfile(user_id, {
+      skills: [...updated_skills],
+    })
 
     if (data) {
       dispatch({
