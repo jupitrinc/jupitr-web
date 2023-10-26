@@ -140,36 +140,39 @@ export function useTalentProfileAction() {
   const updateAllSkills = async (payload: UpdateAllSkillsPayload) => {
     if (
       !payload.user_id ||
-      !payload.talent_skills ||
-      payload.talent_skills.length === 0 ||
       !payload.application_skills ||
       payload.application_skills.length === 0
     )
       return
 
     const new_skills: ISkill[] = []
-    for (let i = 0; i < payload.application_skills.length; i++) {
-      for (let j = 0; j < payload.talent_skills.length; j++) {
-        if (payload.application_skills[i].id !== payload.talent_skills[j].id) {
-          new_skills.push(payload.application_skills[i])
+    payload.application_skills.forEach((application_skill) => {
+      if (!payload.talent_skills || payload.talent_skills.length === 0) {
+        new_skills.push(application_skill)
+      } else {
+        if (
+          !payload.talent_skills.find(
+            (talent_skill) => talent_skill.id === application_skill.id
+          )
+        ) {
+          new_skills.push(application_skill)
         }
       }
-    }
+    })
 
     const updated_skills = [...payload.talent_skills, ...new_skills]
-    for (let i = 0; i < payload.application_skills.length; i++) {
-      for (let j = 0; j < updated_skills.length; j++) {
+    updated_skills.forEach((updated_skill) => {
+      payload.application_skills.forEach((application_skill) => {
         if (
-          payload.application_skills[i].id === updated_skills[j].id &&
-          payload.application_skills[i].level !== updated_skills[j].level
+          updated_skill.id === application_skill.id &&
+          updated_skill.level !== application_skill.level
         ) {
-          updated_skills[j].level = payload.application_skills[i].level
+          updated_skill.level = application_skill.level
         }
-      }
-    }
-
+      })
+    })
     const { data } = await updateProfile(payload.user_id, {
-      skills: [...updated_skills],
+      skills: updated_skills,
     })
 
     if (data) {
