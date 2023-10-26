@@ -3,6 +3,7 @@ import {
   ISkill,
   ITalentProfile,
   TalentProfileActionEnum,
+  UpdateAllSkillsPayload,
 } from "./talentProfile.types"
 import { talentProfileService } from "services/talent/talentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
@@ -17,7 +18,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       socials: socials,
     })
 
@@ -36,7 +37,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       preferences: { ...preferences, location: newLocation },
     })
 
@@ -54,7 +55,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       searching: searching,
     })
 
@@ -78,7 +79,7 @@ export function useTalentProfileAction() {
     )
       return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills ? [...skills, newSkill] : [newSkill],
     })
 
@@ -97,7 +98,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills.filter((s) => s.id !== skill.id),
     })
 
@@ -116,7 +117,7 @@ export function useTalentProfileAction() {
   ) => {
     if (!user_id || !skill.id) return
 
-    const { data, error } = await updateProfile(user_id, {
+    const { data } = await updateProfile(user_id, {
       skills: skills.map((s) => {
         if (s.id === skill.id) {
           return {
@@ -136,6 +137,52 @@ export function useTalentProfileAction() {
     }
   }
 
+  const updateAllSkills = async (payload: UpdateAllSkillsPayload) => {
+    if (
+      !payload.user_id ||
+      !payload.application_skills ||
+      payload.application_skills.length === 0
+    )
+      return
+
+    const new_skills: ISkill[] = []
+    payload.application_skills.forEach((application_skill) => {
+      if (!payload.talent_skills || payload.talent_skills.length === 0) {
+        new_skills.push(application_skill)
+      } else {
+        if (
+          !payload.talent_skills.find(
+            (talent_skill) => talent_skill.id === application_skill.id
+          )
+        ) {
+          new_skills.push(application_skill)
+        }
+      }
+    })
+
+    const updated_skills = [...payload.talent_skills, ...new_skills]
+    updated_skills.forEach((updated_skill) => {
+      payload.application_skills.forEach((application_skill) => {
+        if (
+          updated_skill.id === application_skill.id &&
+          updated_skill.level !== application_skill.level
+        ) {
+          updated_skill.level = application_skill.level
+        }
+      })
+    })
+    const { data } = await updateProfile(payload.user_id, {
+      skills: updated_skills,
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_SKILLS,
+        payload: data.skills,
+      })
+    }
+  }
+
   return {
     updateSocials,
     updateLocation,
@@ -143,5 +190,6 @@ export function useTalentProfileAction() {
     addSkill,
     removeSkill,
     updateSkill,
+    updateAllSkills,
   }
 }

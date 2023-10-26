@@ -51,6 +51,7 @@ const Application = () => {
       company_id: talent_job.company_id,
       job_id: talent_job.id,
       skills: skills,
+      talent_skills: user.skills,
     }
 
     addApplication(data)
@@ -181,7 +182,8 @@ const Application = () => {
                 variant="outlined"
                 onClick={step === 2 ? submitApplication : nextStep}
                 disabled={
-                  (step === 2 && (!videoFile || skills.length < 1)) ||
+                  (step === 2 &&
+                    (!videoFile || (skills && skills.length < 1))) ||
                   !user.name
                 }
                 loading={loading}

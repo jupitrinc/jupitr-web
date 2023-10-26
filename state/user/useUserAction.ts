@@ -211,7 +211,7 @@ export function useUserAction() {
   const toggleActive = async (id: string, active: boolean) => {
     if (!id) return
 
-    const { data, error } = await updateUser(id, { active: !active })
+    const { data } = await updateUser(id, { active: !active })
 
     if (data) {
       dispatch({
@@ -244,11 +244,11 @@ export function useUserAction() {
       bucketName: StorageBucketsEnum.images,
       file: resizedFile,
       filePath,
-    }).then(({ data, error }) => {
+    }).then(({ data }) => {
       if (data?.path) {
         updateUser(userId, {
           avatar_url: data?.path,
-        }).then(({ data, error }) => {
+        }).then(({ data }) => {
           if (data) {
             dispatch({
               type: UserActionEnum.UPDATE_AVATAR,

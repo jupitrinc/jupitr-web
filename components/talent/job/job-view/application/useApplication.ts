@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from "react"
 import { ISkill } from "state/talent_profile/talentProfile.types"
+import { useUserState } from "state/user/useUserState"
 
 export const useApplication = (data: ISkill[]) => {
   const [step, setStep] = useState<number>(1)
   const [skills, setSkills] = useState<ISkill[]>([])
   const [videoFile, setVideoFile] = useState<File | null>(null)
+  const { user } = useUserState()
 
   useEffect(() => {
     if (skills.length < 1) {
       const prepareSkills = data?.map((item) => {
-        return { ...item, level: 1 }
+        const talent_skill = user.skills?.find((skill) => skill.id === item.id)
+        return { ...item, level: talent_skill?.level ?? 1 }
       })
 
       setSkills(prepareSkills)

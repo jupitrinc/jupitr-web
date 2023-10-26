@@ -36,3 +36,9 @@ export enum TalentProfileActionEnum {
   TOGGLE_SEARCHING = "TOGGLE_SEARCHING",
   UPDATE_SKILLS = "UPDATE_SKILLS",
 }
+
+export interface UpdateAllSkillsPayload {
+  user_id: ITalentProfile["user_id"]
+  talent_skills: ISkill[]
+  application_skills: ISkill[]
+}

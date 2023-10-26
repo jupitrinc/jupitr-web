@@ -9,6 +9,7 @@ import {
 import useTalentJobApplicationService from "services/talent/talentApplicationService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
+import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 
 export function useTalentApplicationAction() {
   const { notify } = useNotificationAction()
@@ -17,6 +18,7 @@ export function useTalentApplicationAction() {
   const { uploadVideo } = mediaService()
   const { addApplication: addApplicationService } =
     useTalentJobApplicationService()
+  const { updateAllSkills } = useTalentProfileAction()
 
   const addApplication = async (payload: AddApplicationPayload) => {
     dispatch({
@@ -59,7 +61,7 @@ export function useTalentApplicationAction() {
     } else {
       const cdn_video = upload_data.public_id
 
-      const { data, error } = await addApplicationService({
+      const { error } = await addApplicationService({
         user_id: payload.user_id,
         job_id: payload.job_id,
         video_url: cdn_video,
@@ -84,6 +86,14 @@ export function useTalentApplicationAction() {
 
         gaEvent("talent_application", {
           category: "talent",
+        })
+
+        if (!payload.talent_skills) return
+
+        await updateAllSkills({
+          user_id: payload.user_id,
+          talent_skills: payload.talent_skills,
+          application_skills: payload.skills,
         })
       }
     }
