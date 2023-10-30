@@ -10,8 +10,8 @@ const Videos = () => {
     return (
       <div className="flex flex-col gap-5">
         {talent_job.company_videos.map(
-          (video, index) =>
-            index !== 0 && (
+          (video) =>
+            video.primary !== true && (
               <div key={video.id} className="flex flex-col gap-3">
                 <VideoPlayer
                   src={urlHelper.videoUrl(video.video_url) as string}
