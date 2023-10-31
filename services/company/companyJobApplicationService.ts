@@ -14,7 +14,7 @@ const companyJobApplicationService = () => {
     )
 
     if (err) {
-      const error = await getError(err, "getAllApplications")
+      const error = await getError(err, "searchCountries")
 
       console.error(
         "companyJobApplicationService -> getAllApplications:",
