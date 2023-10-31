@@ -7,6 +7,7 @@ import { IJobVideo } from "state/company_job/companyJob.types"
 import { useCompanyJobVideosAction } from "state/company_job_videos/useCompanyJobVideosAction"
 import { urlHelper } from "helper/urlHelper"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
+import { Pill } from "ui-library/pill/Pill"
 
 const VideoCard = ({ video }: { video: IJobVideo }) => {
   const { deleteVideo } = useCompanyJobVideosAction()
@@ -48,7 +49,10 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
           </Text>
         </div>
 
-        <Dropdown options={dropdown_options} type="more" />
+        <div className="flex flex-row items-start gap-2">
+          {video.primary && <Pill label="Cover video" size="sm" />}
+          <Dropdown options={dropdown_options} type="more" />
+        </div>
       </div>
       <Divider />
     </div>
