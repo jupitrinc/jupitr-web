@@ -5,7 +5,6 @@ import VideoTitle from "./videos/VideoTitle"
 
 const Videos = () => {
   const { talent_job } = useTalentJobState()
-
   const videos = talent_job.company_videos.sort((v) => (v.primary ? -1 : 1))
 
   if (videos.length) {
@@ -14,7 +13,9 @@ const Videos = () => {
         {videos.map((video) => (
           <div
             key={video.id}
-            className={`snap-center shrink-0 ${videos.length > 0 && "w-[90%]"}`}
+            className={`snap-center shrink-0 ${
+              videos.length > 1 ? "w-[90%]" : "w-full"
+            }`}
           >
             <div className="py-3">
               <VideoPlayer
