@@ -49,8 +49,8 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
           </Text>
         </div>
 
-        <div className="flex flex-row items-start">
-          {video.primary && <Pill label="Cover video" size="xs" />}
+        <div className="flex flex-row items-start gap-2">
+          {video.primary && <Pill label="Cover video" size="sm" />}
           <Dropdown options={dropdown_options} type="more" />
         </div>
       </div>
