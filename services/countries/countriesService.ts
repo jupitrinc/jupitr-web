@@ -18,8 +18,20 @@ const countriesService = () => {
 
     return { data }
   }
+  const searchCities = async (search: string) => {
+    const { data, error } = await supabaseClientComponent
+      .from("cities")
+      .select("name, country:country_id(*)")
+      .textSearch("name", `'${search}'`)
 
-  return { searchCountries }
+    if (error) {
+      console.error("countriesService -> searchCities:", error.message)
+    }
+
+    return { data, error }
+  }
+
+  return { searchCountries, searchCities }
 }
 
 export default countriesService
