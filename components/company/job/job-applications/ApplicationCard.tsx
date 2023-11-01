@@ -16,6 +16,8 @@ const ApplicationCard = ({
   application: IApplication
   jobSkills?: ICompanyJob["skills"]
 }) => {
+  const socials = application.users.talent_profile?.socials ?? []
+
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
@@ -35,20 +37,19 @@ const ApplicationCard = ({
             </div>
 
             <div className="flex flex-row gap-3">
-              {application.users.talent_profile?.socials?.length &&
-                application.users.talent_profile?.socials?.map(
-                  (social) =>
-                    social.url && (
-                      <a
-                        key={social.url}
-                        href={urlHelper.websiteUrl(social.url)}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <SocialIcon name={social.name} />
-                      </a>
-                    )
-                )}
+              {socials.map(
+                (social) =>
+                  social.url && (
+                    <a
+                      key={social.url}
+                      href={urlHelper.websiteUrl(social.url)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <SocialIcon name={social.name} />
+                    </a>
+                  )
+              )}
             </div>
           </div>
         </div>

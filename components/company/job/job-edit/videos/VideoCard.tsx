@@ -42,15 +42,17 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
       <div className="flex flex-row gap-5 justify-between">
         <div className="flex flex-col gap-0">
           <Text as="span" size="lg">
-            {video?.user?.name}
+            {video.user.name}
           </Text>
           <Text as="span" size="sm">
-            {video?.user?.job_title}
+            {video.user.job_title}
           </Text>
         </div>
 
-        <div className="flex flex-row items-start gap-2">
-          {video.primary && <Pill label="Cover video" size="sm" />}
+        <div className="flex flex-row items-center gap-2">
+          {video.primary && (
+            <Pill label="Cover video" size="xs" variant="outlined" />
+          )}
           <Dropdown options={dropdown_options} type="more" />
         </div>
       </div>

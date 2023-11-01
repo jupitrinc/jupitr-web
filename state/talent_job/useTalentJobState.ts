@@ -8,5 +8,7 @@ export const useTalentJobState = () => {
     talent_job: useMemo(() => state.data, [state.data]),
     loading: state.loading,
     success: state.success,
+
+    talent_job_videos: state.data.company_videos ?? [],
   }
 }

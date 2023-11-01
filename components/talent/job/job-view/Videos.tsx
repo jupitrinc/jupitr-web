@@ -4,12 +4,12 @@ import { urlHelper } from "helper/urlHelper"
 import VideoTitle from "./videos/VideoTitle"
 
 const Videos = () => {
-  const { talent_job } = useTalentJobState()
-  const videos = talent_job.company_videos.sort((v) => (v.primary ? -1 : 1))
+  const { talent_job_videos } = useTalentJobState()
+  const videos = talent_job_videos.sort((v) => (v.primary ? -1 : 1))
 
   if (videos.length) {
     return (
-      <div className="snap-proximity snap-x flex flex-row overflow-scroll gap-3 pb-1">
+      <div className="snap-proximity snap-x flex flex-row overflow-auto gap-3 pb-1">
         {videos.map((video) => (
           <div
             key={video.id}

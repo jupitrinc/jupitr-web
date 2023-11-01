@@ -24,11 +24,12 @@ const SocialLinks = () => {
   const onChange = useCallback(
     (e: { target: { value: string } }, name: string) => {
       const copySocials = [...socials]
+      const targetValue = e.target.value.trim()
 
       if (socials.find((s) => s.name === name)) {
-        copySocials.map((s) => s.name === name && (s.url = e.target.value))
+        copySocials.map((s) => s.name === name && (s.url = targetValue))
       } else {
-        copySocials.push({ name: name, url: e.target.value })
+        copySocials.push({ name: name, url: targetValue })
       }
 
       setSocials(copySocials)
