@@ -17,10 +17,10 @@ export function useCompanyMemberProfileAction() {
     user_id: ICompanyMemberProfile["user_id"],
     job_title: ICompanyMemberProfile["job_title"]
   ) => {
-    if (!user_id || !job_title) return
+    if (!user_id) return
     const { data, error } = await updateProfile(
       {
-        job_title: job_title,
+        job_title: job_title.trim(),
       },
       user_id
     )

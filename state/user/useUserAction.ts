@@ -147,7 +147,9 @@ export function useUserAction() {
   }
 
   const updateName = async (id: string, name: string) => {
-    const { data } = await updateUser(id, { name: name })
+    if (!id) return
+
+    const { data } = await updateUser(id, { name: name.trim() })
 
     if (data) {
       dispatch({

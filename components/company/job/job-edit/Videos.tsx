@@ -19,10 +19,11 @@ export const Videos = () => {
         </CompanyJobVideosContextProvider>
       </div>
 
-      {videos &&
-        videos
-          .sort((a) => (a.primary ? -1 : 1))
-          .map((video) => <VideoCard key={video.id} video={video} />)}
+      {videos
+        .sort((a) => (a.primary ? -1 : 1))
+        .map((video) => (
+          <VideoCard key={video.id} video={video} />
+        ))}
     </Card>
   )
 }
