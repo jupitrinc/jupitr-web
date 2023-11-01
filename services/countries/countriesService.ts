@@ -17,7 +17,7 @@ const countriesService = () => {
   const searchCities = async (search: string) => {
     const { data, error } = await supabaseClientComponent
       .from("cities")
-      .select("name, country:country_id(*)")
+      .select("*, country:country_id(*)")
       .textSearch("name", `'${search}'`)
 
     if (error) {
