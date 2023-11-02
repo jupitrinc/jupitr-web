@@ -24,20 +24,28 @@ export const Salary = () => {
     value.length <= max_salary_length && setValue(String(value))
   }, [])
 
-  const update = useCallback(() => {
-    if (value && value !== company_job.salary) {
-      updateSalary(company_job.id, value)
-    }
+  const update = useCallback(
+    (
+      e:
+        | React.FormEvent<HTMLFormElement | HTMLInputElement>
+        | React.MouseEvent<Element, MouseEvent>
+    ) => {
+      e.preventDefault()
+      if (value && value !== company_job.salary) {
+        updateSalary(company_job.id, value)
+      }
 
-    setEditing(false)
-  }, [value, company_job])
+      setEditing(false)
+    },
+    [value, company_job]
+  )
 
   return (
-    <div className="flex flex-col gap-3">
+    <form className="flex flex-col gap-3" onSubmit={update}>
       <Label value="Salary" htmlFor="" />
 
       {editing && (
-        <form className="relative" onSubmit={update}>
+        <div className="relative">
           <NumberInput
             value={Number(value)}
             onChange={onChange}
@@ -45,14 +53,14 @@ export const Salary = () => {
             onBlur={update}
           />
 
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
+          <div className="absolute top-1/2 transdiv -translate-y-1/2 right-5">
             <Button
               icon={<Check className="h-5 w-5" />}
               variant="text"
               onClick={update}
             />
           </div>
-        </form>
+        </div>
       )}
 
       {!editing && (
@@ -67,7 +75,7 @@ export const Salary = () => {
           />
         </div>
       )}
-    </div>
+    </form>
   )
 }
 
