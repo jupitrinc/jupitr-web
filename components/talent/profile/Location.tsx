@@ -1,27 +1,53 @@
-import React from "react"
-import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import React, { useEffect, useState } from "react"
 import { useUserState } from "state/user/useUserState"
-import { Select } from "ui-library/form/select/Select"
-import { static_data_locations } from "data/location"
+import { Multiselect } from "ui-library/form/multiselect/Multiselect"
+import { useDebounce } from "helper/hooks/useDebounce"
+import locationService from "services/location/locationService"
+import { useUserAction } from "state/user/useUserAction"
+import { ICity } from "state/location/location.types"
 
 const Location = () => {
   const { user } = useUserState()
-  const { updateLocation } = useTalentProfileAction()
+  const [cities, setCities] = useState<ICity[]>([])
+  const { updateLocation } = useUserAction()
+  const { searchCities } = locationService()
 
-  const changeLocation = (e) => {
-    const location = JSON.parse(e.target.value)
-    if (!location) return
+  const {
+    debouncedValue: searchQuery,
+    setDebouncedValue: setSearchQuery,
+    loading: searchQueryLoading,
+  } = useDebounce()
 
-    updateLocation(user.id, location, user.preferences)
+  const searchLocation = async (searchKeyword: string) => {
+    const { data } = await searchCities(searchKeyword)
+
+    if (data) {
+      const options = data.map((city: ICity) => {
+        return { ...city, name: `${city.name}, ${city.country.name}` }
+      })
+
+      setCities(options)
+    }
+  }
+
+  useEffect(() => {
+    if (searchQuery !== "") {
+      searchLocation(searchQuery)
+    }
+  }, [searchQuery])
+
+  const saveLocation = (location: ICity) => {
+    updateLocation(user.id, location)
   }
 
   return (
-    <Select
-      options={static_data_locations}
+    <Multiselect
       label="Location"
-      placeholder="Select"
-      onChange={changeLocation}
-      value={user.preferences?.location}
+      placeholder={user.location?.name ?? "Search city"}
+      options={cities}
+      onChange={(searchKeyword) => setSearchQuery(searchKeyword)}
+      onSelect={(location) => saveLocation(location as ICity)}
+      loading={searchQueryLoading}
     />
   )
 }

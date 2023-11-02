@@ -100,6 +100,19 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_name_state.data)
       return update_name_state
 
+    case UserActionEnum.UPDATE_LOCATION:
+      const update_user_location_payload = action.payload as IUser["location"]
+      const update_user_location_state = {
+        ...state,
+        data: {
+          ...state.data,
+          location: update_user_location_payload,
+        } as ISuperUser,
+      }
+
+      setItem(LocalStorageItemEnum.user, update_user_location_state.data)
+      return update_user_location_state
+
     case UserActionEnum.UPDATE_EMAIL_SUCCESS:
       const update_email_payload = action.payload as string
       const update_email_state = {
@@ -175,21 +188,6 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, toggle_searching_state.data)
       return toggle_searching_state
-
-    case TalentProfileActionEnum.UPDATE_LOCATION:
-      const update_location_payload =
-        action.payload as ITalentProfile["preferences"]
-
-      const update_location_state = {
-        ...state,
-        data: {
-          ...state.data,
-          preferences: update_location_payload,
-        },
-      }
-
-      setItem(LocalStorageItemEnum.user, update_location_state.data)
-      return update_location_state
 
     case TalentProfileActionEnum.UPDATE_SKILLS:
       const update_skills_payload = action.payload as ISkill[]

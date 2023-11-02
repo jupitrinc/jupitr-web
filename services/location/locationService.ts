@@ -1,6 +1,6 @@
 import { supabaseClientComponent } from "services/_supabase/client"
 
-const countriesService = () => {
+const locationService = () => {
   const searchCountries = async (
     searchTerm: string,
     options: { withCity: boolean }
@@ -18,7 +18,7 @@ const countriesService = () => {
     const { data, error } = await supabaseClientComponent
       .from("cities")
       .select("*, country:country_id(*)")
-      .textSearch("name", `'${search}'`)
+      .textSearch("name", `'${search.trim()}'`)
 
     if (error) {
       console.error("countriesService -> searchCities:", error.message)
@@ -30,4 +30,4 @@ const countriesService = () => {
   return { searchCountries, searchCities }
 }
 
-export default countriesService
+export default locationService

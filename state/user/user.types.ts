@@ -7,6 +7,7 @@ import {
   ITalentProfile,
   TalentProfileAction,
 } from "state/talent_profile/talentProfile.types"
+import { ICity } from "state/location/location.types"
 
 export interface IUserContext {
   state: UserState
@@ -22,6 +23,7 @@ export interface IUser {
   account_type: string
   email: string
   active: boolean
+  location: ICity | null
   created_at: string
   updated_at?: string
 }
@@ -52,6 +54,7 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
+    | UserActionEnum.UPDATE_LOCATION
     | UserActionEnum.UPDATE_EMAIL_BEGIN
     | UserActionEnum.UPDATE_EMAIL_SUCCESS
     | UserActionEnum.UPDATE_EMAIL_FAILURE
@@ -63,7 +66,7 @@ export type UserAction = {
     | UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN
     | UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS
     | UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE
-  payload?: IUser | IUser["name"] | IUser["active"] | User
+  payload?: IUser | IUser["name"] | IUser["active"] | User | IUser["location"]
 }
 
 export enum UserActionEnum {
@@ -83,6 +86,7 @@ export enum UserActionEnum {
 
   UPDATE_NAME = "UPDATE_NAME",
   UPDATE_AVATAR = "UPDATE_AVATAR",
+  UPDATE_LOCATION = "UPDATE_LOCATION",
 
   REQUEST_EMAIL_UPDATE_BEGIN = "REQUEST_EMAIL_UPDATE_BEGIN",
   REQUEST_EMAIL_UPDATE_SUCCESS = "REQUEST_EMAIL_UPDATE_SUCCESS",

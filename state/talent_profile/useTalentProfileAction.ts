@@ -30,25 +30,6 @@ export function useTalentProfileAction() {
     }
   }
 
-  const updateLocation = async (
-    user_id: ITalentProfile["user_id"],
-    newLocation: ITalentProfile["preferences"]["location"],
-    preferences: ITalentProfile["preferences"]
-  ) => {
-    if (!user_id) return
-
-    const { data } = await updateProfile(user_id, {
-      preferences: { ...preferences, location: newLocation },
-    })
-
-    if (data) {
-      dispatch({
-        type: TalentProfileActionEnum.UPDATE_LOCATION,
-        payload: data.preferences,
-      })
-    }
-  }
-
   const toggleSearching = async (
     user_id: ITalentProfile["user_id"],
     searching: ITalentProfile["searching"]
@@ -185,7 +166,6 @@ export function useTalentProfileAction() {
 
   return {
     updateSocials,
-    updateLocation,
     toggleSearching,
     addSkill,
     removeSkill,

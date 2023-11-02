@@ -1,4 +1,5 @@
 import { ICompanyJob } from "state/company_job/companyJob.types"
+import { ICity } from "state/location/location.types"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export interface ICompanyJobApplicationContext {
@@ -30,8 +31,9 @@ export interface IApplication {
 }
 
 interface IApplicant {
-  name?: string
+  name: string | null
   email: string
+  location: ICity | null
   talent_profile?: {
     socials?: { name: string; url: string }[]
   }

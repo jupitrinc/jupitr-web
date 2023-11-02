@@ -5,17 +5,20 @@ import { Divider } from "ui-library/content/divider/Divider"
 import { useProfileChecks } from "./useProfileChecks"
 
 const Checks = () => {
-  const { checksCompleted, name, socials, skills } = useProfileChecks()
+  const { checksCompleted, name, socials, skills, location } =
+    useProfileChecks()
 
   if (checksCompleted()) return
 
   return (
     <div className="mb-10 flex flex-row justify-between items-center rounded-lg gap-1 sm:gap-2">
-      <ProfileCheck label="Add your name" isCompleted={name()} />
+      <ProfileCheck label="Name" isCompleted={name()} />
       <Divider theme="dark" />
-      <ProfileCheck label="Add 3 skills" isCompleted={skills()} />
+      <ProfileCheck label="3 skills" isCompleted={skills()} />
       <Divider theme="dark" />
-      <ProfileCheck label="Add your socials" isCompleted={socials()} />
+      <ProfileCheck label="Location" isCompleted={location()} />
+      <Divider theme="dark" />
+      <ProfileCheck label="Socials" isCompleted={socials()} />
     </div>
   )
 }

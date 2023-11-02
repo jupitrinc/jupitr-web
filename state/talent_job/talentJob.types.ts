@@ -23,7 +23,7 @@ export interface ITalentJob {
   title: string
   status: "open"
   salary: string
-  location: ILocation
+  location: ILocation | null
   work_model: string[]
   visa_sponsorship?: boolean
   company_videos: IJobVideo[] | null
