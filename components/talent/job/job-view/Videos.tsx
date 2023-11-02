@@ -24,7 +24,7 @@ const Videos = () => {
               />
             </div>
             <VideoTitle
-              name={video?.user?.name}
+              name={video?.user?.name ?? ""}
               title={video?.user?.job_title}
             />
           </div>
