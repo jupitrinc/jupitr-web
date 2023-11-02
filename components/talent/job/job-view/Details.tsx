@@ -35,12 +35,14 @@ const Details = () => {
           </div>
         </div>
 
-        <Text as="span" size="base">
-          <span className="flex flex-row flex-wrap gap-1 items-center">
-            <MapPin className="h-5 w-5" />
-            <Pill label={talent_job.location?.name} size="base" />
-          </span>
-        </Text>
+        {talent_job.location && (
+          <Text as="span" size="base">
+            <span className="flex flex-row flex-wrap gap-1 items-center">
+              <MapPin className="h-5 w-5" />
+              <Pill label={talent_job.location.name} size="base" />
+            </span>
+          </Text>
+        )}
 
         <Text as="span" size="base">
           <span className="flex flex-row flex-wrap gap-1 items-center">

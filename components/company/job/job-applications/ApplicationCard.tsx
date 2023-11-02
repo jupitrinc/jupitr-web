@@ -8,6 +8,7 @@ import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
 import { ICompanyJob } from "state/company_job/companyJob.types"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
+import { MapPin } from "lucide-react"
 
 const ApplicationCard = ({
   application,
@@ -17,24 +18,16 @@ const ApplicationCard = ({
   jobSkills?: ICompanyJob["skills"]
 }) => {
   const socials = application.users.talent_profile?.socials ?? []
+  const location = application.users.location?.name
 
   return (
     <Card type="section">
       <div className="flex flex-col gap-5">
         <div>
-          <Text as="span" size="lg">
-            {application.users?.name}
-          </Text>
-
           <div className="flex flex-row gap-1 items-center justify-between">
-            <div className="flex flex-col">
-              <div className="flex flex-row gap-2 items-center">
-                <Text as="span" size="sm">
-                  {application.users?.email}
-                </Text>
-                <CopyClipboard value={application.users?.email} />
-              </div>
-            </div>
+            <Text as="span" size="lg">
+              {application.users.name}
+            </Text>
 
             <div className="flex flex-row gap-3">
               {socials.map(
@@ -51,6 +44,26 @@ const ApplicationCard = ({
                   )
               )}
             </div>
+          </div>
+
+          <div className="flex flex-row gap-1 items-center justify-between">
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-2 items-center">
+                <Text as="span" size="sm">
+                  {application.users?.email}
+                </Text>
+                <CopyClipboard value={application.users.email} />
+              </div>
+            </div>
+
+            {location && (
+              <div className="flex flex-row gap-1 items-center justify-end mt-1">
+                <MapPin className="h-4 w-4 text-gray-600" />
+                <Text as="span" size="xs">
+                  {location}
+                </Text>
+              </div>
+            )}
           </div>
         </div>
 

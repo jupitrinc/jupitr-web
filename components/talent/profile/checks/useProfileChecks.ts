@@ -18,12 +18,16 @@ export const useProfileChecks = () => {
     return Boolean(user.name)
   }
 
+  const location = () => {
+    return Boolean(user.location?.id)
+  }
+
   const checksCompleted = () => {
     return (
       accountType === AccountTypeEnum.company ||
-      (name() && socials() && skills())
+      (name() && socials() && skills() && location())
     )
   }
 
-  return { name, socials, skills, checksCompleted }
+  return { name, socials, skills, location, checksCompleted }
 }

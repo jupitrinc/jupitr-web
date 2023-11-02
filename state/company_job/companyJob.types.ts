@@ -1,3 +1,4 @@
+import { ICity } from "state/location/location.types"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 
 export interface ICompanyJobContext {
@@ -17,7 +18,7 @@ export interface ICompanyJob {
   title: string
   salary: string
   status: IJobStatus
-  location: ILocation
+  location: ILocation | null
   work_model: string[]
   visa_sponsorship: boolean
   skills: ISkill[]
@@ -38,10 +39,7 @@ export enum JobStatusEnum {
   archived = "archived",
 }
 
-export interface ILocation {
-  id: string
-  name: string
-}
+export interface ILocation extends ICity {}
 
 export interface IApplicationVideo {
   duration: string

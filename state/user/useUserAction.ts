@@ -17,6 +17,7 @@ import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
 import { gaEvent } from "helper/libs/google-analytics/events/gaEvent"
+import { ICity } from "state/location/location.types"
 
 export function useUserAction() {
   const { notify } = useNotificationAction()
@@ -155,6 +156,19 @@ export function useUserAction() {
       dispatch({
         type: UserActionEnum.UPDATE_NAME,
         payload: data.name,
+      })
+    }
+  }
+
+  const updateLocation = async (id: string, city: ICity) => {
+    if (!id || !city.id) return
+
+    const { data } = await updateUser(id, { location: city })
+
+    if (data) {
+      dispatch({
+        type: UserActionEnum.UPDATE_LOCATION,
+        payload: data.location,
       })
     }
   }
@@ -299,6 +313,7 @@ export function useUserAction() {
     getUser,
     setUser,
     updateName,
+    updateLocation,
     requestEmailUpdate,
     updateEmail,
     updateAvatar,

@@ -1,3 +1,5 @@
+import { ICity } from "state/location/location.types"
+
 export type Json =
   | string
   | number
@@ -391,6 +393,7 @@ export interface Database {
           id?: string
           name?: string | null
           updated_at?: string | null
+          location?: ICity
         }
         Relationships: [
           {
