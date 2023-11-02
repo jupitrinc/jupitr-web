@@ -53,7 +53,7 @@ export interface IJobVideo {
   video_url: string
   created_at: string
   primary: boolean
-  user: {
+  user?: {
     job_title: string
     name: string
   }
