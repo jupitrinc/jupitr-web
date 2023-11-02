@@ -43,7 +43,7 @@ const Location = () => {
   return (
     <Multiselect
       label="Location"
-      placeholder={user.location?.name ?? "Search city"}
+      placeholder={user.location?.name ?? "Search cities"}
       options={cities}
       onChange={(searchKeyword) => setSearchQuery(searchKeyword)}
       onSelect={(location) => saveLocation(location as ICity)}

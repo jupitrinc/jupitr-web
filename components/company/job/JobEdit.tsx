@@ -15,6 +15,7 @@ import Salary from "./job-edit/Salary"
 import WorkModel from "./job-edit/WorkModel"
 import TalentApplication from "./job-edit/TalentApplication"
 import Location from "./job-edit/Location"
+import JobChecks from "./job-edit/checks/JobChecks"
 
 export const JobEdit = () => {
   const { user } = useUserState()
@@ -39,6 +40,7 @@ export const JobEdit = () => {
     return (
       <div className="grid grid-cols-1 gap-5">
         <PreviewApplications />
+        <JobChecks />
 
         <div className="flex flex-col md:flex-row gap-5">
           <Title />

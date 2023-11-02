@@ -1,3 +1,4 @@
+import { static_data_job } from "data/job"
 import React from "react"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
@@ -12,7 +13,14 @@ const NewJob = () => {
   const createJob = () => {
     if (!user.company_id) return
 
-    addJob("draft", user.company_id)
+    addJob({
+      company_id: user.company_id,
+      status: "draft",
+      application_video: {
+        description: "Why are you the best person for this job?",
+        duration: static_data_job.video_duration[1],
+      },
+    })
   }
 
   return (
