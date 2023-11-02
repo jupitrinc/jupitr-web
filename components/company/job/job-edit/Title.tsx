@@ -24,18 +24,16 @@ const Title = () => {
   )
 
   return (
-    <form className="basis-1/3 w-full ml-3" onSubmit={update}>
-      <div className="relative">
-        <TextInput
-          placeholder="Job title"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onBlur={update}
-          autoFocus={!company_job.title}
-          light
-          ref={inputRef}
-        />
-      </div>
+    <form className="basis-1/3 w-full" onSubmit={update}>
+      <TextInput
+        placeholder="Job title"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={update}
+        autoFocus={!company_job.title}
+        light
+        ref={inputRef}
+      />
     </form>
   )
 }
