@@ -181,7 +181,7 @@ export function useCompanyJobAction() {
   const addSkill = async (
     job_id: ICompanyJob["id"],
     newSkill: ISkill,
-    skills: ISkill[]
+    skills: ISkill[] | null
   ) => {
     if (
       !job_id ||
@@ -212,9 +212,9 @@ export function useCompanyJobAction() {
   const removeSkill = async (
     job_id: ICompanyJob["id"],
     skill: ISkill,
-    skills: ISkill[]
+    skills: ISkill[] | null
   ) => {
-    if (!job_id || !skill.id) return
+    if (!job_id || !skill.id || !skills) return
 
     const { data, error } = await updateJobService(job_id, {
       skills: skills.filter((s) => s.id !== skill.id),
@@ -238,9 +238,9 @@ export function useCompanyJobAction() {
   const updateSkill = async (
     job_id: ICompanyJob["id"],
     skill: ISkill,
-    skills: ISkill[]
+    skills: ISkill[] | null
   ) => {
-    if (!job_id || !skill.id) return
+    if (!job_id || !skill.id || !skills) return
 
     const { data, error } = await updateJobService(job_id, {
       skills: skills.map((s) => {
