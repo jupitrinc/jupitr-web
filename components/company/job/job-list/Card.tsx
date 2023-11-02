@@ -12,6 +12,8 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
     router.push(`/c/jobs/${job.id}`)
   }
 
+  const location = job.location?.name.split(", ")[0] ?? ""
+
   return (
     <Card type="linked" onClick={viewJob}>
       <div className="flex flex-col gap-2 group">
@@ -19,9 +21,11 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
           {job.title ? job.title : "Untitled"}
         </Text>
 
-        <Text as="span" size="base">
-          {job.location?.name}
-        </Text>
+        {location && (
+          <Text as="span" size="sm">
+            {location}
+          </Text>
+        )}
       </div>
     </Card>
   )
