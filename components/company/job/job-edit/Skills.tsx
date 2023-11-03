@@ -68,24 +68,23 @@ export const Skills = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-5">
-        {company_job.skills &&
-          company_job.skills.map((skill) => (
-            <SkillCard
-              skill={skill}
-              key={skill.id}
-              levels={static_data_job.skill_levels}
-              removeSkill={() =>
-                removeSkill(company_job.id, skill, company_job.skills)
-              }
-              updateSkill={(level: number) =>
-                updateSkill(
-                  company_job.id,
-                  { ...skill, level: level },
-                  company_job.skills
-                )
-              }
-            />
-          ))}
+        {company_job.skills?.map((skill) => (
+          <SkillCard
+            skill={skill}
+            key={skill.id}
+            levels={static_data_job.skill_levels}
+            removeSkill={() =>
+              removeSkill(company_job.id, skill, company_job.skills)
+            }
+            updateSkill={(level: number) =>
+              updateSkill(
+                company_job.id,
+                { ...skill, level: level },
+                company_job.skills
+              )
+            }
+          />
+        ))}
       </div>
     </Card>
   )

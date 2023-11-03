@@ -7,7 +7,7 @@ import { useReactiveState } from "helper/hooks/useReactiveState"
 const Title = () => {
   const { company_job } = useCompanyJobState()
   const { updateTitle } = useCompanyJobAction()
-  const { value, setValue } = useReactiveState("", company_job.title)
+  const { value, setValue } = useReactiveState("", company_job.title ?? "")
 
   const update = useCallback(() => {
     if (value && value !== company_job.title) {

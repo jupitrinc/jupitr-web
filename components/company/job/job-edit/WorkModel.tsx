@@ -10,7 +10,10 @@ import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 const WorkModel = () => {
   const { company_job } = useCompanyJobState()
   const { updateWorkModel } = useCompanyJobAction()
-  const { value: workModels } = useReactiveState([], company_job.work_model)
+  const { value: workModels } = useReactiveState(
+    [],
+    company_job.work_model ?? []
+  )
 
   const update = useCallback(
     (e) => {
