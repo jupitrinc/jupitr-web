@@ -67,18 +67,17 @@ const Skills = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-5">
-        {user.skills &&
-          user.skills.map((skill) => (
-            <SkillCard
-              skill={skill}
-              key={skill.id}
-              levels={static_data_job.skill_levels}
-              removeSkill={() => removeSkill(user.id, skill, user.skills)}
-              updateSkill={(level: number) =>
-                updateSkill(user.id, { ...skill, level: level }, user.skills)
-              }
-            />
-          ))}
+        {user.skills?.map((skill) => (
+          <SkillCard
+            skill={skill}
+            key={skill.id}
+            levels={static_data_job.skill_levels}
+            removeSkill={() => removeSkill(user.id, skill, user.skills)}
+            updateSkill={(level: number) =>
+              updateSkill(user.id, { ...skill, level: level }, user.skills)
+            }
+          />
+        ))}
       </div>
     </Card>
   )

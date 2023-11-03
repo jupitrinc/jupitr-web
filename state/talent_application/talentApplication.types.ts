@@ -1,4 +1,7 @@
-import { ISkill } from "state/talent_profile/talentProfile.types"
+import {
+  ISkill,
+  ITalentProfile,
+} from "state/talent_profile/talentProfile.types"
 
 export interface ITalentApplicationContext {
   state: TalentApplicationState
@@ -36,7 +39,7 @@ export enum TalentApplicationActionEnum {
 export interface AddApplicationPayload {
   file: File
   skills: ISkill[]
-  talent_skills?: ISkill[] | null
+  talent_skills: ITalentProfile["skills"]
   user_id: string
   job_id: string
   company_id: string

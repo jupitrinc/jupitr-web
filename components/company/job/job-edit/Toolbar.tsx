@@ -8,12 +8,13 @@ import { JobStatusEnum } from "state/company_job/companyJob.types"
 import { Eye, Share2 } from "lucide-react"
 import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { urlHelper } from "helper/urlHelper"
+import { useJobChecks } from "./checks/useJobChecks"
 
 const Toolbar = () => {
   const router = useRouter()
-
   const { company_job } = useCompanyJobState()
   const { deleteJob, updateStatus } = useCompanyJobAction()
+  const { checksCompleted } = useJobChecks()
 
   const options = useMemo(
     () => [
@@ -61,6 +62,7 @@ const Toolbar = () => {
         label={company_job.status === "open" ? "Pause" : "Publish"}
         variant={company_job.status === "open" ? "text" : "contained"}
         onClick={toggleStatus}
+        disabled={!checksCompleted() && company_job.status !== "open"}
       />
       <Button
         label="Preview"

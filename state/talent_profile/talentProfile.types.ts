@@ -3,11 +3,9 @@ import { IUser } from "state/user/user.types"
 export interface ITalentProfile extends IUser {
   user_id: string
   searching: boolean
-  skills: ISkill[]
-  socials: { name: string; url: string }[]
-  preferences: {
-    location: { id: string; name: string }
-  }
+  skills: ISkill[] | null
+  socials: { name: string; url: string }[] | null
+  preferences: {}
 }
 
 export type ISkill = {

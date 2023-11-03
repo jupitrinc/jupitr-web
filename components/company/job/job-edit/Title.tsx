@@ -7,7 +7,8 @@ import { useReactiveState } from "helper/hooks/useReactiveState"
 const Title = () => {
   const { company_job } = useCompanyJobState()
   const { updateTitle } = useCompanyJobAction()
-  const { value, setValue } = useReactiveState("", company_job.title)
+
+  const { value, setValue } = useReactiveState("", company_job.title ?? "")
   const inputRef = useRef<HTMLInputElement>(null)
 
   const update = useCallback(

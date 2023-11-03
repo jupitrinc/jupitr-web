@@ -6,6 +6,7 @@ const JOBS_TABLE = "jobs"
 interface AddJobPayload {
   company_id: string
   status: string
+  application_video?: { duration: string; description: string }
 }
 
 interface UpdateJobPayload {

@@ -5,13 +5,13 @@ export const useProfileChecks = () => {
   const { user, accountType } = useUserState()
 
   const socials = () => {
-    return (
-      user.socials !== null && user.socials.find((social) => social.url !== "")
+    return Boolean(
+      user.socials && user.socials.find((social) => social.url !== "")
     )
   }
 
   const skills = () => {
-    return user.skills?.length >= 3
+    return Boolean(user.skills && user.skills.length >= 3)
   }
 
   const name = () => {
@@ -23,9 +23,9 @@ export const useProfileChecks = () => {
   }
 
   const checksCompleted = () => {
-    return (
+    return Boolean(
       accountType === AccountTypeEnum.company ||
-      (name() && socials() && skills() && location())
+        (name() && socials() && skills() && location())
     )
   }
 

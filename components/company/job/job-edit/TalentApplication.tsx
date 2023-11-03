@@ -12,12 +12,15 @@ const TalentApplication = () => {
   const { company_job } = useCompanyJobState()
   const { updateApplicationVideo } = useCompanyJobAction()
   const { value: application, setValue: setApplication } = useReactiveState(
-    { description: "", duration: "" },
+    {
+      description: "",
+      duration: "",
+    },
     company_job.application_video
   )
 
   const updateDescription = useCallback(() => {
-    if (!application.description) return
+    if (!application.description.trim()) return
     updateApplicationVideo(company_job.id, {
       ...company_job.application_video,
       description: application.description,
@@ -27,7 +30,7 @@ const TalentApplication = () => {
   const updateDuration = useCallback(
     (e) => {
       const duration = JSON.parse(e.target.value)
-      if (!duration) return
+      if (!duration.trim()) return
 
       updateApplicationVideo(company_job.id, {
         ...company_job.application_video,

@@ -1,6 +1,9 @@
 import { ICompanyJob } from "state/company_job/companyJob.types"
-import { ICity } from "state/location/location.types"
-import { ISkill } from "state/talent_profile/talentProfile.types"
+import {
+  ISkill,
+  ITalentProfile,
+} from "state/talent_profile/talentProfile.types"
+import { IUser } from "state/user/user.types"
 
 export interface ICompanyJobApplicationContext {
   state: CompanyJobApplicationState
@@ -31,11 +34,11 @@ export interface IApplication {
 }
 
 interface IApplicant {
-  name: string | null
+  name: ITalentProfile["name"]
   email: string
-  location: ICity | null
+  location: IUser["location"]
   talent_profile?: {
-    socials?: { name: string; url: string }[]
+    socials: ITalentProfile["socials"]
   }
 }
 

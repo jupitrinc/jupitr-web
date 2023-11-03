@@ -4,6 +4,7 @@ import {
   ICompanyJob,
   CompanyJobActionEnum,
   JobStatusEnum,
+  AddJobPayload,
 } from "./companyJob.types"
 import { CompanyJobContext } from "./CompanyJobContext"
 import companyJobService from "services/company/companyJobService"
@@ -26,20 +27,14 @@ export function useCompanyJobAction() {
   const { togglePrimaryVideo: togglePrimaryVideoService } =
     companyJobVideoService()
 
-  const addJob = async (
-    status: ICompanyJob["status"],
-    company_id: ICompanyJob["company_id"]
-  ) => {
-    if (!status || !company_id) return
+  const addJob = async (payload: AddJobPayload) => {
+    if (!payload.status || !payload.company_id) return
 
     dispatch({
       type: CompanyJobActionEnum.ADD_COMPANY_JOB_BEGIN,
     })
 
-    const { data, error } = await addJobService({
-      status: status,
-      company_id: company_id,
-    })
+    const { data, error } = await addJobService(payload)
 
     if (error) {
       dispatch({
@@ -186,7 +181,7 @@ export function useCompanyJobAction() {
   const addSkill = async (
     job_id: ICompanyJob["id"],
     newSkill: ISkill,
-    skills: ISkill[]
+    skills: ICompanyJob["skills"]
   ) => {
     if (
       !job_id ||
@@ -217,9 +212,9 @@ export function useCompanyJobAction() {
   const removeSkill = async (
     job_id: ICompanyJob["id"],
     skill: ISkill,
-    skills: ISkill[]
+    skills: ICompanyJob["skills"]
   ) => {
-    if (!job_id || !skill.id) return
+    if (!job_id || !skill.id || !skills) return
 
     const { data, error } = await updateJobService(job_id, {
       skills: skills.filter((s) => s.id !== skill.id),
@@ -243,9 +238,9 @@ export function useCompanyJobAction() {
   const updateSkill = async (
     job_id: ICompanyJob["id"],
     skill: ISkill,
-    skills: ISkill[]
+    skills: ICompanyJob["skills"]
   ) => {
-    if (!job_id || !skill.id) return
+    if (!job_id || !skill.id || !skills) return
 
     const { data, error } = await updateJobService(job_id, {
       skills: skills.map((s) => {

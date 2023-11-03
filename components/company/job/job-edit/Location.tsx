@@ -47,7 +47,7 @@ const Location = () => {
   return (
     <Multiselect
       label="Location"
-      placeholder={company_job.location?.name ?? "Search city"}
+      placeholder={company_job.location?.name ?? "Search cities"}
       options={cities}
       onChange={(searchKeyword) => setSearchQuery(searchKeyword)}
       onSelect={(location) => update(location as ICity)}

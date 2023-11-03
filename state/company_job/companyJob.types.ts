@@ -15,13 +15,13 @@ export type CompanyJobState = {
 export interface ICompanyJob {
   id: string
   company_id: string
-  title: string
-  salary: string
+  title: string | null
+  salary: string | null
   status: IJobStatus
   location: ILocation | null
-  work_model: string[]
+  work_model: string[] | null
   visa_sponsorship: boolean
-  skills: ISkill[]
+  skills: ISkill[] | null
   application_video: IApplicationVideo
   company_videos: IJobVideo[]
   applications: [{ count: number }]
@@ -116,4 +116,10 @@ export enum CompanyJobActionEnum {
   TOGGLE_PRIMARY_VIDEO_BEGIN = "TOGGLE_PRIMARY_VIDEO_BEGIN",
   TOGGLE_PRIMARY_VIDEO_FAILURE = "TOGGLE_PRIMARY_VIDEO_FAILURE",
   TOGGLE_PRIMARY_VIDEO_SUCCESS = "TOGGLE_PRIMARY_VIDEO_SUCCESS",
+}
+
+export interface AddJobPayload {
+  company_id: ICompanyJob["company_id"]
+  status: ICompanyJob["status"]
+  application_video: ICompanyJob["application_video"]
 }
