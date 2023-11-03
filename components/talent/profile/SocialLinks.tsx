@@ -18,7 +18,7 @@ const SocialLinks = () => {
 
   const { value: socials, setValue: setSocials } = useReactiveState(
     [],
-    user.socials
+    user.socials ?? []
   )
 
   const onChange = useCallback(
