@@ -5,9 +5,7 @@ export interface ITalentProfile extends IUser {
   searching: boolean
   skills: ISkill[] | null
   socials: { name: string; url: string }[] | null
-  preferences: {
-    location: { id: string; name: string }
-  }
+  preferences: {}
 }
 
 export type ISkill = {

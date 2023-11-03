@@ -2,6 +2,7 @@ import { ICompanyProfile } from "state/company_profile/companyProfile.types"
 import { ISkill } from "state/talent_profile/talentProfile.types"
 import {
   IApplicationVideo,
+  ICompanyJob,
   IJobVideo,
   ILocation,
 } from "state/company_job/companyJob.types"
@@ -23,7 +24,7 @@ export interface ITalentJob {
   title: string
   status: "open"
   salary: string
-  location: ILocation | null
+  location: ICompanyJob["location"]
   work_model: string[]
   visa_sponsorship?: boolean
   company_videos: IJobVideo[] | null

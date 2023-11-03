@@ -51,7 +51,7 @@ export function useTalentProfileAction() {
   const addSkill = async (
     user_id: ITalentProfile["user_id"],
     newSkill: ISkill,
-    skills: ISkill[] | null
+    skills: ITalentProfile["skills"]
   ) => {
     if (
       !user_id ||
@@ -75,7 +75,7 @@ export function useTalentProfileAction() {
   const removeSkill = async (
     user_id: ITalentProfile["user_id"],
     skill: ISkill,
-    skills: ISkill[] | null
+    skills: ITalentProfile["skills"]
   ) => {
     if (!user_id || !skill.id || !skills) return
 
@@ -94,7 +94,7 @@ export function useTalentProfileAction() {
   const updateSkill = async (
     user_id: ITalentProfile["user_id"],
     skill: ISkill,
-    skills: ISkill[] | null
+    skills: ITalentProfile["skills"]
   ) => {
     if (!user_id || !skill.id || !skills) return
 
