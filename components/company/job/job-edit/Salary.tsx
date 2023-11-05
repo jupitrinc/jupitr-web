@@ -8,6 +8,7 @@ import { numberHelper } from "helper/numberHelper"
 import { useCompanyJobState } from "state/company_job/useCompanyJobState"
 import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
+import Currency from "./Currency"
 
 export const Salary = () => {
   const { company_job } = useCompanyJobState()
@@ -65,9 +66,12 @@ export const Salary = () => {
 
       {!editing && (
         <div className="flex flex-row gap-3 items-center -mt-3">
-          <Text as="span" size="lg">{`£${formatNumber(
-            Number(value)
-          )}/annum`}</Text>
+          <div className="flex items-center gap-1">
+            <Currency countryCode={company_job.location?.country.code} />
+            <Text as="span" size="lg">
+              {`${formatNumber(Number(value))}/annum`}
+            </Text>
+          </div>
           <Button
             icon={<Edit className="h-4 w-4" />}
             onClick={() => setEditing(true)}
