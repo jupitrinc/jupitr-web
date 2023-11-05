@@ -1,9 +1,10 @@
-import { Globe, Laptop, MapPin, PoundSterling } from "lucide-react"
+import { Globe, Laptop, MapPin } from "lucide-react"
 import { Text } from "ui-library/text/Text"
 import { Pill } from "ui-library/pill/Pill"
 import { useTalentJobState } from "state/talent_job/useTalentJobState"
 import { numberHelper } from "helper/numberHelper"
 import { urlHelper } from "helper/urlHelper"
+import Currency from "components/company/job/job-edit/Currency"
 
 const Details = () => {
   const { talent_job } = useTalentJobState()
@@ -13,7 +14,7 @@ const Details = () => {
       <div className="flex flex-col flex-wrap gap-5">
         <Text as="span" size="base">
           <span className="flex flex-row flex-wrap gap-1 items-center">
-            <PoundSterling className="h-5 w-5" />
+            <Currency countryCode={talent_job.location?.country.code} />
             <Pill
               label={numberHelper.formatNumber(Number(talent_job.salary))}
               size="base"
