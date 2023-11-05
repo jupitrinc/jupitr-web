@@ -54,7 +54,7 @@ export const Salary = () => {
             onBlur={update}
           />
 
-          <div className="absolute top-1/2 transdiv -translate-y-1/2 right-5">
+          <div className="absolute top-1/2 -translate-y-1/2 right-5">
             <Button
               icon={<Check className="h-5 w-5" />}
               variant="text"
