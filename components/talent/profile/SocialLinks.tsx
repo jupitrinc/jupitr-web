@@ -18,15 +18,15 @@ const SocialLinks = () => {
 
   const { value: socials, setValue: setSocials } = useReactiveState(
     [],
-    user.socials ?? []
+    user.socials
   )
 
   const onChange = useCallback(
     (e: { target: { value: string } }, name: string) => {
-      const copySocials = [...socials]
+      const copySocials = [...(socials ?? [])]
       const targetValue = e.target.value.trim()
 
-      if (socials.find((s) => s.name === name)) {
+      if (socials?.find((s) => s.name === name)) {
         copySocials.map((s) => s.name === name && (s.url = targetValue))
       } else {
         copySocials.push({ name: name, url: targetValue })
@@ -38,7 +38,7 @@ const SocialLinks = () => {
   )
 
   const socialUrl = (name: string) => {
-    return socials.find((s) => s.name === name)?.url
+    return socials?.find((s) => s.name === name)?.url
   }
 
   const save = () => {
