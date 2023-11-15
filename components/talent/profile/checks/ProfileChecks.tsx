@@ -3,7 +3,7 @@ import { useProfileChecks } from "./useProfileChecks"
 import { CheckList } from "ui-library/content/check-list/CheckList"
 
 const ProfileChecks = () => {
-  const { checksCompleted, name, socials, skills, location } =
+  const { checksCompleted, name, socials, skills, location, introVideo } =
     useProfileChecks()
 
   if (checksCompleted()) return
@@ -11,8 +11,9 @@ const ProfileChecks = () => {
   const items = [
     { label: "Name", checked: name() },
     { label: "3 skills", checked: skills() },
-    { label: "Location", checked: location() },
     { label: "Socials", checked: socials() },
+    { label: "Location", checked: location() },
+    { label: "Intro video", checked: introVideo() },
   ]
 
   return (

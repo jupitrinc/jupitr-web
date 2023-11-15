@@ -5,6 +5,7 @@ export interface ITalentProfile extends IUser {
   searching: boolean
   skills: ISkill[] | null
   socials: { name: string; url: string }[] | null
+  intro_video: string | null
   preferences: {}
 }
 
@@ -20,12 +21,16 @@ export type TalentProfileAction = {
     | TalentProfileActionEnum.UPDATE_LOCATION
     | TalentProfileActionEnum.TOGGLE_SEARCHING
     | TalentProfileActionEnum.UPDATE_SKILLS
+    | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_BEGIN
+    | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_FAILURE
+    | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_SUCCESS
 
   payload?:
     | ITalentProfile["socials"]
     | ITalentProfile["preferences"]
     | ISkill[]
     | ITalentProfile["searching"]
+    | ITalentProfile["intro_video"]
 }
 
 export enum TalentProfileActionEnum {
@@ -33,10 +38,19 @@ export enum TalentProfileActionEnum {
   UPDATE_LOCATION = "UPDATE_LOCATION",
   TOGGLE_SEARCHING = "TOGGLE_SEARCHING",
   UPDATE_SKILLS = "UPDATE_SKILLS",
+
+  UPDATE_INTRO_VIDEO_BEGIN = "UPDATE_INTRO_VIDEO_BEGIN",
+  UPDATE_INTRO_VIDEO_FAILURE = "UPDATE_INTRO_VIDEO_FAILURE",
+  UPDATE_INTRO_VIDEO_SUCCESS = "UPDATE_INTRO_VIDEO_SUCCESS",
 }
 
 export interface UpdateAllSkillsPayload {
   user_id: ITalentProfile["user_id"]
   talent_skills: ISkill[]
   application_skills: ISkill[]
+}
+
+export interface UpdateIntroVideoPayload {
+  user_id: ITalentProfile["user_id"]
+  file: File
 }

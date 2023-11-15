@@ -16,12 +16,12 @@ export const TalentAppLayout = ({
   usePersistedUser()
 
   const router = useRouter()
-  const { jobId } = router.query
+  const { jobId, userName } = router.query
 
-  if (user.account_type === AccountTypeEnum.talent || jobId) {
+  if (user.account_type === AccountTypeEnum.talent || jobId || userName) {
     return (
       <>
-        {!jobId && <PageHead />}
+        {!jobId && !userName && <PageHead />}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
           <header className="space-y-2">
             <Navbar />

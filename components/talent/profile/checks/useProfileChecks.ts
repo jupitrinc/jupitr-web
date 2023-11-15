@@ -22,12 +22,16 @@ export const useProfileChecks = () => {
     return Boolean(user.location?.id)
   }
 
+  const introVideo = () => {
+    return Boolean(user.intro_video)
+  }
+
   const checksCompleted = () => {
     return Boolean(
       accountType === AccountTypeEnum.company ||
-        (name() && socials() && skills() && location())
+        (name() && socials() && skills() && location() && introVideo())
     )
   }
 
-  return { name, socials, skills, location, checksCompleted }
+  return { name, socials, skills, location, introVideo, checksCompleted }
 }

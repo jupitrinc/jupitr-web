@@ -1,9 +1,9 @@
+import { ImageIcon, User } from "lucide-react"
 import clsx from "clsx"
+import { Image } from "ui-library/image/Image"
 import { AvatarProps } from "./Avatar.types"
 import { avatarStyles } from "./Avatar.styles"
 import { stringHelper } from "helper/stringHelper"
-import { Image } from "ui-library/image/Image"
-import { ImageIcon, User } from "lucide-react"
 
 export const Avatar: React.FC<AvatarProps> = (avatar) => {
   const styles = avatarStyles

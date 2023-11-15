@@ -26,10 +26,10 @@ export interface IApplication {
   job_id: string
   user_id?: string
   video_url: string
-  status?: string
+  status: string | null
   skills?: ISkill[]
   created_at: string
-  updated_at: string
+  updated_at: string | null
   users: IApplicant
 }
 

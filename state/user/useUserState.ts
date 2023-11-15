@@ -9,7 +9,7 @@ export const useUserState = () => {
     loading: state.loading,
     success: state.success,
 
-    isLoggedIn: state?.data.id ? true : false,
-    accountType: state?.data?.account_type,
+    isLoggedIn: state.data.id ? true : false,
+    accountType: state.data.account_type,
   }
 }

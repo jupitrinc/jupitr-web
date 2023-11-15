@@ -24,6 +24,7 @@ export interface IUser {
   email: string
   active: boolean
   location: ICity | null
+  username: string | null
   created_at: string
   updated_at?: string
 }

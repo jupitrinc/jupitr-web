@@ -18,11 +18,16 @@ export const usePersistedUser = () => {
   const { setUser, signOut } = useUserAction()
   const persistedUser = localStorageHelper.getItem(LocalStorageItemEnum.user)
   const authToken = cookieHelper.getCookie(authTokenCookie)
-  const { isPublicJobRoute, isPublicUrl } = urlHelper
+  const { isPublicJobRoute, isPublicUrl, isPublicTalentProfileRoute } =
+    urlHelper
 
   const verifyToken = async () => {
     if (
-      !(isPublicJobRoute(pathname as string) || isPublicUrl(pathname as string))
+      !(
+        isPublicJobRoute(pathname as string) ||
+        isPublicUrl(pathname as string) ||
+        isPublicTalentProfileRoute(pathname as string)
+      )
     ) {
       const {
         error,

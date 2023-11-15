@@ -27,6 +27,12 @@ export const urlHelper = {
       return parts[1] === "jobs" && parts.length === 3
     }
   },
+  isPublicTalentProfileRoute: (pathName: string) => {
+    if (pathName) {
+      const parts = pathName?.split("/")
+      return parts[1] === "profile" && parts.length === 3
+    }
+  },
   imageUrl: (image: string) => {
     if (!image) return undefined
 
