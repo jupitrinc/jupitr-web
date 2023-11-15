@@ -1,5 +1,5 @@
 import { Text } from "ui-library/text/Text"
-import { themeStyles } from "../../../ui-library/_theme/Theme.styles"
+import { themeStyles } from "ui-library/_theme/Theme.styles"
 import "./intro.style.css"
 const Intro = () => {
   return (
