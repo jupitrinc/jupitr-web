@@ -61,6 +61,7 @@ const Brand = ({ link }: { link: string }) => {
 }
 
 const TalentMenu = () => {
+  const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
   const { imageUrl } = urlHelper
@@ -71,14 +72,17 @@ const TalentMenu = () => {
         <Button label="Jobs" size="base" variant="text" />
       </Link>
 
-      <Link href="/profile">
+      <Link href={`/profile/${user.username}`}>
         <Button label="Profile" size="base" variant="text" />
       </Link>
 
       <Dropdown
         type="avatar"
         image_url={imageUrl(user.avatar_url)}
-        options={[{ name: "Sign out", onClick: signOut }]}
+        options={[
+          { name: "Edit profile", onClick: () => router.push("/profile") },
+          { name: "Sign out", onClick: signOut },
+        ]}
       />
     </div>
   )

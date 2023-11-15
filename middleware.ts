@@ -5,14 +5,16 @@ import { urlHelper } from "./helper/urlHelper"
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const { isPublicUrl, isPublicJobRoute } = urlHelper
+  const { isPublicUrl, isPublicJobRoute, isPublicTalentProfileRoute } =
+    urlHelper
   const publicRoute = isPublicUrl(pathname)
   const authRoute = ["/c/signup", "/login"].includes(`${pathname}`)
   const publicJobRoute = isPublicJobRoute(pathname)
+  const publicTalentProfileRoute = isPublicTalentProfileRoute(pathname)
   const res = NextResponse.next()
   const supabase = createMiddlewareClient({ req, res })
 
-  if (publicJobRoute) {
+  if (publicJobRoute || publicTalentProfileRoute) {
     return res
   }
 

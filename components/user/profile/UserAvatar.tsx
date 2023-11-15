@@ -21,7 +21,7 @@ const UserAvatar = () => {
 
   return (
     <Uploader onChange={handleUpload} accept="image/jpg, image/jpeg, image/png">
-      <Avatar size={28} image_url={urlHelper.imageUrl(user.avatar_url)} />
+      <Avatar size={16} image_url={urlHelper.imageUrl(user.avatar_url)} />
     </Uploader>
   )
 }

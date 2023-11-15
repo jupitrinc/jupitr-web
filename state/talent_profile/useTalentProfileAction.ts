@@ -4,13 +4,19 @@ import {
   ITalentProfile,
   TalentProfileActionEnum,
   UpdateAllSkillsPayload,
+  UpdateIntroVideoPayload,
 } from "./talentProfile.types"
 import { talentProfileService } from "services/talent/talentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
+import { storageFolderHelper } from "helper/storageFolderHelper"
+import mediaService from "services/storage/mediaService"
+import { useNotificationAction } from "state/notification/useNotificationAction"
 
 export function useTalentProfileAction() {
   const { updateProfile } = talentProfileService()
   const { dispatch } = useContext(UserContext)
+  const { uploadVideo } = mediaService()
+  const { notify } = useNotificationAction()
 
   const updateSocials = async (
     user_id: ITalentProfile["user_id"],
@@ -164,6 +170,49 @@ export function useTalentProfileAction() {
     }
   }
 
+  const updateIntroVideo = async (payload: UpdateIntroVideoPayload) => {
+    if (!payload.user_id || !payload.file) return
+
+    dispatch({
+      type: TalentProfileActionEnum.UPDATE_INTRO_VIDEO_BEGIN,
+    })
+
+    const folderPath = storageFolderHelper.talentIntroVideoFolder(
+      payload.user_id
+    )
+    const fileName = payload.user_id
+
+    const { data: upload_data, error: upload_error } = await uploadVideo({
+      file: payload.file,
+      folderPath: folderPath as string,
+      fileName: fileName,
+    })
+
+    if (upload_error) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_INTRO_VIDEO_FAILURE,
+      })
+
+      notify({
+        message: "Failed to upload intro video. Try again",
+        type: "warning",
+      })
+    } else {
+      const cdn_video = upload_data.public_id
+
+      const { data } = await updateProfile(payload.user_id, {
+        intro_video: cdn_video,
+      })
+
+      if (data) {
+        dispatch({
+          type: TalentProfileActionEnum.UPDATE_INTRO_VIDEO_SUCCESS,
+          payload: data.intro_video,
+        })
+      }
+    }
+  }
+
   return {
     updateSocials,
     toggleSearching,
@@ -171,5 +220,6 @@ export function useTalentProfileAction() {
     removeSkill,
     updateSkill,
     updateAllSkills,
+    updateIntroVideo,
   }
 }

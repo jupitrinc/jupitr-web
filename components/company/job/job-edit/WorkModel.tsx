@@ -10,18 +10,15 @@ import { useCompanyJobAction } from "state/company_job/useCompanyJobAction"
 const WorkModel = () => {
   const { company_job } = useCompanyJobState()
   const { updateWorkModel } = useCompanyJobAction()
-  const { value: workModels } = useReactiveState(
-    [],
-    company_job.work_model ?? []
-  )
+  const { value: workModels } = useReactiveState([], company_job.work_model)
 
   const update = useCallback(
     (e) => {
       const { value, checked } = e.target
 
-      if (checked && !workModels.includes(value)) {
-        updateWorkModel(company_job.id, [...workModels, value])
-      } else if (!checked && workModels.includes(value)) {
+      if (checked && !workModels?.includes(value)) {
+        updateWorkModel(company_job.id, [...(workModels ?? []), value])
+      } else if (!checked && workModels?.includes(value)) {
         updateWorkModel(company_job.id, [
           ...workModels.filter((model) => model !== value),
         ])

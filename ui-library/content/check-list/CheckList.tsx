@@ -19,8 +19,8 @@ export const CheckList: React.FC<CheckListProps> = (props) => {
 
 const CheckItem = ({ label, checked }) => {
   const completedStyled =
-    "w-8 h-8 text-white ring-0 bg-gradient-to-r from-orange-400 to-rose-400 from-orange-400 to-rose-400"
-  const notCumpletedStyled = "w-10 h-10 text-gray-400 ring-gray-900/10"
+    "w-6 h-6 text-white ring-0 bg-gradient-to-r from-orange-400 to-rose-400 from-orange-400 to-rose-400"
+  const notCumpletedStyled = "w-6 h-6 text-gray-400 ring-gray-900/10"
 
   return (
     <div className="flex flex-col gap-2 w-full items-center">
@@ -29,7 +29,7 @@ const CheckItem = ({ label, checked }) => {
           checked ? completedStyled : notCumpletedStyled
         }`}
       >
-        {checked ? <Check /> : <Circle className="w-8 h-8" />}
+        {checked ? <Check className="w-5 h-5" /> : <Circle />}
       </figure>
       <Text as="span" size="sm" align="center">
         {label}

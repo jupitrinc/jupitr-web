@@ -33,6 +33,7 @@ export const userReducer = (
     case UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN:
     case UserActionEnum.UPDATE_EMAIL_BEGIN:
     case UserActionEnum.DELETE_USER_BEGIN:
+    case TalentProfileActionEnum.UPDATE_INTRO_VIDEO_BEGIN:
       return {
         ...state,
         loading: true,
@@ -44,6 +45,7 @@ export const userReducer = (
     case UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE:
     case UserActionEnum.UPDATE_EMAIL_FAILURE:
     case UserActionEnum.DELETE_USER_FAILURE:
+    case TalentProfileActionEnum.UPDATE_INTRO_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,
@@ -202,6 +204,23 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, update_skills_state.data)
       return update_skills_state
+
+    case TalentProfileActionEnum.UPDATE_INTRO_VIDEO_SUCCESS:
+      const update_intro_video_payload =
+        action.payload as ITalentProfile["intro_video"]
+
+      const update_intro_video_state = {
+        ...state,
+        loading: false,
+        success: true,
+        data: {
+          ...state.data,
+          intro_video: update_intro_video_payload,
+        },
+      }
+
+      setItem(LocalStorageItemEnum.user, update_intro_video_state.data)
+      return update_intro_video_state
 
     // FIXME company_member_profile
     case CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE:

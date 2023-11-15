@@ -4,6 +4,12 @@ export const storageFolderHelper = {
 
     return `user/${user_id}/profile`
   },
+
+  talentIntroVideoFolder: (user_id: string) => {
+    if (!user_id) return undefined
+
+    return `user/${user_id}/profile/video/intro`
+  },
   companyLogoFolder: (company_id: string) => {
     if (!company_id) return undefined
 

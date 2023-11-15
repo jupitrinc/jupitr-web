@@ -338,6 +338,7 @@ export interface Database {
           socials: Json | null
           updated_at: string | null
           user_id: string | null
+          intro_video: string | null
         }
         Insert: {
           id?: string
@@ -347,6 +348,7 @@ export interface Database {
           socials?: Json | null
           updated_at?: string | null
           user_id?: string | null
+          intro_video?: string | null
         }
         Update: {
           id?: string
@@ -356,6 +358,7 @@ export interface Database {
           socials?: Json | null
           updated_at?: string | null
           user_id?: string | null
+          intro_video?: string | null
         }
         Relationships: [
           {
