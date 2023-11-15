@@ -13,6 +13,7 @@ export const textStyles = {
     lg: "text-lg",
     xl: "text-xl",
     xl2: "text-2xl",
+    xl4: "text-4xl",
   },
   fontFamily: {
     brand: "font-mw",

@@ -123,12 +123,12 @@ const PublicMenu = () => {
         </Link>
       ) : (
         <div className="flex flex-row gap-2 items-center">
-          <Link href="/login">
-            <Button label="Sign in" color="special" />
-          </Link>
-
           <Link href="/c/signup">
             <Button label="Post a job" variant="text" />
+          </Link>
+
+          <Link href="/login">
+            <Button label="Sign in" color="special" />
           </Link>
         </div>
       )}
