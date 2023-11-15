@@ -21,7 +21,7 @@ const Intro = () => {
               </Text>
             </div>
 
-            <Text as={"h2"} size={"xl"}>
+            <Text as={"h2"} size={"base"} align={"center"}>
               Discover opportunities beyond the ordinary. Join jupitr today to
               connect with mission-driven
               <span className="block">
@@ -37,31 +37,33 @@ const Intro = () => {
             </Text>
           </div>
 
-          <div className="text-center grid grid-cols-3 ">
-            <div>
-              <h1 className="text-2xl  font-bold mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
+          <div className="text-center grid grid-cols-1 md:grid-cols-3 ">
+            <div className="mb-5 sm:mb-0">
+              <h1 className="text-2xl  font-bold  mb-4 sm:mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
                 Find a Job
               </h1>
-              <p>
+              <Text as="p" size={"base"}>
                 Explore roles through engaging videos, connecting with
                 <span className="block">
                   opportunities that align with your skills and aspirations.
                 </span>
-              </p>
+              </Text>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
+            <div className="mb-5 sm:mb-0">
+              <h1 className="text-2xl font-bold  mb-4 sm:mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
                 Upskill
               </h1>
-              <p>
+              <Text as="p" size={"base"}>
                 Elevate your skills and stay at the forefront of innovation.
-              </p>
+              </Text>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
+            <div className="mb-5 sm:mb-0">
+              <h1 className="text-2xl font-bold mb-4 sm:mb-7 text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text">
                 Innovate
               </h1>
-              <p>Unlock a World of Possibilities.</p>
+              <Text as="p" size={"base"}>
+                Unlock a World of Possibilities.
+              </Text>
             </div>
           </div>
         </section>
@@ -71,7 +73,7 @@ const Intro = () => {
               Video-Powered Jobs
             </Text>
           </div>
-          <Text as={"h2"} size={"xl"} align={"center"}>
+          <Text as={"h2"} size={"lg"} align={"center"}>
             Hear directly from your future team members about the job,
             challenges, and company culture
           </Text>
@@ -82,7 +84,7 @@ const Intro = () => {
               Your Ideal Match
             </Text>
           </div>
-          <Text as={"h2"} size={"xl"} align={"center"}>
+          <Text as={"h2"} size={"lg"} align={"center"}>
             Explore roles that precisely fit your skills and expertise level.
             Jupitr ensures your career journey is tailored to perfection.
           </Text>
