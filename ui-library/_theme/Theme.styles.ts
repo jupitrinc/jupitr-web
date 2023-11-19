@@ -24,8 +24,6 @@ export const themeStyles = {
       500: "text-red-500",
       600: "text-red-600",
     },
-    "gradient":
-      "text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text",
   },
 
   backgroundColor: {

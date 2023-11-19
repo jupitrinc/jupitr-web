@@ -41,10 +41,10 @@ export const Navbar = () => {
       )
     } else {
       return (
-        <div className="flex flex-row space-x-5 justify-between items-baseline">
+        <nav className="flex flex-row space-x-5 justify-between items-baseline">
           <Brand link="/" />
           <PublicMenu />
-        </div>
+        </nav>
       )
     }
   }

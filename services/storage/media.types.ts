@@ -24,3 +24,4 @@ export enum StorageBucketsEnum {
 
 export const STORAGE_DOMAIN = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public`
 export const VIDEO_CDN_DOMAIN = `https://res.cloudinary.com/dyfg2jhz8/video/upload`
+export const IMAGE_CDN_DOMAIN = `https://res.cloudinary.com/dyfg2jhz8/image/upload`
