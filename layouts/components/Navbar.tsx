@@ -41,10 +41,10 @@ export const Navbar = () => {
       )
     } else {
       return (
-        <div className="flex flex-row space-x-5 justify-between items-baseline">
+        <nav className="flex flex-row space-x-5 justify-between items-baseline">
           <Brand link="/" />
           <PublicMenu />
-        </div>
+        </nav>
       )
     }
   }
@@ -127,12 +127,12 @@ const PublicMenu = () => {
         </Link>
       ) : (
         <div className="flex flex-row gap-2 items-center">
-          <Link href="/login">
-            <Button label="Sign in" color="special" />
-          </Link>
-
           <Link href="/c/signup">
             <Button label="Post a job" variant="text" />
+          </Link>
+
+          <Link href="/login">
+            <Button label="Sign in" color="special" />
           </Link>
         </div>
       )}

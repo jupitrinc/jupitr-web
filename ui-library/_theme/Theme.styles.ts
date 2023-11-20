@@ -25,6 +25,7 @@ export const themeStyles = {
       600: "text-red-600",
     },
   },
+
   backgroundColor: {
     [`${ThemeColorEnum.standard}`]: {
       50: "bg-gray-50",

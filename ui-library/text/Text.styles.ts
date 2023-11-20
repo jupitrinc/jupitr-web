@@ -5,6 +5,8 @@ export const textStyles = {
     [`${ThemeColorEnum.standard}`]: "text-gray-600",
     [`${ThemeColorEnum.important}`]: "text-blue-500",
     [`${ThemeColorEnum.dangerous}`]: "text-red-500",
+    "special":
+      "text-transparent bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text",
   },
   size: {
     xs: "text-xs",
@@ -13,6 +15,7 @@ export const textStyles = {
     lg: "text-lg",
     xl: "text-xl",
     xl2: "text-2xl",
+    xl4: "text-4xl",
   },
   fontFamily: {
     brand: "font-mw",

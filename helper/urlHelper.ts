@@ -1,4 +1,5 @@
 import {
+  IMAGE_CDN_DOMAIN,
   STORAGE_DOMAIN,
   StorageBucketsEnum,
   VIDEO_CDN_DOMAIN,
@@ -54,6 +55,12 @@ export const urlHelper = {
 
     const filters = "f_auto:video,q_auto/v1"
     return `${VIDEO_CDN_DOMAIN}/${filters}/${video_name}`
+  },
+
+  cloudinaryImageUrl: (name: string) => {
+    if (!name) return undefined
+
+    return `${IMAGE_CDN_DOMAIN}/${name}`
   },
 
   videoPosterUrl: (video_name: string) => {

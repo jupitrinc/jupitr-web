@@ -7,7 +7,7 @@ import { AccountTypeEnum } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
 import { GetServerSidePropsContext } from "next"
 import PageHead from "layouts/components/PageHead"
-import Intro from "components/_content/home/Intro"
+import Sections from "components/_content/home/Sections"
 
 export default function Home({ domain }) {
   const router = useRouter()
@@ -40,7 +40,7 @@ export default function Home({ domain }) {
       />
 
       <WebsiteLayout>
-        {!user.id && <Intro />}
+        {!user.id && <Sections />}
 
         {user.id && (
           <div className="flex max-w-sm justify-center m-auto text-center">
