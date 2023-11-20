@@ -20,8 +20,7 @@ const VideoJobApplication = () => {
     <div className="flex flex-col gap-20">
       <SectionHeader
         title="Video job application"
-        subtitle="Show off your attitude alongside
-          skills. You are more than just your CV."
+        subtitle="Show off your attitude alongside skills. You are more than just your CV."
         highlight="Video"
       />
       <div className="max-w-sm sm:max-w-5xl">
