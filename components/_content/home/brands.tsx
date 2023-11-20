@@ -21,7 +21,7 @@ const Brands = () => {
     <div className="flex flex-col gap-20">
       <SectionHeader
         title="Join A-player tech teams"
-        subtitle="Find tech jobs that align with your skills and aspirations."
+        subtitle="Find a tech job that align with your skills and aspirations."
         highlight="A-player"
       />
       <div className="max-w-sm sm:max-w-5xl">
