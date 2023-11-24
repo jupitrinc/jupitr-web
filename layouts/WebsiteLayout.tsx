@@ -7,7 +7,7 @@ export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <header>
+      <header className="flex justify-center">
         <Navbar />
       </header>
 

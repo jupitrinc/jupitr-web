@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
   const { isPublicUrl, isPublicJobRoute, isPublicTalentProfileRoute } =
     urlHelper
   const publicRoute = isPublicUrl(pathname)
-  const authRoute = ["/c/signup", "/login"].includes(`${pathname}`)
+  const authRoute = ["/c", "/c/signup", "/login"].includes(`${pathname}`)
   const publicJobRoute = isPublicJobRoute(pathname)
   const publicTalentProfileRoute = isPublicTalentProfileRoute(pathname)
   const res = NextResponse.next()

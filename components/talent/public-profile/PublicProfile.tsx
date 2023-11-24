@@ -11,6 +11,7 @@ import { ITalentProfile } from "state/talent_profile/talentProfile.types"
 import { urlHelper } from "helper/urlHelper"
 import { Button } from "ui-library/button/Button"
 import { useUserState } from "state/user/useUserState"
+import { Divider } from "ui-library/content/divider/Divider"
 
 export interface IPublicProfile
   extends Omit<IUser, "email" | "account_type" | "active"> {
@@ -33,53 +34,24 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
 
   return (
     <div className="mx-auto max-w-3xl flex flex-col gap-5">
-      <Card type="section">
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-row gap-3 justify-between">
-            {showEditProfile() && (
-              <div>
-                <div className="flex justify-start">
-                  <Button
-                    label="Edit profile"
-                    size="xs"
-                    variant="outlined"
-                    icon={<Edit className="h-4 w-4" />}
-                    onClick={() => router.push("/profile")}
-                  />
-                </div>
-              </div>
-            )}
-
-            <div className="flex flex-col gap-3">
-              {location && (
-                <div className="flex flex-row gap-1 items-center justify-end">
-                  <MapPin className="h-4 w-4 text-gray-600" />
-                  <Text as="span" size="xs">
-                    {location}
-                  </Text>
-                </div>
-              )}
-
-              <div className="flex flex-row gap-3 justify-end">
-                {socials.map(
-                  (social) =>
-                    social.url && (
-                      <a
-                        key={social.url}
-                        href={urlHelper.websiteUrl(social.url)}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <SocialIcon name={social.name} />
-                      </a>
-                    )
-                )}
-              </div>
-            </div>
+      {showEditProfile() && (
+        <div>
+          <div className="flex justify-end">
+            <Button
+              label="Edit profile"
+              size="xs"
+              variant="outlined"
+              icon={<Edit className="h-4 w-4" />}
+              onClick={() => router.push("/profile")}
+            />
           </div>
+        </div>
+      )}
 
-          <div className="w-full text-center my-3">
-            <Text as="span" size="xl2">
+      <Card type="section">
+        <div className="flex flex-col gap-5">
+          <div className="w-full text-center">
+            <Text as="span" size="xl">
               {profile.name}
             </Text>
           </div>
@@ -94,6 +66,35 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
             {skills?.map((skill) => (
               <SkillCard key={skill.id} skill={skill} />
             ))}
+          </div>
+
+          <Divider />
+
+          <div className="flex flex-row justify-between gap-1">
+            {location && (
+              <div className="flex flex-row gap-1 items-center justify-end">
+                <MapPin className="h-4 w-4 text-gray-600" />
+                <Text as="span" size="xs">
+                  {location}
+                </Text>
+              </div>
+            )}
+
+            <div className="flex flex-row gap-3 justify-end">
+              {socials.map(
+                (social) =>
+                  social.url && (
+                    <a
+                      key={social.url}
+                      href={urlHelper.websiteUrl(social.url)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <SocialIcon name={social.name} />
+                    </a>
+                  )
+              )}
+            </div>
           </div>
         </div>
       </Card>
