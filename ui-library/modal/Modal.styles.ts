@@ -1,5 +1,5 @@
 export const modalStyles = {
-  dialog: "",
+  dialog: "z-30",
   dialog_child1: {
     enter: "ease-out duration-300",
     enterFrom: "opacity-0",

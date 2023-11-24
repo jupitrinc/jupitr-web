@@ -43,7 +43,7 @@ export default function Home({ domain }) {
         {!user.id && <Sections />}
 
         {user.id && (
-          <div className="flex max-w-sm justify-center m-auto text-center">
+          <div className="flex max-w-sm justify-center m-auto text-center mt-24">
             <Button
               label="Jobs"
               size="xl"

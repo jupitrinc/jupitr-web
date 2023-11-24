@@ -15,6 +15,7 @@ export const Navbar = () => {
   const { isLoggedIn, accountType } = useUserState()
 
   if (
+    router.pathname.includes("/c") ||
     router.pathname.includes("/c/signup") ||
     router.pathname.includes("/login")
   ) {
@@ -22,29 +23,33 @@ export const Navbar = () => {
   } else {
     if (isLoggedIn) {
       return (
-        <div className="flex flex-row space-x-5 justify-between items-baseline">
-          <div className="flex flex-row gap-3 items-center">
-            <Brand
-              link={
-                accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
-              }
-            />
-            <Feedback />
-          </div>
+        <div className="fixed top-0 py-3 z-20 max-w-7xl px-4 sm:px-6 lg:px-8 w-full bg-gray-100">
+          <nav className="flex flex-row space-x-5 justify-between items-center">
+            <div className="flex flex-row gap-3 items-center">
+              <Brand
+                link={
+                  accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
+                }
+              />
+              <Feedback />
+            </div>
 
-          {accountType === AccountTypeEnum.talent ? (
-            <TalentMenu />
-          ) : (
-            <CompanyMenu />
-          )}
+            {accountType === AccountTypeEnum.talent ? (
+              <TalentMenu />
+            ) : (
+              <CompanyMenu />
+            )}
+          </nav>
         </div>
       )
     } else {
       return (
-        <nav className="flex flex-row space-x-5 justify-between items-baseline">
-          <Brand link="/" />
-          <PublicMenu />
-        </nav>
+        <div className="fixed top-0 py-3 z-20 max-w-7xl px-4 sm:px-6 lg:px-8 w-full bg-gray-100">
+          <nav className="flex flex-row space-x-5 justify-between items-center">
+            <Brand link="/" />
+            <PublicMenu />
+          </nav>
+        </div>
       )
     }
   }
@@ -67,7 +72,7 @@ const TalentMenu = () => {
   const { imageUrl } = urlHelper
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       <Link href="/jobs">
         <Button label="Jobs" size="base" variant="text" />
       </Link>
@@ -95,7 +100,7 @@ const CompanyMenu = () => {
   const { imageUrl } = urlHelper
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 items-center">
       <Link href="/c/jobs">
         <Button label="Jobs" size="base" variant="text" />
       </Link>
@@ -120,14 +125,14 @@ const PublicMenu = () => {
   const { jobId } = router.query
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 items-center">
       {jobId ? (
         <Link href="/login">
           <Button label="Sign in" />
         </Link>
       ) : (
         <div className="flex flex-row gap-2 items-center">
-          <Link href="/c/signup">
+          <Link href="/c">
             <Button label="Post a job" variant="text" />
           </Link>
 

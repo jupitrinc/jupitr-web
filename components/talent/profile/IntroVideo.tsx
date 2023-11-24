@@ -62,7 +62,7 @@ const IntroVideo = () => {
           </Text>
 
           <VideoRecorder
-            duration={Number(static_data_job.video_duration[1])}
+            duration={Number(static_data_job.video_duration[2])}
             recordLabel={videoFile ? "Record again" : "Start"}
             onChange={(videoFile) => setVideoFile(videoFile)}
             disabled={loading}

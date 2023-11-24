@@ -6,14 +6,15 @@ export const WebsiteLayout = ({ children }: { children: React.ReactNode }) => {
   usePersistedUser()
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
-      <header className="space-y-2">
+    <>
+      <header className="flex justify-center">
         <Navbar />
       </header>
 
-      <main className="my-10">{children}</main>
-
-      <Footer />
-    </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
+        <main className="my-10">{children}</main>
+        <Footer />
+      </div>
+    </>
   )
 }

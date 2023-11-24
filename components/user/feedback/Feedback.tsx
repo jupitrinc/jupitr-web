@@ -35,7 +35,12 @@ const Feedback = () => {
 
   return (
     <>
-      <Button onClick={showModal} label="Feedback" size="xs" />
+      <Button
+        onClick={showModal}
+        label="Feedback"
+        size="xs"
+        variant="outlined"
+      />
       <Modal open={modal} onClose={hideModal}>
         <div className="flex flex-row gap-5">
           <Sticker className="w-10 h-10 text-gray-500" />

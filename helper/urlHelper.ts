@@ -17,6 +17,7 @@ export const urlHelper = {
       "/login",
       "/auth/callback",
       "/",
+      "/c",
       "/c/signup",
       "/login/verify",
     ]
