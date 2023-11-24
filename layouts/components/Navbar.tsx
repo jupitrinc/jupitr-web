@@ -22,7 +22,7 @@ export const Navbar = () => {
   } else {
     if (isLoggedIn) {
       return (
-        <div className="fixed top-0 py-2 z-20 px-4 sm:px-20 w-full backdrop-blur-sm bg-gray-200/95">
+        <div className="fixed top-0 py-3 z-20 max-w-7xl px-4 sm:px-6 lg:px-8 w-full bg-gray-100">
           <nav className="flex flex-row space-x-5 justify-between items-center">
             <div className="flex flex-row gap-3 items-center">
               <Brand
