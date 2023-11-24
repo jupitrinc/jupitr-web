@@ -15,7 +15,7 @@ export const Navbar = () => {
   const { isLoggedIn, accountType } = useUserState()
 
   if (
-    router.pathname.includes("/c") ||
+    router.pathname === "/c" ||
     router.pathname.includes("/c/signup") ||
     router.pathname.includes("/login")
   ) {
