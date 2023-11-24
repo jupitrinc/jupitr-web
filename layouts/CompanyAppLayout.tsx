@@ -16,10 +16,10 @@ export const CompanyAppLayout = ({ children }) => {
     return (
       <>
         <PageHead />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
-          <header className="space-y-2">
-            <Navbar />
-          </header>
+        <header className="space-y-2">
+          <Navbar />
+        </header>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10 mt-24">
           <main className="my-10">{children}</main>
         </div>
       </>
