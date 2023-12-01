@@ -4,25 +4,28 @@ import { ToggleProps } from "./Toggle.types"
 import { toggleStyles } from "./Toggle.styles"
 import { ThemeSizeEnum } from "ui-library/_theme/Theme.types"
 
-export const Toggle: React.FC<ToggleProps> = (toggle) => {
+export const Toggle: React.FC<ToggleProps> = ({
+  disabled,
+  checked,
+  onChange,
+  size = ThemeSizeEnum.sm,
+  label,
+}) => {
   const styles = toggleStyles
 
   return (
     <label className={styles.container}>
-      <input
-        type="checkbox"
-        className={styles.input}
-        disabled={toggle.disabled}
-        checked={toggle.checked}
-        onChange={toggle.onChange}
-      />
-      <div
-        className={clsx(
-          styles.size[toggle.size ? toggle.size : ThemeSizeEnum.sm],
-          styles.toggle
-        )}
-      />
-      {toggle.label && <span className={styles.label}>{toggle.label}</span>}
+      <div className="relative">
+        <input
+          type="checkbox"
+          className={styles.input}
+          disabled={disabled}
+          checked={checked}
+          onChange={onChange}
+        />
+        <div className={clsx(styles.size[size], styles.toggle)} />
+      </div>
+      {label && <span className={styles.label}>{label}</span>}
     </label>
   )
 }
