@@ -15,7 +15,7 @@ const ListSwiper = ({ jobs }: { jobs: ITalentJob[] }) => {
   )
 
   return (
-    <div className="md:hidden fixed left-0 bottom-0 flex flex-row justify-between w-full ga-5 p-3 bg-gray-100 border-t border-gray-900/10 items-center">
+    <div className="ga-5 fixed bottom-0 left-0 flex w-full flex-row items-center justify-between border-t border-gray-900/10 bg-gray-100 p-3 md:hidden">
       <Button
         label="Prev"
         size="base"

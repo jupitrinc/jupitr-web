@@ -23,9 +23,9 @@ export const Navbar = () => {
   } else {
     if (isLoggedIn) {
       return (
-        <div className="fixed top-0 py-3 z-20 max-w-7xl px-4 sm:px-6 lg:px-8 w-full bg-gray-100">
-          <nav className="flex flex-row space-x-5 justify-between items-center">
-            <div className="flex flex-row gap-3 items-center">
+        <div className="fixed top-0 z-20 w-full max-w-7xl bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
+          <nav className="flex flex-row items-center justify-between space-x-5">
+            <div className="flex flex-row items-center gap-3">
               <Brand
                 link={
                   accountType === AccountTypeEnum.talent ? "/jobs" : "/c/jobs"
@@ -44,8 +44,8 @@ export const Navbar = () => {
       )
     } else {
       return (
-        <div className="fixed top-0 py-3 z-20 max-w-7xl px-4 sm:px-6 lg:px-8 w-full bg-gray-100">
-          <nav className="flex flex-row space-x-5 justify-between items-center">
+        <div className="fixed top-0 z-20 w-full max-w-7xl bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
+          <nav className="flex flex-row items-center justify-between space-x-5">
             <Brand link="/" />
             <PublicMenu />
           </nav>
@@ -72,7 +72,7 @@ const TalentMenu = () => {
   const { imageUrl } = urlHelper
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <Link href="/jobs">
         <Button label="Jobs" size="base" variant="text" />
       </Link>
@@ -100,7 +100,7 @@ const CompanyMenu = () => {
   const { imageUrl } = urlHelper
 
   return (
-    <div className="flex gap-5 items-center">
+    <div className="flex items-center gap-5">
       <Link href="/c/jobs">
         <Button label="Jobs" size="base" variant="text" />
       </Link>
@@ -125,13 +125,13 @@ const PublicMenu = () => {
   const { jobId } = router.query
 
   return (
-    <div className="flex gap-5 items-center">
+    <div className="flex items-center gap-5">
       {jobId ? (
         <Link href="/login">
           <Button label="Sign in" />
         </Link>
       ) : (
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row items-center gap-2">
           <Link href="/c">
             <Button label="Post a job" variant="text" />
           </Link>

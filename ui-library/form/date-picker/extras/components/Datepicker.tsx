@@ -207,16 +207,16 @@ const Datepicker: React.FC<Props> = ({
         <Input />
 
         <div
-          className="transition-all ease-out duration-300 absolute z-10 mt-[1px] text-sm lg:text-xs 2xl:text-sm translate-y-4 opacity-0 hidden"
+          className="absolute z-10 mt-[1px] hidden translate-y-4 text-sm opacity-0 transition-all duration-300 ease-out lg:text-xs 2xl:text-sm"
           ref={calendarContainerRef}
         >
           <Arrow ref={arrowRef} />
 
-          <div className="mt-2.5 shadow-sm border border-gray-300 px-1 py-0.5 bg-white dark:bg-slate-800 dark:text-white dark:border-slate-600 rounded-xl">
-            <div className="flex flex-col lg:flex-row py-2">
+          <div className="mt-2.5 rounded-xl border border-gray-300 bg-white px-1 py-0.5 shadow-sm dark:border-slate-600 dark:bg-slate-800 dark:text-white">
+            <div className="flex flex-col py-2 lg:flex-row">
               <div
                 className={
-                  "flex items-stretch flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-1.5 md:pl-1 pr-2 lg:pr-1"
+                  "flex flex-col items-stretch space-y-4 pr-2 md:flex-row md:space-x-1.5 md:space-y-0 md:pl-1 lg:pr-1"
                 }
               >
                 <Calendar

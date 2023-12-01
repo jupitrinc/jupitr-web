@@ -45,7 +45,7 @@ export default function TalentPublicJob({
           robots="index, follow"
         />
         <TalentAppLayout>
-          <div className="flex flex-col gap-5 max-w-2xl mx-auto">
+          <div className="mx-auto flex max-w-2xl flex-col gap-5">
             <div className="w-full">
               <JobView />
             </div>
@@ -55,7 +55,7 @@ export default function TalentPublicJob({
     )
   } else {
     return (
-      <div className="flex justify-center mt-20">
+      <div className="mt-20 flex justify-center">
         <NoMatchFound
           message="Job no longer available"
           link="/jobs"

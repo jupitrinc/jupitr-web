@@ -38,10 +38,10 @@ const AddVideos = () => {
   }, [success])
 
   return (
-    <div className="grid grid-cols-2 gap-5 justify-center">
+    <div className="grid grid-cols-2 justify-center gap-5">
       {videos && videos.length < 10 && (
         <Card type="linked" onClick={showModal} justifyContent="center">
-          <div className="flex flex-col gap-1 justify-center items-center self-center">
+          <div className="flex flex-col items-center justify-center gap-1 self-center">
             <Plus className="h-5 w-5 text-gray-600" />
             <Text as="span" size="base">
               Add video
@@ -51,7 +51,7 @@ const AddVideos = () => {
       )}
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="flex flex-col gap-5 min-h-[18rem] overflow-auto pb-5">
+        <div className="flex min-h-[18rem] flex-col gap-5 overflow-auto pb-5">
           <Text as="span" size="xl">
             Add video
           </Text>

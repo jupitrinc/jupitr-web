@@ -16,7 +16,7 @@ const ListCard = ({ job }: { job: ICompanyJob }) => {
 
   return (
     <Card type="linked" onClick={viewJob}>
-      <div className="flex flex-col gap-2 group">
+      <div className="group flex flex-col gap-2">
         <Text as="span" size="xl">
           {job.title ? job.title : "Untitled"}
         </Text>

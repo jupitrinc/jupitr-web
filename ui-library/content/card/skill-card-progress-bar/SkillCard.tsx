@@ -35,7 +35,7 @@ const SkillCard: React.FC<props> = ({ skill }) => {
 
   return (
     <Card type="static">
-      <div className="flex justify-between mb-3">
+      <div className="mb-3 flex justify-between">
         <Text as="span" size="lg">
           {skill.name}
         </Text>
@@ -43,7 +43,7 @@ const SkillCard: React.FC<props> = ({ skill }) => {
 
       <ProgressBar progress={skillLevel(skill.level)} threshold={threshold} />
 
-      <div className="flex justify-between mt-2">
+      <div className="mt-2 flex justify-between">
         <Text as="span" size="sm">
           {static_data_job.skill_levels[0]}
         </Text>

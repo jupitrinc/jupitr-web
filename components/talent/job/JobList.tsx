@@ -41,15 +41,15 @@ const JobList = () => {
       <>
         <ListSwiper jobs={talent_jobs} />
 
-        <div className="hidden md:flex flex-col bg-white rounded-lg h-screen">
-          <div className="grid grid-cols-3 gap-5 items-center p-5">
+        <div className="hidden h-screen flex-col rounded-lg bg-white md:flex">
+          <div className="grid grid-cols-3 items-center gap-5 p-5">
             <Divider />
             <Text as="p" align="center">{`${talent_jobs.length} ${
               talent_jobs.length === 1 ? "job" : "jobs"
             }`}</Text>
             <Divider />
           </div>
-          <div className="overflow-y-scroll space-y-5 p-5">
+          <div className="space-y-5 overflow-y-scroll p-5">
             {talent_jobs.map((job: ITalentJob) => (
               <ListCard key={job.id} job={job} />
             ))}
@@ -59,7 +59,7 @@ const JobList = () => {
     )
   else
     return (
-      <div className="flex flex-col gap-10 items-center fixed top-1/3 -translate-y-1/2 left-1/2 -translate-x-1/2">
+      <div className="fixed left-1/2 top-1/3 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-10">
         <NoMatchFound
           message="0 jobs found matching your profile"
           label="Update profile"

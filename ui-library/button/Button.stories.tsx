@@ -114,7 +114,7 @@ export const labelIcon: Story = {
     size: "lg",
     color: "important",
     variant: "contained",
-    icon: <GoogleIcon className="inline w-6 h-6" />,
+    icon: <GoogleIcon className="inline h-6 w-6" />,
     label: "with Google",
   },
 }

@@ -79,7 +79,7 @@ export const SignIn = () => {
         required={true}
       />
 
-      <div className="grid grid-cols-3 gap-1 items-baseline">
+      <div className="grid grid-cols-3 items-baseline gap-1">
         <Divider />
         <Text as="span" size="xs">
           OR
@@ -89,7 +89,7 @@ export const SignIn = () => {
 
       <Button
         color="standard"
-        icon={<GoogleIcon className="inline w-6 h-6" />}
+        icon={<GoogleIcon className="inline h-6 w-6" />}
         label="with Google"
         onClick={loginWithGoogle}
         variant="contained"

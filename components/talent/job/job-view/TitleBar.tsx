@@ -9,8 +9,8 @@ import Share from "./Share"
 const TitleBar = () => {
   const { talent_job } = useTalentJobState()
   return (
-    <div className="flex flex-col sm:flex-row justify-between gap-5 items-center">
-      <div className="flex flex-row gap-5 items-center">
+    <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+      <div className="flex flex-row items-center gap-5">
         <Avatar
           image_url={urlHelper.imageUrl(talent_job.company.logo)}
           size={14}
@@ -27,7 +27,7 @@ const TitleBar = () => {
           </Text>
         </div>
       </div>
-      <div className="flex flex-row gap-3 items-center">
+      <div className="flex flex-row items-center gap-3">
         <Share />
 
         <TalentApplicationContextProvider>

@@ -9,11 +9,11 @@ const Videos = () => {
 
   if (videos.length) {
     return (
-      <div className="snap-proximity snap-x flex flex-row overflow-auto gap-3 pb-1">
+      <div className="flex snap-x snap-proximity flex-row gap-3 overflow-auto pb-1">
         {videos.map((video) => (
           <div
             key={video.id}
-            className={`snap-center shrink-0 ${
+            className={`shrink-0 snap-center ${
               videos.length > 1 ? "w-[90%]" : "w-full"
             }`}
           >

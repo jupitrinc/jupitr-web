@@ -57,8 +57,8 @@ const MemberCard = ({ member }: { member: ICompanyMember }) => {
 
   return (
     <>
-      <div className="flex flex-row gap-3 justify-between items-center">
-        <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row items-center justify-between gap-3">
+        <div className="flex flex-row items-center gap-2">
           <Avatar image_url={urlHelper.imageUrl(member.avatar_url)} size={10} />
           <div className="flex flex-col">
             <Text as="span">{memberName}</Text>
@@ -69,7 +69,7 @@ const MemberCard = ({ member }: { member: ICompanyMember }) => {
         </div>
 
         {user.permission === "write" && user.id !== member.user_id && (
-          <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-row items-center gap-2">
             <Select
               placeholder="Role"
               size="sm"

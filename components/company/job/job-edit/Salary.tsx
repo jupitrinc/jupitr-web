@@ -54,7 +54,7 @@ export const Salary = () => {
             onBlur={update}
           />
 
-          <div className="absolute top-1/2 -translate-y-1/2 right-5">
+          <div className="absolute right-5 top-1/2 -translate-y-1/2">
             <Button
               icon={<Check className="h-5 w-5" />}
               variant="text"
@@ -65,7 +65,7 @@ export const Salary = () => {
       )}
 
       {!editing && (
-        <div className="flex flex-row gap-3 items-center -mt-3">
+        <div className="-mt-3 flex flex-row items-center gap-3">
           <div className="flex items-center gap-1">
             <Currency countryCode={company_job.location?.country.code} />
             <Text as="span" size="lg">

@@ -24,7 +24,7 @@ const ApplicationCard = ({
     <Card type="section">
       <div className="flex flex-col gap-5">
         <div>
-          <div className="flex flex-row gap-1 items-center justify-between">
+          <div className="flex flex-row items-center justify-between gap-1">
             <Text as="span" size="lg">
               {application.users.name}
             </Text>
@@ -46,9 +46,9 @@ const ApplicationCard = ({
             </div>
           </div>
 
-          <div className="flex flex-row gap-1 items-center justify-between">
+          <div className="flex flex-row items-center justify-between gap-1">
             <div className="flex flex-col">
-              <div className="flex flex-row gap-2 items-center">
+              <div className="flex flex-row items-center gap-2">
                 <Text as="span" size="sm">
                   {application.users?.email}
                 </Text>
@@ -57,7 +57,7 @@ const ApplicationCard = ({
             </div>
 
             {location && (
-              <div className="flex flex-row gap-1 items-center justify-end mt-1">
+              <div className="mt-1 flex flex-row items-center justify-end gap-1">
                 <MapPin className="h-4 w-4 text-gray-600" />
                 <Text as="span" size="xs">
                   {location}
@@ -73,7 +73,7 @@ const ApplicationCard = ({
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {application.skills?.map((skill) => (
             <SkillCard
               key={skill.id}

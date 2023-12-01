@@ -34,7 +34,7 @@ const IntroVideo = () => {
   return (
     <>
       <Card type="section">
-        <div className="flex flex-row gap-1 justify-between">
+        <div className="flex flex-row justify-between gap-1">
           <SectionHeader title="Intro video" />
           <Button
             label={user.intro_video ? "Change" : "Add"}
@@ -56,7 +56,7 @@ const IntroVideo = () => {
       </Card>
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="flex flex-col gap-5 min-h-[18rem] overflow-auto pb-5">
+        <div className="flex min-h-[18rem] flex-col gap-5 overflow-auto pb-5">
           <Text as="span" size="xl">
             Add video
           </Text>

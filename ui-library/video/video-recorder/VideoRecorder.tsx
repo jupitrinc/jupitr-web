@@ -60,8 +60,8 @@ export const VideoRecorder: React.FC<VideoRecorderProps> = (recorder) => {
     return status === "recording"
       ? "Stop"
       : recorder.recordLabel
-      ? recorder.recordLabel
-      : "Start"
+        ? recorder.recordLabel
+        : "Start"
   }
 
   return (

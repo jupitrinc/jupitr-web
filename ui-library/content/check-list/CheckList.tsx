@@ -6,7 +6,7 @@ import { CheckListProps } from "./CheckList.types"
 
 export const CheckList: React.FC<CheckListProps> = (props) => {
   return (
-    <div className="flex flex-row justify-between items-center rounded-lg gap-1 overflow-auto">
+    <div className="flex flex-row items-center justify-between gap-1 overflow-auto rounded-lg">
       {props.items.map((item, index, array) => (
         <Fragment key={item.label}>
           <CheckItem label={item.label} checked={item.checked} />
@@ -23,13 +23,13 @@ const CheckItem = ({ label, checked }) => {
   const notCumpletedStyled = "w-6 h-6 text-gray-400 ring-gray-900/10"
 
   return (
-    <div className="flex flex-col gap-2 w-full items-center">
+    <div className="flex w-full flex-col items-center gap-2">
       <figure
-        className={`flex justify-center items-center rounded-full ${
+        className={`flex items-center justify-center rounded-full ${
           checked ? completedStyled : notCumpletedStyled
         }`}
       >
-        {checked ? <Check className="w-5 h-5" /> : <Circle />}
+        {checked ? <Check className="h-5 w-5" /> : <Circle />}
       </figure>
       <Text as="span" size="sm" align="center">
         {label}

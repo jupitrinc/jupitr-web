@@ -25,7 +25,7 @@ const JobChecks = () => {
   ]
 
   return (
-    <div className="w-full bg-gray-200 p-5 rounded-md">
+    <div className="w-full rounded-md bg-gray-200 p-5">
       <CheckList items={items} />
     </div>
   )

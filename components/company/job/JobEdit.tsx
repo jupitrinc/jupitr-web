@@ -42,13 +42,13 @@ export const JobEdit = () => {
         <PreviewApplications />
         <JobChecks />
 
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col gap-5 md:flex-row">
           <Title />
           <Toolbar />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-5">
-          <div className="basis-1/3 flex flex-col gap-5">
+        <div className="flex flex-col gap-5 md:flex-row">
+          <div className="flex basis-1/3 flex-col gap-5">
             <Card type="section">
               <Salary />
               <WorkModel />
@@ -57,7 +57,7 @@ export const JobEdit = () => {
 
             <Skills />
           </div>
-          <div className="basis-2/3 flex flex-col gap-5">
+          <div className="flex basis-2/3 flex-col gap-5">
             <Videos />
             <TalentApplication />
           </div>
