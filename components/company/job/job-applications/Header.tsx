@@ -22,8 +22,8 @@ const Header = () => {
   }, [company_job_applications])
 
   return (
-    <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
-      <div className="flex flex-col md:flex-row gap-5 items-center">
+    <div className="flex flex-col items-center justify-between gap-5 rounded-lg bg-gray-200 p-5 md:flex-row">
+      <div className="flex flex-col items-center gap-5 md:flex-row">
         <Text as="span" size="xl" align="left">
           {company_job_applications.title}
         </Text>

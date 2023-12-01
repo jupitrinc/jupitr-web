@@ -12,7 +12,7 @@ const SectionHeader = ({
 }) => {
   const parts = title.split(new RegExp(`(${highlight})`, "gi"))
   return (
-    <div className="text-center space-y-5">
+    <div className="space-y-5 text-center">
       {
         <Text as="h1" size="xl4" bold>
           {parts.map((part) =>

@@ -9,8 +9,8 @@ export default function TalentJobs() {
     <TalentAppLayout>
       <TalentJobsContextProvider>
         <TalentJobContextProvider>
-          <div className="flex flex-row md:gap-10 justify-between relative mb-24 md:mb-0">
-            <div className="md:basis-2/5 h-screen overflow-hidden sticky top-10 z-10">
+          <div className="relative mb-24 flex flex-row justify-between md:mb-0 md:gap-10">
+            <div className="sticky top-10 z-10 h-screen overflow-hidden md:basis-2/5">
               <JobList />
             </div>
 

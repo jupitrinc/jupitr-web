@@ -15,12 +15,12 @@ export default function Login() {
         robots="index, follow"
       />
       <WebsiteLayout>
-        <div className="mb-10 flex max-w-sm mx-auto">
+        <div className="mx-auto mb-10 flex max-w-sm">
           <Link href="/">
             <Button variant="text" icon={<ChevronLeft />} label="Home" />
           </Link>
         </div>
-        <div className="max-w-sm mx-auto">
+        <div className="mx-auto max-w-sm">
           <Card type="section">
             <SignIn />
           </Card>

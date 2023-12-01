@@ -11,9 +11,9 @@ const ProfileSocialCheck = () => {
   if (checksCompleted()) return
 
   return (
-    <div className="text-center mt-4 rounded-md p-10 text-gray-600 ring-gray-900/10 bg-gray-100">
+    <div className="mt-4 rounded-md bg-gray-100 p-10 text-center text-gray-600 ring-gray-900/10">
       <Text as="span">Increase your profile&apos;s visibility</Text>
-      <div className="flex justify-center mt-6">
+      <div className="mt-6 flex justify-center">
         <Button
           label="Complete profile"
           size="base"

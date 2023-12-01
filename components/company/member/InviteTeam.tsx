@@ -42,7 +42,7 @@ const InviteTeam = ({ title }: { title: string }) => {
   return (
     <>
       <Card type="linked" onClick={showModal}>
-        <div className="flex flex-col gap-1 justify-center items-center">
+        <div className="flex flex-col items-center justify-center gap-1">
           <div className="h-10">
             <AvatarGroup max_number={3} avatars={avatars} />
           </div>
@@ -54,7 +54,7 @@ const InviteTeam = ({ title }: { title: string }) => {
       </Card>
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="flex flex-col gap-10 max-h-[30rem] md:max-h-[40rem] overflow-auto">
+        <div className="flex max-h-[30rem] flex-col gap-10 overflow-auto md:max-h-[40rem]">
           <Text as="span" size="xl">
             {title}
           </Text>

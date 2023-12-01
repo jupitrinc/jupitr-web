@@ -39,7 +39,7 @@ const VideoCard = ({ video }: { video: IJobVideo }) => {
     <div className="flex flex-col gap-3">
       <VideoPlayer src={urlHelper.videoUrl(video.video_url) as string} />
 
-      <div className="flex flex-row gap-5 justify-between">
+      <div className="flex flex-row justify-between gap-5">
         <div className="flex flex-col gap-0">
           <Text as="span" size="lg">
             {video.user?.name}

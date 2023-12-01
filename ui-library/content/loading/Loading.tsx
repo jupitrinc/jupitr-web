@@ -8,8 +8,8 @@ interface props {
 
 export const Loading = (props: props) => {
   return (
-    <div className="max-w-sm mx-auto flex flex-col space-y-4 w-full items-center pt-20">
-      <Loader color="standard" className="w-5 h-5" />
+    <div className="mx-auto flex w-full max-w-sm flex-col items-center space-y-4 pt-20">
+      <Loader color="standard" className="h-5 w-5" />
       {props.showLabel && <Text as="span">Loading...</Text>}
     </div>
   )

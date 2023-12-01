@@ -29,7 +29,7 @@ const CompanyNotifications = () => {
       {notifications.map((n) => (
         <div
           key={n.id}
-          className="w-full flex flex-row items-center justify-between gap-3"
+          className="flex w-full flex-row items-center justify-between gap-3"
         >
           <Text as="span" size="base">
             {notificationName(n.alert)}

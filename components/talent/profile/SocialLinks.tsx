@@ -47,7 +47,7 @@ const SocialLinks = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-row space-x-3 items-center">
+      <div className="flex flex-row items-center space-x-3">
         <Text as="span">
           <SocialIcon name={SocialsEnum.github} />
         </Text>
@@ -64,7 +64,7 @@ const SocialLinks = () => {
         </div>
       </div>
 
-      <div className="flex flex-row space-x-3 items-center">
+      <div className="flex flex-row items-center space-x-3">
         <Text as="span">
           <SocialIcon name={SocialsEnum.linkedin} />
         </Text>
@@ -83,7 +83,7 @@ const SocialLinks = () => {
         </div>
       </div>
 
-      <div className="flex flex-row space-x-3 items-center">
+      <div className="flex flex-row items-center space-x-3">
         <Text as="span">
           <SocialIcon name={SocialsEnum.website} />
         </Text>

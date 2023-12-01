@@ -61,7 +61,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
             value={query}
           />
           <Combobox.Button className={styles.button} ref={buttonRef}>
-            <ChevronsUpDown className="text-gray-600 w-5 h-5" />
+            <ChevronsUpDown className="h-5 w-5 text-gray-600" />
           </Combobox.Button>
         </div>
 
@@ -76,7 +76,7 @@ export const Multiselect: React.FC<MultiselectProps> = (multiselect) => {
             <Combobox.Options className={styles.options}>
               {filteredOptions.length === 0 || multiselect.loading ? (
                 <div className={styles.option.noResult}>
-                  <div className="flex flex-row gap-5 items-center justify-between flex-wrap">
+                  <div className="flex flex-row flex-wrap items-center justify-between gap-5">
                     {multiselect.loading ? (
                       <Loader className="h-4 w-4" type="custom" />
                     ) : (

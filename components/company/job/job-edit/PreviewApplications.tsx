@@ -13,7 +13,7 @@ export const PreviewApplications = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-5 justify-between items-center bg-gray-200 p-5 rounded-lg">
+    <div className="flex flex-col items-center justify-between gap-5 rounded-lg bg-gray-200 p-5 md:flex-row">
       {company_job.applications && (
         <Text as="span" size="sm" align="right">
           {`${company_job.applications[0].count} ${

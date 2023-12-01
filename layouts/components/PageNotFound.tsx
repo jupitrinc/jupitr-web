@@ -6,9 +6,9 @@ import { Text } from "ui-library/text/Text"
 
 const PageNotFound = () => {
   return (
-    <div className="flex flex-col space-y-5 items-center">
-      <div className="flex flex-row gap-2 items-center">
-        <Rocket className="h-6 w-6 text-gray-600 animate-spin" />
+    <div className="flex flex-col items-center space-y-5">
+      <div className="flex flex-row items-center gap-2">
+        <Rocket className="h-6 w-6 animate-spin text-gray-600" />
         <Text as="span" size="xl2">
           Oops!
         </Text>

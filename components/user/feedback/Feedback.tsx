@@ -43,7 +43,7 @@ const Feedback = () => {
       />
       <Modal open={modal} onClose={hideModal}>
         <div className="flex flex-row gap-5">
-          <Sticker className="w-10 h-10 text-gray-500" />
+          <Sticker className="h-10 w-10 text-gray-500" />
 
           {sent ? (
             <SentMessage />

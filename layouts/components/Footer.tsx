@@ -6,7 +6,7 @@ export const Footer = () => {
   const { currentYear } = dateHelper
 
   return (
-    <footer className="mt-10 max-w-sm mx-auto flex flex-row gap-3 items-center text-center justify-center">
+    <footer className="mx-auto mt-10 flex max-w-sm flex-row items-center justify-center gap-3 text-center">
       <Text as="span" size="sm">
         © {currentYear()} jupitr
       </Text>

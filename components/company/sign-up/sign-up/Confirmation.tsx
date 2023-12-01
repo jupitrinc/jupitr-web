@@ -6,7 +6,7 @@ import { Text } from "ui-library/text/Text"
 const Confirmation = () => {
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-row gap-2 justify-center items-center">
+      <div className="flex flex-row items-center justify-center gap-2">
         <Check className="h-5 w-5 text-gray-600" />
         <Text as="h1" size="xl">
           Account created
@@ -15,7 +15,7 @@ const Confirmation = () => {
 
       <Text as="p">Sign in using the link sent to your inbox.</Text>
 
-      <div className="flex flex-row gap-2 items-center mt-20 mx-auto">
+      <div className="mx-auto mt-20 flex flex-row items-center gap-2">
         <Text as="p" size="sm">
           {"haven't received the link?"}
         </Text>

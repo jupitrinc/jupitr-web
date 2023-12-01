@@ -32,7 +32,7 @@ export const SignUp = () => {
   } = useSignUp()
 
   return (
-    <div className="max-w-sm mx-auto flex flex-col space-y-10 text-center w-full relative">
+    <div className="relative mx-auto flex w-full max-w-sm flex-col space-y-10 text-center">
       <Navbar />
 
       {!success ? (
@@ -40,7 +40,7 @@ export const SignUp = () => {
           <Header />
 
           <form
-            className="flex flex-col gap-5 justify-center"
+            className="flex flex-col justify-center gap-5"
             onSubmit={addCompany}
           >
             <TextInput
@@ -121,7 +121,7 @@ export const SignUp = () => {
 
             <div className="flex flex-col gap-5 text-left">
               <Divider />
-              <div className="flex flex-col gap-5 items-start">
+              <div className="flex flex-col items-start gap-5">
                 <Label value="Company logo" htmlFor="" invalid={invalid.logo} />
 
                 <Uploader

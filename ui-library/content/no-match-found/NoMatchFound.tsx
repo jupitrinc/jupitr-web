@@ -11,7 +11,7 @@ interface props {
 
 export const NoMatchFound: React.FC<props> = (props) => {
   return (
-    <div className="flex flex-col gap-10 items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-10">
       <Text as="span">{props.message}</Text>
 
       {props.label && (

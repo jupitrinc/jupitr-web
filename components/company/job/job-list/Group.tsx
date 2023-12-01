@@ -9,11 +9,11 @@ const Group = memo(
     const highlight = title === "Open"
     return (
       <div
-        className={`flex flex-col gap-5 p-5 relative ${
-          highlight && "bg-white rounded-lg"
+        className={`relative flex flex-col gap-5 p-5 ${
+          highlight && "rounded-lg bg-white"
         }`}
       >
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row items-center gap-2">
           {highlight && <Pulse />}
 
           <Text as="h2" size="sm" align="left">
@@ -21,7 +21,7 @@ const Group = memo(
           </Text>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 overflow-x-auto p-1">
+        <div className="grid grid-cols-1 gap-5 overflow-x-auto p-1 sm:grid-cols-3">
           {jobs.map((job) => (
             <ListCard key={job.id} job={job} />
           ))}

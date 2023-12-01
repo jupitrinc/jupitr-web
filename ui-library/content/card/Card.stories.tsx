@@ -7,9 +7,9 @@ import { Button } from "ui-library/button/Button"
 import { sampleData } from "ui-library/_sample/sample.data"
 
 const SampleComponent = () => (
-  <div className="space-y-1 flex-col">
+  <div className="flex-col space-y-1">
     <Image src={sampleData.image[1]} alt="" className="w-full" />
-    <div className="flex space-y-3 flex-col p-5">
+    <div className="flex flex-col space-y-3 p-5">
       <Text as="h1" size="lg">
         Card title
       </Text>
