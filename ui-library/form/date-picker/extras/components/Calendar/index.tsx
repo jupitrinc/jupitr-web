@@ -226,7 +226,7 @@ const Calendar: React.FC<Props> = ({
 
   return (
     <div className="w-full md:w-[297px] md:min-w-[297px]">
-      <div className="flex items-center space-x-1.5 border border-gray-300 dark:border-gray-700 rounded-xl px-2 py-1.5">
+      <div className="flex items-center space-x-1.5 rounded-xl border border-gray-300 px-2 py-1.5 dark:border-gray-700">
         {!showMonths && !showYears && (
           <div className="flex-none">
             <RoundedButton roundedFull={true} onClick={onClickPrevious}>
@@ -294,7 +294,7 @@ const Calendar: React.FC<Props> = ({
         )}
       </div>
 
-      <div className="px-0.5 sm:px-2 mt-0.5 min-h-[285px]">
+      <div className="mt-0.5 min-h-[285px] px-0.5 sm:px-2">
         {showMonths && <Months clickMonth={clickMonth} />}
 
         {showYears && <Years year={year} clickYear={clickYear} />}

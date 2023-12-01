@@ -7,7 +7,7 @@ const Notifications = () => {
   const { hideNotification } = useNotificationAction()
 
   return notifications.length > 0 ? (
-    <div className="fixed right-5 bottom-5 flex flex-col gap-3 z-10">
+    <div className="fixed bottom-5 right-5 z-10 flex flex-col gap-3">
       {notifications.map((notification) => (
         <Notification
           key={notification.id}

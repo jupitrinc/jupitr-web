@@ -81,7 +81,7 @@ export const Verify = () => {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-10">
+    <div className="mx-auto my-10 max-w-7xl px-4 sm:px-6 lg:px-8">
       <Loading />
     </div>
   )

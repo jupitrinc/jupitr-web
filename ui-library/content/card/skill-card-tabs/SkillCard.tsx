@@ -15,7 +15,7 @@ export interface props {
 const SkillCard: React.FC<props> = (props) => {
   return (
     <Card type="static">
-      <div className="flex justify-between mb-3">
+      <div className="mb-3 flex justify-between">
         <Text as="span" size="lg">
           {props.skill.name}
         </Text>

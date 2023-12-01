@@ -10,7 +10,7 @@ interface SettingProps {
 
 const Setting = (setting: SettingProps) => {
   return (
-    <div className="flex flex-row justify-between items-center">
+    <div className="flex flex-row items-center justify-between">
       <Text as="span">{setting.name}</Text>
       <Button
         label={setting.button_label}

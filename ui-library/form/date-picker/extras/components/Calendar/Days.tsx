@@ -193,12 +193,12 @@ const Days: React.FC<Props> = ({
   )
 
   return (
-    <div className="grid grid-cols-7 gap-y-0.5 my-1">
+    <div className="my-1 grid grid-cols-7 gap-y-0.5">
       {calendarData.days.previous.map((item, index) => (
         <button
           type="button"
           key={index}
-          className="flex items-center justify-center text-gray-400 w-full h-12 lg:w-10 lg:h-10"
+          className="flex h-12 w-full items-center justify-center text-gray-400 lg:h-10 lg:w-10"
           onClick={() => onClickPreviousDays(item)}
           onMouseOver={() => {
             hoverDay(item, "previous")
@@ -228,7 +228,7 @@ const Days: React.FC<Props> = ({
         <button
           type="button"
           key={index}
-          className="flex items-center justify-center text-gray-400 w-full h-12 lg:w-10 lg:h-10"
+          className="flex h-12 w-full items-center justify-center text-gray-400 lg:h-10 lg:w-10"
           onClick={() => {
             onClickNextDays(item)
           }}

@@ -33,7 +33,7 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
   const skills = profile.talent_profile?.skills
 
   return (
-    <div className="mx-auto max-w-3xl flex flex-col gap-5">
+    <div className="mx-auto flex max-w-3xl flex-col gap-5">
       {showEditProfile() && (
         <div>
           <div className="flex justify-end">
@@ -62,17 +62,15 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {skills?.map((skill) => (
-              <SkillCard key={skill.id} skill={skill} />
-            ))}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {skills?.map((skill) => <SkillCard key={skill.id} skill={skill} />)}
           </div>
 
           <Divider />
 
           <div className="flex flex-row justify-between gap-1">
             {location && (
-              <div className="flex flex-row gap-1 items-center justify-end">
+              <div className="flex flex-row items-center justify-end gap-1">
                 <MapPin className="h-4 w-4 text-gray-600" />
                 <Text as="span" size="xs">
                   {location}
@@ -80,7 +78,7 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
               </div>
             )}
 
-            <div className="flex flex-row gap-3 justify-end">
+            <div className="flex flex-row justify-end gap-3">
               {socials.map(
                 (social) =>
                   social.url && (

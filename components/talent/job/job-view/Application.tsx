@@ -79,9 +79,9 @@ const Application = () => {
       )}
 
       <Modal open={modal} onClose={hideModal}>
-        <div className="h-[30rem] md:h-[40rem] overflow-auto pb-10">
-          <div className="overflow-y-scroll h-full flex flex-col px-1">
-            <div className="flex flex-row gap-5 items-center">
+        <div className="h-[30rem] overflow-auto pb-10 md:h-[40rem]">
+          <div className="flex h-full flex-col overflow-y-scroll px-1">
+            <div className="flex flex-row items-center gap-5">
               <Avatar
                 image_url={urlHelper.imageUrl(talent_job.company.logo)}
                 size={10}
@@ -97,11 +97,11 @@ const Application = () => {
                 </Text>
               </div>
             </div>
-            <div className="flex flex-col gap-5 mb-5 w-full mx-auto">
+            <div className="mx-auto mb-5 flex w-full flex-col gap-5">
               <ProgressBar progress={progress(step)} type="sticky" />
 
               {step === 1 && (
-                <div className="flex flex-col gap-5 mt-10">
+                <div className="mt-10 flex flex-col gap-5">
                   {!user.name && (
                     <div className="mb-10">
                       <UserName />
@@ -128,7 +128,7 @@ const Application = () => {
               )}
 
               {step === 2 && (
-                <div className="flex flex-col gap-5 mt-10">
+                <div className="mt-10 flex flex-col gap-5">
                   <Text as="span" size="base" align="left">
                     {talent_job.application_video?.description
                       ? talent_job.application_video?.description
@@ -150,10 +150,10 @@ const Application = () => {
               )}
 
               {step === 3 && success && (
-                <div className="flex flex-col gap-14 mt-32">
+                <div className="mt-32 flex flex-col gap-14">
                   <div className="flex justify-center align-middle">
                     <Text as="span" size="base" align="center">
-                      <span className="flex flex-col justify-center items-center gap-2">
+                      <span className="flex flex-col items-center justify-center gap-2">
                         <Check className="h-6 w-6" />
                         <span>Application submitted</span>
                       </span>
@@ -166,7 +166,7 @@ const Application = () => {
           </div>
 
           {step < 3 && (
-            <div className="flex flex-row gap-5 justify-center bg-gray-100 absolute bottom-0 left-0 w-full p-3">
+            <div className="absolute bottom-0 left-0 flex w-full flex-row justify-center gap-5 bg-gray-100 p-3">
               {step !== 1 && (
                 <Button
                   label="Back"

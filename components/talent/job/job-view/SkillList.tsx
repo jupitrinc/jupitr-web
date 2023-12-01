@@ -8,7 +8,7 @@ const SkillList = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-3 gap-5 items-center">
+      <div className="grid grid-cols-3 items-center gap-5">
         <Divider />
         <Text as="h2" size="lg" align="center">
           Skills

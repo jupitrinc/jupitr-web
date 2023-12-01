@@ -5,10 +5,10 @@ import VideoJobApplication from "./VideoJobApplication"
 
 const Sections = () => {
   return (
-    <div className="flex flex-col gap-5 max-w-4xl mx-auto p-10">
+    <div className="mx-auto flex max-w-4xl flex-col gap-5 p-10">
       <GetStarted />
 
-      <section className="h-screen flex items-center justify-center">
+      <section className="flex h-screen items-center justify-center">
         <div className="basis-full">
           <SectionHeader
             title="Looking for A-player tech talent?"
@@ -24,7 +24,7 @@ const Sections = () => {
         </div>
       </section>
 
-      <section className="h-screen flex items-center justify-center">
+      <section className="flex h-screen items-center justify-center">
         <div className="basis-full">
           <Skills />
         </div>

@@ -14,11 +14,11 @@ const GetStarted = () => {
   }
 
   return (
-    <div className="sticky top-5 w-full bg-gray-200/90 backdrop-blur-sm px-6 py-2 rounded-lg z-10">
+    <div className="sticky top-5 z-10 w-full rounded-lg bg-gray-200/90 px-6 py-2 backdrop-blur-sm">
       <div className="flex justify-between">
         <Button variant="text" size="xs" label="Home" onClick={goHome} />
 
-        <div className="flex flex-row gap-2 justify-center items-center">
+        <div className="flex flex-row items-center justify-center gap-2">
           <Button
             label="Get started"
             size="xs"

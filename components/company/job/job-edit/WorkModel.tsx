@@ -42,9 +42,9 @@ const WorkModel = () => {
   }, [workModels, company_job.id])
 
   return (
-    <div className="flex flex-col gap-2 justify-center">
+    <div className="flex flex-col justify-center gap-2">
       <Label value="Work model" htmlFor="" />
-      <div className="flex flex-row gap-5 flex-wrap">
+      <div className="flex flex-row flex-wrap gap-5">
         <CheckboxGroup options={items} />
       </div>
     </div>

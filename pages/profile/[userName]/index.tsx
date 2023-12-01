@@ -24,7 +24,7 @@ export default function TalentPublicProfile({
     return <Loading />
   } else if (error) {
     return (
-      <div className="flex justify-center mt-20">
+      <div className="mt-20 flex justify-center">
         <NoMatchFound message="Profile not found" link="/" label="Home" />
       </div>
     )

@@ -10,10 +10,10 @@ const Details = () => {
   const { talent_job } = useTalentJobState()
 
   return (
-    <div className="flex flex-row justify-between gap-5 mt-5 mb-5">
+    <div className="mb-5 mt-5 flex flex-row justify-between gap-5">
       <div className="flex flex-col flex-wrap gap-5">
         <Text as="span" size="base">
-          <span className="flex flex-row flex-wrap gap-1 items-center">
+          <span className="flex flex-row flex-wrap items-center gap-1">
             <Currency countryCode={talent_job.location?.country.code} />
             <Pill
               label={numberHelper.formatNumber(Number(talent_job.salary))}
@@ -22,7 +22,7 @@ const Details = () => {
           </span>
         </Text>
 
-        <div className="flex flex-row flex-wrap gap-2 items-center">
+        <div className="flex flex-row flex-wrap items-center gap-2">
           <Laptop className="h-5 w-5" />
 
           <div className="flex flex-row flex-wrap gap-2">
@@ -38,7 +38,7 @@ const Details = () => {
 
         {talent_job.location && (
           <Text as="span" size="base">
-            <span className="flex flex-row flex-wrap gap-1 items-center">
+            <span className="flex flex-row flex-wrap items-center gap-1">
               <MapPin className="h-5 w-5" />
               <Pill label={talent_job.location.name} size="base" />
             </span>
@@ -46,7 +46,7 @@ const Details = () => {
         )}
 
         <Text as="span" size="base">
-          <span className="flex flex-row flex-wrap gap-1 items-center">
+          <span className="flex flex-row flex-wrap items-center gap-1">
             <Globe className="h-5 w-5" />
             <a
               href={urlHelper.websiteUrl(talent_job.company.website)}

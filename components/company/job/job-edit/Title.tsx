@@ -25,7 +25,7 @@ const Title = () => {
   )
 
   return (
-    <form className="basis-1/3 w-full" onSubmit={update}>
+    <form className="w-full basis-1/3" onSubmit={update}>
       <TextInput
         placeholder="Job title"
         value={value}
