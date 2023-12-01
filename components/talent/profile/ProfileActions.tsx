@@ -8,7 +8,7 @@ import { useUserState } from "state/user/useUserState"
 const ProfileActions = () => {
   const { user } = useUserState()
   return (
-    <div className="my-2 flex items-center justify-between rounded-lg bg-white p-4 text-center sm:gap-4">
+    <div className="mb-5 flex items-center justify-between rounded-lg bg-white p-4 text-center sm:gap-4">
       <div className="flex justify-center text-center">
         <Searching />
       </div>
