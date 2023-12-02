@@ -1,6 +1,6 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { Edit, MapPin } from "lucide-react"
+import { Edit, MapPin, Share2 } from "lucide-react"
 import { Card } from "ui-library/content/card/Card"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
@@ -10,6 +10,7 @@ import { IUser } from "state/user/user.types"
 import { ITalentProfile } from "state/talent_profile/talentProfile.types"
 import { urlHelper } from "helper/urlHelper"
 import { Button } from "ui-library/button/Button"
+import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { useUserState } from "state/user/useUserState"
 import { Divider } from "ui-library/content/divider/Divider"
 
@@ -23,7 +24,7 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
   const { userName } = router.query
   const { user } = useUserState()
 
-  const showEditProfile = () => {
+  const isOwnProfile = () => {
     return Boolean(userName && user.username && user.username === userName)
   }
 
@@ -34,13 +35,21 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-5">
-      {showEditProfile() && (
+      {isOwnProfile() && (
         <div>
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
+            <CopyClipboard
+              label="Share profile"
+              confirmLabel="Link copied"
+              size="xs"
+              icon={<Share2 className="h-4 w-4" />}
+              value={urlHelper.pageUrl()}
+            />
+
             <Button
               label="Edit profile"
               size="xs"
-              variant="outlined"
+              variant="text"
               icon={<Edit className="h-4 w-4" />}
               onClick={() => router.push("/profile")}
             />

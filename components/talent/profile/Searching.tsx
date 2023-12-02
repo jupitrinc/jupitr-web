@@ -9,10 +9,10 @@ const Searching = () => {
 
   return (
     <Toggle
-      label={user.searching ? "Looking for a job" : "Not looking for a job"}
+      label="I am open to opportunities"
       onChange={(e) => toggleSearching(user.id, e.target.checked)}
       checked={user.searching}
-      size="lg"
+      size="base"
     />
   )
 }

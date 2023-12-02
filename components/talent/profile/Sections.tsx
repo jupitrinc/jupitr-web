@@ -5,20 +5,14 @@ import Skills from "./Skills"
 import AccountSettings from "components/user/account-settings/AccountSettings"
 import UserProfile from "components/user/profile/UserProfile"
 import Location from "./Location"
-import Searching from "./Searching"
 import IntroVideo from "./IntroVideo"
 
 const Sections = () => {
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       <div>
         <Card type="section">
-          <div className="flex justify-end">
-            <Searching />
-          </div>
-
           <UserProfile />
-
           <SocialLinks />
           <Location />
         </Card>
