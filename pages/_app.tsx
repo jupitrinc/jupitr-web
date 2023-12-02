@@ -5,7 +5,6 @@ import { IndustryContextProvider } from "state/industry/IndustryContext"
 import { NotificationContextProvider } from "state/notification/NotificationContext"
 import { SkillContextProvider } from "state/skill/SkillContext"
 import Notifications from "components/user/notifications/Notifications"
-import { TalentJobContextProvider } from "state/talent_job/TalentJobContext"
 import { GoogleAnalytics } from "helper/libs/google-analytics/GoogleAnalytics"
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -17,10 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <UserContextProvider>
           <IndustryContextProvider>
             <SkillContextProvider>
-              <TalentJobContextProvider>
                 <Component {...pageProps} />
-              </TalentJobContextProvider>
-
               <Notifications />
             </SkillContextProvider>
           </IndustryContextProvider>

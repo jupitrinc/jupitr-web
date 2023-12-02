@@ -3,7 +3,6 @@ import { WebsiteLayout } from "layouts/WebsiteLayout"
 import { useUserState } from "state/user/useUserState"
 import { Button } from "ui-library/button/Button"
 import { useRouter } from "next/router"
-import { AccountTypeEnum } from "state/user/user.types"
 import { urlHelper } from "helper/urlHelper"
 import { GetServerSidePropsContext } from "next"
 import PageHead from "layouts/components/PageHead"
@@ -14,9 +13,7 @@ export default function Home({ domain }) {
   const { user } = useUserState()
 
   const goToDashboard = useCallback(() => {
-    router.push(
-      user.account_type === AccountTypeEnum.company ? "/c/jobs" : "/jobs"
-    )
+    router.push("/profile")
   }, [user])
 
   const dynamicImage = useMemo(
@@ -45,7 +42,7 @@ export default function Home({ domain }) {
         {user.id && (
           <div className="m-auto mt-24 flex max-w-sm justify-center text-center">
             <Button
-              label="Jobs"
+              label="Profile"
               size="xl"
               variant="outlined"
               onClick={goToDashboard}

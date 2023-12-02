@@ -6,7 +6,7 @@ import { VideoRecorder } from "ui-library/video/video-recorder/VideoRecorder"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
 import { useUserState } from "state/user/useUserState"
-import { static_data_job } from "data/job"
+import { system_data } from "data/system"
 import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
@@ -66,7 +66,7 @@ const IntroVideo = () => {
           </Text>
 
           <VideoRecorder
-            duration={Number(static_data_job.video_duration[2])}
+            duration={Number(system_data.video_duration[2])}
             recordLabel={videoFile ? "Record again" : "Start"}
             onChange={(videoFile) => setVideoFile(videoFile)}
             disabled={loading}

@@ -5,7 +5,7 @@ import { Card } from "ui-library/content/card/Card"
 import { Text } from "ui-library/text/Text"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import SkillCard from "ui-library/content/card/skill-card-progress-bar/SkillCard"
-import { SocialIcon } from "components/talent/profile/SocialLinks"
+import { SocialIcon } from "components/talent/profile-edit/SocialLinks"
 import { IUser } from "state/user/user.types"
 import { ITalentProfile } from "state/talent_profile/talentProfile.types"
 import { urlHelper } from "helper/urlHelper"
@@ -14,12 +14,12 @@ import { CopyClipboard } from "ui-library/copy-clipboard/CopyClipboard"
 import { useUserState } from "state/user/useUserState"
 import { Divider } from "ui-library/content/divider/Divider"
 
-export interface IPublicProfile
+export interface IProfile
   extends Omit<IUser, "email" | "account_type" | "active"> {
   talent_profile?: Omit<ITalentProfile, "user_id" | "preferences">
 }
 
-const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
+const Profile = ({ profile }: { profile: IProfile }) => {
   const router = useRouter()
   const { userName } = router.query
   const { user } = useUserState()
@@ -120,4 +120,4 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
   )
 }
 
-export default PublicProfile
+export default Profile

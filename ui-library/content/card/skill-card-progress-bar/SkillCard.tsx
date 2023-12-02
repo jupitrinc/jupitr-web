@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { Text } from "ui-library/text/Text"
 import { ProgressBar } from "ui-library/progress-bar/ProgressBar"
 import { Card } from "ui-library/content/card/Card"
-import { static_data_job } from "data/job"
+import { system_data } from "data/system"
 import { ProgressBarProps } from "ui-library/progress-bar/ProgressBar.types"
 
 export interface props {
@@ -45,10 +45,10 @@ const SkillCard: React.FC<props> = ({ skill }) => {
 
       <div className="mt-2 flex justify-between">
         <Text as="span" size="sm">
-          {static_data_job.skill_levels[0]}
+          {system_data.skill_levels[0]}
         </Text>
         <Text as="span" size="sm">
-          {static_data_job.skill_levels[2]}
+          {system_data.skill_levels[2]}
         </Text>
       </div>
     </Card>

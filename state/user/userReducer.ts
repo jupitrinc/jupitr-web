@@ -12,18 +12,13 @@ import {
   TalentProfileActionEnum,
 } from "state/talent_profile/talentProfile.types"
 import {
-  CompanyMemberProfileAction,
-  CompanyMemberProfileActionEnum,
-  ICompanyMemberProfile,
-} from "state/company_member_profile/companyMemberProfile.types"
-import {
   localStorageHelper,
   LocalStorageItemEnum,
 } from "helper/localStorageHelper"
 
 export const userReducer = (
   state: UserState,
-  action: UserAction | TalentProfileAction | CompanyMemberProfileAction
+  action: UserAction | TalentProfileAction
 ): UserState => {
   const { setItem, removeItem } = localStorageHelper
 
@@ -236,22 +231,6 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, update_intro_video_state.data)
       return update_intro_video_state
-
-    // FIXME company_member_profile
-    case CompanyMemberProfileActionEnum.UPDATE_JOB_TITLE:
-      const update_job_title_payload =
-        action.payload as ICompanyMemberProfile["job_title"]
-
-      const update_job_title_state = {
-        ...state,
-        data: {
-          ...state.data,
-          job_title: update_job_title_payload,
-        },
-      }
-
-      setItem(LocalStorageItemEnum.user, update_job_title_state.data)
-      return update_job_title_state
 
     default:
       return state

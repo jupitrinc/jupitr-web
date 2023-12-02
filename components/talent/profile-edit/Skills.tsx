@@ -6,7 +6,7 @@ import { useUserState } from "state/user/useUserState"
 import { Multiselect } from "ui-library/form/multiselect/Multiselect"
 import { useSkillAction } from "state/skill/useSkillAction"
 import { useSkillState } from "state/skill/useSkillState"
-import { static_data_job } from "data/job"
+import { system_data } from "data/system"
 import { useDebounce } from "helper/hooks/useDebounce"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
 import SectionVisibility from "./SectionVisibility"
@@ -75,7 +75,7 @@ const Skills = () => {
           <SkillCard
             skill={skill}
             key={skill.id}
-            levels={static_data_job.skill_levels}
+            levels={system_data.skill_levels}
             removeSkill={() => removeSkill(user.id, skill, user.skills)}
             updateSkill={(level: number) =>
               updateSkill(user.id, { ...skill, level: level }, user.skills)
