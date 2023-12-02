@@ -33,6 +33,11 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
   const intro_video = profile.talent_profile?.intro_video
   const skills = profile.talent_profile?.skills
 
+  const showSocials = user.visibility?.socials?.overall ?? true
+  const showLocation = user.visibility?.location?.overall ?? true
+  const showIntroVideo = user.visibility?.intro_video?.overall ?? true
+  const showSkills = user.visibility?.skills?.overall ?? true
+
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-5">
       {isOwnProfile() && (
@@ -65,20 +70,24 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
             </Text>
           </div>
 
-          {intro_video && (
+          {showIntroVideo && intro_video && (
             <div className="flex max-h-96">
               <VideoPlayer src={urlHelper.videoUrl(intro_video) as string} />
             </div>
           )}
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {skills?.map((skill) => <SkillCard key={skill.id} skill={skill} />)}
-          </div>
+          {showSkills && (
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {skills?.map((skill) => (
+                <SkillCard key={skill.id} skill={skill} />
+              ))}
+            </div>
+          )}
 
           <Divider />
 
           <div className="flex flex-row justify-between gap-1">
-            {location && (
+            {showLocation && location && (
               <div className="flex flex-row items-center justify-end gap-1">
                 <MapPin className="h-4 w-4 text-gray-600" />
                 <Text as="span" size="xs">
@@ -87,21 +96,23 @@ const PublicProfile = ({ profile }: { profile: IPublicProfile }) => {
               </div>
             )}
 
-            <div className="flex flex-row justify-end gap-3">
-              {socials.map(
-                (social) =>
-                  social.url && (
-                    <a
-                      key={social.url}
-                      href={urlHelper.websiteUrl(social.url)}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <SocialIcon name={social.name} />
-                    </a>
-                  )
-              )}
-            </div>
+            {showSocials && (
+              <div className="flex flex-row justify-end gap-3">
+                {socials.map(
+                  (social) =>
+                    social.url && (
+                      <a
+                        key={social.url}
+                        href={urlHelper.websiteUrl(social.url)}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <SocialIcon name={social.name} />
+                      </a>
+                    )
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Card>

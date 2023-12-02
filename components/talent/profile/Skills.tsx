@@ -9,6 +9,7 @@ import { useSkillState } from "state/skill/useSkillState"
 import { static_data_job } from "data/job"
 import { useDebounce } from "helper/hooks/useDebounce"
 import SkillCard from "ui-library/content/card/skill-card-tabs/SkillCard"
+import SectionVisibility from "./SectionVisibility"
 
 const Skills = () => {
   const { user } = useUserState()
@@ -51,6 +52,9 @@ const Skills = () => {
 
   return (
     <Card type="section">
+      <div className="absolute right-1 top-1 flex items-center">
+        <SectionVisibility section="skills" />
+      </div>
       <div className="flex flex-col gap-5">
         <SectionHeader title="Skills" />
         <Multiselect

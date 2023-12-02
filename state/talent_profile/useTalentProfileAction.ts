@@ -213,6 +213,24 @@ export function useTalentProfileAction() {
     }
   }
 
+  const updateVisibility = async (
+    user_id: ITalentProfile["user_id"],
+    visibility: ITalentProfile["visibility"]
+  ) => {
+    if (!user_id) return
+
+    const { data } = await updateProfile(user_id, {
+      visibility,
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_VISIBILITY,
+        payload: data.visibility,
+      })
+    }
+  }
+
   return {
     updateSocials,
     toggleSearching,
@@ -221,5 +239,6 @@ export function useTalentProfileAction() {
     updateSkill,
     updateAllSkills,
     updateIntroVideo,
+    updateVisibility,
   }
 }
