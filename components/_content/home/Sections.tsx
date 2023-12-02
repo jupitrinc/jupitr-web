@@ -1,32 +1,29 @@
-import Upskill from "./Upskill"
-import VideoJob from "./VideoJob"
-import VideoJobApplication from "./VideoJobApplication"
-import Brands from "./brands"
+import Skills from "./Skills"
+import IntroVideo from "./IntroVideo"
+import SectionHeader from "./SectionHeader"
 
 const Sections = () => {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-5 p-10">
       <section className="flex h-screen items-center justify-center">
         <div className="basis-full">
-          <Brands />
+          <SectionHeader
+            title="Get more job interviews with jupitr."
+            subtitle=""
+            highlight="job interviews"
+          />
         </div>
       </section>
 
       <section className="flex h-screen items-center justify-center">
         <div className="basis-full">
-          <VideoJob />
+          <IntroVideo />
         </div>
       </section>
 
       <section className="flex h-screen items-center justify-center">
         <div className="basis-full">
-          <VideoJobApplication />
-        </div>
-      </section>
-
-      <section className="flex h-screen items-center justify-center">
-        <div className="basis-full">
-          <Upskill />
+          <Skills />
         </div>
       </section>
     </div>

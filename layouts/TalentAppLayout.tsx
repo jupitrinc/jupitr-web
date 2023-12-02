@@ -21,7 +21,7 @@ export const TalentAppLayout = ({
   if (user.account_type === AccountTypeEnum.talent || jobId || userName) {
     return (
       <>
-        {!jobId && !userName && <PageHead />}
+        {!userName && <PageHead />}
         <header className="flex justify-center">
           <Navbar />
         </header>

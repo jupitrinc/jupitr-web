@@ -15,22 +15,22 @@ const data_images = [
   `${data_prefix}/t6_cmoao4.png`,
 ]
 
-const VideoJobApplication = () => {
+const IntroVideo = () => {
   return (
     <div className="flex flex-col gap-20">
       <SectionHeader
-        title="Video job application"
+        title="Intro video"
         subtitle="Show off your attitude alongside skills. You are more than just your CV."
-        highlight="Video"
+        highlight="Intro video"
       />
       <div className="max-w-sm sm:max-w-5xl">
         <ScrollAnimation>
           {data_images.map((image) => (
             <ScrollAnimationItem key={image}>
-              <div className="w-60">
+              <div className="w-80">
                 <Image
                   src={urlHelper.cloudinaryImageUrl(image) as string}
-                  className="w-60 rounded-md"
+                  className="w-80 rounded-md"
                   alt="image"
                 />
               </div>
@@ -42,4 +42,4 @@ const VideoJobApplication = () => {
   )
 }
 
-export default VideoJobApplication
+export default IntroVideo

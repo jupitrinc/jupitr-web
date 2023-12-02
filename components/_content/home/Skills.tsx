@@ -5,13 +5,13 @@ import {
 } from "ui-library/content/scroll-animation/ScrollAnimation"
 import SectionHeader from "./SectionHeader"
 
-const Upskill = () => {
+const Skills = () => {
   return (
     <div className="flex flex-col gap-20">
       <SectionHeader
-        title="Upskill with jupitr community"
-        subtitle="Stay on top of the latest tech skills, tools and tips."
-        highlight="Upskill"
+        title="Skills"
+        subtitle="Showcase your skills on a granular level."
+        highlight="Skills"
       />
 
       <div className="max-w-sm sm:max-w-5xl">
@@ -67,4 +67,4 @@ const Upskill = () => {
   )
 }
 
-export default Upskill
+export default Skills

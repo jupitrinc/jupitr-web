@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <UserContextProvider>
           <IndustryContextProvider>
             <SkillContextProvider>
-                <Component {...pageProps} />
+              <Component {...pageProps} />
               <Notifications />
             </SkillContextProvider>
           </IndustryContextProvider>
