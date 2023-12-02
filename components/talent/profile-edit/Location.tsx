@@ -43,8 +43,8 @@ const Location = () => {
   }
 
   return (
-    <>
-      <div className="mb-2 flex items-center justify-between">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
         <Text as="h2" size="sm">
           Location
         </Text>
@@ -57,7 +57,7 @@ const Location = () => {
         onSelect={(location) => saveLocation(location as ICity)}
         loading={searchQueryLoading}
       />
-    </>
+    </div>
   )
 }
 

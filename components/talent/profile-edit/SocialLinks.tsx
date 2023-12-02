@@ -47,8 +47,8 @@ const SocialLinks = () => {
   }
 
   return (
-    <>
-      <div className="mb-2 flex items-center justify-between">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
         <Text as="h2" size="sm">
           Social links
         </Text>
@@ -112,7 +112,7 @@ const SocialLinks = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
