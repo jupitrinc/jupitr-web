@@ -5,15 +5,13 @@ import { Loading } from "ui-library/content/loading/Loading"
 import { NoMatchFound } from "ui-library/content/no-match-found/NoMatchFound"
 import { talentProfileService } from "services/talent/talentProfileService"
 import PageHead from "layouts/components/PageHead"
-import PublicProfile, {
-  IPublicProfile,
-} from "components/talent/public-profile/PublicProfile"
+import Profile, { IProfile } from "components/talent/profile/Profile"
 
 export default function TalentPublicProfile({
   profile,
   error,
 }: {
-  profile: IPublicProfile
+  profile: IProfile
   error: boolean
 }) {
   const title = useMemo(() => {
@@ -37,7 +35,7 @@ export default function TalentPublicProfile({
           robots="index, follow"
         />
         <TalentAppLayout>
-          <PublicProfile profile={profile} />
+          <Profile profile={profile} />
         </TalentAppLayout>
       </>
     )

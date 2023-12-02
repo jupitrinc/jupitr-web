@@ -9,8 +9,6 @@ import {
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
 import mediaService from "../../services/storage/mediaService"
-import { AddCompany } from "state/company_profile/companyProfile.types"
-import companyService from "services/company/companyService"
 import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
@@ -24,7 +22,6 @@ export function useUserAction() {
 
   const { clear } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
-  const { toBase64 } = imageHelper
 
   const router = useRouter()
   const { dispatch } = useContext(UserContext)
@@ -37,7 +34,6 @@ export function useUserAction() {
     changeEmail: changeEmailService,
   } = useAuthService()
   const { getUser: getUserService, updateUser } = userService()
-  const { addCompany } = companyService()
 
   const signInWithEmail = async (email: string) => {
     dispatch({ type: UserActionEnum.SIGN_IN_BEGIN })
@@ -105,36 +101,6 @@ export function useUserAction() {
       type: UserActionEnum.GET_USER_SUCCESS,
       payload: user,
     })
-  }
-
-  const signUpCompany = async (company: AddCompany) => {
-    dispatch({ type: UserActionEnum.COMPANY_SIGN_UP_BEGIN })
-
-    const resizedFile = await imageHelper.resize(company.logo as File)
-    const base64File = await toBase64(resizedFile)
-    const { error } = await addCompany({
-      ...company,
-      logo: base64File,
-    })
-
-    if (error) {
-      dispatch({
-        type: UserActionEnum.COMPANY_SIGN_UP_FAILURE,
-      })
-
-      notify({
-        message: error.message,
-        type: "warning",
-      })
-    } else {
-      dispatch({
-        type: UserActionEnum.COMPANY_SIGN_UP_SUCCESS,
-      })
-
-      gaEvent("company_signup", {
-        category: "company",
-      })
-    }
   }
 
   const signOut = async () => {
@@ -309,7 +275,6 @@ export function useUserAction() {
     signInWithEmail,
     signInWithGoogle,
     signOut,
-    signUpCompany,
     getUser,
     setUser,
     updateName,

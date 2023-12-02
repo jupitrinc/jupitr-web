@@ -12,8 +12,8 @@ type Story = StoryObj<typeof NoMatchFound>
 
 export const component: Story = {
   args: {
-    message: "Job no longer available",
-    label: "Find similar jobs",
-    link: "/jobs",
+    message: "Profile no longer available",
+    label: "Go back",
+    link: "/",
   },
 }

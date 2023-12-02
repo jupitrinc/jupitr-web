@@ -1,8 +1,5 @@
 import { User } from "@supabase/supabase-js"
-import {
-  CompanyMemberProfileAction,
-  ICompanyMemberProfile,
-} from "state/company_member_profile/companyMemberProfile.types"
+
 import {
   ITalentProfile,
   TalentProfileAction,
@@ -11,9 +8,7 @@ import { ICity } from "state/location/location.types"
 
 export interface IUserContext {
   state: UserState
-  dispatch: ({
-    type,
-  }: UserAction | TalentProfileAction | CompanyMemberProfileAction) => void
+  dispatch: ({ type }: UserAction | TalentProfileAction) => void
 }
 
 export interface IUser {
@@ -34,7 +29,7 @@ export enum AccountTypeEnum {
   company = "company",
 }
 
-export type ISuperUser = ITalentProfile & ICompanyMemberProfile
+export type ISuperUser = ITalentProfile
 
 export type UserState = {
   data: ISuperUser

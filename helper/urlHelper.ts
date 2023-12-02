@@ -13,22 +13,10 @@ interface OGImageUrl {
 
 export const urlHelper = {
   isPublicUrl: (pathName: string) => {
-    const routes = [
-      "/login",
-      "/auth/callback",
-      "/",
-      "/c",
-      "/c/signup",
-      "/login/verify",
-    ]
+    const routes = ["/login", "/auth/callback", "/", "/login/verify"]
     return routes.includes(`${pathName}`)
   },
-  isPublicJobRoute: (pathName: string) => {
-    if (pathName) {
-      const parts = pathName?.split("/")
-      return parts[1] === "jobs" && parts.length === 3
-    }
-  },
+
   isPublicTalentProfileRoute: (pathName: string) => {
     if (pathName) {
       const parts = pathName?.split("/")

@@ -1,7 +1,7 @@
 import { TalentAppLayout } from "layouts/TalentAppLayout"
-import Sections from "components/talent/profile/Sections"
-import Checks from "components/talent/profile/checks/ProfileChecks"
-import ProfileActions from "components/talent/profile/ProfileActions"
+import Sections from "components/talent/profile-edit/Sections"
+import Checks from "components/talent/profile-edit/checks/ProfileChecks"
+import ProfileActions from "components/talent/profile-edit/ProfileActions"
 
 export default function TalentProfile() {
   return (
