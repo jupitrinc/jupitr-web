@@ -11,6 +11,7 @@ import { SectionHeader } from "ui-library/content/section-header/SectionHeader"
 import { VideoPlayer } from "ui-library/video/video-player/VideoPlayer"
 import { urlHelper } from "helper/urlHelper"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
+import SectionVisibility from "./SectionVisibility"
 
 const IntroVideo = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null)
@@ -34,6 +35,9 @@ const IntroVideo = () => {
   return (
     <>
       <Card type="section">
+        <div className="absolute right-1 top-1 flex items-center">
+          <SectionVisibility section="intro_video" />
+        </div>
         <div className="flex flex-row justify-between gap-1">
           <SectionHeader title="Intro video" />
           <Button

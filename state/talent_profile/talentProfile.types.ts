@@ -1,4 +1,5 @@
 import { IUser } from "state/user/user.types"
+import { ProfileVisibility } from "services/_supabase/database"
 
 export interface ITalentProfile extends IUser {
   user_id: string
@@ -7,6 +8,7 @@ export interface ITalentProfile extends IUser {
   socials: { name: string; url: string }[] | null
   intro_video: string | null
   preferences: {}
+  visibility: ProfileVisibility | null
 }
 
 export type ISkill = {
@@ -24,6 +26,7 @@ export type TalentProfileAction = {
     | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_BEGIN
     | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_FAILURE
     | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_SUCCESS
+    | TalentProfileActionEnum.UPDATE_VISIBILITY
 
   payload?:
     | ITalentProfile["socials"]
@@ -31,6 +34,7 @@ export type TalentProfileAction = {
     | ISkill[]
     | ITalentProfile["searching"]
     | ITalentProfile["intro_video"]
+    | ITalentProfile["visibility"]
 }
 
 export enum TalentProfileActionEnum {
@@ -38,6 +42,7 @@ export enum TalentProfileActionEnum {
   UPDATE_LOCATION = "UPDATE_LOCATION",
   TOGGLE_SEARCHING = "TOGGLE_SEARCHING",
   UPDATE_SKILLS = "UPDATE_SKILLS",
+  UPDATE_VISIBILITY = "UPDATE_VISIBILITY",
 
   UPDATE_INTRO_VIDEO_BEGIN = "UPDATE_INTRO_VIDEO_BEGIN",
   UPDATE_INTRO_VIDEO_FAILURE = "UPDATE_INTRO_VIDEO_FAILURE",

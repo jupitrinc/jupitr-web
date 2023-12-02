@@ -8,6 +8,19 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+export type ProfileSections = "intro_video" | "skills" | "socials" | "location"
+
+export type ProfileVisibility = {
+  [K in ProfileSections]?: GenericVisibility
+}
+
+type GenericVisibility = {
+  overall?: boolean
+  details?: VisibilityDetail
+}
+
+type VisibilityDetail = { [key: string]: boolean }
+
 export interface Database {
   public: {
     Tables: {
@@ -339,6 +352,7 @@ export interface Database {
           updated_at: string | null
           user_id: string | null
           intro_video: string | null
+          visibility?: ProfileVisibility | null
         }
         Insert: {
           id?: string
@@ -349,6 +363,7 @@ export interface Database {
           updated_at?: string | null
           user_id?: string | null
           intro_video?: string | null
+          visibility?: ProfileVisibility | null
         }
         Update: {
           id?: string
@@ -359,6 +374,7 @@ export interface Database {
           updated_at?: string | null
           user_id?: string | null
           intro_video?: string | null
+          visibility?: ProfileVisibility | null
         }
         Relationships: [
           {

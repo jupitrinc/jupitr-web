@@ -5,6 +5,8 @@ import { useDebounce } from "helper/hooks/useDebounce"
 import locationService from "services/location/locationService"
 import { useUserAction } from "state/user/useUserAction"
 import { ICity } from "state/location/location.types"
+import { Text } from "ui-library/text/Text"
+import SectionVisibility from "./SectionVisibility"
 
 const Location = () => {
   const { user } = useUserState()
@@ -41,14 +43,21 @@ const Location = () => {
   }
 
   return (
-    <Multiselect
-      label="Location"
-      placeholder={user.location?.name ?? "Search cities"}
-      options={cities}
-      onChange={(searchKeyword) => setSearchQuery(searchKeyword)}
-      onSelect={(location) => saveLocation(location as ICity)}
-      loading={searchQueryLoading}
-    />
+    <>
+      <div className="mb-2 flex items-center justify-between">
+        <Text as="h2" size="sm">
+          Location
+        </Text>
+        <SectionVisibility section="location" />
+      </div>
+      <Multiselect
+        placeholder={user.location?.name ?? "Search cities"}
+        options={cities}
+        onChange={(searchKeyword) => setSearchQuery(searchKeyword)}
+        onSelect={(location) => saveLocation(location as ICity)}
+        loading={searchQueryLoading}
+      />
+    </>
   )
 }
 
