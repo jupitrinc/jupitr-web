@@ -20,7 +20,7 @@ const IntroVideo = () => {
     <div className="flex flex-col gap-20">
       <SectionHeader
         title="Intro video"
-        subtitle="Show off your attitude alongside skills. You are more than just your CV."
+        subtitle="Show off your personality alongside skills. You are more than just your CV."
         highlight="Intro video"
       />
       <div className="max-w-sm sm:max-w-5xl">
