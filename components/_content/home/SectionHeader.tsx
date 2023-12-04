@@ -28,7 +28,7 @@ const SectionHeader = ({
         </Text>
       }
 
-      <Text as="h2" size="lg" align="center">
+      <Text as="h2" size="xl" align="center">
         {subtitle}
       </Text>
     </div>

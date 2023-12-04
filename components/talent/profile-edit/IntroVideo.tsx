@@ -38,7 +38,7 @@ const IntroVideo = () => {
         <div className="absolute right-1 top-1 flex items-center">
           <SectionVisibility section="intro_video" />
         </div>
-        <div className="flex flex-row justify-between gap-1">
+        <div className="flex flex-row items-center justify-between gap-1">
           <SectionHeader title="Intro video" />
           <Button
             label={user.intro_video ? "Change" : "Add"}

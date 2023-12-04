@@ -11,13 +11,18 @@ export default function Login() {
     <>
       <PageHead
         title="Sign in - jupitr"
-        description="Looking for a tech job? Join A-player teams"
+        description=""
         robots="index, follow"
       />
       <WebsiteLayout>
         <div className="mx-auto mb-10 flex max-w-sm">
           <Link href="/">
-            <Button variant="text" icon={<ChevronLeft />} label="Home" />
+            <Button
+              variant="text"
+              icon={<ChevronLeft className="h-5 w-5" />}
+              label="Home"
+              size="xs"
+            />
           </Link>
         </div>
         <div className="mx-auto max-w-sm">

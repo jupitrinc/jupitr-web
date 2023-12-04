@@ -5,7 +5,7 @@ import { Loading } from "ui-library/content/loading/Loading"
 import { NoMatchFound } from "ui-library/content/no-match-found/NoMatchFound"
 import { talentProfileService } from "services/talent/talentProfileService"
 import PageHead from "layouts/components/PageHead"
-import Profile, { IProfile } from "components/talent/profile/Profile"
+import Sections, { IProfile } from "components/talent/profile/Sections"
 
 export default function TalentPublicProfile({
   profile,
@@ -31,11 +31,11 @@ export default function TalentPublicProfile({
       <>
         <PageHead
           title={title}
-          description="Let's connect on jupitr"
+          description="Check out my jupitr profile"
           robots="index, follow"
         />
         <TalentAppLayout>
-          <Profile profile={profile} />
+          <Sections profile={profile} />
         </TalentAppLayout>
       </>
     )
