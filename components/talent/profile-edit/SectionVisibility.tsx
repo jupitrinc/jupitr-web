@@ -51,9 +51,9 @@ const SectionVisibility = ({ section }: ISectionVisibilityProps) => {
       <Button
         icon={
           isVisible ? (
-            <Eye className="h-5 w-5" />
+            <Eye className="h-4 w-4 text-gray-500" />
           ) : (
-            <EyeOff className="h-5 w-5" />
+            <EyeOff className="h-4 w-4 text-gray-500" />
           )
         }
         variant="text"

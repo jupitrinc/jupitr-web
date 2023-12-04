@@ -6,6 +6,7 @@ import { useReactiveState } from "helper/hooks/useReactiveState"
 import { useTalentProfileAction } from "state/talent_profile/useTalentProfileAction"
 import { useUserState } from "state/user/useUserState"
 import SectionVisibility from "./SectionVisibility"
+import { Label } from "ui-library/form/label/Label"
 
 enum SocialsEnum {
   linkedin = "linkedin",
@@ -49,9 +50,8 @@ const SocialLinks = () => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <Text as="h2" size="sm">
-          Social links
-        </Text>
+        <Label htmlFor="" value="Social links" />
+
         <SectionVisibility section="socials" />
       </div>
       <div className="flex flex-col gap-5">
@@ -118,7 +118,7 @@ const SocialLinks = () => {
 
 export default SocialLinks
 
-export const SocialIcon = ({ name }) => {
+const SocialIcon = ({ name }) => {
   if (typeof name !== "string") return null
 
   const styles = "w-5 h-5 align-middle text-gray-600"

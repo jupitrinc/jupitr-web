@@ -65,7 +65,7 @@ export const urlHelper = {
   },
 
   pageUrl: () => {
-    return window.location.href
+    if (typeof window !== "undefined") return window.location.href
   },
   hostName: () => {
     return !window.location.hostname.includes("localhost")
@@ -77,5 +77,8 @@ export const urlHelper = {
   },
   domain: () => {
     return `${urlHelper.protocol()}//${urlHelper.hostName()}`
+  },
+  staticDomain: () => {
+    return `https://jupitr.tech`
   },
 }

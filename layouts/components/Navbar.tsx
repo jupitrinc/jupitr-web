@@ -11,17 +11,12 @@ import Feedback from "components/user/feedback/Feedback"
 
 export const Navbar = () => {
   const router = useRouter()
+  const { userName } = router.query
   const { isLoggedIn } = useUserState()
 
-  if (router.pathname.includes("/login")) {
-    return null
-  } else {
-    if (isLoggedIn) {
-      return <TalentMenu />
-    } else {
-      return <PublicMenu />
-    }
-  }
+  if (router.pathname.includes("/login")) return null
+  if (isLoggedIn) return <TalentMenu />
+  if (!isLoggedIn && !userName) return <PublicMenu />
 }
 
 const Brand = ({ link }: { link: string }) => {
@@ -35,6 +30,7 @@ const Brand = ({ link }: { link: string }) => {
 }
 
 const TalentMenu = () => {
+  const router = useRouter()
   const { user } = useUserState()
   const { signOut } = useUserAction()
   const { imageUrl } = urlHelper
@@ -54,7 +50,10 @@ const TalentMenu = () => {
           <Dropdown
             type="avatar"
             image_url={imageUrl(user.avatar_url)}
-            options={[{ name: "Sign out", onClick: signOut }]}
+            options={[
+              { name: "Edit profile", onClick: () => router.push("/profile") },
+              { name: "Sign out", onClick: signOut },
+            ]}
           />
         </div>
       </nav>
@@ -62,21 +61,19 @@ const TalentMenu = () => {
   )
 }
 
-const PublicMenu = () => {
+export const PublicMenu = () => {
   return (
-    <div className="fixed top-0 z-20 w-full max-w-7xl  px-4 py-3 sm:px-6 lg:px-8">
-      <nav className="sticky top-10 z-10 w-full rounded-lg bg-gray-200/90 px-6 py-2 backdrop-blur-sm">
-        <div className="flex items-center justify-between">
-          <Brand link="/" />
-          <div className="flex items-center gap-5">
-            <div className="flex flex-row items-center gap-2">
-              <Link href="/login">
-                <Button label="Sign in" color="special" size="sm" />
-              </Link>
-            </div>
+    <nav className="fixed top-0 z-20 w-full max-w-7xl bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between">
+        <Brand link="/" />
+        <div className="flex items-center gap-5">
+          <div className="flex flex-row items-center gap-2">
+            <Link href="/login">
+              <Button label="Sign in" color="special" />
+            </Link>
           </div>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   )
 }

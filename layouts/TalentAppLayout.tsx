@@ -12,21 +12,25 @@ export const TalentAppLayout = ({
 }: {
   children: React.ReactNode
 }) => {
-  const { user } = useUserState()
+  const { user, isLoggedIn } = useUserState()
   usePersistedUser()
 
   const router = useRouter()
-  const { jobId, userName } = router.query
+  const { userName } = router.query
 
-  if (user.account_type === AccountTypeEnum.talent || jobId || userName) {
+  if (user.account_type === AccountTypeEnum.talent || userName) {
     return (
       <>
-        {!userName && <PageHead />}
+        {!userName && <PageHead title="Edit profile" />}
         <header className="flex justify-center">
           <Navbar />
         </header>
 
-        <div className="mx-auto my-10 mt-24 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          className={`mx-auto my-10 max-w-7xl px-4 sm:px-6 lg:px-8 ${
+            isLoggedIn && "mt-24"
+          }`}
+        >
           <main className="my-10">{children}</main>
         </div>
       </>

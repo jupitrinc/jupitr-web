@@ -57,12 +57,9 @@ export const SignIn = () => {
 
   return (
     <div className="flex flex-col space-y-6 text-center">
-      <div>
+      <div className="mb-5">
         <Text as="h1" size="xl2">
-          Sign in
-        </Text>
-        <Text as="span" size="sm">
-          or sign up
+          Sign in <span className="font-thin text-gray-300">/</span> up
         </Text>
       </div>
 

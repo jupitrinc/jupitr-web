@@ -5,8 +5,8 @@ import { useDebounce } from "helper/hooks/useDebounce"
 import locationService from "services/location/locationService"
 import { useUserAction } from "state/user/useUserAction"
 import { ICity } from "state/location/location.types"
-import { Text } from "ui-library/text/Text"
 import SectionVisibility from "./SectionVisibility"
+import { Label } from "ui-library/form/label/Label"
 
 const Location = () => {
   const { user } = useUserState()
@@ -45,9 +45,7 @@ const Location = () => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <Text as="h2" size="sm">
-          Location
-        </Text>
+        <Label htmlFor="" value="Location" />
         <SectionVisibility section="location" />
       </div>
       <Multiselect
