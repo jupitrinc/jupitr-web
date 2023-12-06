@@ -38,14 +38,14 @@ const SectionVisibility = ({ section }: ISectionVisibilityProps) => {
 
   return (
     <div className="flex items-center">
-      <Text
-        className={`mr-2 transform transition-opacity duration-300 ease-in-out ${
-          showPopup ? "opacity-100" : "opacity-0"
-        }`}
-        as="span"
-        size="xs"
-      >
-        {isVisible ? "Visible" : "Hidden"}
+      <Text as="span" size="xs">
+        <span
+          className={`mr-2 transform transition-opacity duration-300 ease-in-out ${
+            showPopup ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {isVisible ? "Visible" : "Hidden"}
+        </span>
       </Text>
 
       <Button

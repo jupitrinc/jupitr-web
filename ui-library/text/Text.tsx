@@ -5,7 +5,6 @@ import { textStyles as styles } from "./Text.styles"
 import { ThemeColorEnum, ThemeSizeEnum } from "ui-library/_theme/Theme.types"
 
 export const Text: React.FC<TextProps> = ({
-  className,
   as = "span",
   children,
   color,
@@ -21,8 +20,7 @@ export const Text: React.FC<TextProps> = ({
       styles.size[size ? size : ThemeSizeEnum.base],
       styles.align[align ? align : styles.align.left],
       bold && styles.weight.bold,
-      brand && styles.fontFamily.brand,
-      className
+      brand && styles.fontFamily.brand
     )}
   >
     {children}

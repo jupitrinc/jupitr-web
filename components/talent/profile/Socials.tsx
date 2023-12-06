@@ -3,11 +3,11 @@ import { Github, Globe, Linkedin } from "lucide-react"
 import { ITalentProfile } from "state/talent_profile/talentProfile.types"
 import { urlHelper } from "helper/urlHelper"
 
-const Socials = ({
-  socials,
-}: {
+interface props {
   socials: ITalentProfile["socials"] | undefined
-}) => {
+}
+
+const Socials = ({ socials }: props) => {
   const items = socials ?? []
 
   return (
@@ -34,7 +34,7 @@ export default Socials
 const SocialIcon = ({ name }) => {
   if (typeof name !== "string") return null
 
-  const styles = "w-4 h-4 align-middle text-gray-500"
+  const styles = "w-5 h-5 align-middle text-gray-500"
   if (name.includes("github")) {
     return <Github className={styles} />
   } else if (name.includes("linkedin")) {

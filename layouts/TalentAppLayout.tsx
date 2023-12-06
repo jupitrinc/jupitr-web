@@ -22,7 +22,7 @@ export const TalentAppLayout = ({
     return (
       <>
         {!userName && <PageHead title="Edit profile" />}
-        <header className="flex justify-center">
+        <header>
           <Navbar />
         </header>
 
