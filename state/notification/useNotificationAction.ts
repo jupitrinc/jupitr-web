@@ -8,11 +8,13 @@ export function useNotificationAction() {
 
   const notify = async (payload: Omit<INotification, "id">) => {
     if (!payload.message || !payload.type) return
-
+    const id = stringHelper.randomHash()
     dispatch({
       type: NotificationActionEnum.SHOW_NOTIFICATION,
-      payload: { ...payload, id: stringHelper.randomHash() },
+      payload: { ...payload, id },
     })
+
+    setTimeout(() => hideNotification(id), 3500)
   }
 
   const hideNotification = async (id: string) => {

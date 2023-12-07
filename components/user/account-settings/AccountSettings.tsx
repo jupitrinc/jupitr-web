@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
@@ -14,13 +14,23 @@ import Setting from "./Setting"
 import AccountResume from "../account-deactivation/AccountResume"
 import AccountNotifications from "./AccountNotifications"
 import { AccountTypeEnum } from "state/user/user.types"
+import { useUserAction } from "../../../state/user/useUserAction"
 
 const AccountSettings = () => {
   const { accountType, loading } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
+  const [usernameError, setUserNameError] = useState(false)
   const { notify } = useNotificationAction()
+  const [username, setUsername] = useState("")
+  const { user } = useUserState()
+  const { updateUsername } = useUserAction()
 
+  useEffect(() => {
+    if (user?.username) {
+      setUsername(user.username)
+    }
+  }, [])
   const onEmailChange = useCallback(() => {
     if (!email.trim() || emailHelper.isEmailValid(email) === false) {
       notify({ message: "Please provide a valid email", type: "warning" })
@@ -29,10 +39,20 @@ const AccountSettings = () => {
       setEmail("")
     }
   }, [email])
-
+  const onUsernameChange = async () => {
+    const regex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+    if (regex.test(username)) {
+      await updateUsername(user.id, username)
+      onClose()
+    } else {
+      setUserNameError(true)
+      setTimeout(() => setUserNameError(false), 5000)
+    }
+  }
   const onClose = () => {
     settingModal.onClose()
     setEmail("")
+    setUserNameError(false)
   }
 
   return (
@@ -72,7 +92,28 @@ const AccountSettings = () => {
                   />
                 </form>
               )}
-
+              {activeSetting === "change_username" && (
+                <form className="w-full" onSubmit={onUsernameChange}>
+                  <Text as="span" size="xs" color={"standard"}>
+                    New profile url: https://jupitr.tech/profile/{username}
+                  </Text>
+                  <TextInput
+                    placeholder="New url"
+                    value={username}
+                    name="new_username"
+                    onChange={(e) =>
+                      setUsername(e.target.value.replace(/\s+/g, "-"))
+                    }
+                    type="text"
+                    required
+                  />
+                  {usernameError ? (
+                    <Text as="span" size="xs" color={"dangerous"}>
+                      Invalid username
+                    </Text>
+                  ) : null}
+                </form>
+              )}
               {activeSetting === "change_notifications" && (
                 <AccountNotifications />
               )}
@@ -106,6 +147,16 @@ const AccountSettings = () => {
                       label={settingModal[activeSetting].confirm_button_label}
                       color={settingModal[activeSetting].confirm_button_variant}
                       onClick={onEmailChange}
+                      loading={loading}
+                    />
+                  </div>
+                )}
+                {activeSetting === "change_username" && (
+                  <div className="inline-flex gap-4">
+                    <Button
+                      label={settingModal[activeSetting].confirm_button_label}
+                      color={settingModal[activeSetting].confirm_button_variant}
+                      onClick={onUsernameChange}
                       loading={loading}
                     />
                   </div>

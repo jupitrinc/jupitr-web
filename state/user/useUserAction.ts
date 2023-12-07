@@ -9,7 +9,10 @@ import {
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
 import mediaService from "../../services/storage/mediaService"
-import { localStorageHelper } from "../../helper/localStorageHelper"
+import {
+  localStorageHelper,
+  LocalStorageItemEnum,
+} from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
@@ -20,7 +23,7 @@ import { ICity } from "state/location/location.types"
 export function useUserAction() {
   const { notify } = useNotificationAction()
 
-  const { clear } = localStorageHelper
+  const { clear, setItem, getItem } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
 
   const router = useRouter()
@@ -270,6 +273,24 @@ export function useUserAction() {
       })
     }
   }
+  const updateUsername = async (id: string, username: string) => {
+    const { data, error } = await updateUser(id, { username })
+    if (data) {
+      const lStateUser = getItem(LocalStorageItemEnum.user)
+      const updateLocalStorageUser = { ...lStateUser, ...data }
+      setItem(LocalStorageItemEnum.user, updateLocalStorageUser)
+      notify({
+        message: "Account profile url updated",
+        type: "success",
+      })
+    }
+    if (error) {
+      notify({
+        message: "Account profile url failed",
+        type: "warning",
+      })
+    }
+  }
 
   return {
     signInWithEmail,
@@ -284,5 +305,6 @@ export function useUserAction() {
     updateAvatar,
     toggleActive,
     deleteAccount,
+    updateUsername,
   }
 }

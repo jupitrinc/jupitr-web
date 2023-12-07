@@ -3,12 +3,13 @@ import { useUserAction } from "state/user/useUserAction"
 import { useUserState } from "state/user/useUserState"
 import { ColorType } from "ui-library/_theme/Theme.types"
 
-type SettingsType = "delete_account" | "change_email" | "change_notifications"
 enum SettingsEnum {
   delete_account = "delete_account",
   change_email = "change_email",
   change_notifications = "change_notifications",
+  change_username = "change_username",
 }
+type SettingsType = keyof typeof SettingsEnum
 
 export const useAccountSettings = () => {
   const { toggleActive, deleteAccount, requestEmailUpdate } = useUserAction()
@@ -42,6 +43,14 @@ export const useAccountSettings = () => {
         setModal(true)
       },
     },
+    {
+      name: "Profile url",
+      button_label: "Change",
+      onClick: () => {
+        setActiveSetting("change_username")
+        setModal(true)
+      },
+    },
   ]
 
   const settingModal = {
@@ -58,6 +67,13 @@ export const useAccountSettings = () => {
     [SettingsEnum.change_notifications]: {
       title: "Change notifications",
       description: "",
+      onConfirm: () => {},
+      confirm_button_label: "Save",
+      confirm_button_variant: "standard" as ColorType,
+    },
+    [SettingsEnum.change_username]: {
+      title: "Edit your custom URL",
+      description: "Personalize the URL for your profile.",
       onConfirm: () => {},
       confirm_button_label: "Save",
       confirm_button_variant: "standard" as ColorType,

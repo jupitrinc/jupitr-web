@@ -413,6 +413,7 @@ export interface Database {
           name?: string | null
           updated_at?: string | null
           location?: ICity
+          username?: string | null
         }
         Relationships: [
           {
