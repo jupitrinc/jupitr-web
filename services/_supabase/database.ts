@@ -375,6 +375,7 @@ export interface Database {
           user_id?: string | null
           intro_video?: string | null
           visibility?: ProfileVisibility | null
+          tagline?: string | null
         }
         Relationships: [
           {

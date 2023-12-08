@@ -1,6 +1,5 @@
 import React from "react"
 import { Card } from "ui-library/content/card/Card"
-import { Text } from "ui-library/text/Text"
 import { IUser } from "state/user/user.types"
 import { Divider } from "ui-library/content/divider/Divider"
 import { ITalentProfile } from "state/talent_profile/talentProfile.types"
@@ -10,6 +9,7 @@ import Location from "./Location"
 import Skills from "./Skills"
 import IntroVideo from "./IntroVideo"
 import Footer from "./Footer"
+import Title from "./Title"
 
 export interface IProfile
   extends Omit<IUser, "email" | "account_type" | "active"> {
@@ -33,28 +33,32 @@ const Sections = ({ profile }: { profile: IProfile }) => {
   const showSkills = profile.talent_profile?.visibility?.skills?.overall ?? true
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-5">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-5">
       <Actions />
 
-      <Card type="section">
-        <div className="flex flex-col gap-5">
-          <div className="mb-5 flex w-full flex-col items-center justify-between gap-3 text-center">
-            <Text as="h1" size="xl">
-              {profile.name}
-            </Text>
-            {showSocials && <Socials socials={socials} />}
-          </div>
+      <div className="flex flex-col gap-5">
+        <div className="basis-1/2">
+          <Title
+            name={profile.name}
+            tagline={profile.talent_profile?.tagline}
+          />
 
-          {showIntroVideo && <IntroVideo video={intro_video} />}
-          {showSkills && <Skills skills={skills} />}
+          <Card type="section">
+            <div className="flex flex-col gap-5">
+              {showIntroVideo && <IntroVideo intro_video={intro_video} />}
 
-          <Divider />
+              {showSkills && <Skills skills={skills} />}
 
-          <div className="flex flex-row justify-start">
-            {showLocation && <Location location={location} />}
-          </div>
+              <Divider />
+
+              <div className="flex flex-row items-center justify-between">
+                {showLocation && <Location location={location} />}
+                {showSocials && <Socials socials={socials} />}
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
+      </div>
 
       <Footer />
     </div>

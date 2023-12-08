@@ -14,7 +14,7 @@ const Footer = () => {
 
   return (
     !isLoggedIn && (
-      <div className="mt-5 flex flex-row items-center justify-center gap-1">
+      <div className="sticky bottom-0 left-0 flex w-full justify-center bg-gray-100 px-5 py-3">
         <Text as="span" size="xs">
           <span className="flex flex-row gap-2">
             <span>Built with</span>

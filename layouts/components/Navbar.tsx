@@ -35,8 +35,8 @@ const TalentMenu = () => {
   const { signOut } = useUserAction()
   const { imageUrl } = urlHelper
   return (
-    <div className="fixed top-0 z-20 w-full max-w-7xl bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
-      <nav className="flex flex-row items-center justify-between space-x-5">
+    <div className="fixed top-0 z-20 w-full border-b border-gray-200 bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
+      <nav className="flex flex-row items-center justify-between space-x-5 ">
         <div className="flex flex-row items-center gap-3">
           <Brand link="/profile" />
           <Feedback />
@@ -63,7 +63,7 @@ const TalentMenu = () => {
 
 export const PublicMenu = () => {
   return (
-    <nav className="fixed top-0 z-20 w-full max-w-7xl bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 z-20 w-full border-b border-gray-200 bg-gray-100 px-4 py-3 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between">
         <Brand link="/" />
         <div className="flex items-center gap-5">

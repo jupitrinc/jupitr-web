@@ -22,15 +22,11 @@ export const TalentAppLayout = ({
     return (
       <>
         {!userName && <PageHead title="Edit profile" />}
-        <header className="flex justify-center">
+        <header>
           <Navbar />
         </header>
 
-        <div
-          className={`mx-auto my-10 max-w-7xl px-4 sm:px-6 lg:px-8 ${
-            isLoggedIn && "mt-24"
-          }`}
-        >
+        <div className={`my-10 px-4 sm:px-6 lg:px-8 ${isLoggedIn && "mt-24"}`}>
           <main className="my-10">{children}</main>
         </div>
       </>

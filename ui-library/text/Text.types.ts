@@ -2,7 +2,6 @@ import { ReactNode } from "react"
 import { ColorType, SizeType } from "ui-library/_theme/Theme.types"
 
 export interface TextProps {
-  className?: string
   as: TextType
   children: ReactNode
   color?: ColorType

@@ -9,6 +9,7 @@ export interface ITalentProfile extends IUser {
   intro_video: string | null
   preferences: {}
   visibility: ProfileVisibility | null
+  tagline: string | null
 }
 
 export type ISkill = {
@@ -27,6 +28,7 @@ export type TalentProfileAction = {
     | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_FAILURE
     | TalentProfileActionEnum.UPDATE_INTRO_VIDEO_SUCCESS
     | TalentProfileActionEnum.UPDATE_VISIBILITY
+    | TalentProfileActionEnum.UPDATE_TAGLINE
 
   payload?:
     | ITalentProfile["socials"]
@@ -35,6 +37,7 @@ export type TalentProfileAction = {
     | ITalentProfile["searching"]
     | ITalentProfile["intro_video"]
     | ITalentProfile["visibility"]
+    | ITalentProfile["tagline"]
 }
 
 export enum TalentProfileActionEnum {
@@ -43,6 +46,7 @@ export enum TalentProfileActionEnum {
   TOGGLE_SEARCHING = "TOGGLE_SEARCHING",
   UPDATE_SKILLS = "UPDATE_SKILLS",
   UPDATE_VISIBILITY = "UPDATE_VISIBILITY",
+  UPDATE_TAGLINE = "UPDATE_TAGLINE",
 
   UPDATE_INTRO_VIDEO_BEGIN = "UPDATE_INTRO_VIDEO_BEGIN",
   UPDATE_INTRO_VIDEO_FAILURE = "UPDATE_INTRO_VIDEO_FAILURE",
