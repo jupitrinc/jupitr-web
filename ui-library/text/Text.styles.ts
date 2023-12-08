@@ -14,8 +14,9 @@ export const textStyles = {
     base: "text-base",
     lg: "text-lg",
     xl: "text-lg sm:text-xl",
-    xl2: "text-xl sm:text-2xl",
-    xl4: "text-2xl sm:text-4xl",
+    xl2: "text-2xl",
+    xl3: "text-2xl sm:text-3xl",
+    xl4: "text-3xl sm:text-4xl",
   },
   fontFamily: {
     brand: "font-mw",

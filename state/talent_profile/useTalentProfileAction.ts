@@ -231,6 +231,24 @@ export function useTalentProfileAction() {
     }
   }
 
+  const updateTagline = async (
+    user_id: ITalentProfile["user_id"],
+    tagline: ITalentProfile["tagline"]
+  ) => {
+    if (!user_id) return
+
+    const { data } = await updateProfile(user_id, {
+      tagline,
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_TAGLINE,
+        payload: data.tagline,
+      })
+    }
+  }
+
   return {
     updateSocials,
     toggleSearching,
@@ -240,5 +258,6 @@ export function useTalentProfileAction() {
     updateAllSkills,
     updateIntroVideo,
     updateVisibility,
+    updateTagline,
   }
 }

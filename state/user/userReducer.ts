@@ -201,6 +201,20 @@ export const userReducer = (
       setItem(LocalStorageItemEnum.user, update_visibility_state.data)
       return update_visibility_state
 
+    case TalentProfileActionEnum.UPDATE_TAGLINE:
+      const update_tagline_payload = action.payload as ITalentProfile["tagline"]
+
+      const update_tagline_state = {
+        ...state,
+        data: {
+          ...state.data,
+          tagline: update_tagline_payload,
+        },
+      }
+
+      setItem(LocalStorageItemEnum.user, update_tagline_state.data)
+      return update_tagline_state
+
     case TalentProfileActionEnum.UPDATE_SKILLS:
       const update_skills_payload = action.payload as ISkill[]
 

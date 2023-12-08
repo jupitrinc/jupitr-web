@@ -35,6 +35,7 @@ const Actions = () => {
         label="Share"
         confirmLabel="Profile link copied"
         size="xs"
+        variant="contained"
         icon={<Share2 className="h-3 w-3" />}
         value={shareProfileValue}
       />

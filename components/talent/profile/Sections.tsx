@@ -33,24 +33,32 @@ const Sections = ({ profile }: { profile: IProfile }) => {
   const showSkills = profile.talent_profile?.visibility?.skills?.overall ?? true
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-5">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-5">
       <Actions />
-      <Title name={profile.name} />
 
-      <Card type="section">
-        <div className="flex flex-col gap-5">
-          {showIntroVideo && <IntroVideo intro_video={intro_video} />}
+      <div className="flex flex-col gap-5">
+        <div className="basis-1/2">
+          <Title
+            name={profile.name}
+            tagline={profile.talent_profile?.tagline}
+          />
 
-          {showSkills && <Skills skills={skills} />}
+          <Card type="section">
+            <div className="flex flex-col gap-5">
+              {showIntroVideo && <IntroVideo intro_video={intro_video} />}
 
-          <Divider />
+              {showSkills && <Skills skills={skills} />}
 
-          <div className="flex flex-row items-center justify-between">
-            {showLocation && <Location location={location} />}
-            {showSocials && <Socials socials={socials} />}
-          </div>
+              <Divider />
+
+              <div className="flex flex-row items-center justify-between">
+                {showLocation && <Location location={location} />}
+                {showSocials && <Socials socials={socials} />}
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
+      </div>
 
       <Footer />
     </div>

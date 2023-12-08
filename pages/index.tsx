@@ -21,7 +21,7 @@ export default function Home({ domain }) {
       urlHelper.ogImageUrl({
         domain: domain,
         company_logo: "https://jupitr.tech/logo.png",
-        title: "Create your video CV",
+        title: "Get more job interviews",
       }),
     []
   )
@@ -29,7 +29,7 @@ export default function Home({ domain }) {
   return (
     <>
       <PageHead
-        title="Create your video CV - jupitr"
+        title="jupitr"
         description="Get more job interviews with jupitr"
         keywords="tech jobs london, AI jobs, devops jobs, frontend developer jobs, backend developer jobs, software engineering jobs, javascript developer, typescript developer, python developer, java developer, machine learning jobs, java developer"
         robots="index, follow"
