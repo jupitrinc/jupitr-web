@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { Modal } from "ui-library/modal/Modal"
 import { Button } from "ui-library/button/Button"
 import { Card } from "ui-library/content/card/Card"
@@ -10,49 +10,52 @@ import { TextInput } from "ui-library/form/text-input/TextInput"
 import { useUserState } from "state/user/useUserState"
 import { emailHelper } from "helper/emailHelper"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import { AccountTypeEnum } from "state/user/user.types"
+import { useReactiveState } from "helper/hooks/useReactiveState"
 import Setting from "./Setting"
 import AccountResume from "../account-deactivation/AccountResume"
 import AccountNotifications from "./AccountNotifications"
-import { AccountTypeEnum } from "state/user/user.types"
-import { useUserAction } from "../../../state/user/useUserAction"
 
 const AccountSettings = () => {
-  const { accountType, loading } = useUserState()
+  const { accountType, loading, user } = useUserState()
   const { settings, activeSetting, modal, settingModal } = useAccountSettings()
   const [email, setEmail] = useState("")
   const [usernameError, setUserNameError] = useState(false)
   const { notify } = useNotificationAction()
-  const [username, setUsername] = useState("")
-  const { user } = useUserState()
-  const { updateUsername } = useUserAction()
+  const { value: username, setValue: setUsername } = useReactiveState(
+    "",
+    user.username
+  )
 
-  useEffect(() => {
-    if (user?.username) {
-      setUsername(user.username)
-    }
-  }, [])
-  const onEmailChange = useCallback(() => {
-    if (!email.trim() || emailHelper.isEmailValid(email) === false) {
-      notify({ message: "Please provide a valid email", type: "warning" })
-    } else {
-      settingModal[activeSetting].onConfirm(email)
-      setEmail("")
-    }
-  }, [email])
-  const onUsernameChange = async () => {
+  const onEmailChange = useCallback(
+    (e) => {
+      e.preventDefault()
+
+      if (!email.trim() || emailHelper.isEmailValid(email) === false) {
+        notify({ message: "Please provide a valid email", type: "warning" })
+      } else {
+        settingModal[activeSetting].onConfirm(email)
+        setEmail("")
+      }
+    },
+    [email]
+  )
+
+  const onUsernameChange = async (e) => {
+    e.preventDefault()
+
     const regex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
     if (regex.test(username)) {
-      await updateUsername(user.id, username)
-      onClose()
+      settingModal[activeSetting].onConfirm(username)
+      setUserNameError(false)
+      settingModal.onClose()
     } else {
       setUserNameError(true)
-      setTimeout(() => setUserNameError(false), 5000)
     }
   }
   const onClose = () => {
     settingModal.onClose()
     setEmail("")
-    setUserNameError(false)
   }
 
   return (
@@ -94,24 +97,18 @@ const AccountSettings = () => {
               )}
               {activeSetting === "change_username" && (
                 <form className="w-full" onSubmit={onUsernameChange}>
-                  <Text as="span" size="xs" color={"standard"}>
-                    New profile url: https://jupitr.tech/profile/{username}
-                  </Text>
                   <TextInput
-                    placeholder="New url"
+                    placeholder="Username"
+                    label={`https://jupitr.tech/profile/${username}`}
                     value={username}
                     name="new_username"
                     onChange={(e) =>
                       setUsername(e.target.value.replace(/\s+/g, "-"))
                     }
                     type="text"
+                    invalid={usernameError}
                     required
                   />
-                  {usernameError ? (
-                    <Text as="span" size="xs" color={"dangerous"}>
-                      Invalid username
-                    </Text>
-                  ) : null}
                 </form>
               )}
               {activeSetting === "change_notifications" && (
