@@ -9,10 +9,7 @@ import {
   StorageBucketsEnum,
 } from "../../services/storage/media.types"
 import mediaService from "../../services/storage/mediaService"
-import {
-  localStorageHelper,
-  LocalStorageItemEnum,
-} from "../../helper/localStorageHelper"
+import { localStorageHelper } from "../../helper/localStorageHelper"
 import { cookieHelper } from "helper/cookieHelper"
 import { imageHelper } from "helper/imageHelper"
 import { storageFolderHelper } from "helper/storageFolderHelper"
@@ -23,7 +20,7 @@ import { ICity } from "state/location/location.types"
 export function useUserAction() {
   const { notify } = useNotificationAction()
 
-  const { clear, setItem, getItem } = localStorageHelper
+  const { clear } = localStorageHelper
   const { deleteAllCookies } = cookieHelper
 
   const router = useRouter()
@@ -273,20 +270,27 @@ export function useUserAction() {
       })
     }
   }
-  const updateUsername = async (id: string, username: string) => {
+  const updateUsername = async (
+    id: IUser["id"],
+    username: IUser["username"]
+  ) => {
+    if (!id || !username) return
+
     const { data, error } = await updateUser(id, { username })
     if (data) {
-      const lStateUser = getItem(LocalStorageItemEnum.user)
-      const updateLocalStorageUser = { ...lStateUser, ...data }
-      setItem(LocalStorageItemEnum.user, updateLocalStorageUser)
+      dispatch({
+        type: UserActionEnum.UPDATE_USERNAME,
+        payload: data.username,
+      })
+
       notify({
-        message: "Account profile url updated",
+        message: "Username updated",
         type: "success",
       })
     }
     if (error) {
       notify({
-        message: "Account profile url failed",
+        message: "Username update failed",
         type: "warning",
       })
     }

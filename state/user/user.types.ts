@@ -19,7 +19,7 @@ export interface IUser {
   email: string
   active: boolean
   location: ICity | null
-  username: string | null
+  username: string
   created_at: string
   updated_at?: string
 }
@@ -50,6 +50,7 @@ export type UserAction = {
     | UserActionEnum.GET_USER_SUCCESS
     | UserActionEnum.SIGN_OUT
     | UserActionEnum.UPDATE_NAME
+    | UserActionEnum.UPDATE_USERNAME
     | UserActionEnum.UPDATE_LOCATION
     | UserActionEnum.UPDATE_EMAIL_BEGIN
     | UserActionEnum.UPDATE_EMAIL_SUCCESS
@@ -62,7 +63,13 @@ export type UserAction = {
     | UserActionEnum.REQUEST_EMAIL_UPDATE_BEGIN
     | UserActionEnum.REQUEST_EMAIL_UPDATE_SUCCESS
     | UserActionEnum.REQUEST_EMAIL_UPDATE_FAILURE
-  payload?: IUser | IUser["name"] | IUser["active"] | User | IUser["location"]
+  payload?:
+    | IUser
+    | IUser["name"]
+    | IUser["active"]
+    | User
+    | IUser["location"]
+    | IUser["username"]
 }
 
 export enum UserActionEnum {
@@ -81,6 +88,7 @@ export enum UserActionEnum {
   SIGN_OUT = "SIGN_OUT",
 
   UPDATE_NAME = "UPDATE_NAME",
+  UPDATE_USERNAME = "UPDATE_USERNAME",
   UPDATE_AVATAR = "UPDATE_AVATAR",
   UPDATE_LOCATION = "UPDATE_LOCATION",
 
