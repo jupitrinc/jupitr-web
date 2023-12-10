@@ -23,7 +23,6 @@ const Tagline = () => {
       onChange={(e) => setValue(e.target.value)}
       onBlur={update}
       maxLength={80}
-      invalid={!value}
     />
   )
 }

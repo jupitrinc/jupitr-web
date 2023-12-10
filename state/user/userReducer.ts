@@ -6,6 +6,7 @@ import {
   IUser,
 } from "./user.types"
 import {
+  IProject,
   ISkill,
   ITalentProfile,
   TalentProfileAction,
@@ -258,6 +259,20 @@ export const userReducer = (
 
       setItem(LocalStorageItemEnum.user, update_intro_video_state.data)
       return update_intro_video_state
+
+    case TalentProfileActionEnum.UPDATE_PROJECTS:
+      const update_projects_payload = action.payload as IProject[]
+
+      const update_projects_state = {
+        ...state,
+        data: {
+          ...state.data,
+          projects: update_projects_payload,
+        },
+      }
+
+      setItem(LocalStorageItemEnum.user, update_projects_state.data)
+      return update_projects_state
 
     default:
       return state

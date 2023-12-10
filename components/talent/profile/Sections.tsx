@@ -10,6 +10,7 @@ import Skills from "./Skills"
 import IntroVideo from "./IntroVideo"
 import Footer from "./Footer"
 import Title from "./Title"
+import Projects from "./Projects"
 
 export interface IProfile
   extends Omit<IUser, "email" | "account_type" | "active"> {
@@ -32,32 +33,33 @@ const Sections = ({ profile }: { profile: IProfile }) => {
   const skills = profile.talent_profile?.skills
   const showSkills = profile.talent_profile?.visibility?.skills?.overall ?? true
 
+  const projects = profile.talent_profile?.projects
+  const showProjects =
+    profile.talent_profile?.visibility?.projects?.overall ?? true
+
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-5">
       <Actions />
 
       <div className="flex flex-col gap-5">
-        <div className="basis-1/2">
-          <Title
-            name={profile.name}
-            tagline={profile.talent_profile?.tagline}
-          />
+        <Title name={profile.name} tagline={profile.talent_profile?.tagline} />
 
-          <Card type="section">
-            <div className="flex flex-col gap-5">
-              {showIntroVideo && <IntroVideo intro_video={intro_video} />}
+        <Card type="section">
+          <div className="flex flex-col gap-5">
+            {showIntroVideo && <IntroVideo intro_video={intro_video} />}
 
-              {showSkills && <Skills skills={skills} />}
+            {showSkills && <Skills skills={skills} />}
 
-              <Divider />
+            <Divider />
 
-              <div className="flex flex-row items-center justify-between">
-                {showLocation && <Location location={location} />}
-                {showSocials && <Socials socials={socials} />}
-              </div>
+            <div className="flex flex-row items-center justify-between">
+              {showLocation && <Location location={location} />}
+              {showSocials && <Socials socials={socials} />}
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
+
+        {showProjects && <Projects projects={projects} />}
       </div>
 
       <Footer />

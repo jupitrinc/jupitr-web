@@ -1,16 +1,21 @@
 import { useContext } from "react"
 import {
+  AddProjectPayload,
+  DeleteProjectPayload,
+  IProject,
   ISkill,
   ITalentProfile,
   TalentProfileActionEnum,
   UpdateAllSkillsPayload,
   UpdateIntroVideoPayload,
+  UpdateProjectPayload,
 } from "./talentProfile.types"
 import { talentProfileService } from "services/talent/talentProfileService"
 import { UserContext } from "state/user/UserContextProvider"
 import { storageFolderHelper } from "helper/storageFolderHelper"
 import mediaService from "services/storage/mediaService"
 import { useNotificationAction } from "state/notification/useNotificationAction"
+import { stringHelper } from "helper/stringHelper"
 
 export function useTalentProfileAction() {
   const { updateProfile } = talentProfileService()
@@ -249,6 +254,85 @@ export function useTalentProfileAction() {
     }
   }
 
+  const addProject = async ({
+    user_id,
+    newProject,
+    projects,
+  }: AddProjectPayload) => {
+    if (!user_id || !newProject.name.trim()) return
+
+    const project = { ...newProject, id: stringHelper.randomHash() }
+
+    const { data } = await updateProfile(user_id, {
+      projects: projects ? [...projects, project] : [project],
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_PROJECTS,
+        payload: data.projects,
+      })
+    } else {
+      notify({
+        message: "Failed to add. Try again later",
+        type: "warning",
+      })
+    }
+  }
+
+  const deleteProject = async ({
+    user_id,
+    project_id,
+    projects,
+  }: DeleteProjectPayload) => {
+    if (!user_id || !project_id || !projects?.length) return
+
+    const { data } = await updateProfile(user_id, {
+      projects: projects.filter((p) => p.id !== project_id),
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_PROJECTS,
+        payload: data.projects,
+      })
+    } else {
+      notify({
+        message: "Failed to delete. Try again later",
+        type: "warning",
+      })
+    }
+  }
+
+  const updateProject = async ({
+    user_id,
+    project,
+    projects,
+  }: UpdateProjectPayload) => {
+    if (!user_id || !project.id || !projects) return
+
+    const { data } = await updateProfile(user_id, {
+      projects: projects.map((p) => {
+        if (p.id === project.id) {
+          return project
+        }
+        return p
+      }),
+    })
+
+    if (data) {
+      dispatch({
+        type: TalentProfileActionEnum.UPDATE_PROJECTS,
+        payload: data.projects,
+      })
+    } else {
+      notify({
+        message: "Failed to update. Try again later",
+        type: "warning",
+      })
+    }
+  }
+
   return {
     updateSocials,
     toggleSearching,
@@ -259,5 +343,8 @@ export function useTalentProfileAction() {
     updateIntroVideo,
     updateVisibility,
     updateTagline,
+    addProject,
+    deleteProject,
+    updateProject,
   }
 }
