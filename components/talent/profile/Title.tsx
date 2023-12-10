@@ -9,7 +9,7 @@ interface props {
 
 const Title = ({ name, tagline }: props) => {
   return (
-    <div className="mb-10 flex w-full flex-col items-center justify-between gap-2">
+    <div className="mb-5 flex w-full flex-col items-center justify-between gap-2">
       <Text as="h1" size="xl2">
         {name}
       </Text>

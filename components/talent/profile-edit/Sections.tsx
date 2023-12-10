@@ -6,13 +6,19 @@ import AccountSettings from "components/user/account-settings/AccountSettings"
 import UserProfile from "components/user/profile/UserProfile"
 import Location from "./Location"
 import IntroVideo from "./IntroVideo"
+import Projects from "./projects/Projects"
 
 const Sections = () => {
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-      <div>
+      <div className="flex flex-col gap-5">
         <Card type="section">
           <UserProfile />
+        </Card>
+
+        <IntroVideo />
+
+        <Card type="section">
           <SocialLinks />
           <Location />
         </Card>
@@ -22,7 +28,7 @@ const Sections = () => {
         <Skills />
       </div>
       <div className="flex flex-col gap-5">
-        <IntroVideo />
+        <Projects />
         <AccountSettings />
       </div>
     </div>

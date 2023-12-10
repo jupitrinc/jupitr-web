@@ -34,7 +34,7 @@ export const talentProfileService = () => {
     const { data, error } = await supabaseClientComponent
       .from(USERS_TABLE)
       .select(
-        "id, name, location, avatar_url, username, talent_profile(skills, socials, searching, intro_video, visibility, tagline)"
+        "id, name, location, avatar_url, username, talent_profile(skills, socials, searching, intro_video, visibility, tagline, projects)"
       )
       .eq("active", true)
       .eq("username", username)

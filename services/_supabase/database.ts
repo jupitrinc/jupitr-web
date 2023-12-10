@@ -8,7 +8,12 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type ProfileSections = "intro_video" | "skills" | "socials" | "location"
+export type ProfileSections =
+  | "intro_video"
+  | "skills"
+  | "socials"
+  | "location"
+  | "projects"
 
 export type ProfileVisibility = {
   [K in ProfileSections]?: GenericVisibility
@@ -376,6 +381,7 @@ export interface Database {
           intro_video?: string | null
           visibility?: ProfileVisibility | null
           tagline?: string | null
+          projects?: Json | null
         }
         Relationships: [
           {

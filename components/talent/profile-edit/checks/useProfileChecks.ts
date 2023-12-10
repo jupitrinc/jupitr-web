@@ -14,6 +14,10 @@ export const useProfileChecks = () => {
     return Boolean(user.skills && user.skills.length >= 3)
   }
 
+  const projects = () => {
+    return Boolean(user.projects && user.projects.length >= 1)
+  }
+
   const name = () => {
     return Boolean(user.name)
   }
@@ -29,9 +33,17 @@ export const useProfileChecks = () => {
   const checksCompleted = () => {
     return Boolean(
       accountType === AccountTypeEnum.company ||
-        (name() && socials() && skills() && location() && introVideo())
+        (name() && socials() && skills() && projects() && introVideo())
     )
   }
 
-  return { name, socials, skills, location, introVideo, checksCompleted }
+  return {
+    name,
+    socials,
+    skills,
+    introVideo,
+    checksCompleted,
+    projects,
+    location,
+  }
 }

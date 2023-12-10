@@ -44,11 +44,12 @@ const IntroVideo = () => {
             label={user.intro_video ? "Change" : "Add"}
             onClick={showModal}
             variant="outlined"
+            size="xs"
             icon={
               user.intro_video ? (
-                <RefreshCw className="h-4 w-4" />
+                <RefreshCw className="h-3 w-3" />
               ) : (
-                <Plus className="h-5 w-5" />
+                <Plus className="h-4 w-4" />
               )
             }
           />
