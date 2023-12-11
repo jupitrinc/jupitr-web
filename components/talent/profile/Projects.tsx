@@ -66,7 +66,7 @@ export const Project = ({
         <div className="flex flex-col gap-2">
           <div className="flex flex-row items-center justify-between gap-2">
             <div className="flex flex-row items-center gap-2">
-              <Text as="h2" bold>
+              <Text as="h2" size="lg">
                 {project.name}
               </Text>
 
@@ -84,7 +84,7 @@ export const Project = ({
               )}
             </div>
 
-            <Text as="span" size="xs">
+            <Text as="span" size="sm">
               {project.start_year} -{" "}
               {project.end_year ? project.end_year : "Now"}
             </Text>
