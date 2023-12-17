@@ -56,7 +56,10 @@ const IntroVideo = () => {
         </div>
 
         {user.intro_video && (
-          <VideoPlayer src={urlHelper.videoUrl(user.intro_video) as string} />
+          <VideoPlayer
+            src={urlHelper.videoUrl(user.intro_video) as string}
+            poster={urlHelper.videoPosterUrl(user.intro_video)}
+          />
         )}
       </Card>
 

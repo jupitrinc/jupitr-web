@@ -11,7 +11,10 @@ const IntroVideo = ({ intro_video }: props) => {
   return (
     intro_video && (
       <div className="flex max-h-96">
-        <VideoPlayer src={urlHelper.videoUrl(intro_video) as string} />
+        <VideoPlayer
+          src={urlHelper.videoUrl(intro_video) as string}
+          poster={urlHelper.videoPosterUrl(intro_video)}
+        />
       </div>
     )
   )
